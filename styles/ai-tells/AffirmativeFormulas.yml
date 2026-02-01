@@ -1,5 +1,5 @@
 extends: existence
-message: "AI rhetoric: '%s'. Delete this dramatic framing and let the content speak for itself."
+message: "AI rhetoric: '%s'. Just state your point directly. Delete the preamble and start with what you're actually saying."
 level: warning
 tokens:
   # "And that's [the/what] X" patterns
@@ -37,14 +37,16 @@ tokens:
   - "[Hh]ere'?s what (?:most people|many|few) [^.!?]+"
   - "[Hh]ere'?s why (?:this|that|it) matters"
 
-  # "The X is" revelation patterns
+  # "The [adjective] X is" revelation patterns
+  - "[Tt]he (?:key|fundamental|crucial|core|central|critical|essential|main|primary|underlying|basic|real|true) (?:insight|point|takeaway|lesson|idea|observation|realization|understanding|truth|message|principle) is"
+  # "[Adjective] Xs are" revelation patterns (optional article)
+  - "(?:[Tt]he )?(?:[Kk]ey|[Ff]undamental|[Cc]rucial|[Cc]ore|[Cc]entral|[Cc]ritical|[Ee]ssential|[Mm]ain|[Pp]rimary|[Uu]nderlying|[Bb]asic|[Rr]eal|[Tt]rue) (?:insights|points|takeaways|lessons|ideas|observations|realizations|understandings|truths|messages|principles) are"
+  # Simpler "The X is" patterns
   - "[Tt]he takeaway (?:here )?is [^.!?]+"
   - "[Tt]he lesson (?:here )?is [^.!?]+"
   - "[Tt]he point (?:here )?is [^.!?]+"
   - "[Tt]he insight (?:here )?is [^.!?]+"
   - "[Tt]he bottom line is [^.!?]+"
-  - "[Tt]he key takeaway is [^.!?]+"
-  - "[Tt]he real takeaway is [^.!?]+"
 
   # "And X is [exactly/precisely] what/why" patterns
   - "[Aa]nd (?:this|that) is (?:exactly|precisely) (?:what|why|how) [^.!?]+"
