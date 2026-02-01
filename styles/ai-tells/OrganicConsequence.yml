@@ -1,0 +1,37 @@
+extends: existence
+message: "AI rhetoric: '%s'. This makes designed choices sound organically inevitable. Just say it was designed that way."
+level: suggestion
+tokens:
+  # "falls out naturally" and variants
+  - falls out naturally
+  - fell out naturally
+  - fall out naturally
+
+  # "emerges naturally" and variants
+  - emerges naturally
+  - emerged naturally
+  - emerge naturally
+  - emerges organically
+  - emerged organically
+
+  # "arises naturally" and variants
+  - arises naturally
+  - arose naturally
+  - arise naturally
+  - arises organically
+
+  # "flows naturally" and variants
+  - flows naturally
+  - flowed naturally
+  - flow naturally
+
+  # Other organic-sounding consequence language
+  - a natural consequence
+  - the natural consequence
+  - a natural result
+  - the natural result
+  - naturally follows
+  - naturally leads to
+  - naturally results in
+  - follows naturally from
+  - results naturally from

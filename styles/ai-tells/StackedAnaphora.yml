@@ -1,0 +1,28 @@
+extends: existence
+message: "AI rhetoric: '%s'. Stacked repetition for emphasis is a common AI pattern. Vary your sentence structure or combine into a single statement."
+level: suggestion
+nonword: true
+tokens:
+  # "No X. No Y. No Z." pattern (3+ consecutive)
+  - "No [^.]+\\. No [^.]+\\. No [^.]+"
+
+  # "Not X. Not Y. Not Z." pattern
+  - "Not [^.]+\\. Not [^.]+\\. Not [^.]+"
+
+  # "No more X. No more Y. No more Z." pattern
+  - "No more [^.]+\\. No more [^.]+\\. No more [^.]+"
+
+  # "It's X. It's Y. It's Z." pattern
+  - "[Ii]t'?s [^.]+\\. [Ii]t'?s [^.]+\\. [Ii]t'?s [^.]+"
+
+  # "This is X. This is Y. This is Z." pattern
+  - "[Tt]his is [^.]+\\. [Tt]his is [^.]+\\. [Tt]his is [^.]+"
+
+  # Three consecutive rhetorical questions
+  - "(?:What|Why|How|Where|When|Who|Which|Is|Are|Can|Could|Should|Would|Do|Does) [^?]+\\? (?:What|Why|How|Where|When|Who|Which|Is|Are|Can|Could|Should|Would|Do|Does) [^?]+\\? (?:What|Why|How|Where|When|Who|Which|Is|Are|Can|Could|Should|Would|Do|Does) [^?]+\\?"
+
+  # "X works because Y. Z works because W." parallel justifications
+  - "[A-Z][^.]+works because [^.]+\\. [A-Z][^.]+works because [^.]+\\. [A-Z][^.]+works because [^.]+"
+
+  # Three prepositional phrase chains: "with X, through Y, and for Z" style
+  - "(?:with|through|by|for|via|within) [^,]+, (?:with|through|by|for|via|within) [^,]+, (?:and )?(?:with|through|by|for|via|within) [^.!?]+"
