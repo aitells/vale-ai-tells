@@ -2,7 +2,7 @@
 
 ## Project overview
 
-vale-ai-tells is a Vale package for detecting linguistic patterns commonly associated with AI-generated prose. It provides 11 YAML rule files that flag vocabulary fingerprints, structural patterns, and rhetorical tells.
+vale-ai-tells is a Vale package for detecting linguistic patterns commonly associated with AI-generated prose. It provides 19 YAML rule files that flag vocabulary fingerprints, structural patterns, and rhetorical tells.
 
 ## Repository structure
 
@@ -25,7 +25,7 @@ vale --config=.vale.ini test-document.md
 **Creating a release:**
 
 ```bash
-git tag v0.x.0
+git tag vX.Y.Z
 git push --tags
 ```
 
@@ -33,12 +33,9 @@ The GitHub Actions workflow automatically creates a release with `ai-tells.zip`.
 
 ## Rule conventions
 
-- **Warning level**: Strong AI indicators (vocabulary fingerprints, sycophancy)
-- **Suggestion level**: Patterns humans also use but AI overuses
-
-Rule files use Vale's `existence` or `substitution` extensions. Each rule needs:
+All rules use `error` level by default. Users can override this in their `.vale.ini`. Rule files use Vale's `existence` or `substitution` extensions. Each rule needs:
 - `message`: Clear explanation of why the rule flags the pattern
-- `level`: Either `warning` or `suggestion`
+- `level`: Always `error`
 - `tokens` or `swap`: The patterns to match
 
 ## Tone

@@ -1,6 +1,6 @@
 extends: existence
 message: "AI fingerprint: '%s'. Rewrite with concrete specifics instead of this clichéd phrase."
-level: warning
+level: error
 ignorecase: true
 tokens:
   - rich tapestry

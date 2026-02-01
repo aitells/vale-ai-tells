@@ -1,6 +1,6 @@
 extends: existence
 message: "AI filler: '%s'. Delete this phrase—it adds no meaning."
-level: suggestion
+level: error
 ignorecase: true
 tokens:
   - a wide range of

@@ -1,6 +1,6 @@
 extends: existence
 message: "AI sycophancy: '%s'. Delete this—it sounds robotic and insincere."
-level: warning
+level: error
 ignorecase: true
 tokens:
   - Great question

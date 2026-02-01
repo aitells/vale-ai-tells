@@ -1,6 +1,6 @@
 extends: existence
 message: "AI rhetoric: '%s'. This rhetorical device is overrepresented in AI-generated text."
-level: suggestion
+level: error
 nonword: true
 tokens:
   # "When [verb]ing X, ask: [question]" - the imperative test pattern

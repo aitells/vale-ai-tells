@@ -1,6 +1,6 @@
 extends: existence
 message: "AI vocabulary: '%s'. Replace with a more specific or common word."
-level: warning
+level: error
 tokens:
   - delve
   - delves

@@ -1,6 +1,6 @@
 extends: existence
 message: "AI metacommentary: '%s'. This comments on your own text rather than saying something substantive. Delete it or replace with actual content."
-level: suggestion
+level: error
 nonword: true
 scope: raw
 tokens:

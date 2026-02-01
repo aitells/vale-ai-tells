@@ -1,6 +1,6 @@
 extends: existence
 message: "AI opening: '%s'. Start with your actual point instead of this generic lead-in."
-level: warning
+level: error
 ignorecase: true
 tokens:
   - In today's rapidly evolving

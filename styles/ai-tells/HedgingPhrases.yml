@@ -1,6 +1,6 @@
 extends: existence
 message: "AI hedge: '%s'. Delete this throat-clearing and state your point directly."
-level: suggestion
+level: error
 ignorecase: true
 tokens:
   - It's important to note that

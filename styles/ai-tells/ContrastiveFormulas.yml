@@ -1,6 +1,6 @@
 extends: existence
 message: "AI rhetoric: '%s'. State the positive claim directly without the 'not X, but Y' formula."
-level: warning
+level: error
 tokens:
   # "It's not just X; it's Y" patterns
   - "[Ii]t'?s not just [^;,—:]+[;,—:] it'?s [^.!?]+"

@@ -1,6 +1,6 @@
 extends: existence
 message: "AI evasion: '%s'. Take a clear position or remove the hedge."
-level: suggestion
+level: error
 ignorecase: true
 tokens:
   - both sides of the argument

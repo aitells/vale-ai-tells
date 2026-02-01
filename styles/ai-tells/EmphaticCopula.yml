@@ -1,6 +1,6 @@
 extends: existence
 message: "AI emphasis: '%s'. Italicizing 'is' to manufacture profundity is a common AI pattern. The emphasis rarely adds meaning."
-level: suggestion
+level: error
 nonword: true
 scope: raw
 tokens:

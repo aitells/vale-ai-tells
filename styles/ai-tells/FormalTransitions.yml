@@ -1,6 +1,6 @@
 extends: existence
 message: "AI transition: '%s'. Delete it, or use a simpler connector like 'and', 'but', or 'so'."
-level: suggestion
+level: error
 ignorecase: true
 tokens:
   - Moreover
