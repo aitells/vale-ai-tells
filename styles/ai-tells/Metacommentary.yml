@@ -88,3 +88,25 @@ tokens:
   # "Real-world" filler
   - "Real-world [a-z]+"
   - "In the real world"
+
+  # "At its core/heart" framing
+  - "At its core"
+  - "At its heart"
+  - "At its most basic"
+  - "At its most basic level"
+  - "At its most fundamental"
+  - "At its most fundamental level"
+  - "At its simplest"
+  - "At their core"
+  - "At their heart"
+
+  # "Think of X as" explanatory framing
+  - "Think of it as"
+  - "Think of this as"
+  - "Think of [^.]+as [^.]+\\."
+
+  # "This is where" pivot phrases
+  - "This is where it gets interesting"
+  - "This is where things get interesting"
+  - "This is where [^.]+ comes in"
+  - "That'?s where [^.]+ comes in"

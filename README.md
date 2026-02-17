@@ -31,32 +31,34 @@ vale sync
 
 ## Rules included
 
-This package contains 13 rule files covering different categories of AI tells:
+This package contains 22 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
-### Warning level (strong indicators)
-
 | Rule | Description |
 |------|-------------|
-| `OverusedVocabulary` | Words with documented AI overuse: "delve," "tapestry," "multifaceted," "leverage," "foster," etc. |
-| `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "In the realm of," etc. |
-| `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
-| `AICompoundPhrases` | Compound phrases: "rich tapestry," "intricate interplay," "paradigm shift," etc. |
-| `EmDashUsage` | Em-dashes, which AI uses excessively |
-| `ContrastiveFormulas` | Rhetorical contrasts: "It's not just X; it's Y," "The real question isn't X; it's Y," etc. |
+| `AICompoundPhrases` | Compound phrases: "rich tapestry," "intricate interplay," "paradigm shift," "double-edged sword," etc. |
 | `AffirmativeFormulas` | Revelation patterns: "Here's the thing," "And that's the beauty of it," "Let that sink in," etc. |
-
-### Suggestion level (patterns AI overuses)
-
-| Rule | Description |
-|------|-------------|
-| `HedgingPhrases` | Compulsive hedging: "It's important to note that," "Generally speaking," etc. |
+| `ClosingPleasantries` | Sign-off language: "I hope this helps," "Feel free to ask," "Don't hesitate to reach out," etc. |
 | `ConclusionMarkers` | Formulaic conclusions: "In conclusion," "Ultimately," "At the end of the day," etc. |
-| `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "Additionally," etc. |
-| `FalseBalance` | Evasive "both sides" language: "both sides present valid points," etc. |
-| `FillerPhrases` | Padding: "a wide range of," "in order to," "due to the fact that," etc. |
+| `ContrastiveFormulas` | Rhetorical contrasts: "It's not just X; it's Y," "The real question isn't X; it's Y," etc. |
+| `DefensiveHedges` | Preemptive concessions: "This may seem X, but..." "Admittedly, X, but..." "At first glance," etc. |
+| `EmDashUsage` | Em-dashes, which AI uses excessively |
+| `EmphaticCopula` | Italicized *is*, *are*, *the* for manufactured profundity |
+| `FalseBalance` | Evasive "both sides" language: "both sides present valid points," "nuanced approach," etc. |
+| `FillerPhrases` | Padding and performative sincerity: "a wide range of," "in order to," "honestly," etc. |
 | `FormalRegister` | Overly formal vocabulary: "utilize," "facilitate," "commence," etc. |
+| `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "What's more," "Case in point," etc. |
+| `HedgingPhrases` | Compulsive hedging: "It's important to note that," "That being said," "Generally speaking," etc. |
+| `Metacommentary` | Throat-clearing and self-commentary: "This matters," "Let me explain," "At its core," etc. |
+| `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "Without further ado," "Whether you're," etc. |
+| `OrganicConsequence` | False inevitability: "emerges naturally," "a natural consequence," "follows naturally from," etc. |
+| `OverusedVocabulary` | Words with documented AI overuse: "delve," "leverage," "comprehensive," "unprecedented," "sophisticated," etc. |
+| `RestatementMarkers` | Redundant restatements: "In other words," "Simply put," "To be more specific," etc. |
+| `RhetoricalDevices` | Rhetorical question patterns: "Ask yourself:", "The test:", "When doing X, ask:" etc. |
+| `SelfReference` | Self-referential cross-references: "as mentioned above," "as noted earlier," "as we'll explore," etc. |
+| `StackedAnaphora` | Stacked repetition for emphasis: "No X. No Y. No Z." "It's X. It's Y. It's Z." etc. |
+| `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
 
 <!-- vale on -->
 

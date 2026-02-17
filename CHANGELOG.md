@@ -5,6 +5,38 @@ This file documents all notable changes to this project.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- **ClosingPleasantries**: New rule catching AI sign-off language — "I hope
+  this helps," "Feel free to ask," "Don't hesitate to reach out," "Happy to
+  help," "Best of luck," and similar pleasantries that appear at the end of
+  AI-generated responses
+- **RestatementMarkers**: New rule flagging redundant restatements — "In other
+  words," "Simply put," "To be more specific," "What I mean is," etc.
+- **SelfReference**: New rule detecting self-referential cross-references —
+  "as mentioned above," "as noted earlier," "as we'll explore," "recall that," etc.
+
+### Changed
+
+- **OverusedVocabulary**: Added comprehensive, innovative, notable,
+  sophisticated, unprecedented, remarkable, exceptional, significant, profound,
+  scalable, versatile, dynamic, crucial, vital, foundational, state-of-the-art,
+  best-in-class, world-class, next-generation, next-level (and inflected forms)
+- **OpeningCliches**: Added "Without further ado," "Gone are the days,"
+  "Whether you're," "You might be wondering," "Chances are," "Look no further,"
+  "You've come to the right place," "Ready to dive in," and variants
+- **FormalTransitions**: Added "What's more," "Case in point," "Not to mention,"
+  "Along the same lines," "In the same vein," "Better yet," "To top it off,"
+  "On that note," "Given the above," "In light of this/that," "That is to say,"
+  and more
+- **Metacommentary**: Expanded with more patterns
+- **README**: Updated rule count to 22, refreshed rule table with all current
+  rules, removed stale warning/suggestion level split (all rules are error level)
+- **test-document.md**: Unwrapped hard-wrapped paragraphs; added test cases for
+  all new and expanded rules
+
 ## [1.0.0] - 2026-02-01
 
 ### Changed
