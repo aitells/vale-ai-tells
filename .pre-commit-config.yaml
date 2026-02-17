@@ -1,0 +1,36 @@
+---
+default_stages: [pre-commit, pre-push]
+
+repos:
+  - repo: builtin
+    hooks:
+      - id: check-case-conflict
+      - id: check-merge-conflict
+      - id: end-of-file-fixer
+      - id: fix-byte-order-marker
+      - id: mixed-line-ending
+      - id: trailing-whitespace
+
+  - repo: https://github.com/adrienverge/yamllint
+    rev: 79a6b2b1392eaf49cdd32ac4f14be1a809bbd8f7 # v1.37.1
+    hooks:
+      - id: yamllint
+        name: Check YAML files with yamllint
+        entry: yamllint -c .yamllint.yaml --strict
+        types: [yaml]
+
+  - repo: https://github.com/codespell-project/codespell
+    rev: 63c8f8312b7559622c0d82815639671ae42132ac # v2.4.1
+    hooks:
+      - id: codespell
+        exclude: (^\.)
+
+  - repo: https://github.com/rvben/rumdl-pre-commit
+    rev: f82d34de69ae7ddb36af40383c18d81d042fa3b1 # v0.0.222
+    hooks:
+      - id: rumdl
+
+  - repo: https://github.com/errata-ai/vale
+    rev: 27593b0e0e7eb8f0c2b7fae0d93fa1cfaabceb2f # v3.13.0
+    hooks:
+      - id: vale

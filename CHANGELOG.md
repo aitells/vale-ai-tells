@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Justfile**: Task runner with recipes for linting (`lint`, `lint-yaml`,
+  `lint-prose`, `lint-markdown`, `lint-spelling`), Vale style syncing (`sync`),
+  and pre-commit hook management (`prek`, `prek-all`, `prek-install`)
+- **`.pre-commit-config.yaml`**: Pre-commit hooks for YAML validation
+  (yamllint), spelling (codespell), Markdown linting (rumdl), and prose
+  linting (vale), plus standard file hygiene hooks
+- **`.yamllint.yaml`**: yamllint configuration extending default rules with
+  `line-length` disabled (Vale rule files contain arbitrarily long regex tokens)
+- **CLAUDE.md**: Development workflow instructions for first-time setup,
+  running linters, and using pre-commit hooks
+
 - **ClosingPleasantries**: New rule catching AI sign-off language — "I hope
   this helps," "Feel free to ask," "Don't hesitate to reach out," "Happy to
   help," "Best of luck," and similar pleasantries that appear at the end of

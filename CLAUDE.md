@@ -10,16 +10,41 @@ vale-ai-tells is a Vale package for detecting linguistic patterns commonly assoc
 vale-ai-tells/
 ├── styles/ai-tells/     # Vale rule files (*.yml)
 ├── .github/workflows/   # Release automation
+├── .pre-commit-config.yaml
+├── .yamllint.yaml
 ├── .vale.ini            # Sample configuration
+├── Justfile
 └── test-document.md     # Test file with AI patterns
 ```
 
 ## Development workflow
 
+**First-time setup:**
+
+```bash
+just sync          # fetch external Vale styles (Google, write-good, proselint)
+just prek-install  # install pre-commit hooks
+```
+
 **Testing rules locally:**
 
 ```bash
 vale --config=.vale.ini test-document.md
+```
+
+**Running all linters:**
+
+```bash
+just lint          # yamllint + vale + rumdl + codespell
+just lint-yaml     # YAML rule files only
+just lint-prose    # Vale prose check only
+```
+
+**Pre-commit hooks:**
+
+```bash
+just prek          # run hooks on staged files
+just prek-all      # run hooks on all files
 ```
 
 **Creating a release:**

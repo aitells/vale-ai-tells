@@ -1,0 +1,11 @@
+---
+extends: default
+
+ignore-from-file: [.gitignore]
+
+rules:
+  line-length: disable
+  comments:
+    min-spaces-from-content: 1
+  truthy:
+    check-keys: false
