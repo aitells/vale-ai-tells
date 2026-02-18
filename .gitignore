@@ -4,6 +4,9 @@ styles/Google/
 styles/proselint/
 styles/write-good/
 
+# Git worktrees
+.worktrees/
+
 # Temporary files
 tmp/
 

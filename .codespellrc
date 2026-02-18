@@ -1,4 +1,0 @@
-[codespell]
-# Ignore regex character-class fragments that appear inside Vale rule file patterns
-# e.g. [Aa]nd -> nd, [Cc]ore -> ore, [Mm]ake -> ake, [Hh]ot -> ot, [Ss]ure -> ure
-ignore-words-list = nd,ore,ake,ot,ure
