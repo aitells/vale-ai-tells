@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI vocabulary: '%s'. Replace with a more specific or common word."
 level: error
@@ -9,8 +10,6 @@ tokens:
   - tapestry
   - multifaceted
   - underscores
-  - showcasing
-  - showcases
   - pivotal
   - intricate
   - intricacies
@@ -19,13 +18,6 @@ tokens:
   - seamless
   - seamlessly
   - robust
-  - leverage
-  - leveraging
-  - leverages
-  - fostering
-  - fosters
-  - harnessing
-  - harnesses
   - streamline
   - streamlines
   - streamlining
@@ -35,9 +27,6 @@ tokens:
   - bolster
   - bolsters
   - bolstering
-  - spearhead
-  - spearheads
-  - spearheading
   - underpins
   - underpin
   - underpinning
@@ -75,9 +64,6 @@ tokens:
   - ubiquitous
   - encompasses
   - encompassing
-  - embark
-  - embarks
-  - embarking
   - endeavor
   - endeavors
   - endeavoring
@@ -93,10 +79,6 @@ tokens:
   - proactive
   - proactively
   - meaningful
-  - navigate
-  - navigates
-  - navigating
-  - navigated
   - evolving
   - comprehensive
   - comprehensively

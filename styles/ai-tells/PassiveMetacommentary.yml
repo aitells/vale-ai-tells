@@ -1,0 +1,13 @@
+---
+extends: sequence
+message: "Passive metacommentary: 'it %s %s'. State your point directly."
+level: error
+tokens:
+  - pattern: "[Ii]t"
+  - pattern: is|are|was|should|would|can|may|might|could
+    tag: VBZ|VBP|MD
+  - pattern: important|essential|worth|necessary|useful|helpful|advisable|critical|vital|noteworthy|notable|relevant
+    tag: JJ
+    skip: 2
+  - pattern: to|that
+    tag: TO|IN

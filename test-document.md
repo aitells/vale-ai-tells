@@ -78,3 +78,41 @@ On that note, let's look at the benchmarks.
 Given the above, migration is strongly recommended.
 
 In light of this, the team updated the guidelines.
+
+## Sequence rules (new patterns)
+
+### OverusedVocabularyVerbs: verb forms that should trigger
+
+Teams leverage machine learning to improve recommendations.
+
+The framework helps developers navigate complex dependency graphs.
+
+The annual conference showcases emerging research from academia.
+
+Organizations harness distributed computing to process large datasets.
+
+New engineers embark on a structured onboarding program.
+
+Regular retrospectives foster a culture of continuous improvement.
+
+The VP will spearhead the platform migration.
+
+### AIAdjectiveNounPairs: AI adjective + noun combos that should trigger
+
+This holistic approach ensures comprehensive coverage.
+
+The seamless integration delivers an unprecedented experience.
+
+Our innovative platform supports sophisticated workflows.
+
+The transformative impact of this groundbreaking framework is unparalleled.
+
+### PassiveMetacommentary: "it + modal/be + adj + to/that" that should trigger
+
+It is important to understand the implications.
+
+It is essential to validate your inputs before processing.
+
+It is critical to note that security must be prioritized.
+
+It is necessary to configure the environment first.
