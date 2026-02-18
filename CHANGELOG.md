@@ -1,6 +1,6 @@
 # Changelog
 
-This file documents all notable changes to this project.
+This file documents all major changes to this project.
 
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **Commit-message linting**: Vale now runs on `COMMIT_EDITMSG` via a
+  `commit-msg` pre-commit hook, catching AI-generated patterns before they land
+  in history. The hook applies only `ai-tells` rules (not Google/write-good/
+  proselint) to keep noise low. See README for setup instructions.
 - **Justfile**: Task runner with recipes for linting (`lint`, `lint-yaml`,
   `lint-prose`, `lint-markdown`, `lint-spelling`), Vale style syncing (`sync`),
   and pre-commit hook management (`prek`, `prek-all`, `prek-install`)
@@ -20,6 +24,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CLAUDE.md**: Development workflow instructions for first-time setup,
   running linters, and using pre-commit hooks
 
+<!-- vale Google.EmDash = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale ai-tells.ClosingPleasantries = NO -->
+<!-- vale ai-tells.RestatementMarkers = NO -->
+<!-- vale ai-tells.SelfReference = NO -->
 - **ClosingPleasantries**: New rule catching AI sign-off language — "I hope
   this helps," "Feel free to ask," "Don't hesitate to reach out," "Happy to
   help," "Best of luck," and similar pleasantries that appear at the end of
@@ -28,20 +37,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   words," "Simply put," "To be more specific," "What I mean is," etc.
 - **SelfReference**: New rule detecting self-referential cross-references —
   "as mentioned above," "as noted earlier," "as we'll explore," "recall that," etc.
+<!-- vale Google.EmDash = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.ClosingPleasantries = YES -->
+<!-- vale ai-tells.RestatementMarkers = YES -->
+<!-- vale ai-tells.SelfReference = YES -->
 
 ### Changed
 
+<!-- vale ai-tells.OverusedVocabulary = NO -->
 - **OverusedVocabulary**: Added comprehensive, innovative, notable,
   sophisticated, unprecedented, remarkable, exceptional, significant, profound,
   scalable, versatile, dynamic, crucial, vital, foundational, state-of-the-art,
   best-in-class, world-class, next-generation, next-level (and inflected forms)
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.OpeningCliches = NO -->
 - **OpeningCliches**: Added "Without further ado," "Gone are the days,"
   "Whether you're," "You might be wondering," "Chances are," "Look no further,"
   "You've come to the right place," "Ready to dive in," and variants
+<!-- vale ai-tells.OpeningCliches = YES -->
+<!-- vale ai-tells.FormalTransitions = NO -->
+<!-- vale proselint.Cliches = NO -->
 - **FormalTransitions**: Added "What's more," "Case in point," "Not to mention,"
   "Along the same lines," "In the same vein," "Better yet," "To top it off,"
   "On that note," "Given the above," "In light of this/that," "That is to say,"
   and more
+<!-- vale ai-tells.FormalTransitions = YES -->
+<!-- vale proselint.Cliches = YES -->
 - **Metacommentary**: Expanded with more patterns
 - **README**: Updated rule count to 22, refreshed rule table with all current
   rules, removed stale warning/suggestion level split (all rules are error level)
@@ -95,8 +117,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Rewrote error messages to be actionable for AI agents. Messages now explain
-  why a pattern triggers and suggest alternatives.
+- Rewrote error messages to be immediately usable: each one explains why a
+  pattern triggers and suggests alternatives.
 
 ## [0.3.0] - 2025-12-02
 

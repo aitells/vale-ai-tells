@@ -34,3 +34,8 @@ repos:
     rev: 27593b0e0e7eb8f0c2b7fae0d93fa1cfaabceb2f # v3.13.0
     hooks:
       - id: vale
+        args: [--minAlertLevel=error]
+      - id: vale
+        name: vale (commit message)
+        stages: [commit-msg]
+        args: [--ext=.md, --minAlertLevel=error]

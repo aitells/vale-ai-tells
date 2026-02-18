@@ -29,6 +29,78 @@ Then run:
 vale sync
 ```
 
+## Linting commit messages
+
+AI-generated commit messages carry the same fingerprints as AI-generated prose.
+<!-- vale off -->
+"This commit leverages a comprehensive solution to seamlessly enhance the functionality"
+<!-- vale on -->
+is detectable for the same reasons as anything else in your docs.
+
+### Setup
+
+Add a `[formats]` section and a named section for the commit message file to your `.vale.ini`:
+
+```ini
+[formats]
+COMMIT_EDITMSG = md
+
+[{COMMIT_EDITMSG,.git/COMMIT_EDITMSG}]
+BasedOnStyles = ai-tells
+```
+
+The glob covers both how pre-commit passes the path and direct Vale invocations.
+
+Add the commit-msg hook to your `.pre-commit-config.yaml`:
+
+```yaml
+  - repo: https://github.com/errata-ai/vale
+    rev: 27593b0e0e7eb8f0c2b7fae0d93fa1cfaabceb2f # v3.13.0
+    hooks:
+      - id: vale
+      - id: vale
+        name: vale (commit message)
+        stages: [commit-msg]
+        args: [--ext=.md]
+```
+
+Install the hook:
+
+```bash
+prek install --hook-type commit-msg
+```
+
+### Example
+
+A blocked commit:
+
+```text
+$ git commit -m "This commit leverages a comprehensive solution to seamlessly enhance the functionality"
+
+vale (commit message)....................................................Failed
+- hook id: vale
+- exit code: 1
+
+ .git/COMMIT_EDITMSG
+ 1:13  error  AI vocabulary: 'leverages'. Replace with a more specific      ai-tells.OverusedVocabulary
+              or common word.
+ 1:24  error  AI vocabulary: 'comprehensive'. Delete or replace with a      ai-tells.OverusedVocabulary
+              specific adjective.
+ 1:48  error  AI filler: 'seamlessly'. Delete—it describes no real         ai-tells.FillerPhrases
+              mechanism.
+```
+
+### Suppressing noisy rules
+
+Some rules are less relevant for commit messages. `SycophancyMarkers` and `ClosingPleasantries` are unlikely to fire on a commit summary line, but if they generate noise, suppress them in your `.vale.ini`:
+
+```ini
+[{COMMIT_EDITMSG,.git/COMMIT_EDITMSG}]
+BasedOnStyles = ai-tells
+ai-tells.SycophancyMarkers = NO
+ai-tells.ClosingPleasantries = NO
+```
+
 ## Rules included
 
 This package contains 22 rule files covering different categories of AI tells. All rules default to `error` level.
@@ -44,13 +116,13 @@ This package contains 22 rule files covering different categories of AI tells. A
 | `ContrastiveFormulas` | Rhetorical contrasts: "It's not just X; it's Y," "The real question isn't X; it's Y," etc. |
 | `DefensiveHedges` | Preemptive concessions: "This may seem X, but..." "Admittedly, X, but..." "At first glance," etc. |
 | `EmDashUsage` | Em-dashes, which AI uses excessively |
-| `EmphaticCopula` | Italicized *is*, *are*, *the* for manufactured profundity |
+| `EmphaticCopula` | Italicized copula verbs and determiners for manufactured profundity |
 | `FalseBalance` | Evasive "both sides" language: "both sides present valid points," "nuanced approach," etc. |
 | `FillerPhrases` | Padding and performative sincerity: "a wide range of," "in order to," "honestly," etc. |
 | `FormalRegister` | Overly formal vocabulary: "utilize," "facilitate," "commence," etc. |
 | `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "What's more," "Case in point," etc. |
 | `HedgingPhrases` | Compulsive hedging: "It's important to note that," "That being said," "Generally speaking," etc. |
-| `Metacommentary` | Throat-clearing and self-commentary: "This matters," "Let me explain," "At its core," etc. |
+| `Metacommentary` | Throat-clearing and self-commentary that narrates the text rather than adding content |
 | `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "Without further ado," "Whether you're," etc. |
 | `OrganicConsequence` | False inevitability: "emerges naturally," "a natural consequence," "follows naturally from," etc. |
 | `OverusedVocabulary` | Words with documented AI overuse: "delve," "leverage," "comprehensive," "unprecedented," "sophisticated," etc. |
@@ -64,7 +136,7 @@ This package contains 22 rule files covering different categories of AI tells. A
 
 ## Using with AI agents
 
-Each error message provides actionable guidance for AI agents (or humans) to fix issues immediately. Messages include:
+Each error message gives AI agents (or humans) specific, usable guidance to fix issues immediately. Messages include:
 
 - A short prefix for quick identification (`AI hedge:`, `AI filler:`, etc.)
 - The matched text
@@ -141,7 +213,7 @@ This package catches lexical and phrasal patterns. It can't detect:
 - Semantic analysis
 - Model-specific stylometric signatures
 
-For comprehensive detection, combine this package with statistical analysis tools.
+For fuller detection, combine this package with statistical analysis tools.
 
 ### Supplementing with AI agent instructions
 

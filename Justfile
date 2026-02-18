@@ -35,4 +35,5 @@ prek-all:
 
 # Install pre-commit hooks (run `just sync` first to fetch Vale styles)
 prek-install:
-  pre-commit install
+  prek install
+  prek install --hook-type commit-msg
