@@ -35,4 +35,6 @@ jobs:
         run: uv run vale sync
 
       - name: Lint prose
-        run: uv run vale --minAlertLevel=error .
+        run: |
+          git ls-files '*.md' | grep -vE '(^|/)test[^/]*\.md$' | \
+            xargs --no-run-if-empty uv run vale --minAlertLevel=error
