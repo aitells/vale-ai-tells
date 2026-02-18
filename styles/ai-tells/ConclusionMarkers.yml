@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI tell: '%s'. Delete this and let your final point stand on its own."
 level: error

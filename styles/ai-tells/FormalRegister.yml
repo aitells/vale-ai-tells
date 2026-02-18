@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI formalism: '%s'. Use a simpler word (e.g., 'use' instead of 'utilize')."
 level: error

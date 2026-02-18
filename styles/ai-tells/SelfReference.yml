@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI cross-reference: '%s'. These backward/forward references are an AI writing habit. Rewrite to stand on its own or restructure the content."
 level: error

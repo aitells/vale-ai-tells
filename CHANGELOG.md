@@ -40,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   to [verb]" and "It is worth [verb]ing that" pattern families
 <!-- vale ai-tells.HedgingPhrases = YES -->
 <!-- vale ai-tells.OverusedVocabulary = YES -->
+- **Rule files**: Added YAML document-start markers (`---`) to all rule files for yamllint strict-mode compliance
 
 ## [1.1.0] - 2026-02-17
 

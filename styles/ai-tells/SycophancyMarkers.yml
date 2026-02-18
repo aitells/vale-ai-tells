@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI sycophancy: '%s'. Delete this—it sounds robotic and insincere."
 level: error

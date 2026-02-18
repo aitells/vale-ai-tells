@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI opening: '%s'. Start with your actual point instead of this generic lead-in."
 level: error

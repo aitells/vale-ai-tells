@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI closing: '%s'. This sign-off is a signature AI pleasantry. Delete it and let your content speak for itself."
 level: error

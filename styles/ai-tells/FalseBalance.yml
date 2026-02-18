@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI evasion: '%s'. Take a clear position or remove the hedge."
 level: error

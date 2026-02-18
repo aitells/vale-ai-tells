@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI rhetoric: '%s'. Just state your point directly. Delete the preamble and start with what you're actually saying."
 level: error

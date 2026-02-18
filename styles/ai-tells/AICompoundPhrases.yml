@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI fingerprint: '%s'. Rewrite with concrete specifics instead of this clichéd phrase."
 level: error

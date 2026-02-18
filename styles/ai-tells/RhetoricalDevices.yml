@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI rhetoric: '%s'. This rhetorical device is overrepresented in AI-generated text."
 level: error

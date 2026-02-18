@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI restatement: '%s'. This signals uncertainty about whether you were clear the first time. Delete it and trust your original phrasing."
 level: error

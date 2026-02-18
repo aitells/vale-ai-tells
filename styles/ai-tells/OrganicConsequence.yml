@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI rhetoric: '%s'. This makes designed choices sound organically inevitable. Just say it was designed that way."
 level: error

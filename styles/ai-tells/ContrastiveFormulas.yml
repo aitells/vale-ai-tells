@@ -1,3 +1,4 @@
+---
 extends: existence
 message: "AI rhetoric: '%s'. State the positive claim directly without the 'not X, but Y' formula."
 level: error
