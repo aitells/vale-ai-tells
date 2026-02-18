@@ -22,12 +22,12 @@ The embark terminal at the port was closed for repairs.
 
 (Intentionally sparse — calibrate based on real-world false positive data.)
 
-## PassiveMetacommentary: genuine requirements and warnings that should NOT trigger
+## HedgingPhrases: genuine requirements that should NOT trigger
 
 It is important to test this before deploying to production.
 
-It is essential that the private key be kept secret.
+It is essential to configure the firewall before going live.
 
-It is critical that backups run before the migration window.
+It is critical to back up the database before migrating.
 
-It is necessary that all contributors sign the CLA.
+It is necessary to restart the service after updating the config.

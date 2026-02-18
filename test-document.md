@@ -107,12 +107,14 @@ Our innovative platform supports sophisticated workflows.
 
 The transformative impact of this groundbreaking framework is unparalleled.
 
-### PassiveMetacommentary: "it + modal/be + adj + to/that" that should trigger
+### HedgingPhrases (expanded): new patterns that should trigger
 
 It is important to understand the implications.
 
-It is essential to validate your inputs before processing.
+It is essential to recognize the risks before proceeding.
 
 It is critical to note that security must be prioritized.
 
-It is necessary to configure the environment first.
+It is worth emphasizing that this approach has tradeoffs.
+
+It is necessary to acknowledge the limitations of this approach.

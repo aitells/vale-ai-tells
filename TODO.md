@@ -33,13 +33,13 @@ immediately preceding any noun, such as "holistic approach," "seamless
 integration," and "transformative impact." Set at `warning` level pending false
 positive calibration.
 
-**`PassiveMetacommentary.yml`** - Matches `it + modal/be + adj + to/that`
-grammar to catch "It is important to," "It is essential to," and similar
-constructions without requiring enumeration. Known limitation: cannot
-distinguish AI throat-clearing from genuine requirements (such as testing a
-security check before deploying). False positives confirmed in
-`test-false-positives.md`. May need narrowing to `adj + to` patterns only, or
-downgrading to `warning`.
+**`PassiveMetacommentary.yml`** - Attempted to match `it + modal/be + adj + to/that`
+grammar via `sequence`. **Dropped**: Vale's sequence extension does not enforce
+the final token as mandatory; it fires on any 4-token match regardless of
+whether the fifth token matches. Without reliable fifth-token enforcement, the rule
+had too many false positives on genuine requirement statements to ship at `error`
+level. The patterns have been folded into `HedgingPhrases.yml` as enumerated
+`existence` matches instead.
 <!-- vale ai-tells.EmDashUsage = YES -->
 <!-- vale ai-tells.OverusedVocabulary = YES -->
 <!-- vale ai-tells.AIAdjectiveNounPairs = YES -->
@@ -60,8 +60,9 @@ config.
 - [ ] Collect false positive data on real prose for `AIAdjectiveNounPairs`
       and promote from `warning` to `error` once the false positive rate is
       acceptable
-- [ ] Decide whether to merge `PassiveMetacommentary` as `warning` or refine
-      the pattern to reduce false positives on genuine requirement statements
+- [x] Decide on `PassiveMetacommentary`: dropped in favour of expanded
+      `HedgingPhrases` existence patterns (sequence fifth-token enforcement
+      is unreliable in the current Vale release)
 - [ ] Fix the `yamllint` `document-start` issue across all existing rule files
       or update the config
 - [ ] Merge the `vale-sequence` branch if the prototypes get approved
