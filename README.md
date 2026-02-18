@@ -9,6 +9,8 @@ This package is designed for **technical documentation**, where clarity and dire
 > The author created this package to help clean up AI-assisted technical documentation, not to disguise AI-generated content as human-written.
 <!-- vale proselint.Annotations = YES -->
 
+[![linted with vale-ai-tells](https://img.shields.io/badge/linted%20with-vale--ai--tells-blue)](https://github.com/tbhb/vale-ai-tells)
+
 ## Installation
 
 Add the package to your `.vale.ini`:
@@ -17,7 +19,7 @@ Add the package to your `.vale.ini`:
 StylesPath = styles
 MinAlertLevel = suggestion
 
-Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.3.0/ai-tells.zip
+Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.4.0/ai-tells.zip
 
 [*.md]
 BasedOnStyles = ai-tells
@@ -103,12 +105,13 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 25 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 29 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
 | Rule | Description |
 |------|-------------|
+| `AbsoluteAssertions` | AI overconfidence: "the only way to," "the only real solution," "make no mistake," "there is no denying," "above all else," etc. Verify the claim or soften it. |
 | `AIAdjectiveNounPairs` | AI adjective immediately preceding a noun: "holistic approach," "seamless integration," "transformative impact," etc. Currently at `warning` level. |
 | `AICompoundPhrases` | Compound phrases: "rich tapestry," "intricate interplay," "paradigm shift," "double-edged sword," etc. |
 | `AffirmativeFormulas` | Revelation patterns: "Here's the thing," "And that's the beauty of it," "Let that sink in," etc. |
@@ -122,18 +125,42 @@ This package contains 25 rule files covering different categories of AI tells. A
 | `FillerPhrases` | Padding and performative sincerity: "a wide range of," "in order to," "honestly," etc. |
 | `FormalRegister` | Overly formal vocabulary: "utilize," "facilitate," "commence," etc. |
 | `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "What's more," "Case in point," etc. |
-| `HedgingPhrases` | Compulsive hedging: "It's important to note that," "That being said," "Generally speaking," etc. |
+| `HedgingPhrases` | Compulsive hedging: "It's important to note that," "That being said," "Generally speaking," "As you might expect," etc. |
+| `ListIntroductions` | Announcements of upcoming lists or summaries: "Below you'll find," "Here's a breakdown of," "Here's everything you need to know," "The following sections will," etc. |
 | `Metacommentary` | Throat-clearing and self-commentary that narrates the text rather than adding content |
 | `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "Without further ado," "Whether you're," etc. |
 | `OrganicConsequence` | False inevitability: "emerges naturally," "a natural consequence," "follows naturally from," etc. |
-| `OverusedVocabulary` | Words with documented AI overuse: "delve," "comprehensive," "unprecedented," "sophisticated," etc. Verb forms (leverage, harness, etc.) moved to `OverusedVocabularyVerbs`. |
+| `OverusedVocabulary` | Words with documented AI overuse: "delve," "comprehensive," "unprecedented," "sophisticated," "salient," "efficacy," "paramount," "cognizant," etc. Verb forms (leverage, harness, etc.) moved to `OverusedVocabularyVerbs`. |
 | `OverusedVocabularyVerbs` | Verb forms of AI vocabulary fingerprints: "leverage," "navigate," "showcase," "harness," "embark," "foster," "spearhead." Sequence-based for precision — noun forms such as "financial leverage" do not trigger. |
 | `RestatementMarkers` | Redundant restatements: "In other words," "Simply put," "To be more specific," etc. |
 | `RhetoricalDevices` | Rhetorical question patterns: "Ask yourself:", "The test:", "When doing X, ask:" etc. |
 | `SelfReference` | Self-referential cross-references: "as mentioned above," "as noted earlier," "as we'll explore," etc. |
 | `StackedAnaphora` | Stacked repetition for emphasis: "No X. No Y. No Z." "It's X. It's Y. It's Z." etc. |
+| `StructureAnnouncements` | Narrating upcoming structure: "key takeaway," "quick recap," "to recap," "quick summary," "to put it plainly," "to put this in perspective," etc. |
 | `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
+| `UnpackExplore` | Explainer announcements: AI's habit of announcing what it is about to explain rather than just explaining it. Phrases beginning with "Let me" or "Let us" followed by unpack, break down, dive in, walk through, examine, explore, etc. |
 | `UrgencyInflation` | False urgency and importance assertions: "cannot be overstated," "more important than ever," "has never been more critical," "the stakes have never been higher," "at a critical juncture," "in an increasingly connected world," etc. |
+
+<!-- vale on -->
+
+## What to write instead
+
+Quick substitution reference for the most common patterns:
+
+<!-- vale off -->
+
+| Instead of | Write |
+|---|---|
+| `delve into` | `look at`, `cover`, `examine` |
+| `leverage` (verb) | `use`, `apply`, `build on` |
+| `utilize` | `use` |
+| `seamlessly` | *(delete)* |
+| `comprehensive` | *(delete, or name what's included)* |
+| `in order to` | `to` |
+| `Moreover` / `Furthermore` | `Also`, `And`, or start a new sentence |
+| em-dash | comma, period, or parentheses |
+| `It's important to note that` | *(delete — just state the point)* |
+| `I hope this helps` | *(delete)* |
 
 <!-- vale on -->
 

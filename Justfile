@@ -37,3 +37,37 @@ prek-all:
 prek-install:
   prek install
   prek install --hook-type commit-msg
+
+# Assert test-false-positives.md produces zero Vale errors
+test-clean:
+  @echo "Checking for false positives..."
+  @vale --config=.vale.ini test-false-positives.md && echo "Clean — no false positives."
+
+# Scaffold a new rule file
+scaffold name:
+  #!/usr/bin/env bash
+  cat > "styles/ai-tells/{{name}}.yml" << 'EOF'
+  ---
+  extends: existence
+  message: "AI [type]: '%s'. [action]."
+  level: error
+  ignorecase: true
+  tokens:
+    -
+  EOF
+  echo "Created styles/ai-tells/{{name}}.yml"
+
+# Show token counts per rule
+stats:
+  #!/usr/bin/env bash
+  echo "Token counts per rule:"
+  total=0
+  for f in styles/ai-tells/*.yml; do
+    count=$(grep -c "^  - " "$f" 2>/dev/null || true)
+    [[ -z "$count" ]] && count=0
+    total=$((total + count))
+    printf "  %-44s %3d\n" "$(basename "$f" .yml)" "$count"
+  done
+  echo ""
+  echo "  Total: $total"
+  echo "  (Sequence rules report 1; actual verb count is higher)"

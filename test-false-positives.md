@@ -20,7 +20,23 @@ The embark terminal at the port was closed for repairs.
 
 ## AIAdjectiveNounPairs: technical uses that should NOT trigger
 
-(Intentionally sparse — calibrate based on real-world false positive data.)
+(Intentionally sparse. Calibrate based on real-world false positive data.)
+
+## StructureAnnouncements: legitimate uses that should NOT trigger
+
+(No known false positives. Verify against real-world data.)
+
+## AbsoluteAssertions: legitimate uses that should NOT trigger
+
+(No known false positives. Verify against real-world data.)
+
+## ListIntroductions: legitimate uses that should NOT trigger
+
+(No known false positives. Patterns are tightly scoped to list-announcement phrases.)
+
+## UnpackExplore: legitimate uses that should NOT trigger
+
+(No known false positives. Patterns are tightly scoped to explainer announcements.)
 
 ## HedgingPhrases: genuine requirements that should NOT trigger
 

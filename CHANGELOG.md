@@ -7,6 +7,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.4.0] - 2026-02-17
+
+### Added
+
+- **UnpackExplore**: New rule flagging AI explainer announcements. AI's habit of
+  announcing what it is about to explain rather than just explaining it: phrases
+  starting with "Let me" or "Let us" followed by unpack, break down, dive into,
+  walk through, dig into, examine, explore, and similar verbs
+<!-- vale ai-tells.ListIntroductions = NO -->
+- **ListIntroductions**: New rule catching AI list and summary announcements:
+  "Below you'll find," "Here's a breakdown of," "Here's an overview of,"
+  "Here is everything you need to know," "The following sections will," and
+  variants
+<!-- vale ai-tells.ListIntroductions = YES -->
+<!-- vale ai-tells.AbsoluteAssertions = NO -->
+- **AbsoluteAssertions**: New rule flagging AI overconfidence assertions:
+  "the only way to," "the only real solution," "the single most important,"
+  "make no mistake," "there is no denying," "above all else," and variants
+<!-- vale ai-tells.AbsoluteAssertions = YES -->
+<!-- vale ai-tells.StructureAnnouncements = NO -->
+- **StructureAnnouncements**: New rule catching narrated structure and recap
+  phrases: "key takeaway," "quick recap," "to recap," "a quick summary,"
+  "to put it plainly," "to put this in perspective," and variants
+<!-- vale ai-tells.StructureAnnouncements = YES -->
+
+### Changed
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+- **OverusedVocabulary**: Added salient, saliently, efficacy, paramount, adept,
+  cognizant
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.HedgingPhrases = NO -->
+- **HedgingPhrases**: Added "as you might expect," "as you'd expect,"
+  "as one might expect"
+<!-- vale ai-tells.HedgingPhrases = YES -->
+<!-- vale ai-tells.AbsoluteAssertions = NO -->
+- **AffirmativeFormulas**: Removed "make no mistake" (now covered by
+  AbsoluteAssertions)
+<!-- vale ai-tells.AbsoluteAssertions = YES -->
+- **Justfile**: Added `test-clean` (assert zero false positives),
+  `scaffold` (create a new rule file from template), and `stats`
+  (token counts per rule) recipes
+- **README**: Added badge, "What to write instead" substitution table
+
 ## [1.3.0] - 2026-02-17
 
 ### Added
@@ -234,6 +278,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.4.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.0.0...v1.1.0

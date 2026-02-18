@@ -166,3 +166,95 @@ We are at an inflection point for the industry.
 In an increasingly connected world, latency matters.
 
 In an increasingly data-driven world, privacy is essential.
+
+## StructureAnnouncements
+
+The key takeaway from this section is that caching reduces latency.
+
+Key takeaways: performance, reliability, and cost.
+
+Here's a quick recap of what we covered.
+
+To recap: we migrated the database, updated the API, and deployed the new service.
+
+To recap briefly, the three options are X, Y, and Z.
+
+A quick summary of the changes is provided below.
+
+Quick overview: this tool handles authentication, routing, and logging.
+
+To put it plainly, the old approach doesn't scale.
+
+To put this in perspective, the previous implementation took three weeks.
+
+## AbsoluteAssertions
+
+The only way to ensure reliability is to add redundancy.
+
+This is the only real solution to the scaling problem.
+
+The single most important factor is latency.
+
+The most important thing is to ship early and iterate.
+
+Make no mistake: this decision will affect everyone.
+
+Make no mistake about it, security cannot be an afterthought.
+
+There is no denying that the approach has tradeoffs.
+
+There's no denying the impact this will have on the team.
+
+Above all else, prioritize correctness over speed.
+
+## ListIntroductions
+
+Below you'll find a complete list of supported options.
+
+Here's a breakdown of how the system works.
+
+Here is an overview of the migration process.
+
+Here's a summary of the key changes in this release.
+
+Here's everything you need to know about getting started.
+
+Here is what you need to know about the new API.
+
+The following sections will cover each component in detail.
+
+The following guide will walk you through the setup process.
+
+## UnpackExplore
+
+Let's unpack what this means for your workflow.
+
+Let me break this down into manageable steps.
+
+Let's take a closer look at the configuration options.
+
+Let me dive into the implementation details.
+
+Let's walk through the setup process together.
+
+Let me dig into the root cause of the error.
+
+Let's examine the tradeoffs between these approaches.
+
+Let's explore the available options.
+
+## OverusedVocabulary (expanded tokens)
+
+The salient point here is that efficacy is paramount.
+
+Being adept at these techniques is saliently important.
+
+It is important to be cognizant of the tradeoffs.
+
+## HedgingPhrases (expanded tokens)
+
+As you might expect, the results were mixed.
+
+As you'd expect, performance degraded under load.
+
+As one might expect, the migration took longer than planned.

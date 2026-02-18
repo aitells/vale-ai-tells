@@ -81,8 +81,7 @@ tokens:
   - "[Ll]et'?s be (?:clear|honest|direct|frank|real)"
   - "[Tt]o be (?:clear|honest|direct|frank)"
 
-  # "Make no mistake" patterns
-  - "[Mm]ake no mistake"
+  # "Have no doubt" / "Rest assured" patterns
   - "[Hh]ave no doubt"
   - "[Rr]est assured"
 
