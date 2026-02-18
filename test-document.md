@@ -118,3 +118,51 @@ It is critical to note that security must be prioritized.
 It is worth emphasizing that this approach has tradeoffs.
 
 It is necessary to acknowledge the limitations of this approach.
+
+## AICompoundPhrases (new tokens)
+
+This issue takes center stage in the debate.
+
+The report paints a picture of systemic failure.
+
+The approach is not without its challenges.
+
+Whether we like it or not, change is coming.
+
+## HedgingPhrases (new tokens)
+
+One thing is clear: the system needs redesign.
+
+This much is certain: delays are inevitable.
+
+This raises important questions about governance.
+
+This begs the question of why no one acted sooner.
+
+This forces us to consider the alternatives.
+
+This invites us to reflect on our assumptions.
+
+The incident calls into question the entire process.
+
+This reminds us that safety cannot be an afterthought.
+
+## UrgencyInflation
+
+The importance of this cannot be overstated.
+
+Security has never been more important than ever.
+
+The need for action has never been more urgent.
+
+The stakes have never been higher.
+
+The stakes couldn't be higher.
+
+We are at a critical juncture in the project.
+
+We are at an inflection point for the industry.
+
+In an increasingly connected world, latency matters.
+
+In an increasingly data-driven world, privacy is essential.

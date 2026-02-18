@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2026-02-17
+
+### Added
+
+<!-- vale ai-tells.UrgencyInflation = NO -->
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+- **UrgencyInflation**: New rule catching false urgency and importance assertions:
+  "cannot be overstated," "more important than ever," "has never been more
+  critical," "the stakes have never been higher," "at a critical juncture,"
+  "in an increasingly connected world," and variants
+<!-- vale ai-tells.UrgencyInflation = YES -->
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+
+### Changed
+
+<!-- vale ai-tells.AICompoundPhrases = NO -->
+- **AICompoundPhrases**: Added "takes center stage," "paints a picture of,"
+  "is not without its challenges," "whether we like it or not," and inflected forms
+<!-- vale ai-tells.AICompoundPhrases = YES -->
+<!-- vale ai-tells.HedgingPhrases = NO -->
+- **HedgingPhrases**: Added "One thing is clear," "raises important questions,"
+  "begs the question," "forces us to consider," "invites us to reflect,"
+  "calls into question," "reminds us that," and related patterns
+<!-- vale ai-tells.HedgingPhrases = YES -->
+
 ## [1.2.0] - 2026-02-17
 
 ### Added
@@ -209,6 +234,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.3.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/tbhb/vale-ai-tells/compare/v0.6.0...v1.0.0

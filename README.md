@@ -17,7 +17,7 @@ Add the package to your `.vale.ini`:
 StylesPath = styles
 MinAlertLevel = suggestion
 
-Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.2.0/ai-tells.zip
+Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.3.0/ai-tells.zip
 
 [*.md]
 BasedOnStyles = ai-tells
@@ -103,7 +103,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 24 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 25 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -133,6 +133,7 @@ This package contains 24 rule files covering different categories of AI tells. A
 | `SelfReference` | Self-referential cross-references: "as mentioned above," "as noted earlier," "as we'll explore," etc. |
 | `StackedAnaphora` | Stacked repetition for emphasis: "No X. No Y. No Z." "It's X. It's Y. It's Z." etc. |
 | `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
+| `UrgencyInflation` | False urgency and importance assertions: "cannot be overstated," "more important than ever," "has never been more critical," "the stakes have never been higher," "at a critical juncture," "in an increasingly connected world," etc. |
 
 <!-- vale on -->
 
