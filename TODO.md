@@ -58,8 +58,8 @@ config.
 ### Next steps
 
 - [ ] Collect false positive data on real prose for `AIAdjectiveNounPairs`
-      (calibrate the adjective list; consider removing `comprehensive` and
-      `innovative` if too noisy)
+      and promote from `warning` to `error` once the false positive rate is
+      acceptable
 - [ ] Decide whether to merge `PassiveMetacommentary` as `warning` or refine
       the pattern to reduce false positives on genuine requirement statements
 - [ ] Fix the `yamllint` `document-start` issue across all existing rule files
