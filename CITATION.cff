@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+title: vale-ai-tells
+message: >-
+  If you use this software, please cite it using the
+  metadata from this file.
+type: software
+authors:
+  - given-names: Tony
+    family-names: Burns
+    email: tony@tonyburns.net
+    orcid: "https://orcid.org/0009-0006-4480-2939"
+repository-code: "https://github.com/tbhb/vale-ai-tells"
+abstract: >-
+  A Vale package for detecting linguistic patterns commonly
+  associated with AI-generated prose. Provides rules that
+  flag vocabulary fingerprints, structural patterns, and
+  rhetorical tells.
+keywords:
+  - vale
+  - linting
+  - prose
+  - ai-generated text
+  - ai detection
+  - writing style
+  - technical writing
+license: MIT
+version: 1.3.0
+date-released: "2026-02-17"

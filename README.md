@@ -251,6 +251,10 @@ Based on research including:
 
 Yes, Claude wrote most of this repository. It promised me all of these rules actually work because it "knows its own tendencies."
 
+## Citation
+
+If you use this package in research or want to cite it, see [`CITATION.cff`](CITATION.cff) for the citation metadata.
+
 ## License
 
 MIT
