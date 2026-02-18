@@ -1,0 +1,38 @@
+---
+name: Lint
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@e58605a9b6da7c637471fab8847a5e5a6b8df081 # v5
+
+      - name: Install dependencies
+        run: uv sync --frozen
+
+      - name: Lint YAML
+        run: uv run yamllint --strict .
+
+      - name: Check spelling
+        run: uv run codespell
+
+      - name: Lint Markdown
+        run: uv run rumdl check .
+
+      - name: Lint GitHub Actions workflows
+        uses: raven-actions/actionlint@e01d1ea33dd6a5ed517d95b4c0c357560ac6f518 # v2
+
+      - name: Sync Vale packages
+        run: uv run vale sync
+
+      - name: Lint prose
+        run: uv run vale --minAlertLevel=error .
