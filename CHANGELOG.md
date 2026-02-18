@@ -5,6 +5,42 @@ This file documents all major changes to this project.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale Google.EmDash = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+- **OverusedVocabularyVerbs**: New sequence-based rule constraining AI vocabulary
+  tokens (leverage, navigate, showcase, harness, embark, foster, spearhead) to
+  verb uses only — "financial leverage" and "climbing harness" no longer trigger
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+- **AIAdjectiveNounPairs**: New sequence-based rule catching AI-characteristic
+  adjectives immediately preceding any noun. Currently at `warning` level pending
+  false positive calibration on real prose; will be promoted to `error` once
+  the false positive rate is acceptable
+
+### Changed
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale Google.EmDash = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+- **OverusedVocabulary**: Removed leverage, navigate, showcase, harness, embark,
+  foster, and spearhead (and inflected forms) — now handled with POS precision by
+  OverusedVocabularyVerbs
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.HedgingPhrases = NO -->
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+- **HedgingPhrases**: Expanded with "It is essential/crucial/critical/necessary
+  to [verb]" and "It is worth [verb]ing that" pattern families
+<!-- vale ai-tells.HedgingPhrases = YES -->
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+
 ## [1.1.0] - 2026-02-17
 
 ### Added

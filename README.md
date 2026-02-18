@@ -103,12 +103,13 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 22 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 24 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
 | Rule | Description |
 |------|-------------|
+| `AIAdjectiveNounPairs` | AI adjective immediately preceding a noun: "holistic approach," "seamless integration," "transformative impact," etc. Currently at `warning` level. |
 | `AICompoundPhrases` | Compound phrases: "rich tapestry," "intricate interplay," "paradigm shift," "double-edged sword," etc. |
 | `AffirmativeFormulas` | Revelation patterns: "Here's the thing," "And that's the beauty of it," "Let that sink in," etc. |
 | `ClosingPleasantries` | Sign-off language: "I hope this helps," "Feel free to ask," "Don't hesitate to reach out," etc. |
@@ -125,7 +126,8 @@ This package contains 22 rule files covering different categories of AI tells. A
 | `Metacommentary` | Throat-clearing and self-commentary that narrates the text rather than adding content |
 | `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "Without further ado," "Whether you're," etc. |
 | `OrganicConsequence` | False inevitability: "emerges naturally," "a natural consequence," "follows naturally from," etc. |
-| `OverusedVocabulary` | Words with documented AI overuse: "delve," "leverage," "comprehensive," "unprecedented," "sophisticated," etc. |
+| `OverusedVocabulary` | Words with documented AI overuse: "delve," "comprehensive," "unprecedented," "sophisticated," etc. Verb forms (leverage, harness, etc.) moved to `OverusedVocabularyVerbs`. |
+| `OverusedVocabularyVerbs` | Verb forms of AI vocabulary fingerprints: "leverage," "navigate," "showcase," "harness," "embark," "foster," "spearhead." Sequence-based for precision — noun forms such as "financial leverage" do not trigger. |
 | `RestatementMarkers` | Redundant restatements: "In other words," "Simply put," "To be more specific," etc. |
 | `RhetoricalDevices` | Rhetorical question patterns: "Ask yourself:", "The test:", "When doing X, ask:" etc. |
 | `SelfReference` | Self-referential cross-references: "as mentioned above," "as noted earlier," "as we'll explore," etc. |
