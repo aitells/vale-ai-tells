@@ -40,5 +40,56 @@ tokens:
   # "X works because Y. Z works because W." parallel justifications
   - "[A-Z][^.]+works because [^.]+\\. [A-Z][^.]+works because [^.]+\\. [A-Z][^.]+works because [^.]+"
 
+  # "One X. One Y. One Z." pattern (3+ consecutive)
+  - "One [^.]+\\. One [^.]+\\. One [^.]+"
+
+  # "One X, one Y, one Z." pattern (3+ comma-separated)
+  - "One [^,]+, one [^,]+, one [^.!?]+"
+
+  # "One X, one Y." pattern (2 comma-separated)
+  - "One [^,]+, one [^.!?]+"
+
+  # "Every X. Every Y. Every Z." pattern (3+ consecutive)
+  - "Every [^.]+\\. Every [^.]+\\. Every [^.]+"
+
+  # "Every X, every Y, every Z." pattern (3+ comma-separated)
+  - "Every [^,]+, every [^,]+, every [^.!?]+"
+
+  # "Every X, every Y." pattern (2 comma-separated)
+  - "Every [^,]+, every [^.!?]+"
+
+  # "Each X. Each Y. Each Z." pattern (3+ consecutive)
+  - "Each [^.]+\\. Each [^.]+\\. Each [^.]+"
+
+  # "Each X, each Y, each Z." pattern (3+ comma-separated)
+  - "Each [^,]+, each [^,]+, each [^.!?]+"
+
+  # "Each X, each Y." pattern (2 comma-separated)
+  - "Each [^,]+, each [^.!?]+"
+
+  # "Zero X. Zero Y. Zero Z." pattern (3+ consecutive)
+  - "Zero [^.]+\\. Zero [^.]+\\. Zero [^.]+"
+
+  # "Zero X, zero Y, zero Z." pattern (3+ comma-separated)
+  - "Zero [^,]+, zero [^,]+, zero [^.!?]+"
+
+  # "Zero X, zero Y." pattern (2 comma-separated)
+  - "Zero [^,]+, zero [^.!?]+"
+
+  # "A single X. A single Y." pattern (2+ consecutive)
+  - "A single [^.]+\\. A single [^.]+"
+
+  # "A single X, a single Y." pattern (2+ comma-separated)
+  - "A single [^,]+, a single [^.!?]+"
+
+  # "Many X. Many Y." pattern (2+ consecutive)
+  - "Many [^.]+\\. Many [^.]+\\."
+
+  # "Few X. Few Y." pattern (2+ consecutive)
+  - "Few [^.]+\\. Few [^.]+\\."
+
+  # "All X. All Y. All Z." pattern (3+ consecutive)
+  - "All [^.]+\\. All [^.]+\\. All [^.]+"
+
   # Three prepositional phrase chains: "with X, through Y, and for Z" style
   - "(?:with|through|by|for|via|within) [^,]+, (?:with|through|by|for|via|within) [^,]+, (?:and )?(?:with|through|by|for|via|within) [^.!?]+"
