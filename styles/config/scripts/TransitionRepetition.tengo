@@ -1,0 +1,70 @@
+text := import("text")
+
+matches := []
+
+// Formal transition phrases to track.
+transitions := [
+    "in addition",
+    "for instance",
+    "for example",
+    "in particular",
+    "moreover",
+    "furthermore",
+    "additionally",
+    "consequently",
+    "subsequently",
+    "nevertheless",
+    "conversely",
+    "accordingly",
+    "hence",
+    "thus",
+    "therefore",
+    "specifically",
+    "notably",
+    "importantly",
+    "crucially",
+    "essentially"
+]
+
+// Split document into sections by markdown headings.
+sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+
+for section in sections {
+    section = text.trim_space(section)
+    if section == "" {
+        continue
+    }
+
+    // Strip code blocks and HTML comments.
+    clean := text.re_replace("(?s)```.*?```", section, "")
+    clean = text.re_replace("(?s)<!--.*?-->", clean, "")
+    clean_lower := text.to_lower(clean)
+
+    if text.trim_space(clean_lower) == "" {
+        continue
+    }
+
+    // Count occurrences of each transition using text.count on lowercase.
+    has_repetition := false
+    for t in transitions {
+        // For multi-word transitions, normalize spaces.
+        count := text.count(clean_lower, t)
+        if count >= 3 {
+            has_repetition = true
+            break
+        }
+    }
+
+    if has_repetition {
+        // Flag the entire section.
+        start := text.index(scope, section)
+        if start < 0 {
+            start = 0
+        }
+        end := start + len(section)
+        if end > len(scope) {
+            end = len(scope)
+        }
+        matches = append(matches, {begin: start, end: end})
+    }
+}

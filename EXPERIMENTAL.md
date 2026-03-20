@@ -182,6 +182,59 @@ A substitution rule that provides concrete inline rewrite suggestions for common
 
 **Known limitation:** Cannot distinguish noun vs verb usage. "Financial leverage" (legitimate noun) triggers with a suggestion to use "use" or "apply," which is wrong in that context. The main `ai-tells` style handles this with POS-tag-aware sequence rules (`OverusedVocabularyVerbs`), but the substitution extension doesn't support POS tags.
 
+<!-- vale ai-tells.FormalTransitions = NO -->
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.ConclusionMarkers = NO -->
+<!-- vale ai-tells.VerbTricolon = NO -->
+
+### TransitionRepetition
+
+Detects when the same formal transition phrase appears 3+ times within a document section. The existing `FormalTransitions` rule flags individual uses; this catches the density pattern where AI leans on the same connector repeatedly.
+
+**How it works:**
+1. Splits the document into sections by markdown headings
+2. Strips code blocks and HTML comments
+3. Counts occurrences of 20 common formal transitions (case-insensitive): "Moreover," "Furthermore," "Additionally," "Consequently," "Hence," "Thus," etc.
+4. Flags when any single transition appears 3+ times in the same section
+
+### SentenceStartEntropy
+
+Measures Shannon entropy of sentence-starting words within document sections. A more nuanced version of SentenceStartRepetition that captures overall diversity rather than just the most repeated opener.
+
+**Research basis:** A section could have no single dominant opener yet still be monotonous (alternating between just "The" and "This"). Shannon entropy captures this broader pattern.
+
+**How it works:**
+1. Splits the document into sections, strips non-prose content
+2. Extracts the first word of each sentence (lowercased, 2+ characters)
+3. Requires at least 8 sentences in the section
+4. Computes Shannon entropy: H = -sum(p * log2(p)) for each word's probability
+5. Normalizes by H_max = log2(unique_count) to get a 0-1 scale
+6. Flags sections where normalized entropy falls below 0.65
+
+**Threshold rationale:** Normalized entropy of 1.0 means perfectly uniform distribution (every sentence starts with a different word). Below 0.65 means the distribution is concentrated on a small set of openers. Testing showed 0.469 on sections where 9/10 sentences start with "The."
+
+### TricolonDensityDocument
+
+Detects when an unusually high proportion of enumerated lists in a document use exactly three items. AI defaults to three-item lists for everything; human writers naturally vary between 2, 3, 4, and 5+ items.
+
+**Research basis:**
+- Gorrie (2024): Tricolon overuse identified as a key AI rhetorical tell
+- tropes.fyi: "Tricolon Abuse" listed as a sentence-structure pattern
+- Multiple sources note AI's "rule of three" default
+
+**How it works:**
+1. Scans the entire document (not per-section) for list patterns
+2. Counts bullet/dash list groups by length (groups of exactly 3 vs other counts)
+3. Counts inline comma-separated lists ("X, Y, and Z" patterns) with heuristic filtering to avoid false positives from subordinate clauses
+4. Flags when all three conditions hold: at least 4 tricolons total, tricolons make up more than 60% of all enumerated lists, and at least 20% of prose sentences contain a tricolon
+
+**The density gate:** The 20% sentence-density requirement prevents false positives on long documents with a small cluster of tricolons in one section. A truly AI-saturated document has tricolons spread throughout.
+
+<!-- vale ai-tells.FormalTransitions = YES -->
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.ConclusionMarkers = YES -->
+<!-- vale ai-tells.VerbTricolon = YES -->
+
 ## Calibration status
 
 These thresholds are derived from research and validated against a small set of documents (synthetic AI text, curated test documents, AI-generated spec docs, human-varied prose). They need calibration against a larger corpus of real-world technical documentation.

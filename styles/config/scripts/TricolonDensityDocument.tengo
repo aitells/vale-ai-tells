@@ -1,0 +1,207 @@
+text := import("text")
+
+matches := []
+
+// Strip code blocks and HTML comments from analysis.
+clean := text.re_replace("(?s)```.*?```", scope, "")
+clean = text.re_replace("(?s)<!--.*?-->", clean, "")
+
+tricolon_count := 0
+other_list_count := 0
+
+// ── Phase 1: Count bullet/dash list groups ──────────────────────────
+// Identify consecutive runs of list items (-, *, 1.) and classify by
+// length: exactly 3 = tricolon, 2 or 4+ = other.
+all_lines := text.split(clean, "\n")
+current_run := 0
+prose_lines := []
+i := 0
+for i < len(all_lines) {
+    line := text.trim_space(all_lines[i])
+    is_list_item := false
+    if text.has_prefix(line, "- ") || text.has_prefix(line, "* ") {
+        is_list_item = true
+    }
+    if !is_list_item {
+        if text.re_match(`^[0-9]+\.\s`, line) {
+            is_list_item = true
+        }
+    }
+    if is_list_item {
+        current_run += 1
+    } else {
+        if current_run > 0 {
+            if current_run == 3 {
+                tricolon_count += 1
+            } else {
+                if current_run >= 2 {
+                    other_list_count += 1
+                }
+            }
+            current_run = 0
+        }
+        // Collect non-list, non-heading, non-empty lines for prose analysis.
+        if line != "" {
+            if !text.has_prefix(line, "#") {
+                prose_lines = append(prose_lines, line)
+            }
+        }
+    }
+    i += 1
+}
+// Handle a list run that ends at the document's last line.
+if current_run > 0 {
+    if current_run == 3 {
+        tricolon_count += 1
+    } else {
+        if current_run >= 2 {
+            other_list_count += 1
+        }
+    }
+}
+
+// ── Phase 2: Count inline comma-separated lists ─────────────────────
+// Collapse prose lines into a single string so wrapped lines form
+// complete sentences, then split into sentences for analysis.
+prose := text.join(prose_lines, " ")
+sentences := text.re_split(`[.!?]+\s*`, prose)
+
+total_sentences := 0
+
+for sentence in sentences {
+    s := text.trim_space(sentence)
+    if s == "" {
+        continue
+    }
+
+    // Count total sentences (3+ words) for density calculation.
+    words := text.re_split(`\s+`, s)
+    if len(words) >= 3 {
+        total_sentences += 1
+    }
+
+    // ── Oxford comma pattern: "X, Y, and Z" / "X, Y, or Z" ──
+    and_idx := text.index(s, ", and ")
+    or_idx := text.index(s, ", or ")
+    conj_idx := -1
+
+    if and_idx >= 0 {
+        conj_idx = and_idx
+    }
+    if or_idx >= 0 {
+        if conj_idx < 0 || or_idx < conj_idx {
+            conj_idx = or_idx
+        }
+    }
+
+    if conj_idx >= 0 {
+        // Split the text before the conjunction at commas.
+        before := s[:conj_idx]
+        parts := text.split(before, ",")
+        comma_count := len(parts) - 1
+
+        // Heuristic: verify that segments between commas (indices 1+)
+        // are short (≤ 3 words), like list items. The first segment
+        // (index 0) is excluded because it includes the sentence
+        // preamble (subject + verb + first item).
+        items_short := true
+        pi := 1
+        for pi < len(parts) {
+            seg := text.trim_space(parts[pi])
+            seg_words := text.re_split(`\s+`, seg)
+            if len(seg_words) > 3 {
+                items_short = false
+            }
+            pi += 1
+        }
+
+        if items_short {
+            // item_count = commas before conjunction + 2
+            // "A, B, and C" → before="A, B" → 1 comma → 3 items
+            // "A, B, C, and D" → before="A, B, C" → 2 commas → 4 items
+            item_count := comma_count + 2
+            if item_count >= 2 {
+                if item_count == 3 {
+                    tricolon_count += 1
+                } else {
+                    other_list_count += 1
+                }
+            }
+        }
+        continue
+    }
+
+    // ── Non-Oxford pattern: "X, Y and Z" / "X, Y or Z" ──
+    and_idx2 := text.index(s, " and ")
+    or_idx2 := text.index(s, " or ")
+    conj_idx2 := -1
+
+    if and_idx2 >= 0 {
+        conj_idx2 = and_idx2
+    }
+    if or_idx2 >= 0 {
+        if conj_idx2 < 0 || or_idx2 < conj_idx2 {
+            conj_idx2 = or_idx2
+        }
+    }
+
+    if conj_idx2 > 0 {
+        before := s[:conj_idx2]
+        has_comma := text.index(before, ",") >= 0
+        if has_comma {
+            parts := text.split(before, ",")
+            comma_count := len(parts) - 1
+            // Same heuristic: verify non-first segments are short.
+            all_short := true
+            pi := 1
+            for pi < len(parts) {
+                seg := text.trim_space(parts[pi])
+                seg_words := text.re_split(`\s+`, seg)
+                if len(seg_words) > 3 {
+                    all_short = false
+                }
+                pi += 1
+            }
+            if all_short {
+                item_count := comma_count + 2
+                if item_count >= 2 {
+                    if item_count == 3 {
+                        tricolon_count += 1
+                    } else {
+                        other_list_count += 1
+                    }
+                }
+            }
+        }
+    }
+}
+
+// ── Phase 3: Evaluate thresholds ────────────────────────────────────
+// Three conditions must all hold:
+//   1. At least 4 tricolons in the document
+//   2. Tricolons are > 60% of all enumerated lists
+//   3. At least 20% of prose sentences contain a tricolon (density gate)
+// Condition 3 prevents false positives on long documents that happen to
+// have a small cluster of tricolons in one section.
+total_lists := tricolon_count + other_list_count
+
+if tricolon_count >= 4 {
+    if total_lists > 0 {
+        ratio := (0.0 + tricolon_count) / total_lists
+        if ratio > 0.60 {
+            if total_sentences > 0 {
+                density := (0.0 + tricolon_count) / total_sentences
+                if density >= 0.20 {
+                    first_newline := text.index(scope, "\n")
+                    if first_newline < 0 {
+                        first_newline = len(scope)
+                    }
+                    if first_newline <= 0 {
+                        first_newline = 1
+                    }
+                    matches = append(matches, {begin: 0, end: first_newline})
+                }
+            }
+        }
+    }
+}

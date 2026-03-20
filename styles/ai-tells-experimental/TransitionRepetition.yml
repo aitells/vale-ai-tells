@@ -1,0 +1,6 @@
+---
+extends: script
+message: "AI monotony: the same transition phrase appears 3+ times in this section. Vary your connectors or restructure to eliminate the need for transitions."
+level: warning
+scope: raw
+script: TransitionRepetition.tengo
