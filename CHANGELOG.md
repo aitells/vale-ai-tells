@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.1] - 2026-03-20
+
+### Fixed
+
+- **Packaging**: `ai-tells-experimental.zip` now uses Vale's nested package
+  structure (`ai-tells-experimental/styles/...`) so that `vale sync` correctly
+  installs both rules and Tengo scripts. Previously, `config/scripts/` was a
+  sibling directory in the zip and Vale's package sync silently dropped it.
+
 ## [1.6.0] - 2026-03-20
 
 ### Added
@@ -537,7 +546,8 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
-[1.6.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.1...1.6.0
+[1.6.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.6.0...v1.6.1
+[1.6.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.3.0...v1.4.0

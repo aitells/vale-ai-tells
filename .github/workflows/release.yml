@@ -19,9 +19,19 @@ jobs:
       - name: Create packages
         run: |
           cd styles
+
+          # ai-tells and ai-tells-commits are style-only packages (flat zip)
           zip -r ../ai-tells.zip ai-tells
           zip -r ../ai-tells-commits.zip ai-tells-commits
-          zip -r ../ai-tells-experimental.zip ai-tells-experimental config
+
+          # ai-tells-experimental includes Tengo scripts and vocabularies
+          # in config/. Vale's package sync expects a top-level dir wrapping
+          # a styles/ subtree so it can merge into StylesPath.
+          cd ..
+          mkdir -p pkg/ai-tells-experimental/styles
+          cp -r styles/ai-tells-experimental pkg/ai-tells-experimental/styles/
+          cp -r styles/config pkg/ai-tells-experimental/styles/
+          cd pkg && zip -r ../ai-tells-experimental.zip ai-tells-experimental
 
       - name: Create release
         uses: softprops/action-gh-release@v2
