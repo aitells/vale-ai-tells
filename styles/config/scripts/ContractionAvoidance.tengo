@@ -1,0 +1,117 @@
+text := import("text")
+
+matches := []
+
+// Strip code blocks and HTML comments.
+clean := text.re_replace("(?s)```.*?```", scope, "")
+clean = text.re_replace("(?s)<!--.*?-->", clean, "")
+
+// Gate check: only flag informal/conversational documents.
+// Formal docs (specs, legal, academic) legitimately avoid contractions.
+informal_markers := 0
+// First/second person pronouns
+if text.re_match(`(?i)\byou\b`, clean) { informal_markers += 1 }
+if text.re_match(`(?i)\byour\b`, clean) { informal_markers += 1 }
+if text.re_match(`(?i)\bwe\b`, clean) { informal_markers += 1 }
+if text.re_match(`(?i)\bour\b`, clean) { informal_markers += 1 }
+if text.re_match(`(?i)\bI\b`, clean) { informal_markers += 1 }
+// Questions in prose
+if text.re_match(`\?\s`, clean) { informal_markers += 1 }
+
+// Need at least 2 informal markers to consider the doc conversational.
+if informal_markers >= 2 {
+    // Count words to ensure document is long enough.
+    all_words := text.re_split(`\s+`, text.trim_space(clean))
+
+    if len(all_words) >= 500 {
+        // Count contractible full forms (negations are highest signal).
+        full_forms := 0
+        negation_patterns := [
+            `(?i)\bdo not\b`,
+            `(?i)\bdoes not\b`,
+            `(?i)\bdid not\b`,
+            `(?i)\bcannot\b`,
+            `(?i)\bwill not\b`,
+            `(?i)\bwould not\b`,
+            `(?i)\bshould not\b`,
+            `(?i)\bcould not\b`,
+            `(?i)\bis not\b`,
+            `(?i)\bare not\b`,
+            `(?i)\bwas not\b`,
+            `(?i)\bwere not\b`,
+            `(?i)\bhas not\b`,
+            `(?i)\bhave not\b`,
+            `(?i)\bhad not\b`,
+            `(?i)\bit is\b`,
+            `(?i)\bthat is\b`,
+            `(?i)\bthey are\b`,
+            `(?i)\bwe are\b`,
+            `(?i)\byou are\b`,
+            `(?i)\bI am\b`,
+            `(?i)\bI have\b`,
+            `(?i)\bI will\b`,
+            `(?i)\bwe have\b`,
+            `(?i)\bwe will\b`
+        ]
+
+        for pat in negation_patterns {
+            found := text.re_find(pat, clean, -1)
+            if found != undefined {
+                full_forms += len(found)
+            }
+        }
+
+        // Count contractions.
+        contractions := 0
+        contraction_patterns := [
+            `(?i)\bdon't\b`,
+            `(?i)\bdoesn't\b`,
+            `(?i)\bdidn't\b`,
+            `(?i)\bcan't\b`,
+            `(?i)\bwon't\b`,
+            `(?i)\bwouldn't\b`,
+            `(?i)\bshouldn't\b`,
+            `(?i)\bcouldn't\b`,
+            `(?i)\bisn't\b`,
+            `(?i)\baren't\b`,
+            `(?i)\bwasn't\b`,
+            `(?i)\bweren't\b`,
+            `(?i)\bhasn't\b`,
+            `(?i)\bhaven't\b`,
+            `(?i)\bhadn't\b`,
+            `(?i)\bit's\b`,
+            `(?i)\bthat's\b`,
+            `(?i)\bthey're\b`,
+            `(?i)\bwe're\b`,
+            `(?i)\byou're\b`,
+            `(?i)\bI'm\b`,
+            `(?i)\bI've\b`,
+            `(?i)\bI'll\b`,
+            `(?i)\bwe've\b`,
+            `(?i)\bwe'll\b`
+        ]
+
+        for pat in contraction_patterns {
+            found := text.re_find(pat, clean, -1)
+            if found != undefined {
+                contractions += len(found)
+            }
+        }
+
+        total := contractions + full_forms
+
+        // Need at least 8 contractible forms to have a meaningful sample.
+        if total >= 8 {
+            // Flag when contraction ratio is below 0.10.
+            // PNAS (2025): GPT models use contractions at 60-63% of human rate.
+            // A ratio below 0.10 means near-total avoidance in conversational text.
+            ratio := 0.0
+            if total > 0 {
+                ratio = contractions / total
+            }
+            if ratio < 0.10 {
+                matches = append(matches, {begin: 0, end: len(scope)})
+            }
+        }
+    }
+}

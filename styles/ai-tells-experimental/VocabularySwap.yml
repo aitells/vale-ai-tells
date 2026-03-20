@@ -1,0 +1,64 @@
+---
+extends: substitution
+message: "Consider using %s instead of '%s' (AI vocabulary)."
+level: warning
+ignorecase: true
+swap:
+  delve: examine|look at|cover
+  delves: examines|looks at|covers
+  delving: examining|looking at|covering
+  delved: examined|looked at|covered
+  utilize: use
+  utilizes: uses
+  utilizing: using
+  utilized: used
+  utilization: use
+  facilitate: help|enable|support
+  facilitates: helps|enables|supports
+  facilitating: helping|enabling|supporting
+  commence: start|begin
+  commences: starts|begins
+  commencing: starting|beginning
+  commenced: started|began
+  terminate: end|stop
+  terminates: ends|stops
+  terminating: ending|stopping
+  terminated: ended|stopped
+  ascertain: find out|determine|learn
+  endeavor: effort|attempt|try
+  endeavors: efforts|attempts|tries
+  endeavour: effort|attempt|try
+  endeavours: efforts|attempts|tries
+  leverage: use|apply|build on
+  leverages: uses|applies|builds on
+  leveraging: using|applying|building on
+  leveraged: used|applied|built on
+  streamline: simplify|speed up
+  streamlines: simplifies|speeds up
+  streamlining: simplifying|speeding up
+  bolster: strengthen|support|boost
+  bolsters: strengthens|supports|boosts
+  bolstering: strengthening|supporting|boosting
+  elucidate: explain|clarify
+  elucidates: explains|clarifies
+  elucidating: explaining|clarifying
+  elevate: raise|improve|increase
+  elevates: raises|improves|increases
+  elevating: raising|improving|increasing
+  reimagine: rethink|redesign|redo
+  reimagines: rethinks|redesigns|redoes
+  reimagining: rethinking|redesigning|redoing
+  encompass: include|cover
+  encompasses: includes|covers
+  encompassing: including|covering
+  comprehensive: complete|full|thorough
+  methodology: method|approach
+  paradigm: model|pattern|approach
+  actionable: useful|practical|concrete
+  impactful: effective|influential
+  proactive: early|preventive|forward-looking
+  proactively: early|in advance
+  synergy: cooperation|combined effect
+  synergies: combined effects
+  holistic: complete|whole|full
+  holistically: completely|as a whole

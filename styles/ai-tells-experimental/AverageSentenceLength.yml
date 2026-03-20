@@ -1,0 +1,6 @@
+---
+extends: metric
+message: "AI uniformity: average sentence length is %s words. AI text tends toward uniformly long sentences (~27 words). Mix short and long sentences, aiming for an average under 25."
+level: warning
+formula: "words / sentences"
+condition: "> 25.0"

@@ -1,0 +1,6 @@
+---
+extends: metric
+message: "AI vocabulary density: %s of words have 3+ syllables. AI text defaults to polysyllabic vocabulary where simpler words would do."
+level: warning
+formula: "complex_words / words"
+condition: "> 0.3"

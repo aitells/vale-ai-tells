@@ -1,0 +1,6 @@
+---
+extends: script
+message: "AI repetition: this passage closely duplicates earlier content in the same section. Combine or remove the repeated material."
+level: warning
+scope: raw
+script: ContentDuplication.tengo

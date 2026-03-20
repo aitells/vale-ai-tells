@@ -1,0 +1,149 @@
+text := import("text")
+
+matches := []
+
+// Split document into sections by markdown headings.
+// Compare paragraphs within each section for near-duplicate content.
+sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+
+for section in sections {
+    section = text.trim_space(section)
+    if section == "" {
+        continue
+    }
+
+    // Strip code blocks.
+    clean := text.re_replace("(?s)```.*?```", section, "")
+
+    // Split into paragraphs by double newlines.
+    raw_paragraphs := text.re_split(`\n{2,}`, clean)
+
+    // Filter to prose paragraphs only: skip headings, list items, short lines.
+    paragraphs := []
+    for p in raw_paragraphs {
+        trimmed := text.trim_space(p)
+        if trimmed == "" {
+            continue
+        }
+        // Skip headings.
+        if text.has_prefix(trimmed, "#") {
+            continue
+        }
+        // Skip list items.
+        if text.has_prefix(trimmed, "- ") || text.has_prefix(trimmed, "* ") || text.has_prefix(trimmed, "1.") {
+            continue
+        }
+        // Skip very short lines (fewer than 8 words).
+        words := text.re_split(`\s+`, trimmed)
+        if len(words) >= 8 {
+            paragraphs = append(paragraphs, trimmed)
+        }
+    }
+
+    // Build a word set (map with dummy values) from text.
+    // Normalizes to lowercase, strips punctuation.
+    make_word_set := func(t) {
+        result := {}
+        lowered := text.to_lower(t)
+        tokens := text.re_split(`\s+`, lowered)
+        for tok in tokens {
+            cleaned := text.re_replace(`^[^a-z0-9]+`, tok, "")
+            cleaned = text.re_replace(`[^a-z0-9]+$`, cleaned, "")
+            if cleaned != "" && len(cleaned) > 1 {
+                result[cleaned] = true
+            }
+        }
+        return result
+    }
+
+    // Compute Jaccard index between two word sets (maps).
+    // Jaccard = |intersection| / |union|
+    jaccard := func(set_a, set_b) {
+        intersection_count := 0
+        union_count := 0
+        // Count words in set_a; check which are also in set_b.
+        for word, _ in set_a {
+            union_count += 1
+            if set_b[word] != undefined {
+                intersection_count += 1
+            }
+        }
+        // Count words in set_b that are NOT in set_a (add to union only).
+        for word, _ in set_b {
+            if set_a[word] == undefined {
+                union_count += 1
+            }
+        }
+        if union_count == 0 {
+            return 0.0
+        }
+        return (0.0 + intersection_count) / union_count
+    }
+
+    // Track which paragraphs we already flagged to avoid duplicate matches.
+    flagged := {}
+
+    // Compare all pairs of paragraphs within this section.
+    i := 0
+    for i < len(paragraphs) {
+        j := i + 1
+        for j < len(paragraphs) {
+            if flagged[j] == undefined {
+                set_a := make_word_set(paragraphs[i])
+                set_b := make_word_set(paragraphs[j])
+                sim := jaccard(set_a, set_b)
+                if sim > 0.60 {
+                    // Flag the later paragraph (the duplicate).
+                    pos := text.index(scope, paragraphs[j])
+                    if pos >= 0 {
+                        end_pos := pos + len(paragraphs[j])
+                        if end_pos > len(scope) {
+                            end_pos = len(scope)
+                        }
+                        matches = append(matches, {begin: pos, end: end_pos})
+                        flagged[j] = true
+                    }
+                }
+            }
+            j += 1
+        }
+        i += 1
+    }
+
+    // Also check for near-verbatim sentence repetition within paragraphs.
+    for p in paragraphs {
+        sentences := text.re_split(`[.!?]+\s+`, p)
+        sent_texts := []
+        for s in sentences {
+            st := text.trim_space(s)
+            if st != "" {
+                words := text.re_split(`\s+`, st)
+                if len(words) >= 5 {
+                    sent_texts = append(sent_texts, st)
+                }
+            }
+        }
+
+        si := 0
+        for si < len(sent_texts) {
+            sj := si + 1
+            for sj < len(sent_texts) {
+                set_a := make_word_set(sent_texts[si])
+                set_b := make_word_set(sent_texts[sj])
+                sim := jaccard(set_a, set_b)
+                if sim > 0.70 {
+                    pos := text.index(scope, sent_texts[sj])
+                    if pos >= 0 {
+                        end_pos := pos + len(sent_texts[sj])
+                        if end_pos > len(scope) {
+                            end_pos = len(scope)
+                        }
+                        matches = append(matches, {begin: pos, end: end_pos})
+                    }
+                }
+                sj += 1
+            }
+            si += 1
+        }
+    }
+}

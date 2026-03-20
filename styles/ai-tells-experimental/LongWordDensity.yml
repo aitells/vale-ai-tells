@@ -1,0 +1,6 @@
+---
+extends: metric
+message: "AI vocabulary density: %s of words are 7+ characters. AI text skews toward longer, more formal vocabulary. Consider using simpler words where possible."
+level: warning
+formula: "long_words / words"
+condition: "> 0.4"

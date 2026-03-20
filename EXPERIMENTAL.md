@@ -93,6 +93,85 @@ Counts the first word of each sentence within a section and flags when any singl
 4. Extracts the first word of each sentence (lowercased, ignoring single-character words that naturally repeat like "I" and "a")
 5. Flags when any word starts more than 30% of sentences (minimum 3 times)
 
+### ContentDuplication
+
+Detects near-identical paragraphs within a document section using Jaccard word-overlap similarity. Flags the later occurrence when two paragraphs share more than 60% of their words.
+
+**Research basis:**
+- tropes.fyi: "Content Duplication" and "One-Point Dilution" identified as common AI composition patterns
+- Wikipedia: Lists verbatim section repetition as a sign of unedited AI output
+
+**How it works:**
+1. Splits the document into sections by markdown headings
+2. Collects prose paragraphs (filtering out code blocks, headings, list items, short lines under 8 words)
+3. Normalizes each paragraph to a lowercase word set with punctuation stripped
+4. Computes Jaccard index (intersection / union) for each paragraph pair
+5. Flags the later paragraph when overlap exceeds 60%
+
+**Tengo note:** Map iteration requires the two-variable form `for key, _ in map`. The single-variable `for key in map` silently produces no iterations.
+
+### ContractionAvoidance
+
+Detects documents that avoid contractions almost entirely despite using informal language. Uses a two-pass approach: first checks for informal markers (pronouns, questions), then computes the contraction ratio.
+
+**Research basis:**
+- PNAS (2025): GPT models use contractions at 60-63% of the human rate
+- Pangram Labs (2025): "Minimal contractions" listed as an AI grammar tell
+- Kassorla (2024): Absence of contractions identified as a formality signal
+
+**How it works:**
+1. Gate check: counts informal markers (first/second person pronouns, questions). Requires at least 2 to avoid flagging legitimately formal documents.
+2. Requires at least 500 words (short docs don't have enough signal)
+3. Counts all contractible full forms ("do not," "is not," "will not," etc.)
+4. Counts all contractions ("don't," "isn't," "won't," etc.)
+5. Requires at least 8 total contractible forms for a useful sample size
+6. Flags when the contraction ratio (contractions / total) falls below 0.10
+
+### AverageSentenceLength
+
+A metric-based rule (YAML only, no script) that flags documents where the average sentence length exceeds 25 words.
+
+**Research basis:**
+- Gibbs (2024): ChatGPT averages ~27 words per sentence with low variance
+- Human technical writing typically averages 15-20 words per sentence
+
+**Formula:** `words / sentences > 25.0`
+
+### LongWordDensity
+
+A metric-based rule that flags documents where more than 40% of words are 7+ characters.
+
+**Research basis:**
+- PNAS (2025): Mean word length is a top-5 discriminating feature between AI and human text. Instruction-tuned LLMs shift toward longer, more formal vocabulary.
+
+**Formula:** `long_words / words > 0.4`
+
+### ComplexWordDensity
+
+A metric-based rule that flags documents where more than 30% of words have 3+ syllables.
+
+**Research basis:**
+- PNAS (2025): Nominalizations (typically polysyllabic) appear at 150-214% of human rates in GPT output.
+
+**Formula:** `complex_words / words > 0.3`
+
+### HeadingTitleCase
+
+A capitalization rule that flags markdown headings using Title Case instead of sentence case.
+
+**Research basis:**
+- Wikipedia "Signs of AI writing": "AI chatbots strongly tend to capitalize all main words in section headings."
+
+**How it works:** Uses Vale's built-in `capitalization` extension with `match: $sentence` and `scope: heading`. Includes an exceptions list for common acronyms (API, CLI, SQL, etc.) and proper nouns (GitHub, Docker, PostgreSQL, etc.).
+
+### VocabularySwap
+
+A substitution rule that provides concrete inline rewrite suggestions for common AI vocabulary fingerprints. Complements the existing `OverusedVocabulary` rule (which says "replace with a more specific or common word") by suggesting actual alternatives.
+
+**How it works:** Uses Vale's `substitution` extension with a `swap` map of 56 entries covering 20 AI vocabulary words and their inflected forms. Only includes words where clear, universally applicable substitutions exist.
+
+**Known limitation:** Cannot distinguish noun vs verb usage. "Financial leverage" (legitimate noun) triggers with a suggestion to use "use" or "apply," which is wrong in that context. The main `ai-tells` style handles this with POS-tag-aware sequence rules (`OverusedVocabularyVerbs`), but the substitution extension doesn't support POS tags.
+
 ## Calibration status
 
 These thresholds are derived from research and validated against a small set of documents (synthetic AI text, curated test documents, AI-generated spec docs, human-varied prose). They need calibration against a larger corpus of real-world technical documentation.

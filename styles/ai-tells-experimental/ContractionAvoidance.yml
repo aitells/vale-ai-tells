@@ -1,0 +1,6 @@
+---
+extends: script
+message: "AI formality: this document avoids contractions almost entirely despite using informal language. AI text uses contractions at 60%% of the human rate (PNAS 2025). Use contractions naturally in conversational prose."
+level: warning
+scope: raw
+script: ContractionAvoidance.tengo
