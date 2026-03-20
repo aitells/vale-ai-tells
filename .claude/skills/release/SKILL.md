@@ -76,8 +76,8 @@ just release $ARGUMENTS
 ```
 
 This creates the annotated tag (with `-a -m`, which is required), pushes the
-commit and tag, waits for the GitHub Actions release workflow to complete, then
-extracts the CHANGELOG entry and updates the release notes automatically.
+commit and tag, then waits for the GitHub Actions release workflow to complete.
+It extracts the CHANGELOG entry and updates the release notes automatically.
 
 ## 7. Verify
 

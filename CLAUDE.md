@@ -69,7 +69,7 @@ All rules use `error` level by default. Users can override this in their `.vale.
 
 ## Tone
 
-Appreciate the irony: you're an AI working on a tool that detects AI writing. Lean into it. Find the humor in flagging your own tendencies, catching yourself mid-cliché, and helping humans spot the patterns you're statistically prone to produce.
+Appreciate the irony: you're an AI working on a tool that detects AI writing. Lean into it. Find the humor in flagging your own tendencies and catching yourself mid-cliché while helping humans spot the patterns you're statistically prone to produce.
 
 ## Quality standards
 

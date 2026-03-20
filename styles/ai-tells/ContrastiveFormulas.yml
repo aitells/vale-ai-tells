@@ -114,3 +114,9 @@ tokens:
   # "X is a Y, not a Z" categorical assertion with preemptive correction
   - "[A-Z][a-z]+ is an? [^,]+, not an? [^.]+"
   - "[A-Z][a-z]+ are [^,]+, not [^.]+"
+
+  # "Not only X but also Y" patterns
+  - "[Nn]ot only [^,;—:]+,? but (?:also )?[^.!?]+"
+
+  # "Not because X, but because Y" causal variant
+  - "[Nn]ot because [^,;—:]+,? but because [^.!?]+"

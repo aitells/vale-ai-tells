@@ -1,6 +1,6 @@
 # vale-ai-tells
 
-A [Vale](https://vale.sh) package for detecting linguistic patterns commonly associated with AI-generated prose. Based on 2024-2025 research into vocabulary fingerprints, structural patterns, and rhetorical tells.
+A [Vale](https://vale.sh) package for detecting linguistic patterns commonly associated with AI-generated prose. Based on 2024-2025 research into vocabulary fingerprints and structural tells.
 
 This package is designed for **technical documentation**, where clarity and directness matter more than style. It's less useful for creative writing, marketing copy, or other contexts where some of these patterns may be intentional choices.
 
@@ -105,7 +105,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 29 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 41 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -117,29 +117,41 @@ This package contains 29 rule files covering different categories of AI tells. A
 | `AffirmativeFormulas` | Revelation patterns: "Here's the thing," "And that's the beauty of it," "Let that sink in," etc. |
 | `ClosingPleasantries` | Sign-off language: "I hope this helps," "Feel free to ask," "Don't hesitate to reach out," etc. |
 | `ConclusionMarkers` | Formulaic conclusions: "In conclusion," "Ultimately," "At the end of the day," etc. |
-| `ContrastiveFormulas` | Rhetorical contrasts: "It's not just X; it's Y," "The real question isn't X; it's Y," etc. |
+| `ContrastiveFormulas` | Rhetorical contrasts: "It's not just X; it's Y," "The real question isn't X; it's Y," "Not only X but also Y," etc. |
 | `DefensiveHedges` | Preemptive concessions: "This may seem X, but..." "Admittedly, X, but..." "At first glance," etc. |
+| `DespiteChallenges` | The "despite challenges" dismissal formula: "despite these challenges," "while challenges remain," "challenges notwithstanding," etc. |
 | `EmDashUsage` | Em-dashes, which AI uses excessively |
 | `EmphaticCopula` | Italicized copula verbs and determiners for manufactured profundity |
 | `FalseBalance` | Evasive "both sides" language: "both sides present valid points," "nuanced approach," etc. |
+| `FalseExclusivity` | False insider drama: "nobody talks about," "what most people miss," "the dirty secret," "the elephant in the room," etc. |
 | `FillerPhrases` | Padding and performative sincerity: "a wide range of," "in order to," "honestly," etc. |
 | `FormalRegister` | Overly formal vocabulary: "utilize," "facilitate," "commence," etc. |
 | `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "What's more," "Case in point," etc. |
 | `HedgingPhrases` | Compulsive hedging: "It's important to note that," "That being said," "Generally speaking," "As you might expect," etc. |
 | `ListIntroductions` | Announcements of upcoming lists or summaries: "Below you'll find," "Here's a breakdown of," "Here's everything you need to know," "The following sections will," etc. |
 | `Metacommentary` | Throat-clearing and self-commentary that narrates the text rather than adding content |
+| `MicDrop` | Short dramatic sentences for manufactured emphasis in technical prose: "It matters." "Full stop." "And it shows." etc. |
+| `NarrativePivots` | Unearned dramatic pivots: "something shifted," "everything changed," "that changed everything," "it was a wake-up call," etc. |
 | `OpeningCliches` | AI-style openings: "In today's rapidly evolving landscape," "Without further ado," "Whether you're," etc. |
 | `OrganicConsequence` | False inevitability: "emerges naturally," "a natural consequence," "follows naturally from," etc. |
-| `OverusedVocabulary` | Words with documented AI overuse: "delve," "comprehensive," "unprecedented," "sophisticated," "salient," "efficacy," "paramount," "cognizant," etc. Verb forms (leverage, harness, etc.) moved to `OverusedVocabularyVerbs`. |
+| `OverusedVocabulary` | Words with documented AI overuse: "delve," "comprehensive," "unprecedented," "sophisticated," "salient," "efficacy," "paramount," "cognizant," "camaraderie," "palpable," "fleeting," "amidst," etc. Verb forms (leverage, harness, etc.) moved to `OverusedVocabularyVerbs`. |
 | `OverusedVocabularyVerbs` | Verb forms of AI vocabulary fingerprints: "leverage," "navigate," "showcase," "harness," "embark," "foster," "spearhead." Sequence-based for precision — noun forms such as "financial leverage" do not trigger. |
+| `ParticipialPadding` | Present participle (-ing) phrases appended for shallow analysis: "highlighting its importance," "reflecting broader trends," "underscoring its role," "solidifying its position," etc. The #1 discriminating feature in the PNAS study (527% of human rate). |
+| `PromotionalPuffery` | Ad-copy and travel-brochure language: "nestled in," "vibrant community," "a beacon of," "renowned for its," "has emerged as a," "left an indelible mark," etc. |
 | `RestatementMarkers` | Redundant restatements: "In other words," "Simply put," "To be more specific," etc. |
 | `RhetoricalDevices` | Rhetorical question patterns: "Ask yourself:", "The test:", "When doing X, ask:" etc. |
+| `RhetoricalSelfAnswer` | Self-posed rhetorical questions answered for dramatic effect: "The result/catch/worst part?" followed by an immediate answer. |
 | `SelfReference` | Self-referential cross-references: "as mentioned above," "as noted earlier," "as we'll explore," etc. |
+| `SequencingMarkers` | Formulaic ordinal sequencing: "Firstly," "Secondly," "Thirdly," "The first takeaway," "The second benefit," etc. |
+| `ServesAsDodge` | Inflated copula replacements: "serves as a," "stands as the," "represents a pivotal," "boasts a vibrant," etc. Use "is" or "are" instead. |
 | `StackedAnaphora` | Stacked repetition for emphasis: "No X. No Y. No Z." "It's X. It's Y. It's Z." etc. |
 | `StructureAnnouncements` | Narrating upcoming structure: "key takeaway," "quick recap," "to recap," "quick summary," "to put it plainly," "to put this in perspective," etc. |
 | `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
 | `UnpackExplore` | Explainer announcements: AI's habit of announcing what it is about to explain rather than just explaining it. Phrases beginning with "Let me" or "Let us" followed by unpack, break down, dive in, walk through, examine, explore, etc. |
 | `UrgencyInflation` | False urgency and importance assertions: "cannot be overstated," "more important than ever," "has never been more critical," "the stakes have never been higher," "at a critical juncture," "in an increasingly connected world," etc. |
+| `VagueAttributions` | Claims attributed to unnamed authorities: "experts argue," "studies show that," "research suggests," "a growing body of evidence," etc. |
+| `VerbTricolon` | Exactly-three parallel verb lists: "build, test, and deploy," "define, validate, and transform," etc. |
+| `VerbTricolonDensity` | Multiple verb tricolons in one paragraph — LLM prose clusters exactly-three enumerations. |
 
 <!-- vale on -->
 
@@ -243,6 +255,31 @@ This package catches lexical and phrasal patterns. It can't detect:
 - Semantic analysis
 - Model-specific stylometric signatures
 
+### Known patterns not covered
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale ai-tells.VerbTricolon = NO -->
+<!-- vale Google.EmDash = NO -->
+<!-- vale Google.Latin = NO -->
+
+These patterns are documented in AI writing research but require analysis beyond Vale's token-matching capabilities:
+
+- **Sentence-length uniformity:** AI produces sentences of remarkably consistent length (~27 words), while human writing varies widely. Requires statistical analysis across the document.
+- **Paragraph-length uniformity:** AI paragraphs tend to be roughly the same size (3-5 sentences, ~60-100 words each). Requires document-level measurement.
+- **Dead metaphor repetition:** AI latches onto a single metaphor and repeats it 5-10 times throughout a piece. Requires tracking metaphor usage across the document.
+- **One-point dilution:** A single argument restated 10 ways across thousands of words — circular repetition disguised as comprehensiveness. Requires semantic analysis.
+- **Elegant variation:** AI's repetition-penalty pushes it to substitute synonyms unnaturally (e.g., cycling through "protagonist," "key player," "eponymous character" instead of reusing a name). Requires NLP-level analysis.
+- **Content duplication:** Repeating entire sections or paragraphs verbatim within the same piece. Requires document-level diff analysis.
+- **Unnecessary inline definitions:** AI habitually inserts appositive definitions ("X, a [definition], does Y") even when the audience already knows the term. Too many false positives for token matching.
+- **Invented concept labels:** AI appends abstract problem-nouns ("paradox," "trap," "creep," "divide") to domain words and uses them as if they're established terms. Too many legitimate uses for token matching.
+
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.VerbTricolon = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale Google.Latin = YES -->
+
 For fuller detection, combine this package with statistical analysis tools.
 
 ### Supplementing with AI agent instructions
@@ -267,12 +304,41 @@ This covers structural patterns that lexical analysis can't catch.
 
 ## Sources
 
-Based on research including:
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.VerbTricolon = NO -->
+<!-- vale Google.EmDash = NO -->
+<!-- vale write-good.So = NO -->
 
-- [Delving into ChatGPT usage in academic writing through excess vocabulary](https://arxiv.org/abs/2406.07016) (arXiv, 2024)
-- [Distinguishing academic science writing from humans or ChatGPT with over 99% accuracy](https://pmc.ncbi.nlm.nih.gov/articles/PMC10328544/) (PMC, 2023)
-- [Wikipedia: Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-- Practitioner guides from 2024 and 2025
+Based on academic research, practitioner analysis, and community-maintained catalogs of AI writing patterns:
+
+### Academic research
+
+- [Delving into ChatGPT usage in academic writing through excess vocabulary](https://arxiv.org/abs/2406.07016) (arXiv, 2024) — Identifies specific words with statistically significant overuse in AI-assisted academic writing.
+- [Distinguishing academic science writing from humans or ChatGPT with over 99% accuracy](https://pmc.ncbi.nlm.nih.gov/articles/PMC10328544/) (PMC, 2023) — Demonstrates that stylometric features can reliably distinguish AI from human academic prose.
+- [Do LLMs write like humans? Variation in grammatical and rhetorical styles](https://www.pnas.org/doi/10.1073/pnas.2422455122) (PNAS, 2025) — Analyzes 67 grammatical and rhetorical features across human and LLM text; identifies present participial clauses as the strongest discriminator (527% of human rate in GPT-4o).
+
+### Pattern catalogs
+
+- [tropes.fyi — AI Writing Tropes Directory](https://tropes.fyi/directory) — Categorized catalog of 33+ named AI writing tropes with examples and community contributions.
+- [Wikipedia — Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing) — Wikipedia's comprehensive editor guide for identifying AI-generated content, covering content, language, style, formatting, and citation patterns.
+- [GitHub Gist — AI Writing Tropes to Avoid](https://gist.github.com/ossa-ma/f3baa9d25154c33095e22272c631f5a1) — The tropes.fyi list in a format suitable for inclusion in AI system prompts.
+
+### Practitioner analysis
+
+- [Colin Gorrie — Why ChatGPT writes like that](https://www.deadlanguagesociety.com/p/rhetorical-analysis-ai) — Rhetorical analysis identifying compulsive parallelism, explicit antithesis, and device saturation as key AI tells.
+- [Beutler Ink — How to Spot AI Writing](https://www.beutlerink.com/blog/how-to-spot-ai-writing) — Identifies negative parallelism ("It's not X — it's Y") as the most recognizable AI tell, plus false ranges, compulsive summaries, and formatting overkill.
+- [Charlie Guo — The Field Guide to AI Slop](https://www.ignorance.ai/p/the-field-guide-to-ai-slop) — Categorizes AI patterns from red herrings (unreliable indicators) through stylistic tics, structural patterns, and uncanny content.
+- [Michelle Kassorla — Recognizing AI Structures in Writing](https://michellekassorla.substack.com/p/recognizing-ai-structures-in-writing) — Focuses on sentence-level structural patterns: simple sentence chaining, semicolon connectors, and syntactic monotony.
+- [Pangram Labs — Comprehensive Guide to Spotting AI Writing Patterns](https://www.pangram.com/blog/comprehensive-guide-to-spotting-ai-writing-patterns) — Extensive taxonomy covering vocabulary, phrasing, grammar, organization, tone, specificity, and repetition patterns.
+- [Hana La Rock — 10 Common ChatGPT-isms](https://www.hanalarockwriting.com/post/10-common-chatgpt-isms-what-to-watch-out-for-when-writing-content-with-ai-infographics) — Identifies unnecessary inline definitions, sequencing markers, and excessive qualifiers as key AI tells.
+- [Jordan Gibbs — Spot The Bot: Why ChatGPT's Style Is So Obvious](https://medium.com/@jordan_gibbs/spot-the-bot-why-chatgpts-style-is-so-obvious-e27c6afe1595) — Analysis of 15,000 sentences across 27 stylistic dimensions; documents the RLHF origin of ChatGPT's vocabulary preferences.
+
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.VerbTricolon = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale write-good.So = YES -->
 
 ## Acknowledgments
 

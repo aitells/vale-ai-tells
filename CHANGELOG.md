@@ -7,6 +7,105 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale ai-tells.OpeningCliches = NO -->
+<!-- vale ai-tells.VagueAttributions = NO -->
+<!-- vale ai-tells.DespiteChallenges = NO -->
+<!-- vale ai-tells.ServesAsDodge = NO -->
+<!-- vale ai-tells.ParticipialPadding = NO -->
+<!-- vale ai-tells.PromotionalPuffery = NO -->
+<!-- vale ai-tells.FalseExclusivity = NO -->
+<!-- vale ai-tells.NarrativePivots = NO -->
+<!-- vale ai-tells.SequencingMarkers = NO -->
+<!-- vale ai-tells.ContrastiveFormulas = NO -->
+<!-- vale ai-tells.MicDrop = NO -->
+<!-- vale ai-tells.RhetoricalSelfAnswer = NO -->
+<!-- vale ai-tells.AICompoundPhrases = NO -->
+<!-- vale Google.EmDash = NO -->
+<!-- vale Google.LyHyphens = NO -->
+<!-- vale proselint.CorporateSpeak = NO -->
+
+- **VerbTricolon**: New rule detecting exactly-three parallel verb lists
+  ("build, test, and deploy"), covering gerund, past tense, third person, modal,
+  infinitive, colon-introduced, asyndetic, and subject-verb tricolon forms
+- **VerbTricolonDensity**: New occurrence-based rule flagging paragraphs with
+  multiple verb tricolons
+- **MicDrop**: New rule catching short dramatic sentences used for manufactured
+  emphasis in technical prose ("It matters." "Full stop." "And it shows.")
+- **ServesAsDodge**: New rule detecting inflated copula replacements where AI
+  substitutes "serves as a," "stands as the," "represents a pivotal," or
+  "boasts a vibrant" for simple "is" or "are." Backed by PNAS data showing a
+  10%+ decrease in is/are usage in AI text
+- **ParticipialPadding**: New rule catching present participle (-ing) phrases
+  appended for shallow analysis ("highlighting its importance," "reflecting
+  broader trends," "solidifying its position"). The #1 discriminating feature
+  in the PNAS study (GPT-4o uses participial clauses at 527% of the human rate)
+- **VagueAttributions**: New rule flagging claims attributed to unnamed
+  authorities ("experts argue," "studies show that," "research suggests,"
+  "a growing body of evidence")
+- **DespiteChallenges**: New rule catching the rigid "despite challenges"
+  dismissal formula where AI acknowledges problems only to immediately dismiss
+  them with optimism ("despite these challenges," "while challenges remain,"
+  "challenges notwithstanding")
+- **RhetoricalSelfAnswer**: New rule detecting self-posed rhetorical questions
+  answered for dramatic effect ("The result/catch/worst part?" followed by an
+  immediate answer)
+- **SequencingMarkers**: New rule flagging formulaic ordinal sequencing that
+  disguises a list as prose ("Firstly," "Secondly," "The first takeaway,"
+  "The second benefit")
+- **FalseExclusivity**: New rule catching false insider drama that claims
+  something is secret or unspoken ("nobody talks about," "the dirty secret,"
+  "what most people miss," "the elephant in the room")
+- **NarrativePivots**: New rule detecting unearned dramatic pivot phrases
+  ("something shifted," "everything changed," "that changed everything,"
+  "it was a wake-up call," "the penny dropped")
+- **PromotionalPuffery**: New rule flagging promotional and travel-brochure
+  language ("nestled in," "vibrant community," "a beacon of," "renowned for
+  its," "has emerged as a," "left an indelible mark")
+
+### Changed
+
+- **OverusedVocabulary**: Added 41 words from the PNAS study with 80-162x
+  overuse rates: camaraderie (162x), palpable (145x), grapple (131x),
+  fleeting (124x), ignite (122x), amidst (100x), unspoken (102x), solace,
+  cacophony, bustling, gossamer, enigma, labyrinth, metropolis, expanse,
+  indelible, kaleidoscopic, waft, beacon, intertwine, unravel, vibrant,
+  and inflected forms
+- **AICompoundPhrases**: Added "a cornerstone of," "the transformative power
+  of," "deeply rooted," "the hallmark of"
+- **ContrastiveFormulas**: Added "not only X but also Y" and "not because X,
+  but because Y" causal variant patterns
+- **OpeningCliches**: Added 13 patterns including "In a world where,"
+  "As technology continues to evolve," "We live in an era," and variants
+- **StackedAnaphora**: Expanded with two-item "No/Not" anaphora,
+  comma-separated forms, and quantifier-word anaphora patterns
+- **README**: Updated rule table to list all 41 rules; added "Known patterns
+  not covered" subsection documenting 8 patterns that require analysis beyond
+  Vale's capabilities; expanded Sources from 4 entries to 13 with structured
+  bibliography (academic research, pattern catalogs, practitioner analysis)
+
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.OpeningCliches = YES -->
+<!-- vale ai-tells.VagueAttributions = YES -->
+<!-- vale ai-tells.DespiteChallenges = YES -->
+<!-- vale ai-tells.ServesAsDodge = YES -->
+<!-- vale ai-tells.ParticipialPadding = YES -->
+<!-- vale ai-tells.PromotionalPuffery = YES -->
+<!-- vale ai-tells.FalseExclusivity = YES -->
+<!-- vale ai-tells.NarrativePivots = YES -->
+<!-- vale ai-tells.SequencingMarkers = YES -->
+<!-- vale ai-tells.ContrastiveFormulas = YES -->
+<!-- vale ai-tells.MicDrop = YES -->
+<!-- vale ai-tells.RhetoricalSelfAnswer = YES -->
+<!-- vale ai-tells.AICompoundPhrases = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale Google.LyHyphens = YES -->
+<!-- vale proselint.CorporateSpeak = YES -->
+
 ## [1.4.0] - 2026-02-17
 
 ### Added
@@ -57,12 +156,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 <!-- vale ai-tells.UrgencyInflation = NO -->
 <!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.OpeningCliches = NO -->
 - **UrgencyInflation**: New rule catching false urgency and importance assertions:
   "cannot be overstated," "more important than ever," "has never been more
   critical," "the stakes have never been higher," "at a critical juncture,"
   "in an increasingly connected world," and variants
 <!-- vale ai-tells.UrgencyInflation = YES -->
 <!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.OpeningCliches = YES -->
 
 ### Changed
 
