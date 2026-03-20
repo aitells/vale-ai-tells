@@ -68,7 +68,7 @@ It is important to test this before deploying to production.
 
 All four endpoints are returning errors after the deploy.
 
-And that's why we need to rewrite the parser.
+And the reason we need to rewrite the parser is the performance regression.
 
 Both endpoints return the same status code when the upstream service is down.
 
@@ -112,7 +112,7 @@ With practice, developers learn to spot these patterns quickly.
 
 The building plan, the meeting agenda, and the ceiling height were all wrong.
 
-Advanced techniques, improved processes, and streamlined workflows enable better outcomes.
+New techniques, better processes, and fast workflows enable better outcomes.
 
 Paris attractions, London landmarks, and Tokyo highlights are all worth visiting.
 

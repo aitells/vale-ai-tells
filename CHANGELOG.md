@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2026-03-20
+
 ### Added
 
 <!-- vale ai-tells.OverusedVocabulary = NO -->
@@ -125,6 +127,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.AICompoundPhrases = NO -->
+<!-- vale ai-tells.OpeningCliches = NO -->
+<!-- vale ai-tells.PromotionalPuffery = NO -->
 - **OverusedVocabulary**: Added 41 words from the PNAS study with 80-162x
   overuse rates: camaraderie (162x), palpable (145x), grapple (131x),
   fleeting (124x), ignite (122x), amidst (100x), unspoken (102x), solace,
@@ -137,6 +143,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   but because Y" causal variant patterns
 - **OpeningCliches**: Added 13 patterns including "In a world where,"
   "As technology continues to evolve," "We live in an era," and variants
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.AICompoundPhrases = YES -->
+<!-- vale ai-tells.OpeningCliches = YES -->
+<!-- vale ai-tells.PromotionalPuffery = YES -->
 - **StackedAnaphora**: Expanded with two-item "No/Not" anaphora,
   comma-separated forms, and quantifier-word anaphora patterns
 - **README**: Updated rule table to list all 41 rules; added "Known patterns
@@ -150,6 +160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Justfile**: `stats` recipe now reports token counts for both styles
 - **test-commit-messages.md**: New test document with examples of all 6
   commit message AI tells
+
 ## [1.4.0] - 2026-02-17
 
 ### Added
@@ -423,6 +434,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.5.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.2.0...v1.3.0
 [1.2.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.1.0...v1.2.0
