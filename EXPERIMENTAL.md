@@ -103,19 +103,64 @@ Known limitations:
 - **Section splitting is markdown-only.** The heading-based section split assumes markdown. Other formats (reStructuredText, AsciiDoc) would need different splitting logic.
 - **Per-section measurement can miss document-level uniformity.** If every section individually passes but the document as a whole is monotonous, these rules won't catch it.
 
-## Future directions
+## Roadmap
 
-Additional structural checks that could be built with Tengo scripts:
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale ai-tells.FormalRegister = NO -->
+<!-- vale ai-tells.FormalTransitions = NO -->
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.ConclusionMarkers = NO -->
+<!-- vale Google.EmDash = NO -->
 
-- **Content duplication:** Compare sentences or paragraphs within a document using word-overlap similarity (Jaccard index on word sets). Would catch near-verbatim repetition without requiring embeddings.
-- **Tricolon density (document-level):** The existing `VerbTricolonDensity` rule works per-paragraph. A script could measure document-wide density of three-item lists of all types.
-- **Sentence-start diversity index:** Instead of just flagging the most repeated opener, compute a diversity index (Shannon entropy) across all sentence starters. Lower entropy = more monotonous.
+### Metric-based rules (YAML only, no scripts)
 
-Patterns that would need capabilities beyond Tengo:
+Vale's `metric` extension provides built-in variables (`words`, `sentences`, `paragraphs`, `syllables`, `complex_words`, `long_words`) and arithmetic formulas evaluated at document level. These are trivial to implement.
 
-- **Elegant variation** (needs entity resolution / coreference)
-- **One-point dilution** (needs semantic similarity / embeddings)
-- **Unnecessary inline definitions** (needs syntactic parsing)
+**AverageSentenceLength** — Flag documents where `words / sentences` clusters near 27, the mean ChatGPT sentence length identified by Gibbs (2024). Human writing averages vary by genre but the tight clustering around a single value is the tell, not the value itself. This complements the per-section CV check by catching the document-level average.
+
+**LongWordDensity** — Flag documents where `long_words / words` is unusually high. The PNAS study found instruction-tuned LLMs shift toward the "informational" pole of Biber's Dimension 1, characterized by longer words, more nominalizations, and more attributive adjectives. A high long-word ratio in text that isn't academic prose is a signal.
+
+**ComplexWordDensity** — Similar to long word density but using `complex_words` (3+ syllables). AI defaults to polysyllabic vocabulary where simpler words would work ("utilize" instead of "use," "methodology" instead of "method"). High complex-word density in non-academic text suggests AI generation.
+
+### Capitalization rules (built-in check type)
+
+**HeadingTitleCase** — Flag markdown headings that use Title Case instead of sentence case. Wikipedia's "Signs of AI writing" guide specifically identifies Title Case headings as an AI tell: "AI chatbots strongly tend to capitalize all main words in section headings." Vale's `capitalization` extension with `match: $sentence` and `scope: heading` handles this directly.
+
+### Substitution rules (better developer experience)
+
+**OverusedVocabularySwap** — Convert some `existence` rules to `substitution` rules so Vale suggests specific replacements inline. Instead of "AI vocabulary: 'delve'. Replace with a more specific or common word," the output becomes "AI vocabulary: 'delve'. Use 'examine', 'look at', or 'cover' instead." The `swap` map provides `bad: good|good|good` pairs. Start with the highest-frequency words from OverusedVocabulary where clear substitutions exist.
+
+### Repetition rules (built-in check type)
+
+**TransitionRepetition** — Flag when the same formal transition ("Additionally," "Furthermore," "Moreover") appears multiple times within a section. The existing `FormalTransitions` rule catches each individual use; this would catch the density pattern where the same one recurs. Vale's `repetition` extension with `tokens` set to common transitions could work, though the built-in type only catches consecutive duplicates, which limits its usefulness. A Tengo script tracking transition frequency per section may be needed instead.
+
+### Script-based rules (Tengo)
+
+**ContentDuplication** — Compare sentences or paragraphs within a document using word-overlap similarity (Jaccard index on word sets). Would catch near-verbatim repetition without requiring embeddings. Tengo can split text into word sets and compute intersection/union ratios.
+
+**TricolonDensityDocument** — The existing `VerbTricolonDensity` rule works per-paragraph. A script could measure document-wide density of three-item lists of all types, catching the pattern where every section has exactly three bullet points or three examples.
+
+**SentenceStartEntropy** — Instead of just flagging the most repeated opener (as `SentenceStartRepetition` does), compute Shannon entropy across all sentence starters per section. Lower entropy = more monotonous. This is a more nuanced version of the current rule that would catch cases where no single word dominates but the overall diversity is still low.
+
+### Consistency rules (built-in check type)
+
+**ContractionConsistency** — Enforce that a document uses either contractions or full forms consistently. AI avoids contractions at 60-63% of human rate (PNAS, GPT models). A document that never uses contractions in otherwise informal prose is a signal. Vale's `consistency` extension with `either` pairs like `don't: do not` could flag the inconsistency, though the real tell is the complete absence of contractions rather than inconsistency.
+
+### Beyond Vale (future tools)
+
+These patterns need capabilities Tengo can't provide. They'd require a separate tool or a Vale plugin with access to NLP libraries:
+
+- **Elegant variation** — AI's repetition penalty causes unnatural synonym cycling ("the protagonist," "the key player," "the eponymous character" instead of reusing a name). Needs entity resolution and coreference tracking.
+- **One-point dilution** — A single argument restated 10 ways across thousands of words. Needs semantic similarity (sentence embeddings) to detect that paragraphs are saying the same thing differently.
+- **Unnecessary inline definitions** — AI inserts appositive definitions ("X, a [definition], does Y") even for audiences that know the term. Needs syntactic parsing to identify appositive structures.
+- **Awkward analogies** — AI generates metaphors that are superficially plausible but lack cultural specificity. Needs semantic analysis to evaluate metaphor quality.
+
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.FormalRegister = YES -->
+<!-- vale ai-tells.FormalTransitions = YES -->
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.ConclusionMarkers = YES -->
+<!-- vale Google.EmDash = YES -->
 
 ## Contributing
 
