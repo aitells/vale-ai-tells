@@ -21,6 +21,7 @@ jobs:
           cd styles
           zip -r ../ai-tells.zip ai-tells
           zip -r ../ai-tells-commits.zip ai-tells-commits
+          zip -r ../ai-tells-experimental.zip ai-tells-experimental config
 
       - name: Create release
         uses: softprops/action-gh-release@v2
@@ -28,4 +29,5 @@ jobs:
           files: |
             ai-tells.zip
             ai-tells-commits.zip
+            ai-tells-experimental.zip
           generate_release_notes: true

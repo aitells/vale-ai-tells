@@ -2,7 +2,7 @@
 
 The `ai-tells-experimental` style contains script-based rules that use Tengo to detect structural patterns Vale's regex-based rules can't catch. These rules analyze document-level properties like sentence-length distribution and paragraph uniformity.
 
-All experimental rules default to `warning` level. They ship in the same release zip as `ai-tells` but in a separate directory so users opt in independently:
+All experimental rules default to `warning` level. They ship as a separate `ai-tells-experimental.zip` release artifact (which includes the `config/scripts/` directory the Tengo rules need). Download it and unzip into your `StylesPath`, then opt in:
 
 ```ini
 [*.md]
