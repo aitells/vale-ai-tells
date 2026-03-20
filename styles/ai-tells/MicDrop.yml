@@ -1,0 +1,117 @@
+---
+extends: existence
+message: "AI mic-drop: '%s'. Short dramatic sentences for emphasis are a common AI tell in technical prose. Integrate the point into surrounding text or cut it."
+level: error
+nonword: true
+tokens:
+  # ==========================================================================
+  # Staccato declarations: short punchy sentences AI drops in for dramatic
+  # effect. "All four are thin." "It matters." "And it shows."
+  #
+  # These read like someone slamming a gavel in what should be a calm
+  # technical discussion. Human technical writers state facts inline;
+  # AI punctuates with mic-drops.
+  # ==========================================================================
+
+  # ---- Pronoun + intransitive verb mic-drops ----
+  # "It matters." "This works." "That scales."
+  - "(?:It|This|That) matters\\."
+  - "(?:It|This|That) works\\."
+  - "(?:It|This|That) shows\\."
+  - "(?:It|This|That) helps\\."
+  - "(?:It|This|That) scales\\."
+  - "(?:It|This|That) compounds\\."
+  - "(?:It|This|That) counts\\."
+  - "(?:It|This|That) adds up\\."
+  - "(?:It|This|That) pays off\\."
+  - "(?:It|This|That) depends\\."
+
+  # ---- "This/That/It + copula + adjective" emphatic declarations ----
+  # "This is key." "That's intentional." "It was deliberate."
+  - "(?:It|This|That)(?:'s| is| was) (?:key|crucial|critical|intentional|deliberate|powerful|elegant|subtle|clean|simple|clear|important|significant|telling|striking|notable|profound|revealing|transformative|remarkable|essential|fundamental|beautiful|paramount|vital|obvious|neat|real|enough)\\."
+  - "(?:It|This|That)(?:'s| is| was) (?:by design|on purpose|no accident|no coincidence|worth it|worth noting|not optional)\\."
+
+  # ---- "They/These/Those + copula + adjective" ----
+  # "These are thin." "Those were deliberate."
+  - "(?:They|These|Those)(?:'re| are| were) (?:thin|key|crucial|critical|intentional|deliberate|powerful|elegant|subtle|clean|simple|clear|important|significant|telling|striking|notable|profound|essential|vital|obvious|neat|enough)\\."
+
+  # ---- "The [noun] is [adjective]." short dramatic assessments ----
+  # "The result is clean." "The difference is subtle."
+  - "The \\w+ (?:is|are|was|were) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|striking|notable|straightforward|profound|revealing|transformative|remarkable|essential|fundamental|beautiful|obvious|neat|real|paramount|vital)\\."
+  - "The \\w+ \\w+ (?:is|are|was|were) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|striking|notable|straightforward|profound|revealing|transformative|remarkable|essential|fundamental|beautiful|obvious|neat|real|paramount|vital)\\."
+
+  # ---- Quantifier/determiner + copula + adjective mic-drops ----
+  # Short declarations with a quantifier subject and a single-adjective verdict.
+
+  # "All [noun] are [adjective]." — "All four are thin." "All three are identical."
+  - "All \\w+ (?:are|were) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|striking|notable|straightforward|profound|essential|obvious|neat|identical|interchangeable|equivalent)\\."
+
+  # "Both [are/noun are] [adjective]." — "Both are thin." "Both layers are thin."
+  - "Both (?:are|were) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|notable|straightforward|essential|obvious|identical|interchangeable|equivalent)\\."
+  - "Both \\w+ (?:are|were) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|notable|straightforward|essential|obvious|identical|interchangeable|equivalent)\\."
+
+  # "Each/Every [noun] is [adjective]." — "Each handler is clean." "Every choice is deliberate."
+  - "(?:Each|Every) \\w+ (?:is|was) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|striking|notable|straightforward|profound|essential|obvious|neat|identical|independent|self-contained)\\."
+  # "Each is [adjective]." — standalone without noun
+  - "Each (?:(?:one )?(?:is|was)) (?:thin|clean|simple|subtle|clear|key|crucial|critical|intentional|deliberate|powerful|elegant|important|significant|telling|notable|straightforward|essential|obvious|identical|independent|self-contained)\\."
+
+  # "Everything/Nothing is [adjective]." — "Everything is intentional." "Nothing is accidental."
+  - "Everything (?:is|was) (?:intentional|deliberate|purposeful|connected|composable|explicit|visible|traceable|testable|optional)\\."
+  - "Nothing (?:is|was) (?:accidental|random|hidden|implicit|optional|wasted|redundant|superfluous|arbitrary|magical|surprising)\\."
+
+  # "None are [adjective]." — "None are optional." "None are accidental."
+  - "None (?:are|were|is|was) (?:optional|accidental|random|redundant|superfluous|arbitrary|wasted|surprising|hidden|magical)\\."
+
+  # ---- Antithetical balance: "X changes, Y stays the same." ----
+  # Two balanced clauses with change/permanence verb opposition, creating
+  # a pithy aphorism. AI reaches for this structure constantly.
+  # "The adapter changes, the service call stays the same."
+  # "Tools change, principles don't."
+  # "Frameworks come and go, fundamentals remain."
+
+  # Change-verb, then stay-verb (comma / semicolon / em-dash separated)
+  - "(?:changes?|evolves?|shifts?|varies|vary|comes? and go(?:es)?)[,;—] (?:the |a |an )?(?:\\w+ ){0,4}(?:stays? the same|remains?(?: the same)?|holds?|persists?|endures?|(?:doesn't|don't) change)\\."
+
+  # Stay-verb, then change-verb (reverse order)
+  - "(?:stays? the same|remains?(?: the same)?|holds?|persists?|endures?)[,;—] (?:the |a |an )?(?:\\w+ ){0,4}(?:changes?|evolves?|shifts?|varies|vary|comes? and go(?:es)?)\\."
+
+  # Period-separated: "Tools change. Principles don't."
+  - "(?:changes?|evolves?|shifts?|varies|vary)\\. [A-Z](?:\\w+ ){0,3}(?:stays? the same|remains?|holds?|persists?|endures?|(?:doesn't|don't) change)\\."
+  - "(?:stays? the same|remains?|holds?|persists?|endures?)\\. [A-Z](?:\\w+ ){0,3}(?:changes?|evolves?|shifts?|varies|vary)\\."
+
+  # ---- Verbless fragment mic-drops ----
+  # Short sentences with no main verb, used as paragraph closers.
+  # Distinct from the copula patterns above — these have no verb at all.
+
+  # Bare adjective list fragments: "Simple, predictable, testable."
+  - "(?:Pure|Clean|Simple|Clear|Fast|Small|Thin|Lean|Cheap|Safe|Flat|Sane|Strict|Minimal|Explicit|Composable|Predictable|Testable|Readable|Maintainable|Reproducible|Intentional|Deliberate|Declarative|Idiomatic|Immutable|Ergonomic|Deterministic|Straightforward|Opinionated), (?:\\w+, )*(?:and )?\\w+\\."
+
+  # Parallel noun-phrase fragment pairs: "Clean separation, clear ownership."
+  - "(?:Clean|Clear|Pure|Simple|Single|One|Zero|Full|Same|Thin|Flat|Strict|Minimal|Explicit|Complete|Total|Direct|Separate) \\w+, (?:clean|clear|pure|simple|single|one|zero|full|same|thin|flat|strict|minimal|explicit|complete|total|direct|separate|different|no|fewer?) \\w+\\."
+
+  # "Just/Pure/Clean + noun" standalone fragments: "Pure orchestration." "Just data."
+  - "(?:Just|Pure|Clean|Plain|Bare|Raw|Straight|Strict|Simple|Mere) \\w+\\."
+
+  # "Just X, nothing more/else" closers: "Just data, nothing more."
+  - "Just \\w+, nothing (?:more|else|fancy|special|clever)\\."
+
+  # Fragment + dramatic qualifier spliced with "and":
+  # "Pure orchestration, and the one package that imports from all layers."
+  - "(?:Pure|Clean|Just|Simple|Plain|Bare|Raw|Mere|Thin|Flat) \\w+, and [^.]+\\."
+
+  # ---- Dramatic codas: "And [short clause]." ----
+  # "And it shows." "And that's okay."
+  - "And it shows\\."
+  - "And it works\\."
+  - "And it matters\\."
+  - "And it helps\\."
+  - "And it scales\\."
+  - "And that'?s okay\\."
+  - "And that'?s fine\\."
+  - "And that'?s enough\\."
+  - "And that'?s it\\."
+  - "And that'?s the point\\."
+
+  # ---- "Full stop" / "Period" as emphasis ----
+  - "Full stop\\."
+  - "[Pp]eriod\\."

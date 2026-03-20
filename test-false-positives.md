@@ -58,6 +58,52 @@ There is no way to know for certain.
 
 No additional configuration is required for basic usage.
 
+## MicDrop: legitimate short sentences that should NOT trigger
+
+This is a critical security vulnerability that must be patched immediately.
+
+The result is not clean enough to merge.
+
+It is important to test this before deploying to production.
+
+All four endpoints are returning errors after the deploy.
+
+And that's why we need to rewrite the parser.
+
+Both endpoints return the same status code when the upstream service is down.
+
+Each handler validates its input before passing it to the service layer.
+
+Every request must include an authorization header.
+
+Nothing in the response body indicates which shard served the request.
+
+None of the tests cover the edge case where the token has expired.
+
+The schema changes frequently during early development, so pin your client version.
+
+If the configuration changes, the service automatically restarts and picks up the new values.
+
+The API has remained stable since the v2 release despite internal refactoring.
+
+The logging is clean and structured with proper context.
+
+Pure functions return the same output for the same input.
+
+Just run the migration script and restart the service.
+
+Clean up the stale connections before deploying the new version.
+
+Simple types are easier to serialize than complex nested structures.
+
+Plain text logs are sufficient for local development.
+
+Bare metal servers offer better performance for latency-sensitive workloads.
+
+Raw SQL queries bypass the ORM's query builder for complex joins.
+
+Same as above, but with the timeout increased to 30 seconds.
+
 ## VerbTricolon: noun lists that should NOT trigger
 
 The building plan, the meeting agenda, and the ceiling height were all wrong.
