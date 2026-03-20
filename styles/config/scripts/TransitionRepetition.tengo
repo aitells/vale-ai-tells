@@ -27,7 +27,7 @@ transitions := [
 ]
 
 // Split document into sections by markdown headings.
-sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+sections := text.re_split(`(?m)^#{1,6}\s+[^\n]+\n`, scope)
 
 for section in sections {
     section = text.trim_space(section)
@@ -44,11 +44,12 @@ for section in sections {
         continue
     }
 
-    // Count occurrences of each transition using text.count on lowercase.
+    // Count occurrences of each transition using word-boundary regex.
     has_repetition := false
     for t in transitions {
-        // For multi-word transitions, normalize spaces.
-        count := text.count(clean_lower, t)
+        found := text.re_find(`\b` + t + `\b`, clean_lower, -1)
+        count := 0
+        if found != undefined { count = len(found) }
         if count >= 3 {
             has_repetition = true
             break

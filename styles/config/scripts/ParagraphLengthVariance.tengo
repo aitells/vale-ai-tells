@@ -5,7 +5,7 @@ matches := []
 
 // Split document into sections by markdown headings.
 // Measure paragraph-length variance within each section independently.
-sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+sections := text.re_split(`(?m)^#{1,6}\s+[^\n]+\n`, scope)
 
 for section in sections {
     section = text.trim_space(section)
@@ -13,24 +13,17 @@ for section in sections {
         continue
     }
 
+    // Strip code blocks before splitting into paragraphs.
+    clean := text.re_replace("(?s)```.*?```", section, "")
+
     // Split into paragraphs within this section.
-    paragraphs := text.re_split(`\n{2,}`, section)
+    paragraphs := text.re_split(`\n{2,}`, clean)
 
     // Filter to prose paragraphs only.
     lengths := []
-    in_code_block := false
     for p in paragraphs {
         trimmed := text.trim_space(p)
         if trimmed == "" {
-            continue
-        }
-
-        // Track fenced code blocks.
-        if text.has_prefix(trimmed, "```") {
-            in_code_block = !in_code_block
-            continue
-        }
-        if in_code_block {
             continue
         }
 

@@ -4,7 +4,7 @@ matches := []
 
 // Split document into sections by markdown headings.
 // Compare paragraphs within each section for near-duplicate content.
-sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+sections := text.re_split(`(?m)^#{1,6}\s+[^\n]+\n`, scope)
 
 for section in sections {
     section = text.trim_space(section)

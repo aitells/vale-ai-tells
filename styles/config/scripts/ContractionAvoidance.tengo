@@ -51,7 +51,16 @@ if informal_markers >= 2 {
             `(?i)\bI have\b`,
             `(?i)\bI will\b`,
             `(?i)\bwe have\b`,
-            `(?i)\bwe will\b`
+            `(?i)\bwe will\b`,
+            `(?i)\byou will\b`,
+            `(?i)\byou have\b`,
+            `(?i)\bshe is\b`,
+            `(?i)\bhe is\b`,
+            `(?i)\bthere is\b`,
+            `(?i)\bhere is\b`,
+            `(?i)\bwhat is\b`,
+            `(?i)\bwho is\b`,
+            `(?i)\blet us\b`
         ]
 
         for pat in negation_patterns {
@@ -88,7 +97,16 @@ if informal_markers >= 2 {
             `(?i)\bI've\b`,
             `(?i)\bI'll\b`,
             `(?i)\bwe've\b`,
-            `(?i)\bwe'll\b`
+            `(?i)\bwe'll\b`,
+            `(?i)\byou'll\b`,
+            `(?i)\byou've\b`,
+            `(?i)\bshe's\b`,
+            `(?i)\bhe's\b`,
+            `(?i)\bthere's\b`,
+            `(?i)\bhere's\b`,
+            `(?i)\bwhat's\b`,
+            `(?i)\bwho's\b`,
+            `(?i)\blet's\b`
         ]
 
         for pat in contraction_patterns {
@@ -107,7 +125,7 @@ if informal_markers >= 2 {
             // A ratio below 0.10 means near-total avoidance in conversational text.
             ratio := 0.0
             if total > 0 {
-                ratio = contractions / total
+                ratio = (0.0 + contractions) / total
             }
             if ratio < 0.10 {
                 matches = append(matches, {begin: 0, end: len(scope)})

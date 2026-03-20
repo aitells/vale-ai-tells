@@ -4,7 +4,7 @@ matches := []
 
 // Split document into sections by markdown headings.
 // Measure sentence-start repetition within each section independently.
-sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+sections := text.re_split(`(?m)^#{1,6}\s+[^\n]+\n`, scope)
 
 for section in sections {
     section = text.trim_space(section)
@@ -12,11 +12,11 @@ for section in sections {
         continue
     }
 
-    // Strip code blocks.
-    section = text.re_replace("(?s)```.*?```", section, "")
+    // Strip code blocks (use separate variable to preserve section for position lookup).
+    clean := text.re_replace("(?s)```.*?```", section, "")
 
     // Collapse to single line for sentence splitting.
-    flat := text.re_replace(`\n{2,}`, section, " ")
+    flat := text.re_replace(`\n{2,}`, clean, " ")
     flat = text.re_replace(`\s+`, flat, " ")
     flat = text.trim_space(flat)
 
@@ -51,7 +51,7 @@ for section in sections {
     if total >= 6 {
         // Flag when any starting word appears in > 30% of sentences.
         for word, count in first_words {
-            ratio := count / total
+            ratio := (0.0 + count) / total
             if ratio > 0.30 && count >= 3 {
                 start := text.index(scope, section)
                 if start < 0 {

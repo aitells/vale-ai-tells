@@ -1,6 +1,6 @@
 ---
 extends: script
-message: "AI monotony: sentence starters lack diversity in this section (entropy: %s). Human writing naturally varies how sentences begin."
+message: "AI monotony: sentence starters lack diversity in this section. Human writing naturally varies how sentences begin."
 level: warning
 scope: raw
 script: SentenceStartEntropy.tengo

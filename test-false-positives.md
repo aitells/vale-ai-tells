@@ -1,3 +1,6 @@
+<!-- vale ai-tells-experimental.HeadingTitleCase = NO -->
+<!-- vale ai-tells-experimental.VocabularySwap = NO -->
+
 # False Positive Test Cases
 
 These sentences should NOT trigger the new sequence rules.

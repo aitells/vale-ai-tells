@@ -8,7 +8,7 @@ ln2 := math.log(2.0)
 
 // Split document into sections by markdown headings.
 // Measure sentence-start entropy within each section independently.
-sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+sections := text.re_split(`(?m)^#{1,6}\s+[^\n]+\n`, scope)
 
 for section in sections {
     section = text.trim_space(section)
