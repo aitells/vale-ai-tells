@@ -113,3 +113,9 @@ Advanced techniques, improved processes, and streamlined workflows enable better
 Paris attractions, London landmarks, and Tokyo highlights are all worth visiting.
 
 The morning shift, the evening shift, and the weekend shift all need coverage.
+
+They need servers, databases, and load balancers.
+
+We use PostgreSQL, Redis, and Elasticsearch.
+
+You want speed, reliability, and simplicity.

@@ -339,6 +339,16 @@ You can configure settings, customize themes, or override defaults.
 
 We should carefully evaluate options, thoroughly test changes, and promptly deploy fixes.
 
+### Pronoun subject base-form tricolons
+
+They parse input, call a service method, and format output.
+
+We validate requests, check permissions, and return responses.
+
+You read the config, initialize the client, or use the defaults.
+
+They carefully parse input, thoroughly validate records, and efficiently format output.
+
 ### Shared "to" infinitive tricolons
 
 The goal is to simplify workflows, reduce errors, and improve efficiency.
