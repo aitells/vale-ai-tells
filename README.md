@@ -355,6 +355,15 @@ Based on academic research, practitioner analysis, and community-maintained cata
 - [Hana La Rock — 10 Common ChatGPT-isms](https://www.hanalarockwriting.com/post/10-common-chatgpt-isms-what-to-watch-out-for-when-writing-content-with-ai-infographics) — Identifies unnecessary inline definitions, sequencing markers, and excessive qualifiers as key AI tells.
 - [Jordan Gibbs — Spot The Bot: Why ChatGPT's Style Is So Obvious](https://medium.com/@jordan_gibbs/spot-the-bot-why-chatgpts-style-is-so-obvious-e27c6afe1595) — Analysis of 15,000 sentences across 27 stylistic dimensions; documents the RLHF origin of ChatGPT's vocabulary preferences.
 
+### Commit message research
+
+- [Fingerprinting AI Coding Agents on GitHub](https://arxiv.org/abs/2601.17406) (MSR, 2026) — Analyzes 33,580 PRs from five AI agents; achieves 97.2% F1-score identifying which agent wrote a PR, with commit message characteristics (multiline ratio, message length) as dominant features.
+- [Analyzing Message-Code Inconsistency in AI Coding Agent-Authored Pull Requests](https://arxiv.org/abs/2601.04886) (arXiv, 2025) — Finds 1.7% of 23,247 agentic PRs have high message-code inconsistency; 45.4% of inconsistencies are "descriptions claim unimplemented changes."
+- [Lore: Repurposing Git Commit Messages as a Structured Knowledge Protocol](https://arxiv.org/abs/2603.15566) (arXiv, 2026) — Introduces the "Decision Shadow" concept: AI commit tools describe what changed, not why, producing "lossy compression of information already present."
+- [An Empirical Study on Commit Message Generation using LLMs](https://arxiv.org/abs/2502.18904) (ICSE, 2025) — LLM-generated messages were preferred over human ones; human messages favored only 13.1% of the time. Traditional metrics (BLEU, ROUGE-L) correlate poorly with human judgment.
+- [The Emoji Commit Index](https://www.allstacks.com/blog/the-emoji-commit-index) (Allstacks, 2025) — Documents emoji adoption in commits jumping from ~25% to ~75% of organizations between 2023-2025, driven by AI commit tools.
+- [peakoss/anti-slop](https://github.com/peakoss/anti-slop) (GitHub Action) — 31 checks derived from 130+ manually reviewed AI slop PRs on large open-source projects; enforces max commit message length, max emoji count, and max code references.
+
 <!-- vale ai-tells.EmDashUsage = YES -->
 <!-- vale ai-tells.OverusedVocabulary = YES -->
 <!-- vale ai-tells.VerbTricolon = YES -->
