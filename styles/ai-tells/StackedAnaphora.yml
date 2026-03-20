@@ -7,11 +7,26 @@ tokens:
   # "No X. No Y. No Z." pattern (3+ consecutive)
   - "No [^.]+\\. No [^.]+\\. No [^.]+"
 
+  # "No X. No Y." pattern (2 consecutive)
+  - "No \\w[^.]+\\. No \\w[^.]+"
+
+  # "No X, no Y, no Z." pattern (3+ comma-separated)
+  - "No [^,]+, no [^,]+, no [^.!?]+"
+
+  # "No X, no Y." pattern (2 comma-separated)
+  - "No [^,]+, no [^.!?]+"
+
   # "Not X. Not Y. Not Z." pattern
   - "Not [^.]+\\. Not [^.]+\\. Not [^.]+"
 
+  # "Not X. Not Y." pattern (2 consecutive)
+  - "Not \\w[^.]+\\. Not \\w[^.]+"
+
   # "No more X. No more Y. No more Z." pattern
   - "No more [^.]+\\. No more [^.]+\\. No more [^.]+"
+
+  # "No more X. No more Y." pattern (2 consecutive)
+  - "No more \\w[^.]+\\. No more \\w[^.]+"
 
   # "It's X. It's Y. It's Z." pattern
   - "[Ii]t'?s [^.]+\\. [Ii]t'?s [^.]+\\. [Ii]t'?s [^.]+"

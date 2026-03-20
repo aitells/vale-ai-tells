@@ -47,3 +47,13 @@ It is essential to configure the firewall before going live.
 It is critical to back up the database before migrating.
 
 It is necessary to restart the service after updating the config.
+
+## StackedAnaphora: legitimate "No" uses that should NOT trigger
+
+No one expected the results to be that clear.
+
+No, I do not think that is correct.
+
+There is no way to know for certain.
+
+No additional configuration is required for basic usage.

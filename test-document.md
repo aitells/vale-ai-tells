@@ -258,3 +258,17 @@ As you might expect, the results were mixed.
 As you'd expect, performance degraded under load.
 
 As one might expect, the migration took longer than planned.
+
+## StackedAnaphora ("No" patterns)
+
+No database imports, no HTTP imports, no framework dependencies.
+
+No compromises, no shortcuts.
+
+No database imports. No HTTP imports. No framework dependencies.
+
+No compromises. No shortcuts.
+
+Not possible in production. Not acceptable in staging.
+
+No more manual deploys. No more broken builds. No more weekend outages.
