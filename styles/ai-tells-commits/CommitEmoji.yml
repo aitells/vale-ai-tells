@@ -1,0 +1,91 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. Systematic gitmoji is a fingerprint of AI commit tools. Use words."
+level: error
+nonword: true
+tokens:
+  # Features and additions
+  - "✨"
+  - "🎉"
+  - "➕"
+
+  # Bugs and fixes
+  - "🐛"
+  - "🩹"
+  - "🚑"
+  - "🥅"
+
+  # Refactoring and code quality
+  - "♻️"
+  - "🎨"
+  - "💄"
+  - "🔨"
+
+  # Performance
+  - "⚡"
+  - "🚀"
+
+  # Documentation
+  - "📝"
+  - "💡"
+
+  # Tests
+  - "✅"
+  - "🧪"
+
+  # Dependencies and builds
+  - "📦"
+  - "⬆️"
+  - "⬇️"
+  - "➖"
+
+  # Configuration and tooling
+  - "🔧"
+  - "🔩"
+  - "🔨"
+
+  # Security
+  - "🔒"
+  - "🔐"
+
+  # Removal and deprecation
+  - "🔥"
+  - "🗑️"
+  - "💀"
+
+  # Version control operations
+  - "🔀"
+  - "⏪"
+  - "🏷️"
+
+  # Logging and monitoring
+  - "🔊"
+  - "🔇"
+
+  # Architecture and infrastructure
+  - "🏗️"
+  - "🚚"
+  - "🗃️"
+
+  # Accessibility and i18n
+  - "♿"
+  - "🌐"
+
+  # Types
+  - "🏷️"
+
+  # UI and UX
+  - "📱"
+  - "🚸"
+
+  # CI/CD
+  - "👷"
+  - "💚"
+
+  # Misc AI-favored commit emoji
+  - "🍱"
+  - "🤡"
+  - "💩"
+  - "🙈"
+  - "📸"
+  - "🧹"

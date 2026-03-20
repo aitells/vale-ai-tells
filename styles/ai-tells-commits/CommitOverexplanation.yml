@@ -1,0 +1,58 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. This filler phrase pads the commit message without adding information. Cut it."
+level: error
+ignorecase: true
+tokens:
+  # "as part of" filler
+  - as part of this change
+  - as part of this commit
+  - as part of this update
+  - as part of this PR
+  - as part of this pull request
+  - as part of this refactor
+  - as part of this effort
+  - as part of this migration
+  - as part of this work
+
+  # "this is necessary" explanations
+  - this is necessary because
+  - this was necessary because
+  - this is needed because
+  - this was needed because
+  - this is needed to
+  - this was needed to
+  - this is required because
+  - this was required to
+  - this is necessary to ensure
+  - this was necessary to ensure
+
+  # "along with" padding
+  - along with necessary
+  - along with corresponding
+  - along with related
+  - along with relevant
+  - along with associated
+  - along with appropriate
+  - along with updated
+
+  # Diff narration phrases
+  - the following changes were made
+  - the following changes have been made
+  - the following modifications were made
+  - changes include
+  - changes made include
+  - the key changes are
+  - the main changes are
+  - the notable changes are
+  - summary of changes
+
+  # Unnecessary scope framing
+  - the goal of this change
+  - the purpose of this change
+  - the purpose of this commit
+  - the goal of this commit
+  - the intent of this change
+  - the motivation for this change
+  - the reason for this change
+  - the rationale behind this

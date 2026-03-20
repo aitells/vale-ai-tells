@@ -1,0 +1,89 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. This trailing justification restates the obvious—if the change is good, the diff shows it."
+level: error
+ignorecase: true
+tokens:
+  # "ensuring" justifications
+  - ensuring consistency
+  - ensuring correctness
+  - ensuring compatibility
+  - ensuring proper handling
+  - ensuring proper validation
+  - ensuring type safety
+  - ensuring that the
+  - ensuring the application
+  - ensuring the code
+  - ensuring all tests
+  - ensuring a clean
+  - ensuring a consistent
+
+  # "improving" justifications
+  - improving performance
+  - improving readability
+  - improving maintainability
+  - improving reliability
+  - improving testability
+  - improving type safety
+  - improving code quality
+  - improving the overall
+  - improving developer experience
+  - improving error handling
+
+  # "enhancing" justifications
+  - enhancing the overall
+  - enhancing readability
+  - enhancing maintainability
+  - enhancing performance
+  - enhancing the user experience
+  - enhancing code quality
+  - enhancing type safety
+  - enhancing developer experience
+
+  # "maintaining" justifications
+  - maintaining consistency
+  - maintaining compatibility
+  - maintaining backwards compatibility
+  - maintaining backward compatibility
+  - maintaining type safety
+  - maintaining a clean
+
+  # "providing" justifications
+  - providing better error
+  - providing a better
+  - providing a more robust
+  - providing a cleaner
+  - providing more flexibility
+  - providing a consistent
+
+  # "for improved/better" justifications
+  - for improved performance
+  - for improved readability
+  - for improved maintainability
+  - for improved reliability
+  - for improved type safety
+  - for improved clarity
+  - for better performance
+  - for better readability
+  - for better maintainability
+  - for better type safety
+  - for better error handling
+  - for better developer experience
+  - for better clarity
+  - for greater clarity
+  - for greater flexibility
+
+  # "which ensures/allows/enables" relative clauses
+  - which ensures that
+  - which ensures the
+  - which allows for
+  - which allows the
+  - which enables the
+  - which enables us to
+  - which improves the
+  - which improves overall
+  - which provides a
+  - which provides better
+  - which makes the code
+  - which makes it easier
+  - which results in

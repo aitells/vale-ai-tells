@@ -33,11 +33,26 @@ vale sync
 
 ## Linting commit messages
 
-AI-generated commit messages carry the same fingerprints as AI-generated prose.
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+AI-generated commit messages carry the same fingerprints as AI-generated prose, plus a few tells of their own: self-referential preambles ("This commit adds\u2026"), trailing justification clauses ("\u2026ensuring consistency"), buzzword adjective combos ("comprehensive tests," "robust error handling"), and systematic gitmoji.
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+
+The `ai-tells-commits` style provides 6 rules purpose-built for commit messages, separate from the prose rules so you can opt in without pulling them into your docs.
+
+### Commit message rules
+
 <!-- vale off -->
-"This commit leverages a comprehensive solution to seamlessly enhance the functionality"
+
+| Rule | Description |
+|------|-------------|
+| `CommitSelfReference` | Self-narrating preambles: "This commit adds...," "This PR introduces...," "In this change...," "These changes ensure...," etc. |
+| `CommitTrailingJustification` | Trailing clauses that restate the obvious: "...ensuring consistency," "...improving readability," "...which allows for," "for better maintainability," etc. |
+| `CommitBuzzwords` | Vague adjective+noun combos: "comprehensive tests," "robust error handling," "proper validation," "various fixes," "relevant components," "necessary changes," etc. |
+| `CommitHedging` | Inappropriate uncertainty for changes already made: "This should fix...," "This may help...," "seems to resolve...," etc. |
+| `CommitEmoji` | Systematic gitmoji prefixes (✨🐛♻️📝⚡✅🔧🔥🚀 etc.) — emoji commit adoption has jumped from ~25% to ~75% of organizations, driven almost entirely by AI tools. |
+| `CommitOverexplanation` | Filler that pads without informing: "As part of this change...," "The purpose of this commit...," "Summary of changes," "The following changes were made," etc. |
+
 <!-- vale on -->
-is detectable for the same reasons as anything else in your docs.
 
 ### Setup
 
@@ -48,10 +63,10 @@ Add a `[formats]` section and a named section for the commit message file to you
 COMMIT_EDITMSG = md
 
 [{COMMIT_EDITMSG,.git/COMMIT_EDITMSG}]
-BasedOnStyles = ai-tells
+BasedOnStyles = ai-tells, ai-tells-commits
 ```
 
-The glob covers both how pre-commit passes the path and direct Vale invocations.
+The glob covers both how pre-commit passes the path and direct Vale invocations. Use both styles together: `ai-tells` catches general vocabulary and structural tells, `ai-tells-commits` catches commit-specific patterns.
 
 Add the commit-msg hook to your `.pre-commit-config.yaml`:
 
@@ -76,6 +91,8 @@ prek install --hook-type commit-msg
 
 A blocked commit:
 
+<!-- vale off -->
+
 ```text
 $ git commit -m "This commit leverages a comprehensive solution to seamlessly enhance the functionality"
 
@@ -84,21 +101,25 @@ vale (commit message)....................................................Failed
 - exit code: 1
 
  .git/COMMIT_EDITMSG
- 1:13  error  AI vocabulary: 'leverages'. Replace with a more specific      ai-tells.OverusedVocabulary
+ 1:1   error  AI commit tell: 'This commit'. Commit messages shouldn't     ai-tells-commits.CommitSelfReference
+              narrate themselves—just state what you did and why.
+ 1:13  error  AI vocabulary: 'leverages'. Replace with a more specific     ai-tells.OverusedVocabulary
               or common word.
- 1:24  error  AI vocabulary: 'comprehensive'. Delete or replace with a      ai-tells.OverusedVocabulary
-              specific adjective.
- 1:48  error  AI filler: 'seamlessly'. Delete—it describes no real         ai-tells.FillerPhrases
-              mechanism.
+ 1:24  error  AI commit tell: 'comprehensive solution'. This vague         ai-tells-commits.CommitBuzzwords
+              buzzword combo is a hallmark of AI-generated commits.
+ 1:48  error  AI vocabulary: 'seamlessly'. Replace with a more specific    ai-tells.OverusedVocabulary
+              or common word.
 ```
+
+<!-- vale on -->
 
 ### Suppressing noisy rules
 
-Some rules are less relevant for commit messages. `SycophancyMarkers` and `ClosingPleasantries` are unlikely to fire on a commit summary line, but if they generate noise, suppress them in your `.vale.ini`:
+Some prose rules are less relevant for commit messages. If they generate noise, suppress them in your `.vale.ini`:
 
 ```ini
 [{COMMIT_EDITMSG,.git/COMMIT_EDITMSG}]
-BasedOnStyles = ai-tells
+BasedOnStyles = ai-tells, ai-tells-commits
 ai-tells.SycophancyMarkers = NO
 ai-tells.ClosingPleasantries = NO
 ```

@@ -1,0 +1,89 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. Commit messages shouldn't narrate themselves—just state what you did and why."
+level: error
+ignorecase: true
+tokens:
+  # "This commit" preambles
+  - This commit adds
+  - This commit fixes
+  - This commit updates
+  - This commit removes
+  - This commit introduces
+  - This commit implements
+  - This commit improves
+  - This commit resolves
+  - This commit addresses
+  - This commit refactors
+  - This commit cleans up
+  - This commit moves
+  - This commit renames
+  - This commit modifies
+  - This commit enhances
+  - This commit ensures
+  - This commit contains
+
+  # "This change" preambles
+  - This change adds
+  - This change fixes
+  - This change updates
+  - This change removes
+  - This change introduces
+  - This change implements
+  - This change improves
+  - This change resolves
+  - This change addresses
+  - This change refactors
+  - This change ensures
+  - This change modifies
+  - This change enhances
+
+  # "This PR" preambles
+  - This PR adds
+  - This PR fixes
+  - This PR updates
+  - This PR removes
+  - This PR introduces
+  - This PR implements
+  - This PR improves
+  - This PR resolves
+  - This PR addresses
+  - This PR refactors
+  - This PR contains
+
+  # "This update" preambles
+  - This update adds
+  - This update fixes
+  - This update improves
+  - This update introduces
+  - This update implements
+  - This update resolves
+  - This update ensures
+
+  # "These changes" preambles
+  - These changes add
+  - These changes fix
+  - These changes update
+  - These changes remove
+  - These changes introduce
+  - These changes implement
+  - These changes improve
+  - These changes resolve
+  - These changes address
+  - These changes ensure
+
+  # "This patch" preambles
+  - This patch fixes
+  - This patch adds
+  - This patch updates
+  - This patch resolves
+  - This patch addresses
+  - This patch improves
+
+  # "In this commit/PR/change" preambles
+  - In this commit
+  - In this PR
+  - In this change
+  - In this update
+  - In this patch
+  - In this pull request

@@ -60,7 +60,7 @@ scaffold name:
 # Show token counts per rule
 stats:
   #!/usr/bin/env bash
-  echo "Token counts per rule:"
+  echo "Token counts per rule (ai-tells):"
   total=0
   for f in styles/ai-tells/*.yml; do
     count=$(grep -c "^  - " "$f" 2>/dev/null || true)
@@ -69,8 +69,21 @@ stats:
     printf "  %-44s %3d\n" "$(basename "$f" .yml)" "$count"
   done
   echo ""
-  echo "  Total: $total"
+  echo "  Subtotal: $total"
   echo "  (Sequence rules report 1; actual verb count is higher)"
+  echo ""
+  echo "Token counts per rule (ai-tells-commits):"
+  commits_total=0
+  for f in styles/ai-tells-commits/*.yml; do
+    count=$(grep -c "^  - " "$f" 2>/dev/null || true)
+    [[ -z "$count" ]] && count=0
+    commits_total=$((commits_total + count))
+    printf "  %-44s %3d\n" "$(basename "$f" .yml)" "$count"
+  done
+  echo ""
+  echo "  Subtotal: $commits_total"
+  echo ""
+  echo "  Grand total: $((total + commits_total))"
 
 # Create an annotated release tag (e.g. just tag v1.5.0)
 tag version:

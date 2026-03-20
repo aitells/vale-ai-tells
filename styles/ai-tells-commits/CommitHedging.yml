@@ -1,0 +1,49 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. You already made the change—don't hedge about whether it works. If you're unsure, say what you tested."
+level: error
+ignorecase: true
+tokens:
+  # "should" hedges
+  - This should fix
+  - This should resolve
+  - This should address
+  - This should prevent
+  - This should improve
+  - This should help
+  - This should handle
+  - should fix the
+  - should resolve the
+  - should address the
+  - should prevent the
+  - should improve the
+  - should help with
+
+  # "may/might" hedges
+  - This may fix
+  - This may help
+  - This may resolve
+  - This may improve
+  - This might fix
+  - This might help
+  - This might resolve
+  - This might improve
+
+  # "helps to" hedges
+  - This helps to
+  - This helps with
+  - This helps ensure
+  - This helps prevent
+  - helps to ensure
+  - helps to prevent
+  - helps to improve
+  - helps to reduce
+  - helps to avoid
+
+  # "appears to" / "seems to" hedges
+  - appears to fix
+  - appears to resolve
+  - seems to fix
+  - seems to resolve
+  - seems to work
+  - seems to be

@@ -66,6 +66,63 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   language ("nestled in," "vibrant community," "a beacon of," "renowned for
   its," "has emerged as a," "left an indelible mark")
 
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale ai-tells.OpeningCliches = YES -->
+<!-- vale ai-tells.VagueAttributions = YES -->
+<!-- vale ai-tells.DespiteChallenges = YES -->
+<!-- vale ai-tells.ServesAsDodge = YES -->
+<!-- vale ai-tells.ParticipialPadding = YES -->
+<!-- vale ai-tells.PromotionalPuffery = YES -->
+<!-- vale ai-tells.FalseExclusivity = YES -->
+<!-- vale ai-tells.NarrativePivots = YES -->
+<!-- vale ai-tells.SequencingMarkers = YES -->
+<!-- vale ai-tells.ContrastiveFormulas = YES -->
+<!-- vale ai-tells.MicDrop = YES -->
+<!-- vale ai-tells.RhetoricalSelfAnswer = YES -->
+<!-- vale ai-tells.AICompoundPhrases = YES -->
+<!-- vale Google.EmDash = YES -->
+<!-- vale Google.LyHyphens = YES -->
+<!-- vale proselint.CorporateSpeak = YES -->
+
+<!-- vale ai-tells-commits.CommitSelfReference = NO -->
+<!-- vale ai-tells-commits.CommitTrailingJustification = NO -->
+<!-- vale ai-tells-commits.CommitBuzzwords = NO -->
+<!-- vale ai-tells-commits.CommitHedging = NO -->
+<!-- vale ai-tells-commits.CommitEmoji = NO -->
+<!-- vale ai-tells-commits.CommitOverexplanation = NO -->
+- **ai-tells-commits**: New opt-in style with 6 rules purpose-built for
+  detecting AI tells in commit messages and PR descriptions. Shipped in the
+  same release zip as `ai-tells` but in a separate `ai-tells-commits` directory
+  so users can enable it independently via `BasedOnStyles = ai-tells-commits`.
+  Rules based on research including "Fingerprinting AI Coding Agents on GitHub"
+  (arXiv:2601.17406), the Allstacks Emoji Commit Index, and community analysis
+  of output from Claude Code, Copilot, Cursor, Aider, and Windsurf.
+- **CommitSelfReference**: Flags self-narrating preambles: "This commit adds,"
+  "This PR introduces," "In this change," "These changes ensure," etc.
+- **CommitTrailingJustification**: Flags trailing clauses that restate the
+  obvious: "ensuring consistency," "improving readability," "which allows for,"
+  "for better maintainability," etc.
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+- **CommitBuzzwords**: Flags vague adjective+noun combos characteristic of AI
+  commits: "comprehensive tests," "robust error handling," "proper validation,"
+  "various fixes," "relevant components," "necessary changes," etc.
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+- **CommitHedging**: Flags inappropriate uncertainty for changes already made:
+  "This should fix," "This may help," "seems to resolve," etc.
+- **CommitEmoji**: Flags systematic gitmoji prefixes. Emoji commit adoption
+  jumped from ~25% to ~75% of organizations between 2023-2025, driven almost
+  entirely by AI commit tools.
+- **CommitOverexplanation**: Flags commit-specific filler: "As part of this
+  change," "The purpose of this commit," "Summary of changes," "The following
+  changes were made," etc.
+<!-- vale ai-tells-commits.CommitSelfReference = YES -->
+<!-- vale ai-tells-commits.CommitTrailingJustification = YES -->
+<!-- vale ai-tells-commits.CommitBuzzwords = YES -->
+<!-- vale ai-tells-commits.CommitHedging = YES -->
+<!-- vale ai-tells-commits.CommitEmoji = YES -->
+<!-- vale ai-tells-commits.CommitOverexplanation = YES -->
+
 ### Changed
 
 - **OverusedVocabulary**: Added 41 words from the PNAS study with 80-162x
@@ -86,26 +143,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   not covered" subsection documenting 8 patterns that require analysis beyond
   Vale's capabilities; expanded Sources from 4 entries to 13 with structured
   bibliography (academic research, pattern catalogs, practitioner analysis)
-
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale ai-tells.OpeningCliches = YES -->
-<!-- vale ai-tells.VagueAttributions = YES -->
-<!-- vale ai-tells.DespiteChallenges = YES -->
-<!-- vale ai-tells.ServesAsDodge = YES -->
-<!-- vale ai-tells.ParticipialPadding = YES -->
-<!-- vale ai-tells.PromotionalPuffery = YES -->
-<!-- vale ai-tells.FalseExclusivity = YES -->
-<!-- vale ai-tells.NarrativePivots = YES -->
-<!-- vale ai-tells.SequencingMarkers = YES -->
-<!-- vale ai-tells.ContrastiveFormulas = YES -->
-<!-- vale ai-tells.MicDrop = YES -->
-<!-- vale ai-tells.RhetoricalSelfAnswer = YES -->
-<!-- vale ai-tells.AICompoundPhrases = YES -->
-<!-- vale Google.EmDash = YES -->
-<!-- vale Google.LyHyphens = YES -->
-<!-- vale proselint.CorporateSpeak = YES -->
-
+- **Release workflow**: `ai-tells.zip` now includes both `ai-tells/` and
+  `ai-tells-commits/` directories
+- **.vale.ini**: `COMMIT_EDITMSG` section now uses both `ai-tells` and
+  `ai-tells-commits` styles
+- **Justfile**: `stats` recipe now reports token counts for both styles
+- **test-commit-messages.md**: New test document with examples of all 6
+  commit message AI tells
 ## [1.4.0] - 2026-02-17
 
 ### Added

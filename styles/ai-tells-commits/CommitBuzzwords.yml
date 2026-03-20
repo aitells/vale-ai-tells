@@ -1,0 +1,105 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. This vague buzzword combo is a hallmark of AI-generated commits. Be specific about what actually changed."
+level: error
+ignorecase: true
+tokens:
+  # "comprehensive" combos
+  - comprehensive tests
+  - comprehensive test suite
+  - comprehensive test coverage
+  - comprehensive error handling
+  - comprehensive solution
+  - comprehensive coverage
+  - comprehensive validation
+  - comprehensive logging
+  - comprehensive documentation
+  - comprehensive refactor
+  - comprehensive set of
+  - comprehensive unit tests
+  - comprehensive e2e
+
+  # "robust" combos
+  - robust error handling
+  - robust solution
+  - robust validation
+  - robust implementation
+  - robust logging
+  - robust testing
+  - robust set of
+  - robust type checking
+  - more robust
+
+  # "proper" combos
+  - proper validation
+  - proper handling
+  - proper error handling
+  - proper error messages
+  - proper type checking
+  - proper cleanup
+  - proper initialization
+  - properly handle
+  - properly validate
+  - properly initialize
+  - properly clean up
+
+  # "relevant" combos
+  - relevant components
+  - relevant tests
+  - relevant documentation
+  - relevant files
+  - relevant modules
+  - relevant sections
+  - update relevant
+
+  # "appropriate" combos
+  - appropriate error messages
+  - appropriate error handling
+  - appropriate validation
+  - appropriate handling
+  - appropriate defaults
+  - appropriate types
+
+  # "necessary" combos
+  - necessary changes
+  - necessary updates
+  - necessary tests
+  - necessary fixes
+  - necessary adjustments
+  - necessary modifications
+  - necessary refactoring
+  - necessary cleanup
+
+  # "various" combos
+  - various improvements
+  - various fixes
+  - various updates
+  - various changes
+  - various issues
+  - various places
+  - various components
+  - various modules
+
+  # "overall" combos
+  - overall performance
+  - overall quality
+  - overall readability
+  - overall structure
+  - overall code quality
+  - overall maintainability
+  - overall stability
+  - overall experience
+
+  # "corresponding" combos
+  - corresponding tests
+  - corresponding changes
+  - corresponding updates
+  - corresponding documentation
+  - corresponding types
+
+  # "associated" and "related" combos
+  - and related changes
+  - and related updates
+  - and related tests
+  - and associated changes
+  - and associated tests

@@ -19,7 +19,7 @@ jobs:
       - name: Create package
         run: |
           cd styles
-          zip -r ../ai-tells.zip ai-tells
+          zip -r ../ai-tells.zip ai-tells ai-tells-commits
 
       - name: Create release
         uses: softprops/action-gh-release@v2
