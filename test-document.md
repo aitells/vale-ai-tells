@@ -361,6 +361,40 @@ We need to identify the root cause, to develop a fix, and to deploy the patch.
 
 The plan is to audit the logs, to isolate the failure, or to escalate the incident.
 
+### Base form after colon tricolons
+
+Every adapter follows the same discipline: parse input, call a service method, and format output.
+
+The rule is simple: read the config, validate the schema, or reject the input.
+
+### Asyndetic gerund tricolons
+
+The system keeps running, processing data, generating reports, updating dashboards.
+
+We spent the sprint analyzing logs, fixing regressions, improving coverage.
+
+### Asyndetic past tense tricolons
+
+The team reviewed the code, updated the tests, deployed the fix.
+
+### Asyndetic third person present tricolons
+
+The pipeline validates inputs, normalizes data, transforms records.
+
+### Asyndetic modal tricolons
+
+You should read the docs, check the changelog, test locally.
+
+### Asyndetic pronoun subject tricolons
+
+They parse input, call a service method, format output.
+
+We read the config, validate the schema, start the server.
+
+### Asyndetic colon tricolons
+
+The discipline is simple: parse input, call a method, format output.
+
 ### Subject-verb tricolons
 
 The first module validates input, the second module processes data, and the third module generates output.
@@ -464,6 +498,16 @@ Same interface, different backend.
 Single source, no duplication.
 
 Full control, minimal overhead.
+
+#### Terse prepositional callback fragments
+
+With SQLite, the binary has zero external dependencies. With PostgreSQL, one.
+
+With Docker, none.
+
+With caching, two.
+
+With self-hosting, zero.
 
 #### "Just/Pure/Clean + noun" standalone fragments
 

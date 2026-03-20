@@ -99,6 +99,11 @@ tokens:
   # "Pure orchestration, and the one package that imports from all layers."
   - "(?:Pure|Clean|Just|Simple|Plain|Bare|Raw|Mere|Thin|Flat) \\w+, and [^.]+\\."
 
+  # Terse prepositional callback: "With PostgreSQL, one."
+  # A telegraphic fragment that only makes sense as a parallel to the
+  # preceding sentence. The single-word answer is the mic-drop.
+  - "With \\w+(?:[ -]\\w+)?, \\w+\\."
+
   # ---- Dramatic codas: "And [short clause]." ----
   # "And it shows." "And that's okay."
   - "And it shows\\."

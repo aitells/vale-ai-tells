@@ -104,6 +104,10 @@ Raw SQL queries bypass the ORM's query builder for complex joins.
 
 Same as above, but with the timeout increased to 30 seconds.
 
+With PostgreSQL, the binary requires a running database server on the network.
+
+With practice, developers learn to spot these patterns quickly.
+
 ## VerbTricolon: noun lists that should NOT trigger
 
 The building plan, the meeting agenda, and the ceiling height were all wrong.
