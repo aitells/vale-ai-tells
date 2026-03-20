@@ -7,6 +7,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale ai-tells.FormalTransitions = NO -->
+<!-- vale ai-tells.HedgingPhrases = NO -->
+<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale Google.EmDash = NO -->
+- **ai-tells-experimental**: New opt-in style with 13 rules for detecting
+  structural AI writing patterns that Vale's regex-based rules can't catch.
+  Uses Tengo scripts, metric formulas, capitalization, and substitution
+  check types to analyze document-level properties. Shipped as a separate
+  `ai-tells-experimental.zip` release artifact (includes `config/scripts/`).
+  All rules at `warning` level; thresholds are research-grounded starting
+  points pending calibration on a larger corpus.
+- **SentenceLengthVariance** (script): Flags sections where the coefficient
+  of variation of sentence word counts falls below 0.30. Gibbs (2024):
+  ChatGPT averages ~27 words/sentence with low variance; PNAS (2025):
+  instruction-tuned LLMs compress the sentence-length range humans produce
+- **ParagraphLengthVariance** (script): Flags sections where paragraph-length
+  CV falls below 0.25. Pangram Labs (2025): AI paragraphs default to uniform
+  60-100 word blocks
+- **SentenceStartRepetition** (script): Flags sections where >30% of
+  sentences start with the same word (minimum 6 sentences, 3 occurrences).
+  Complements `StackedAnaphora` for non-consecutive repetition
+- **SentenceStartEntropy** (script): Measures Shannon entropy of sentence-
+  starting words per section. Flags when normalized entropy falls below 0.65,
+  catching low diversity even when no single opener dominates
+- **ContentDuplication** (script): Detects near-identical paragraphs within
+  a section using Jaccard word-overlap similarity. Flags the later occurrence
+  when two paragraphs share more than 60% of their words
+- **ContractionAvoidance** (script): Detects documents that avoid
+  contractions despite using informal language. Two-pass approach: informality
+  gate (pronouns, questions) then ratio check. PNAS (2025): GPT models use
+  contractions at 60-63% of the human rate
+- **TransitionRepetition** (script): Flags when the same formal transition
+  phrase appears 3+ times within a section. Tracks 20 common transitions
+  including "moreover," "furthermore," "additionally," "hence," "thus"
+- **TricolonDensityDocument** (script): Detects when tricolons make up >60%
+  of all enumerated lists in a document with at least 4 tricolons and 20%
+  sentence density. Gorrie (2024), tropes.fyi: tricolon overuse is a key AI
+  rhetorical tell
+- **AverageSentenceLength** (metric): Flags documents where
+  `words / sentences > 25.0`
+- **LongWordDensity** (metric): Flags documents where
+  `long_words / words > 0.4`. PNAS (2025): mean word length is a top-5
+  discriminating feature between AI and human text
+- **ComplexWordDensity** (metric): Flags documents where
+  `complex_words / words > 0.3`. PNAS (2025): nominalizations appear at
+  150-214% of human rates in GPT output
+- **HeadingTitleCase** (capitalization): Flags markdown headings using Title
+  Case. Wikipedia: "AI chatbots strongly tend to capitalize all main words
+  in section headings." Supports project-specific exceptions via Vale vocab
+- **VocabularySwap** (substitution): Inline rewrite suggestions for 20 AI
+  vocabulary words (56 swap entries covering inflected forms). Complements
+  `OverusedVocabulary` by suggesting concrete alternatives
+<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.FormalTransitions = YES -->
+<!-- vale ai-tells.HedgingPhrases = YES -->
+<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale Google.EmDash = YES -->
+
+### Changed
+
+- **Release workflow**: `ai-tells-experimental.zip` now ships as its own
+  release artifact alongside `ai-tells.zip` and `ai-tells-commits.zip`
+
+### Fixed
+
+- **SentenceStartRepetition**: Fixed integer division that caused the rule
+  to fire only at 100% repetition instead of the intended 30% threshold
+- **ContractionAvoidance**: Fixed integer division that caused false
+  positives on every document with full forms regardless of contraction count.
+  Added 9 missing contraction/full-form pairs (you'll, you've, she's, he's,
+  there's, here's, what's, who's, let's)
+<!-- vale ai-tells.FormalTransitions = NO -->
+<!-- vale Google.Quotes = NO -->
+- **TransitionRepetition**: Fixed substring matching that counted "thus"
+  inside "enthusiasm" and "hence" inside "whence". Now uses word-boundary
+  matching
+<!-- vale ai-tells.FormalTransitions = YES -->
+<!-- vale Google.Quotes = YES -->
+- **SentenceLengthVariance**, **SentenceStartRepetition**: Fixed section
+  variable overwriting that broke position lookups (all matches pointed to
+  position 0)
+- **ParagraphLengthVariance**: Fixed code-block toggle tracking that got
+  permanently stuck, skipping all content after the first fenced block.
+  Now strips code blocks with regex before paragraph splitting
+- **Script rule messages**: Removed `%s` placeholders from 4 script rule
+  messages that dumped the entire matched text span instead of metric values
+- **Section splitting**: All 7 section-splitting scripts now handle headings
+  at the start of a document (previously required a leading newline)
+
 ## [1.5.1] - 2026-03-20
 
 ### Fixed
