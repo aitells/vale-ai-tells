@@ -16,13 +16,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Create package
+      - name: Create packages
         run: |
           cd styles
-          zip -r ../ai-tells.zip ai-tells ai-tells-commits
+          zip -r ../ai-tells.zip ai-tells
+          zip -r ../ai-tells-commits.zip ai-tells-commits
 
       - name: Create release
         uses: softprops/action-gh-release@v2
         with:
-          files: ai-tells.zip
+          files: |
+            ai-tells.zip
+            ai-tells-commits.zip
           generate_release_notes: true

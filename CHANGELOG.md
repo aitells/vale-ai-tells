@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.1] - 2026-03-20
+
+### Fixed
+
+- **Packaging**: `ai-tells-commits` is now shipped as its own zip asset
+  (`ai-tells-commits.zip`) so Vale can install it as a separate package.
+  Previously it was bundled inside `ai-tells.zip`, which Vale ignored
+  during sync because the directory name did not match the package name.
+
 ## [1.5.0] - 2026-03-20
 
 ### Added
@@ -434,6 +443,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.5.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.0...v1.5.1
 [1.5.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.2.0...v1.3.0
