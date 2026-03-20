@@ -57,3 +57,13 @@ No, I do not think that is correct.
 There is no way to know for certain.
 
 No additional configuration is required for basic usage.
+
+## VerbTricolon: noun lists that should NOT trigger
+
+The building plan, the meeting agenda, and the ceiling height were all wrong.
+
+Advanced techniques, improved processes, and streamlined workflows enable better outcomes.
+
+Paris attractions, London landmarks, and Tokyo highlights are all worth visiting.
+
+The morning shift, the evening shift, and the weekend shift all need coverage.

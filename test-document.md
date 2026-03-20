@@ -272,3 +272,57 @@ No compromises. No shortcuts.
 Not possible in production. Not acceptable in staging.
 
 No more manual deploys. No more broken builds. No more weekend outages.
+
+## VerbTricolon
+
+### Gerund tricolons
+
+By analyzing logs, monitoring metrics, and reviewing alerts, the team caught the issue early.
+
+The tool excels at processing data, transforming records, or exporting results.
+
+### Gerund tricolons with adverbs
+
+The system is continuously analyzing inputs, dynamically processing records, and automatically generating outputs.
+
+### Past tense tricolons
+
+The team analyzed requirements, developed prototypes, and delivered the final product.
+
+We carefully reviewed the code, updated the dependencies, or removed the deprecated calls.
+
+### Third person present tricolons
+
+This tool analyzes data, processes results, and generates reports.
+
+The pipeline validates inputs, normalizes data, or transforms records.
+
+### Third person present with adverbs
+
+The engine efficiently analyzes queries, rapidly processes results, and reliably generates responses.
+
+### Modal + base form tricolons
+
+Teams should evaluate options, prioritize tasks, and allocate resources.
+
+You can configure settings, customize themes, or override defaults.
+
+### Modal with adverbs
+
+We should carefully evaluate options, thoroughly test changes, and promptly deploy fixes.
+
+### Shared "to" infinitive tricolons
+
+The goal is to simplify workflows, reduce errors, and improve efficiency.
+
+We need to identify the root cause, fix the bug, or revert the change.
+
+### Repeated "to" infinitive tricolons
+
+We need to identify the root cause, to develop a fix, and to deploy the patch.
+
+The plan is to audit the logs, to isolate the failure, or to escalate the incident.
+
+### Subject-verb tricolons
+
+The first module validates input, the second module processes data, and the third module generates output.
