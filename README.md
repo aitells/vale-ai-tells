@@ -19,8 +19,8 @@ Add the package to your `.vale.ini`:
 StylesPath = styles
 MinAlertLevel = suggestion
 
-Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.5.1/ai-tells.zip, \
-  https://github.com/tbhb/vale-ai-tells/releases/download/v1.5.1/ai-tells-commits.zip
+Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.6.0/ai-tells.zip, \
+  https://github.com/tbhb/vale-ai-tells/releases/download/v1.6.0/ai-tells-commits.zip
 
 [*.md]
 BasedOnStyles = ai-tells
