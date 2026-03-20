@@ -114,11 +114,15 @@ release version:
   git push && git push --tags
   echo "Waiting for release workflow..."
   run_id=""
-  for i in $(seq 1 15); do
-    run_id=$(gh run list --workflow=release.yml --limit=1 --json databaseId -q '.[0].databaseId' 2>/dev/null || true)
+  for i in $(seq 1 30); do
+    run_id=$(gh run list --workflow=release.yml --branch={{version}} --limit=1 --json databaseId -q '.[0].databaseId' 2>/dev/null || true)
     [[ -n "$run_id" ]] && break
     sleep 2
   done
+  if [[ -z "$run_id" ]]; then
+    echo "Error: no release workflow run found for {{version}} after 60s"
+    exit 1
+  fi
   gh run watch "$run_id" --exit-status
   just update-release-notes {{version}}
   repo=$(gh repo view --json nameWithOwner -q .nameWithOwner)
