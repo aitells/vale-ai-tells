@@ -1,0 +1,107 @@
+text := import("text")
+math := import("math")
+
+matches := []
+
+// Split document into sections by markdown headings.
+// Measure sentence-length variance within each section independently,
+// so format diversity (bullets vs prose vs tables) across sections
+// doesn't mask uniformity within a section.
+sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+
+for section in sections {
+    section = text.trim_space(section)
+    if section == "" {
+        continue
+    }
+
+    // Strip code blocks from the section.
+    section = text.re_replace("(?s)```.*?```", section, "")
+
+    // Filter out list items, checklist items, and table rows — these are
+    // naturally uniform in length and not prose.
+    lines := text.split(section, "\n")
+    prose_lines := []
+    for line in lines {
+        trimmed := text.trim_space(line)
+        // Skip list items, checklists, table rows, and HTML comments.
+        if text.has_prefix(trimmed, "- ") || text.has_prefix(trimmed, "* ") || text.has_prefix(trimmed, "1.") {
+            continue
+        }
+        if text.has_prefix(trimmed, "- [") {
+            continue
+        }
+        if text.has_prefix(trimmed, "|") {
+            continue
+        }
+        if text.has_prefix(trimmed, "<!--") {
+            continue
+        }
+        prose_lines = append(prose_lines, line)
+    }
+    section = text.join(prose_lines, "\n")
+
+    // Collapse to single line for sentence splitting.
+    flat := text.re_replace(`\n{2,}`, section, " ")
+    flat = text.re_replace(`\s+`, flat, " ")
+    flat = text.trim_space(flat)
+
+    if flat == "" {
+        continue
+    }
+
+    sentences := text.re_split(`[.!?]+\s+`, flat)
+
+    // Count words per sentence (need at least 5 in this section).
+    lengths := []
+    for s in sentences {
+        trimmed := text.trim_space(s)
+        if trimmed != "" {
+            words := text.re_split(`\s+`, trimmed)
+            if len(words) >= 3 {
+                lengths = append(lengths, len(words))
+            }
+        }
+    }
+
+    if len(lengths) >= 5 {
+        // Compute mean.
+        sum := 0.0
+        for l in lengths {
+            sum += l
+        }
+        mean := sum / len(lengths)
+
+        // Skip sections where average sentence length is very short
+        // (< 12 words). These are likely test cases, examples, or
+        // bullet-style content, not prose worth measuring.
+        if mean >= 12 {
+            // Compute standard deviation.
+            sq_sum := 0.0
+            for l in lengths {
+                diff := l - mean
+                sq_sum += diff * diff
+            }
+            std_dev := math.sqrt(sq_sum / len(lengths))
+
+            // Coefficient of variation: std_dev / mean.
+            // Human writing typically has CV > 0.40.
+            // AI text clusters around CV 0.15-0.25.
+            // Threshold: flag when CV < 0.30.
+            cv := std_dev / mean
+            if cv < 0.30 {
+                // Find where this section starts in the original scope
+                // so we can point the match at the right location.
+                start := text.index(scope, section)
+                if start < 0 {
+                    start = 0
+                }
+                end := start + len(section)
+                if end > len(scope) {
+                    end = len(scope)
+                }
+                matches = append(matches, {begin: start, end: end})
+            }
+        }
+    }
+}

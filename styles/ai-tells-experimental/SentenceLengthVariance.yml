@@ -1,0 +1,6 @@
+---
+extends: script
+message: "AI uniformity: sentence lengths are too consistent (CV: %s). Human writing varies widely in sentence length; AI text clusters around a fixed average. Mix short and long sentences."
+level: warning
+scope: raw
+script: SentenceLengthVariance.tengo

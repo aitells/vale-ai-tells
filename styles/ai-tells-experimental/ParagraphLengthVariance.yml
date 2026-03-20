@@ -1,0 +1,6 @@
+---
+extends: script
+message: "AI uniformity: paragraph lengths are too consistent (CV: %s). Human writers vary paragraph length for pacing and emphasis; AI text defaults to uniform blocks."
+level: warning
+scope: raw
+script: ParagraphLengthVariance.tengo

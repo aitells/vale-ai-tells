@@ -1,0 +1,88 @@
+text := import("text")
+math := import("math")
+
+matches := []
+
+// Split document into sections by markdown headings.
+// Measure paragraph-length variance within each section independently.
+sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+
+for section in sections {
+    section = text.trim_space(section)
+    if section == "" {
+        continue
+    }
+
+    // Split into paragraphs within this section.
+    paragraphs := text.re_split(`\n{2,}`, section)
+
+    // Filter to prose paragraphs only.
+    lengths := []
+    in_code_block := false
+    for p in paragraphs {
+        trimmed := text.trim_space(p)
+        if trimmed == "" {
+            continue
+        }
+
+        // Track fenced code blocks.
+        if text.has_prefix(trimmed, "```") {
+            in_code_block = !in_code_block
+            continue
+        }
+        if in_code_block {
+            continue
+        }
+
+        // Skip headings, list items.
+        if text.has_prefix(trimmed, "#") {
+            continue
+        }
+        if text.has_prefix(trimmed, "- ") || text.has_prefix(trimmed, "* ") || text.has_prefix(trimmed, "1.") {
+            continue
+        }
+
+        words := text.re_split(`\s+`, trimmed)
+        // Only count multi-sentence paragraphs (>= 30 words).
+        if len(words) >= 30 {
+            lengths = append(lengths, len(words))
+        }
+    }
+
+    // Need at least 4 prose paragraphs in this section.
+    if len(lengths) >= 4 {
+        // Compute mean.
+        sum := 0.0
+        for l in lengths {
+            sum += l
+        }
+        mean := sum / len(lengths)
+
+        if mean > 0 {
+            // Compute standard deviation.
+            sq_sum := 0.0
+            for l in lengths {
+                diff := l - mean
+                sq_sum += diff * diff
+            }
+            std_dev := math.sqrt(sq_sum / len(lengths))
+
+            // Coefficient of variation: std_dev / mean.
+            // AI paragraphs tend to be 3-5 sentences, 60-100 words.
+            // Human writing varies paragraph length for pacing.
+            // Threshold: flag when CV < 0.25.
+            cv := std_dev / mean
+            if cv < 0.25 {
+                start := text.index(scope, section)
+                if start < 0 {
+                    start = 0
+                }
+                end := start + len(section)
+                if end > len(scope) {
+                    end = len(scope)
+                }
+                matches = append(matches, {begin: start, end: end})
+            }
+        }
+    }
+}

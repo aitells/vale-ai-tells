@@ -1,0 +1,69 @@
+text := import("text")
+
+matches := []
+
+// Split document into sections by markdown headings.
+// Measure sentence-start repetition within each section independently.
+sections := text.re_split(`\n#{1,6}\s+[^\n]+\n`, scope)
+
+for section in sections {
+    section = text.trim_space(section)
+    if section == "" {
+        continue
+    }
+
+    // Strip code blocks.
+    section = text.re_replace("(?s)```.*?```", section, "")
+
+    // Collapse to single line for sentence splitting.
+    flat := text.re_replace(`\n{2,}`, section, " ")
+    flat = text.re_replace(`\s+`, flat, " ")
+    flat = text.trim_space(flat)
+
+    if flat == "" {
+        continue
+    }
+
+    sentences := text.re_split(`[.!?]+\s+`, flat)
+
+    // Count first words across sentences in this section.
+    first_words := {}
+    total := 0
+    for s in sentences {
+        trimmed := text.trim_space(s)
+        if trimmed != "" {
+            words := text.re_split(`\s+`, trimmed)
+            if len(words) > 0 {
+                word := text.to_lower(words[0])
+                // Skip single-char words that naturally repeat.
+                if len(word) >= 2 {
+                    if first_words[word] == undefined {
+                        first_words[word] = 0
+                    }
+                    first_words[word] += 1
+                    total += 1
+                }
+            }
+        }
+    }
+
+    // Need at least 6 sentences in this section.
+    if total >= 6 {
+        // Flag when any starting word appears in > 30% of sentences.
+        for word, count in first_words {
+            ratio := count / total
+            if ratio > 0.30 && count >= 3 {
+                start := text.index(scope, section)
+                if start < 0 {
+                    start = 0
+                }
+                end := start + len(section)
+                if end > len(scope) {
+                    end = len(scope)
+                }
+                matches = append(matches, {begin: start, end: end})
+                break
+            }
+        }
+    }
+}
