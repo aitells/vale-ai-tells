@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.2] - 2026-03-22
+
 ### Fixed
 
 - **Vocabulary**: Renamed project vocabulary from `ai-tells` to `vale-ai-tells`
@@ -477,6 +479,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.6.2]: https://github.com/tbhb/vale-ai-tells/compare/v1.6.1...v1.6.2
 [1.6.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.6.0...v1.6.1
 [1.6.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.1...v1.6.0
 [1.5.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.5.0...v1.5.1
