@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- **Vocabulary**: Renamed project vocabulary from `ai-tells` to `vale-ai-tells`
+  to avoid confusion with the style package, and excluded it from release zips
+  since it is a project-local spelling allowlist, not something consumers need.
 - **Tengo scripts**: Strip HTML comments from prose analysis so vale
   suppression directives (`<!-- vale ... -->`) are not treated as content.
   Also filter list items and table rows from SentenceStartRepetition to
