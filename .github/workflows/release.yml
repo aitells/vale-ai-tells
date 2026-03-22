@@ -24,13 +24,14 @@ jobs:
           zip -r ../ai-tells.zip ai-tells
           zip -r ../ai-tells-commits.zip ai-tells-commits
 
-          # ai-tells-experimental includes Tengo scripts and vocabularies
-          # in config/. Vale's package sync expects a top-level dir wrapping
+          # ai-tells-experimental includes Tengo scripts in config/.
+          # Vale's package sync expects a top-level dir wrapping
           # a styles/ subtree so it can merge into StylesPath.
           cd ..
           mkdir -p pkg/ai-tells-experimental/styles
           cp -r styles/ai-tells-experimental pkg/ai-tells-experimental/styles/
-          cp -r styles/config pkg/ai-tells-experimental/styles/
+          # Copy config but exclude the project vocabulary (not part of the package)
+          rsync -a --exclude='vocabularies/' styles/config/ pkg/ai-tells-experimental/styles/config/
           cd pkg && zip -r ../ai-tells-experimental.zip ai-tells-experimental
 
       - name: Create release
