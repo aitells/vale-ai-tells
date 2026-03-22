@@ -15,8 +15,9 @@ for section in sections {
         continue
     }
 
-    // Strip code blocks (use separate variable to preserve section for position lookup).
+    // Strip code blocks and HTML comments (use separate variable to preserve section for position lookup).
     clean := text.re_replace("(?s)```.*?```", section, "")
+    clean = text.re_replace("<!--.*?-->", clean, "")
 
     // Filter out list items, checklist items, and table rows — these are
     // naturally uniform in length and not prose.

@@ -12,8 +12,27 @@ for section in sections {
         continue
     }
 
-    // Strip code blocks (use separate variable to preserve section for position lookup).
+    // Strip code blocks and HTML comments (use separate variable to preserve section for position lookup).
     clean := text.re_replace("(?s)```.*?```", section, "")
+    clean = text.re_replace("<!--.*?-->", clean, "")
+
+    // Filter out list items, table rows, and other non-prose lines.
+    lines := text.split(clean, "\n")
+    prose_lines := []
+    for line in lines {
+        trimmed := text.trim_space(line)
+        if text.has_prefix(trimmed, "- ") || text.has_prefix(trimmed, "* ") || text.has_prefix(trimmed, "1.") {
+            continue
+        }
+        if text.has_prefix(trimmed, "- [") {
+            continue
+        }
+        if text.has_prefix(trimmed, "|") {
+            continue
+        }
+        prose_lines = append(prose_lines, line)
+    }
+    clean = text.join(prose_lines, "\n")
 
     // Collapse to single line for sentence splitting.
     flat := text.re_replace(`\n{2,}`, clean, " ")

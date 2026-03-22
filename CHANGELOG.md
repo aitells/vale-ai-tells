@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- **Tengo scripts**: Strip HTML comments from prose analysis so vale
+  suppression directives (`<!-- vale ... -->`) are not treated as content.
+  Also filter list items and table rows from SentenceStartRepetition to
+  prevent structured lists from triggering false positives.
+
 ## [1.6.1] - 2026-03-20
 
 ### Fixed

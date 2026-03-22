@@ -13,8 +13,9 @@ for section in sections {
         continue
     }
 
-    // Strip code blocks before splitting into paragraphs.
+    // Strip code blocks and HTML comments before splitting into paragraphs.
     clean := text.re_replace("(?s)```.*?```", section, "")
+    clean = text.re_replace("<!--.*?-->", clean, "")
 
     // Split into paragraphs within this section.
     paragraphs := text.re_split(`\n{2,}`, clean)
