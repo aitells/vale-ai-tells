@@ -3,6 +3,17 @@ vale-ai-tells
 ai-tells
 
 # Acronyms
-PMC
+BLEU
+GPT
+ICSE
+LLM
+MDX
 MIT
+MSR
+NLP
+PMC
+PNAS
+POS
+RLHF
+ROUGE
 arXiv

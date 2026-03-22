@@ -13,20 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - **Packaging**: `ai-tells-experimental.zip` now uses Vale's nested package
   structure (`ai-tells-experimental/styles/...`) so that `vale sync` correctly
-  installs both rules and Tengo scripts. Previously, `config/scripts/` was a
-  sibling directory in the zip and Vale's package sync silently dropped it.
+  installs both rules and Tengo scripts. The old zip had `config/scripts/` as a
+  sibling directory, and Vale's package sync silently dropped it.
 
 ## [1.6.0] - 2026-03-20
 
 ### Added
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale ai-tells.FormalTransitions = NO -->
-<!-- vale ai-tells.HedgingPhrases = NO -->
-<!-- vale ai-tells.EmDashUsage = NO -->
-<!-- vale Google.EmDash = NO -->
+<!-- vale off -->
 - **ai-tells-experimental**: New opt-in style with 13 rules for detecting
-  structural AI writing patterns that Vale's regex-based rules can't catch.
+  structural AI writing patterns beyond Vale's regular expression rules.
   Uses Tengo scripts, metric formulas, capitalization, and substitution
   check types to analyze document-level properties. Shipped as a separate
   `ai-tells-experimental.zip` release artifact (includes `config/scripts/`).
@@ -40,7 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   CV falls below 0.25. Pangram Labs (2025): AI paragraphs default to uniform
   60-100 word blocks
 - **SentenceStartRepetition** (script): Flags sections where >30% of
-  sentences start with the same word (minimum 6 sentences, 3 occurrences).
+  sentences start with the same word (at least 6 sentences, 3 occurrences).
   Complements `StackedAnaphora` for non-consecutive repetition
 - **SentenceStartEntropy** (script): Measures Shannon entropy of sentence-
   starting words per section. Flags when normalized entropy falls below 0.65,
@@ -62,7 +58,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **AverageSentenceLength** (metric): Flags documents where
   `words / sentences > 25.0`
 - **LongWordDensity** (metric): Flags documents where
-  `long_words / words > 0.4`. PNAS (2025): mean word length is a top-5
+  `long_words / words > 0.4`. PNAS (2025): mean word length ranks as a top-5
   discriminating feature between AI and human text
 - **ComplexWordDensity** (metric): Flags documents where
   `complex_words / words > 0.3`. PNAS (2025): nominalizations appear at
@@ -73,11 +69,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **VocabularySwap** (substitution): Inline rewrite suggestions for 20 AI
   vocabulary words (56 swap entries covering inflected forms). Complements
   `OverusedVocabulary` by suggesting concrete alternatives
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.FormalTransitions = YES -->
-<!-- vale ai-tells.HedgingPhrases = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale Google.EmDash = YES -->
+<!-- vale on -->
 
 ### Changed
 
@@ -90,8 +82,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   to fire only at 100% repetition instead of the intended 30% threshold
 - **ContractionAvoidance**: Fixed integer division that caused false
   positives on every document with full forms regardless of contraction count.
+<!-- vale Google.We = NO -->
+<!-- vale write-good.E-Prime = NO -->
   Added 9 missing contraction/full-form pairs (you'll, you've, she's, he's,
   there's, here's, what's, who's, let's)
+<!-- vale write-good.E-Prime = YES -->
+<!-- vale Google.We = YES -->
 <!-- vale ai-tells.FormalTransitions = NO -->
 <!-- vale Google.Quotes = NO -->
 - **TransitionRepetition**: Fixed substring matching that counted "thus"
@@ -104,49 +100,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   position 0)
 - **ParagraphLengthVariance**: Fixed code-block toggle tracking that got
   permanently stuck, skipping all content after the first fenced block.
-  Now strips code blocks with regex before paragraph splitting
+  Now strips code blocks via pattern matching before paragraph splitting
 - **Script rule messages**: Removed `%s` placeholders from 4 script rule
   messages that dumped the entire matched text span instead of metric values
 - **Section splitting**: All 7 section-splitting scripts now handle headings
-  at the start of a document (previously required a leading newline)
+  at the start of a document; earlier versions needed a leading newline
 
 ## [1.5.1] - 2026-03-20
 
 ### Fixed
 
-- **Packaging**: `ai-tells-commits` is now shipped as its own zip asset
-  (`ai-tells-commits.zip`) so Vale can install it as a separate package.
-  Previously it was bundled inside `ai-tells.zip`, which Vale ignored
-  during sync because the directory name did not match the package name.
+- **Packaging**: `ai-tells-commits` now ships as its own zip asset,
+  `ai-tells-commits.zip`, so Vale can install it as a separate package.
+  Before, it shipped inside `ai-tells.zip`, which Vale ignored during
+  sync because the directory name didn't match the package name.
 
 ## [1.5.0] - 2026-03-20
 
 ### Added
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale ai-tells.EmDashUsage = NO -->
-<!-- vale ai-tells.OpeningCliches = NO -->
-<!-- vale ai-tells.VagueAttributions = NO -->
-<!-- vale ai-tells.DespiteChallenges = NO -->
-<!-- vale ai-tells.ServesAsDodge = NO -->
-<!-- vale ai-tells.ParticipialPadding = NO -->
-<!-- vale ai-tells.PromotionalPuffery = NO -->
-<!-- vale ai-tells.FalseExclusivity = NO -->
-<!-- vale ai-tells.NarrativePivots = NO -->
-<!-- vale ai-tells.SequencingMarkers = NO -->
-<!-- vale ai-tells.ContrastiveFormulas = NO -->
-<!-- vale ai-tells.MicDrop = NO -->
-<!-- vale ai-tells.RhetoricalSelfAnswer = NO -->
-<!-- vale ai-tells.AICompoundPhrases = NO -->
-<!-- vale Google.EmDash = NO -->
-<!-- vale Google.LyHyphens = NO -->
-<!-- vale proselint.CorporateSpeak = NO -->
+<!-- vale off -->
 
 - **VerbTricolon**: New rule detecting exactly-three parallel verb lists
   ("build, test, and deploy"), covering gerund, past tense, third person, modal,
   infinitive, colon-introduced, asyndetic, and subject-verb tricolon forms
 - **VerbTricolonDensity**: New occurrence-based rule flagging paragraphs with
-  multiple verb tricolons
+  two or more verb tricolons
 - **MicDrop**: New rule catching short dramatic sentences used for manufactured
   emphasis in technical prose ("It matters." "Full stop." "And it shows.")
 - **ServesAsDodge**: New rule detecting inflated copula replacements where AI
@@ -180,31 +159,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   language ("nestled in," "vibrant community," "a beacon of," "renowned for
   its," "has emerged as a," "left an indelible mark")
 
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale ai-tells.OpeningCliches = YES -->
-<!-- vale ai-tells.VagueAttributions = YES -->
-<!-- vale ai-tells.DespiteChallenges = YES -->
-<!-- vale ai-tells.ServesAsDodge = YES -->
-<!-- vale ai-tells.ParticipialPadding = YES -->
-<!-- vale ai-tells.PromotionalPuffery = YES -->
-<!-- vale ai-tells.FalseExclusivity = YES -->
-<!-- vale ai-tells.NarrativePivots = YES -->
-<!-- vale ai-tells.SequencingMarkers = YES -->
-<!-- vale ai-tells.ContrastiveFormulas = YES -->
-<!-- vale ai-tells.MicDrop = YES -->
-<!-- vale ai-tells.RhetoricalSelfAnswer = YES -->
-<!-- vale ai-tells.AICompoundPhrases = YES -->
-<!-- vale Google.EmDash = YES -->
-<!-- vale Google.LyHyphens = YES -->
-<!-- vale proselint.CorporateSpeak = YES -->
+<!-- vale on -->
 
-<!-- vale ai-tells-commits.CommitSelfReference = NO -->
-<!-- vale ai-tells-commits.CommitTrailingJustification = NO -->
-<!-- vale ai-tells-commits.CommitBuzzwords = NO -->
-<!-- vale ai-tells-commits.CommitHedging = NO -->
-<!-- vale ai-tells-commits.CommitEmoji = NO -->
-<!-- vale ai-tells-commits.CommitOverexplanation = NO -->
+<!-- vale off -->
 - **ai-tells-commits**: New opt-in style with 6 rules purpose-built for
   detecting AI tells in commit messages and PR descriptions. Shipped in the
   same release zip as `ai-tells` but in a separate `ai-tells-commits` directory
@@ -217,32 +174,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **CommitTrailingJustification**: Flags trailing clauses that restate the
   obvious: "ensuring consistency," "improving readability," "which allows for,"
   "for better maintainability," etc.
-<!-- vale ai-tells.OverusedVocabulary = NO -->
 - **CommitBuzzwords**: Flags vague adjective+noun combos characteristic of AI
   commits: "comprehensive tests," "robust error handling," "proper validation,"
   "various fixes," "relevant components," "necessary changes," etc.
-<!-- vale ai-tells.OverusedVocabulary = YES -->
 - **CommitHedging**: Flags inappropriate uncertainty for changes already made:
   "This should fix," "This may help," "seems to resolve," etc.
 - **CommitEmoji**: Flags systematic gitmoji prefixes. Emoji commit adoption
-  jumped from ~25% to ~75% of organizations between 2023-2025, driven almost
+  jumped from ~25% to ~75% of organizations in 2023–2025, driven almost
   entirely by AI commit tools.
 - **CommitOverexplanation**: Flags commit-specific filler: "As part of this
   change," "The purpose of this commit," "Summary of changes," "The following
   changes were made," etc.
-<!-- vale ai-tells-commits.CommitSelfReference = YES -->
-<!-- vale ai-tells-commits.CommitTrailingJustification = YES -->
-<!-- vale ai-tells-commits.CommitBuzzwords = YES -->
-<!-- vale ai-tells-commits.CommitHedging = YES -->
-<!-- vale ai-tells-commits.CommitEmoji = YES -->
-<!-- vale ai-tells-commits.CommitOverexplanation = YES -->
+<!-- vale on -->
 
 ### Changed
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale ai-tells.AICompoundPhrases = NO -->
-<!-- vale ai-tells.OpeningCliches = NO -->
-<!-- vale ai-tells.PromotionalPuffery = NO -->
+<!-- vale off -->
 - **OverusedVocabulary**: Added 41 words from the PNAS study with 80-162x
   overuse rates: camaraderie (162x), palpable (145x), grapple (131x),
   fleeting (124x), ignite (122x), amidst (100x), unspoken (102x), solace,
@@ -255,16 +202,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   but because Y" causal variant patterns
 - **OpeningCliches**: Added 13 patterns including "In a world where,"
   "As technology continues to evolve," "We live in an era," and variants
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.AICompoundPhrases = YES -->
-<!-- vale ai-tells.OpeningCliches = YES -->
-<!-- vale ai-tells.PromotionalPuffery = YES -->
+<!-- vale on -->
 - **StackedAnaphora**: Expanded with two-item "No/Not" anaphora,
   comma-separated forms, and quantifier-word anaphora patterns
 - **README**: Updated rule table to list all 41 rules; added "Known patterns
   not covered" subsection documenting 8 patterns that require analysis beyond
   Vale's capabilities; expanded Sources from 4 entries to 13 with structured
-  bibliography (academic research, pattern catalogs, practitioner analysis)
+  bibliography covering academic research, pattern catalogs, and practitioner analysis
 - **Release workflow**: `ai-tells.zip` now includes both `ai-tells/` and
   `ai-tells-commits/` directories
 - **.vale.ini**: `COMMIT_EDITMSG` section now uses both `ai-tells` and
@@ -277,21 +221,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+<!-- vale off -->
 - **UnpackExplore**: New rule flagging AI explainer announcements. AI's habit of
   announcing what it is about to explain rather than just explaining it: phrases
   starting with "Let me" or "Let us" followed by unpack, break down, dive into,
   walk through, dig into, examine, explore, and similar verbs
-<!-- vale ai-tells.ListIntroductions = NO -->
+<!-- vale on -->
+<!-- vale off -->
 - **ListIntroductions**: New rule catching AI list and summary announcements:
   "Below you'll find," "Here's a breakdown of," "Here's an overview of,"
   "Here is everything you need to know," "The following sections will," and
   variants
-<!-- vale ai-tells.ListIntroductions = YES -->
-<!-- vale ai-tells.AbsoluteAssertions = NO -->
+<!-- vale on -->
+<!-- vale off -->
 - **AbsoluteAssertions**: New rule flagging AI overconfidence assertions:
   "the only way to," "the only real solution," "the single most important,"
   "make no mistake," "there is no denying," "above all else," and variants
-<!-- vale ai-tells.AbsoluteAssertions = YES -->
+<!-- vale on -->
 <!-- vale ai-tells.StructureAnnouncements = NO -->
 - **StructureAnnouncements**: New rule catching narrated structure and recap
   phrases: "key takeaway," "quick recap," "to recap," "a quick summary,"
@@ -321,70 +267,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-<!-- vale ai-tells.UrgencyInflation = NO -->
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale ai-tells.OpeningCliches = NO -->
+<!-- vale off -->
 - **UrgencyInflation**: New rule catching false urgency and importance assertions:
   "cannot be overstated," "more important than ever," "has never been more
   critical," "the stakes have never been higher," "at a critical juncture,"
   "in an increasingly connected world," and variants
-<!-- vale ai-tells.UrgencyInflation = YES -->
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.OpeningCliches = YES -->
+<!-- vale on -->
 
 ### Changed
 
-<!-- vale ai-tells.AICompoundPhrases = NO -->
+<!-- vale off -->
 - **AICompoundPhrases**: Added "takes center stage," "paints a picture of,"
   "is not without its challenges," "whether we like it or not," and inflected forms
-<!-- vale ai-tells.AICompoundPhrases = YES -->
-<!-- vale ai-tells.HedgingPhrases = NO -->
+<!-- vale on -->
+<!-- vale off -->
 - **HedgingPhrases**: Added "One thing is clear," "raises important questions,"
   "begs the question," "forces us to consider," "invites us to reflect,"
   "calls into question," "reminds us that," and related patterns
-<!-- vale ai-tells.HedgingPhrases = YES -->
+<!-- vale on -->
 
 ## [1.2.0] - 2026-02-17
 
 ### Added
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale Google.EmDash = NO -->
-<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale off -->
 - **OverusedVocabularyVerbs**: New sequence-based rule constraining AI vocabulary
   tokens (leverage, navigate, showcase, harness, embark, foster, spearhead) to
   verb uses only — "financial leverage" and "climbing harness" no longer trigger
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale Google.EmDash = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
+<!-- vale on -->
 - **AIAdjectiveNounPairs**: New sequence-based rule catching AI-characteristic
   adjectives immediately preceding any noun. Currently at `warning` level pending
-  false positive calibration on real prose; will be promoted to `error` once
-  the false positive rate is acceptable
+  false positive calibration on real prose. Promotion to `error` follows once
+  the false positive rate drops enough
 
 ### Changed
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale Google.EmDash = NO -->
-<!-- vale ai-tells.EmDashUsage = NO -->
+<!-- vale off -->
 - **OverusedVocabulary**: Removed leverage, navigate, showcase, harness, embark,
-  foster, and spearhead (and inflected forms) — now handled with POS precision by
+  foster, and spearhead plus inflected forms — now handled with POS precision by
   OverusedVocabularyVerbs
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale Google.EmDash = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale ai-tells.HedgingPhrases = NO -->
-<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale on -->
+<!-- vale off -->
 - **HedgingPhrases**: Expanded with "It is essential/crucial/critical/necessary
   to [verb]" and "It is worth [verb]ing that" pattern families
-<!-- vale ai-tells.HedgingPhrases = YES -->
-<!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale on -->
+<!-- vale Google.Parens = NO -->
 - **Rule files**: Added YAML document-start markers (`---`) to all rule files for yamllint strict-mode compliance
+<!-- vale Google.Parens = YES -->
 
 ## [1.1.0] - 2026-02-17
 
 ### Added
 
+<!-- vale off -->
 - **Commit-message linting**: Vale now runs on `COMMIT_EDITMSG` via a
   `commit-msg` pre-commit hook, catching AI-generated patterns before they land
   in history. The hook applies only `ai-tells` rules (not Google/write-good/
@@ -396,15 +331,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (yamllint), spelling (codespell), Markdown linting (rumdl), and prose
   linting (vale), plus standard file hygiene hooks
 - **`.yamllint.yaml`**: yamllint configuration extending default rules with
-  `line-length` disabled (Vale rule files contain arbitrarily long regex tokens)
+  `line-length` turned off (Vale rule files contain arbitrarily long regular expression tokens)
 - **CLAUDE.md**: Development workflow instructions for first-time setup,
   running linters, and using pre-commit hooks
-
-<!-- vale Google.EmDash = NO -->
-<!-- vale ai-tells.EmDashUsage = NO -->
-<!-- vale ai-tells.ClosingPleasantries = NO -->
-<!-- vale ai-tells.RestatementMarkers = NO -->
-<!-- vale ai-tells.SelfReference = NO -->
 - **ClosingPleasantries**: New rule catching AI sign-off language — "I hope
   this helps," "Feel free to ask," "Don't hesitate to reach out," "Happy to
   help," "Best of luck," and similar pleasantries that appear at the end of
@@ -413,36 +342,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   words," "Simply put," "To be more specific," "What I mean is," etc.
 - **SelfReference**: New rule detecting self-referential cross-references —
   "as mentioned above," "as noted earlier," "as we'll explore," "recall that," etc.
-<!-- vale Google.EmDash = YES -->
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale ai-tells.ClosingPleasantries = YES -->
-<!-- vale ai-tells.RestatementMarkers = YES -->
-<!-- vale ai-tells.SelfReference = YES -->
+<!-- vale on -->
 
 ### Changed
 
-<!-- vale ai-tells.OverusedVocabulary = NO -->
+<!-- vale off -->
 - **OverusedVocabulary**: Added comprehensive, innovative, notable,
   sophisticated, unprecedented, remarkable, exceptional, significant, profound,
   scalable, versatile, dynamic, crucial, vital, foundational, state-of-the-art,
   best-in-class, world-class, next-generation, next-level (and inflected forms)
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.OpeningCliches = NO -->
 - **OpeningCliches**: Added "Without further ado," "Gone are the days,"
   "Whether you're," "You might be wondering," "Chances are," "Look no further,"
   "You've come to the right place," "Ready to dive in," and variants
-<!-- vale ai-tells.OpeningCliches = YES -->
-<!-- vale ai-tells.FormalTransitions = NO -->
-<!-- vale proselint.Cliches = NO -->
 - **FormalTransitions**: Added "What's more," "Case in point," "Not to mention,"
   "Along the same lines," "In the same vein," "Better yet," "To top it off,"
   "On that note," "Given the above," "In light of this/that," "That is to say,"
   and more
-<!-- vale ai-tells.FormalTransitions = YES -->
-<!-- vale proselint.Cliches = YES -->
+<!-- vale on -->
 - **Metacommentary**: Expanded with more patterns
 - **README**: Updated rule count to 22, refreshed rule table with all current
-  rules, removed stale warning/suggestion level split (all rules are error level)
+  rules, removed stale warning/suggestion level split since all rules now use error level
 - **test-document.md**: Unwrapped hard-wrapped paragraphs; added test cases for
   all new and expanded rules
 
@@ -451,8 +370,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **BREAKING**: All 19 rules now default to `error` level. Sorry not sorry.
-  Override in your `.vale.ini` if this is too spicy for your workflow.
-- Updated CLAUDE.md to reflect the all-errors policy and correct rule count (19)
+  Override in your `.vale.ini` if that feels too spicy for your workflow.
+- Updated CLAUDE.md to reflect the all-errors policy and correct rule count of 19
 
 ## [0.6.0] - 2026-02-01
 
@@ -478,7 +397,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+<!-- vale write-good.E-Prime = NO -->
 - Revelation patterns for "The [adjective] [noun] is/are" constructions
+<!-- vale write-good.E-Prime = YES -->
 
 ### Changed
 
@@ -493,7 +414,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
-- Rewrote error messages to be immediately usable: each one explains why a
+- Rewrote error messages for immediate usability: each one explains why a
   pattern triggers and suggests alternatives.
 
 ## [0.3.0] - 2025-12-02
@@ -523,7 +444,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release with 11 rules for detecting AI writing patterns.
 
-### Rules (warning level)
+### Rules at warning level
 
 <!-- vale off -->
 
@@ -536,13 +457,13 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **SycophancyMarkers**: Excessive agreement and validation phrases
 - **AICompoundPhrases**: Compound constructions favored by AI models
 
-### Rules (suggestion level)
+### Rules at suggestion level
 
 - **HedgingPhrases**: Qualification language that softens claims
 - **ConclusionMarkers**: Formulaic conclusion transitions
 - **FormalTransitions**: Overly formal transition phrases
 - **FalseBalance**: Constructions that present artificial balance
-- **EmDashUsage**: Frequent em-dash usage (a stylistic tell)
+- **EmDashUsage**: Frequent em-dash usage, a stylistic tell
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 

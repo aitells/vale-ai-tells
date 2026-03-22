@@ -1,7 +1,7 @@
 ---
 extends: default
 
-ignore-from-file: [.gitignore]
+ignore-from-file: [.gitignore, .yamllintignore] # cspell:disable-line
 
 rules:
   line-length: disable

@@ -4,9 +4,15 @@ styles/Google/
 styles/proselint/
 styles/write-good/
 
+# Linter caches
+.rumdl_cache/
+
 # Git worktrees
 .worktrees/
 .claude/worktrees/
+
+# Claude Code
+.claude/settings.local.json
 
 # Temporary files
 tmp/

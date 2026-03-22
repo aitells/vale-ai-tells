@@ -2,7 +2,7 @@
 
 A [Vale](https://vale.sh) package for detecting linguistic patterns commonly associated with AI-generated prose. Based on 2024-2025 research into vocabulary fingerprints and structural tells.
 
-This package is designed for **technical documentation**, where clarity and directness matter more than style. It's less useful for creative writing, marketing copy, or other contexts where some of these patterns may be intentional choices.
+This package targets **technical documentation**, where clarity and directness matter more than style. Less useful for creative writing, marketing copy, or other contexts where some of these patterns may represent intentional choices.
 
 <!-- vale proselint.Annotations = NO -->
 > [!NOTE]
@@ -35,8 +35,10 @@ vale sync
 ## Linting commit messages
 
 <!-- vale ai-tells.OverusedVocabulary = NO -->
-AI-generated commit messages carry the same fingerprints as AI-generated prose, plus a few tells of their own: self-referential preambles ("This commit adds\u2026"), trailing justification clauses ("\u2026ensuring consistency"), buzzword adjective combos ("comprehensive tests," "robust error handling"), and systematic gitmoji.
+<!-- vale ai-tells.AIAdjectiveNounPairs = NO -->
+AI-generated commit messages carry the same fingerprints as AI-generated prose, plus a few tells of their own: self-referential preambles like "This commit adds\u2026," trailing justification clauses like "\u2026ensuring consistency," buzzword adjective combos like "comprehensive tests" and "robust error handling," and gitmoji patterns.
 <!-- vale ai-tells.OverusedVocabulary = YES -->
+<!-- vale ai-tells.AIAdjectiveNounPairs = YES -->
 
 The `ai-tells-commits` style provides 6 rules purpose-built for commit messages, separate from the prose rules so you can opt in without pulling them into your docs.
 
@@ -116,7 +118,7 @@ vale (commit message)....................................................Failed
 
 ### Suppressing noisy rules
 
-Some prose rules are less relevant for commit messages. If they generate noise, suppress them in your `.vale.ini`:
+Some prose rules matter less for commit messages. If they generate noise, suppress them in your `.vale.ini`:
 
 ```ini
 [{COMMIT_EDITMSG,.git/COMMIT_EDITMSG}]
@@ -200,11 +202,11 @@ Quick substitution reference for the most common patterns:
 
 ## Using with AI agents
 
-Each error message gives AI agents (or humans) specific, usable guidance to fix issues immediately. Messages include:
+Each error message gives AI agents, and humans alike, specific, usable guidance to fix issues immediately. Messages include:
 
-- A short prefix for quick identification (`AI hedge:`, `AI filler:`, etc.)
+- A short prefix for quick identification: `AI hedge:`, `AI filler:`, and similar labels
 - The matched text
-- A concrete action (delete, rewrite, replace, use simpler word)
+- A concrete action: delete, rewrite, replace, or use a simpler word
 
 Example workflow with an AI coding assistant:
 
@@ -250,7 +252,7 @@ ai-tells.HedgingPhrases = error
 
 ## Proactive prevention with AI agent instructions
 
-If you're using an AI coding assistant, add instructions to your project's `CLAUDE.md`, `AGENTS.md`, or similar file to prevent Vale violations before they happen:
+If you use an AI coding assistant, add instructions to your project's `CLAUDE.md`, `AGENTS.md`, or similar file to prevent Vale violations before they happen:
 
 ```markdown
 ## Writing style
@@ -285,16 +287,16 @@ This package catches lexical and phrasal patterns. It can't detect:
 <!-- vale Google.EmDash = NO -->
 <!-- vale Google.Latin = NO -->
 
-These patterns are documented in AI writing research but require analysis beyond Vale's token-matching capabilities:
+AI writing research documents these patterns, but they need analysis beyond Vale's token-matching capabilities:
 
-- **Sentence-length uniformity:** AI produces sentences of remarkably consistent length (~27 words), while human writing varies widely. Requires statistical analysis across the document.
-- **Paragraph-length uniformity:** AI paragraphs tend to be roughly the same size (3-5 sentences, ~60-100 words each). Requires document-level measurement.
+- **Sentence-length uniformity:** AI produces sentences of near-uniform length, roughly 27 words, while human writing varies widely. Requires statistical analysis across the document.
+- **Paragraph-length uniformity:** AI paragraphs tend toward uniform size, typically 3-5 sentences and 60-100 words each. Requires document-level measurement.
 - **Dead metaphor repetition:** AI latches onto a single metaphor and repeats it 5-10 times throughout a piece. Requires tracking metaphor usage across the document.
 - **One-point dilution:** A single argument restated 10 ways across thousands of words — circular repetition disguised as comprehensiveness. Requires semantic analysis.
-- **Elegant variation:** AI's repetition-penalty pushes it to substitute synonyms unnaturally (e.g., cycling through "protagonist," "key player," "eponymous character" instead of reusing a name). Requires NLP-level analysis.
+- **Elegant variation:** AI's repetition-penalty pushes it to substitute synonyms unnaturally, cycling through "protagonist," "key player," "eponymous character" instead of reusing a name. Requires NLP-level analysis.
 - **Content duplication:** Repeating entire sections or paragraphs verbatim within the same piece. Requires document-level diff analysis.
-- **Unnecessary inline definitions:** AI habitually inserts appositive definitions ("X, a [definition], does Y") even when the audience already knows the term. Too many false positives for token matching.
-- **Invented concept labels:** AI appends abstract problem-nouns ("paradox," "trap," "creep," "divide") to domain words and uses them as if they're established terms. Too many legitimate uses for token matching.
+- **Unnecessary inline definitions:** AI habitually inserts appositive definitions like "X, a [definition], does Y" even when the audience already knows the term. Too many false positives for token matching.
+- **Invented concept labels:** AI appends abstract problem-nouns like "paradox," "trap," "creep," and "divide" to domain words and treats them as established terms. Too many legitimate uses for token matching.
 
 <!-- vale ai-tells.OverusedVocabulary = YES -->
 <!-- vale ai-tells.EmDashUsage = YES -->
@@ -306,7 +308,7 @@ For fuller detection, combine this package with statistical analysis tools.
 
 ### Supplementing with AI agent instructions
 
-Vale can't detect structural patterns like sentence uniformity or paragraph rhythm. If you're using an AI coding assistant, add instructions to your project's `CLAUDE.md`, `AGENTS.md`, or similar file to cover what Vale misses:
+Vale can't detect structural patterns like sentence uniformity or paragraph rhythm. If you use an AI coding assistant, add instructions to your project's `CLAUDE.md`, `AGENTS.md`, or similar file to cover what Vale misses:
 
 ```markdown
 ## Writing style
@@ -326,13 +328,9 @@ This covers structural patterns that lexical analysis can't catch.
 
 ## Sources
 
-<!-- vale ai-tells.EmDashUsage = NO -->
-<!-- vale ai-tells.OverusedVocabulary = NO -->
-<!-- vale ai-tells.VerbTricolon = NO -->
-<!-- vale Google.EmDash = NO -->
-<!-- vale write-good.So = NO -->
-
 Based on academic research, practitioner analysis, and community-maintained catalogs of AI writing patterns:
+
+<!-- vale off -->
 
 ### Academic research
 
@@ -361,19 +359,17 @@ Based on academic research, practitioner analysis, and community-maintained cata
 - [Fingerprinting AI Coding Agents on GitHub](https://arxiv.org/abs/2601.17406) (MSR, 2026) — Analyzes 33,580 PRs from five AI agents; achieves 97.2% F1-score identifying which agent wrote a PR, with commit message characteristics (multiline ratio, message length) as dominant features.
 - [Analyzing Message-Code Inconsistency in AI Coding Agent-Authored Pull Requests](https://arxiv.org/abs/2601.04886) (arXiv, 2025) — Finds 1.7% of 23,247 agentic PRs have high message-code inconsistency; 45.4% of inconsistencies are "descriptions claim unimplemented changes."
 - [Lore: Repurposing Git Commit Messages as a Structured Knowledge Protocol](https://arxiv.org/abs/2603.15566) (arXiv, 2026) — Introduces the "Decision Shadow" concept: AI commit tools describe what changed, not why, producing "lossy compression of information already present."
-- [An Empirical Study on Commit Message Generation using LLMs](https://arxiv.org/abs/2502.18904) (ICSE, 2025) — LLM-generated messages were preferred over human ones; human messages favored only 13.1% of the time. Traditional metrics (BLEU, ROUGE-L) correlate poorly with human judgment.
-- [The Emoji Commit Index](https://www.allstacks.com/blog/the-emoji-commit-index) (Allstacks, 2025) — Documents emoji adoption in commits jumping from ~25% to ~75% of organizations between 2023-2025, driven by AI commit tools.
-- [peakoss/anti-slop](https://github.com/peakoss/anti-slop) (GitHub Action) — 31 checks derived from 130+ manually reviewed AI slop PRs on large open-source projects; enforces max commit message length, max emoji count, and max code references.
+- [An Empirical Study on Commit Message Generation using LLMs](https://arxiv.org/abs/2502.18904) (ICSE, 2025) — Evaluators preferred LLM-generated messages over human ones, favoring human messages only 13.1% of the time. Traditional metrics (BLEU, ROUGE-L) correlate poorly with human judgment.
+- [The Emoji Commit Index](https://www.allstacks.com/blog/the-emoji-commit-index) (Allstacks, 2025) — Documents emoji adoption in commits jumping from ~25% to ~75% of organizations in 2023–2025, driven by AI commit tools.
+- [peakoss/anti-slop](https://github.com/peakoss/anti-slop) (GitHub Action) — 31 checks derived from 130+ manually reviewed AI slop PRs on large open source projects; enforces max commit message length, max emoji count, and max code references.
 
-<!-- vale ai-tells.EmDashUsage = YES -->
-<!-- vale ai-tells.OverusedVocabulary = YES -->
-<!-- vale ai-tells.VerbTricolon = YES -->
-<!-- vale Google.EmDash = YES -->
-<!-- vale write-good.So = YES -->
+<!-- vale on -->
 
 ## Acknowledgments
 
-Yes, Claude wrote most of this repository. It promised me all of these rules actually work because it "knows its own tendencies."
+<!-- vale Google.FirstPerson = NO -->
+Yes, Claude wrote most of this repository. It promised me these rules actually work because it "knows its own tendencies."
+<!-- vale Google.FirstPerson = YES -->
 
 ## Citation
 

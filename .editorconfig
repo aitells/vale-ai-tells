@@ -8,8 +8,30 @@ indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
+[*.{json,jsonc}]
+indent_style = space
+indent_size = 2
+
+[*.{yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[*.toml]
+indent_style = space
+indent_size = 2
+
 [*.md]
 trim_trailing_whitespace = false
+max_line_length = off
+
+[*.sh]
+indent_style = space
+indent_size = 2
+
+[*.{ini,cfg,conf}]
+indent_style = space
+indent_size = 2
 
 [Justfile]
-indent_style = tab
+indent_style = space
+indent_size = 2

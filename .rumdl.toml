@@ -1,5 +1,22 @@
 [global]
-# MD013 (line length) is disabled because the README and CHANGELOG contain
-# intentionally long lines: table cells with rule descriptions, code blocks,
-# and inline examples. Same rationale as disabling line-length in .yamllint.yaml.
-disable = ["MD013"]
+disable = [
+  "MD013", # Line length
+  "MD033", # Inline HTML
+]
+respect_gitignore = true
+exclude = [".git", ".vale", "tmp"]
+
+[MD003]
+style = "atx"
+
+[MD004]
+style = "dash"
+
+[MD025]
+front_matter_title = ""
+
+[MD046]
+style = "fenced"
+
+[MD048]
+style = "backtick"

@@ -1,0 +1,16 @@
+tag_prefix = "v"
+
+[changelog]
+path = "CHANGELOG.md"
+template = "remote"
+remote = "github.com"
+repository = "vale-ai-tells"
+owner = "aitells"
+authors = [
+  { username = "aitellsbot", signature = "AI Tells Bot" },
+  { username = "tbhb", signature = "Tony Burns" },
+]
+
+[commit_types]
+chore = { omit_from_changelog = true }
+test = { omit_from_changelog = true }
