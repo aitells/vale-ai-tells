@@ -17,3 +17,8 @@ POS
 RLHF
 ROUGE
 arXiv
+
+# Other
+burstiness
+gitmoji
+stylometric

@@ -36,7 +36,9 @@ vale sync
 
 <!-- vale ai-tells.OverusedVocabulary = NO -->
 <!-- vale ai-tells.AIAdjectiveNounPairs = NO -->
+<!-- vale ai-tells-experimental.VocabularySwap = NO -->
 AI-generated commit messages carry the same fingerprints as AI-generated prose, plus a few tells of their own: self-referential preambles like "This commit adds\u2026," trailing justification clauses like "\u2026ensuring consistency," buzzword adjective combos like "comprehensive tests" and "robust error handling," and gitmoji patterns.
+<!-- vale ai-tells-experimental.VocabularySwap = YES -->
 <!-- vale ai-tells.OverusedVocabulary = YES -->
 <!-- vale ai-tells.AIAdjectiveNounPairs = YES -->
 
@@ -250,7 +252,7 @@ BasedOnStyles = ai-tells
 ai-tells.HedgingPhrases = error
 ```
 
-## Proactive prevention with AI agent instructions
+## Early prevention with AI agent instructions
 
 If you use an AI coding assistant, add instructions to your project's `CLAUDE.md`, `AGENTS.md`, or similar file to prevent Vale violations before they happen:
 
@@ -365,11 +367,11 @@ Based on academic research, practitioner analysis, and community-maintained cata
 
 <!-- vale on -->
 
-## Acknowledgments
+## AI disclosure
 
-<!-- vale Google.FirstPerson = NO -->
-Yes, Claude wrote most of this repository. It promised me these rules actually work because it "knows its own tendencies."
-<!-- vale Google.FirstPerson = YES -->
+Claude wrote the majority of rule definitions, documentation, and test cases in this repository. ChatGPT and Gemini generated text samples for cross-model validation. A human designed the rule categories, severity assignments, quality criteria, and the research-to-rule pipeline. A human validated every AI-generated rule against test documents containing known patterns.
+
+The CITATION.cff lists the human author. AI tools are not listed as authors, consistent with [Committee for Publication Ethics (COPE) guidance](https://publicationethics.org/guidance/cope-position/authorship-and-ai-tools) on AI and authorship.
 
 ## Citation
 
