@@ -120,3 +120,36 @@ tokens:
   # ---- "Full stop" / "Period" as emphasis ----
   - "Full stop\\."
   - "[Pp]eriod\\."
+
+  # ---- Contrastive fragment mic-drops ----
+  # "X, not Y." — contrastive fragment with no verb
+  # "Dense, not cramped." "Fast, not sloppy." "Opinionated, not rigid."
+  - "[A-Z][a-z]+, not [a-z]+\\."
+  - "[A-Z][a-z]+, never [a-z]+\\."
+
+  # "X over Y." — preference fragment
+  # "Clarity over cleverness." "Depth over breadth."
+  - "[A-Z][a-z]+ over [a-z]+\\."
+
+  # "X, not Y, not Z." — extended contrastive
+  - "[A-Z][a-z]+, not [a-z]+, not [a-z]+\\."
+
+  # "X, then Y." — sequencing fragment
+  # "Scannable, then readable." "Simple, then fast."
+  - "[A-Z][a-z]+, then [a-z]+\\."
+
+  # "X first, Y second." — priority fragment
+  - "[A-Z][a-z]+ first, [a-z]+ second\\."
+  - "[A-Z][a-z]+ first, [a-z]+ never\\."
+
+  # "Verb in the noun." — imperative mic-drop
+  # "Invest in the system." "Trust the process." "Ship the thing."
+  - "(?:Invest|Trust|Embrace|Ship|Build|Start|Keep|Focus|Lean|Bet|Play|Own|Do) (?:in |on |into )?the [a-z]+\\."
+
+  # "[Noun] is a [noun]." — categorical declaration as closer
+  # "Density is a feature." "Complexity is a choice."
+  - "[A-Z][a-z]+ is an? [a-z]+\\."
+
+  # "the X, not the Y" — tagline gloss after a colon
+  # "Implicit positioning: the reference shelf, not the opinion column."
+  - ": the [^,]+, not the [^.]+"

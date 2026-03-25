@@ -120,3 +120,69 @@ tokens:
 
   # "Not because X, but because Y" causal variant
   - "[Nn]ot because [^,;—:]+,? but because [^.!?]+"
+
+  # === Plural subject negation-correction ===
+
+  # "These aren't X. They're Y." — period-separated
+  - "[Tt]hese aren'?t [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hose aren'?t [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hese are not [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hose are not [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hese are not [^.!?]+\\. [Tt]hey are [^.!?]+"
+  - "[Tt]hose are not [^.!?]+\\. [Tt]hey are [^.!?]+"
+
+  # With modifiers
+  - "[Tt]hese aren'?t just [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hese aren'?t merely [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[Tt]hese aren'?t simply [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+
+  # Semicolon/em-dash-joined
+  - "[Tt]hese aren'?t [^;,—:]+[;,—:] they'?re [^.!?]+"
+  - "[Tt]hose aren'?t [^;,—:]+[;,—:] they'?re [^.!?]+"
+  - "[Tt]hese are not [^;,—:]+[;,—:] they'?re [^.!?]+"
+  - "[Tt]hose are not [^;,—:]+[;,—:] they'?re [^.!?]+"
+
+  # Generic "[Noun] aren't X. They're Y." catch-all
+  - "[A-Z][a-z]+ aren'?t [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[A-Z][a-z]+ are not [^.!?]+\\. [Tt]hey'?re [^.!?]+"
+  - "[A-Z][a-z]+ are not [^.!?]+\\. [Tt]hey are [^.!?]+"
+
+  # === "Doesn't mean X. It means Y." ===
+
+  # Period-separated
+  - "[Tt]his doesn'?t mean [^.!?]+\\. [Ii]t means [^.!?]+"
+  - "[Tt]hat doesn'?t mean [^.!?]+\\. [Ii]t means [^.!?]+"
+  - "[Tt]his does not mean [^.!?]+\\. [Ii]t means [^.!?]+"
+  - "[Tt]hat does not mean [^.!?]+\\. [Ii]t means [^.!?]+"
+
+  # Semicolon/em-dash-joined
+  - "[Tt]his doesn'?t mean [^;,—:]+[;,—:] it means [^.!?]+"
+  - "[Tt]hat doesn'?t mean [^;,—:]+[;,—:] it means [^.!?]+"
+
+  # Generic "[Noun] doesn't mean X. It means Y."
+  - "[A-Z][a-z]+ doesn'?t mean [^.!?]+\\. [Ii]t means [^.!?]+"
+  - "[A-Z][a-z]+ does not mean [^.!?]+\\. [Ii]t means [^.!?]+"
+
+  # === Multi-word subject "isn't X. It's Y." ===
+  # Catches "The colophon isn't a disclaimer. It's a feature."
+  # The single-word "[Noun] isn't X. It's Y." patterns above only match
+  # single capitalized-word subjects.
+
+  # "The [noun] isn't X. It's Y."
+  - "[Tt]he [a-z]+ isn'?t [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "[Tt]he [a-z]+ is not [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "[Tt]he [a-z]+ isn'?t [^.!?]+\\. [Ii]t is [^.!?]+"
+
+  # "A/An [noun] isn't X. It's Y."
+  - "[Aa]n? [a-z]+ isn'?t [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "[Aa]n? [a-z]+ is not [^.!?]+\\. [Ii]t'?s [^.!?]+"
+
+  # "Our/Your/Their [noun] isn't X. It's Y."
+  - "(?:Our|Your|Their|Its) [a-z]+ isn'?t [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "(?:Our|Your|Their|Its) [a-z]+ is not [^.!?]+\\. [Ii]t'?s [^.!?]+"
+
+  # Multi-word/acronym subjects — catch-all with "isn't...It's" anchor
+  # "WCAG 2.1 AA isn't a checkbox. It's a constraint."
+  - "[^.!?]+ isn'?t [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "[^.!?]+ is not [^.!?]+\\. [Ii]t'?s [^.!?]+"
+  - "[^.!?]+ isn'?t [^.!?]+\\. [Ii]t is [^.!?]+"

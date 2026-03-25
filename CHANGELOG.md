@@ -7,6 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **AnthropomorphicJustification**: New rule for treating abstractions like
+  employees under performance review: "earns its keep," "does the heavy
+  lifting," "pulls its weight," "pays for itself," "speaks for itself," etc.
+- **ParallelStaccato**: New rule for back-to-back minimal sentences with
+  parallel structure ("Engineers build. Managers ship.") and solo two-word
+  staccato sentences ("Complexity scales.").
+- **MicDropHeadings**: New rule (scoped to headings) for tagline-style headings:
+  "Clarity, not cleverness," "Simple, then fast," "Speed over correctness,"
+  "X first, Y second," etc.
+
+### Changed
+
+- **ContrastiveFormulas**: Added plural subject negation-correction patterns
+  ("These aren't X. They're Y."), "doesn't mean X / it means Y" patterns, and
+  multi-word subject patterns ("The colophon isn't a disclaimer. It's a
+  feature.") that the existing single-word subject rules didn't cover.
+- **MicDrop**: Added contrastive fragments ("Dense, not cramped."), preference
+  fragments ("Clarity over cleverness."), sequencing fragments ("Scannable,
+  then readable."), imperative mic-drops ("Trust the process."), categorical
+  declarations ("Density is a feature."), and colon-tagged tagline glosses
+  (": the reference shelf, not the opinion column.").
+
+<!-- vale on -->
+
 ## [1.6.2] - 2026-03-22
 
 ### Fixed

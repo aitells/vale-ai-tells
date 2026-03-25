@@ -18,7 +18,20 @@ RLHF
 ROUGE
 arXiv
 
-# Other
+# Technical terms
+allowlist
 burstiness
 gitmoji
+lookups
+[Mm]etacommentary
+proselint
 stylometric
+substring
+[Tt]engo
+yamllint
+
+# Common words
+repo
+
+# File names
+Justfile

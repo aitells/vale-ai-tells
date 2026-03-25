@@ -18,6 +18,7 @@
   ],
   "words": [
     "agentic",
+    "aren",
     "aitells",
     "aitellsbot",
     "Allstacks",
@@ -29,7 +30,10 @@
     "cocogitto",
     "codespell",
     "coreference",
+    "doesn",
     "dunder",
+    "etacommentary",
+    "engo",
     "EDITMSG",
     "endeavours",
     "gitmoji",
@@ -57,6 +61,7 @@
     "Overexplanation",
     "peakoss",
     "pipefail",
+    "punche",
     "pyproject",
     "PNAS",
     "prek",
@@ -77,6 +82,7 @@
     "verbing",
     "worktree",
     "worktrees",
+    "WCAG",
     "yamllintignore"
   ]
 }

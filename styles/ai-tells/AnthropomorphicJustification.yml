@@ -1,0 +1,53 @@
+---
+extends: existence
+message: >-
+  AI cliché: '%s'.
+  Treating abstractions like employees under performance review
+  is a common AI pattern. Say what you mean directly.
+level: error
+ignorecase: true
+tokens:
+  # "Earning" family
+  - earns? its keep
+  - earns? its place
+  - earns? its spot
+  - earned its keep
+  - earned its place
+  - earned its spot
+  - more than earns?
+
+  # "Paying" family
+  - pays? for itself
+  - pays? dividends
+  - more than pays? for itself
+  - paid for itself
+  - paid dividends
+
+  # "Weight" family
+  - pulls? its weight
+  - carries? its weight
+  - carrying its weight
+  - pulling its weight
+  - punche?s? above its weight
+  - punching above its weight
+  - worth its weight
+
+  # "Lifting" family
+  - does? the heavy lifting
+  - does? a lot of heavy lifting
+  - doing the heavy lifting
+  - doing a lot of heavy lifting
+  - does? the legwork
+  - doing the legwork
+  - do the heavy lifting
+
+  # "Standing" family
+  - stands? on its own
+  - standing on its own
+  - holds? its own
+  - holding its own
+  - speaks? for itself
+  - speaking for itself
+  - justifies? its existence
+  - justify its existence
+  - justifying its existence
