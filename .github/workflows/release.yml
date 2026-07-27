@@ -30,8 +30,10 @@ jobs:
           cd ..
           mkdir -p pkg/ai-tells-experimental/styles
           cp -r styles/ai-tells-experimental pkg/ai-tells-experimental/styles/
-          # Copy config but exclude the project vocabulary (not part of the package)
-          rsync -a --exclude='vocabularies/' styles/config/ pkg/ai-tells-experimental/styles/config/
+          # Copy config but exclude the project vocabulary and the dev-only
+          # message view (not part of the package; scripts/ is all the Tengo
+          # rules need)
+          rsync -a --exclude='vocabularies/' --exclude='views/' styles/config/ pkg/ai-tells-experimental/styles/config/
           cd pkg && zip -r ../ai-tells-experimental.zip ai-tells-experimental
 
       - name: Extract release notes from CHANGELOG
