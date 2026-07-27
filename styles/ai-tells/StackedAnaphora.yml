@@ -11,10 +11,8 @@ tokens:
   - "No \\w[^.]+\\. No \\w[^.]+"
 
   # "No X, no Y, no Z." pattern (3+ comma-separated)
+  # 2-item "No X, no Y." is owned by ContrastiveNegation; keep only 3+ here.
   - "No [^,]+, no [^,]+, no [^.!?]+"
-
-  # "No X, no Y." pattern (2 comma-separated)
-  - "No [^,]+, no [^.!?]+"
 
   # "Not X. Not Y. Not Z." pattern
   - "Not [^.]+\\. Not [^.]+\\. Not [^.]+"

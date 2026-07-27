@@ -42,7 +42,6 @@ tokens:
   # Configuration and tooling
   - "🔧"
   - "🔩"
-  - "🔨"
 
   # Security
   - "🔒"
@@ -70,9 +69,6 @@ tokens:
   # Accessibility and i18n
   - "♿"
   - "🌐"
-
-  # Types
-  - "🏷️"
 
   # UI and UX
   - "📱"

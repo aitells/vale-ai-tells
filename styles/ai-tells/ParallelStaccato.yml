@@ -30,5 +30,6 @@ tokens:
   # === Solo two-word staccato (enumerated verbs) ===
   # Single "Subject verb." sentences that AI drops for dramatic effect.
   # Only flagged for verbs commonly used this way.
-
-  - "[A-Z][a-z]+ (?:scales?|ships?|breaks?|builds?|flows?|lands?|wins?|fails?|works?|scans?|reads?|stays?|drops?|clicks?|runs?|falls?|grows?|fades?|leads?|counts?|hits?|fits?|stops?|starts?|moves?|waits?|holds?|lives?|dies?|rises?|shines?|shifts?|sticks?|stands?|spreads?|bends?|flips?|snaps?|locks?|fires?|loads?|calls?|pulls?|pushes?|pays?|sells?|talks?|walks?)\\."
+  # scales/works/counts are dropped here: MicDrop owns the pronoun
+  # one-liner ("It works.", "That scales.") and fires on them already.
+  - "[A-Z][a-z]+ (?:ships?|breaks?|builds?|flows?|lands?|wins?|fails?|scans?|reads?|stays?|drops?|clicks?|runs?|falls?|grows?|fades?|leads?|hits?|fits?|stops?|starts?|moves?|waits?|holds?|lives?|dies?|rises?|shines?|shifts?|sticks?|stands?|spreads?|bends?|flips?|snaps?|locks?|fires?|loads?|calls?|pulls?|push(?:es)?|pays?|sells?|talks?|walks?)\\."

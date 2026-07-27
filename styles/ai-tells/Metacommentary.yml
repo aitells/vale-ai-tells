@@ -21,31 +21,19 @@ tokens:
   - "This nuance matters"
   - "This subtlety matters"
 
-  # "Let me explain" / "Let's explore" throat-clearing
-  - "Let me explain"
-  - "Let's explore"
-  - "Let's examine"
-  - "Let's consider"
-  - "Let's look at"
-  - "Let's break down"
-  - "Let's unpack"
-  - "Let's dive into"
+  # The "Let me explain / Let's explore" explainer-prompt family is owned by
+  # UnpackExplore.
 
   # "The key here is" / "The point is" filler
   - "The key here is"
   - "The point here is"
   - "The idea here is"
   - "The insight here is"
-  - "The takeaway here is"
+  # "The takeaway ... here is" is owned by StructureAnnouncements.
   - "The important thing here is"
 
-  # "It's worth [verb]ing" hedged assertions
-  - "It'?s worth noting"
-  - "It'?s worth mentioning"
-  - "It'?s worth pointing out"
-  - "It'?s worth emphasizing"
-  - "It'?s worth highlighting"
-  - "It'?s worth remembering"
+  # The "It's worth [verb]ing" hedged-assertion family is owned by
+  # HedgingPhrases.
 
   # Bold callout phrases (in markdown)
   - "\\*\\*Key insight:?\\*\\*"

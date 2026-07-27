@@ -40,7 +40,10 @@ tokens:
   - it can be seen that
   - it can be observed that
 
-  # Performative sincerity markers
+  # Performative sincerity markers. "to be honest," overlaps DefensiveHedges'
+  # fuller "To be honest, X, but Y" concessive shape on purpose: this rule owns
+  # the bare filler, DefensiveHedges owns the hedged-concession reading, and a
+  # sentence that is both earns both alerts by design.
   - and honestly
   - and honestly,
   - honestly,

@@ -43,11 +43,11 @@ tokens:
   # "[Adjective] Xs are" revelation patterns (optional article)
   - "(?:[Tt]he )?(?:[Kk]ey|[Ff]undamental|[Cc]rucial|[Cc]ore|[Cc]entral|[Cc]ritical|[Ee]ssential|[Mm]ain|[Pp]rimary|[Uu]nderlying|[Bb]asic|[Rr]eal|[Tt]rue) (?:insights|points|takeaways|lessons|ideas|observations|realizations|understandings|truths|messages|principles) are"
   # Simpler "The X is" patterns
-  - "[Tt]he takeaway (?:here )?is [^.!?]+"
+  # "The takeaway ... is" is owned by StructureAnnouncements; "The bottom line
+  # is" is owned by ConclusionMarkers. Both removed here to avoid double alerts.
   - "[Tt]he lesson (?:here )?is [^.!?]+"
   - "[Tt]he point (?:here )?is [^.!?]+"
   - "[Tt]he insight (?:here )?is [^.!?]+"
-  - "[Tt]he bottom line is [^.!?]+"
 
   # "And X is [exactly/precisely] what/why" patterns
   - "[Aa]nd (?:this|that) is (?:exactly|precisely) (?:what|why|how) [^.!?]+"
