@@ -8,7 +8,7 @@ level: error
 raw:
   - '(?i)(?:'
   - '\b(?:all\s+)?\d+\s*/?\s*\d*\s*tests?\s+(?:pass(?:ing|ed)?|fail(?:ing|ed)?)\b'
-  - '|\b\d+\s+(?:passed|failed)(?:\s*,\s*\d+\s+(?:passed|failed))?\b'
+  - '|\b\d+\s+(?:passed|failed)\s*,\s*\d+\s+(?:passed|failed)\b'
   - '|\bcoverage\s*:\s*\d+(?:\.\d+)?\s*%%'
   - '|\b\d+(?:\.\d+)?\s*%%\s+(?:coverage|code coverage|test coverage|line coverage|branch coverage)\b'
   - '|\ball\s+tests?\s+(?:pass(?:ing|ed)?|are passing|green)\b'

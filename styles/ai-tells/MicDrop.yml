@@ -136,8 +136,11 @@ tokens:
   - "And that'?s the point\\."
 
   # ---- "Full stop" / "Period" as emphasis ----
+  # Standalone one-word emphatic "Period." only; anchored to a sentence
+  # boundary so the ordinary noun ("billing period.", "grace period.")
+  # stays clean. Capitalized form only — the lowercase noun is the FP.
   - "Full stop\\."
-  - "[Pp]eriod\\."
+  - "(?:^|[.!?\"] )Period\\."
 
   # ---- Contrastive fragment mic-drops ----
   # "X, not Y." — contrastive fragment with no verb

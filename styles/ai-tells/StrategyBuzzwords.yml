@@ -18,7 +18,8 @@ tokens:
   # moat (competitive advantage), not the castle
   - "\\b(?:competitive|economic|defensible|durable|structural|wide|deep|business|data|regulatory|technological|distribution) moats?\\b"
   - "\\b(?:build|building|built|widen|widens|widening|widened|deepen|deepens|deepening|deepened|create|creates|created|creating) (?:a |the |our |its |their |wider |deeper )?moats?\\b"
-  - "\\bmoats? (?:around|against)\\b"
+  # figurative object only, so the literal "moat around the castle" stays clean
+  - "\\bmoats? (?:around|against) (?:the |our |its |their |your )?(?:business|company|product|platform|franchise|market|position|revenue|profits?|margins?|data|ecosystem|core)\\b"
   # north star (guiding metric), not Polaris
   - "\\bnorth[- ]star metric\\b"
   - "\\bnorth-star\\b"

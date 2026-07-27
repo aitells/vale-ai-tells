@@ -46,4 +46,9 @@ tokens:
   - seems to fix
   - seems to resolve
   - seems to work
-  - seems to be
+  # bare 'seems to be' dropped: it fires on diagnostic prose ("the root
+  # cause seems to be a race"). Pair it with a resolution object so only
+  # the effect-hedging sense matches, like the siblings above.
+  - seems to be fixed
+  - seems to be resolved
+  - seems to be working

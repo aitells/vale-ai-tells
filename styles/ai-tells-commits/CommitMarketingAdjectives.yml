@@ -25,8 +25,8 @@ tokens:
   - rock-solid
   - rock solid
   - bulletproof
-  - first-class
-  - first class
+  # 'first-class' / 'first class' omitted: standard CS terminology
+  # (first-class functions, first-class support) with no marketing sense.
   - top-tier
   - top tier
   - highly scalable
