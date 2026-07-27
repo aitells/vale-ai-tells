@@ -111,6 +111,10 @@ With PostgreSQL, the binary requires a running database server on the network.
 
 With practice, developers learn to spot these patterns quickly.
 
+We reviewed every charge for the current billing period.
+
+The token expires after a five-minute grace period.
+
 ## ColloquialAssessments: literal uses that should NOT trigger
 
 The plane lands at 6 PM.
@@ -316,6 +320,10 @@ She rides the bus to campus every morning.
 
 He rides the elevator to the tenth floor.
 
+She rides the bus to the office every morning.
+
+Run the cleanup script to get rid of the stale cache entries.
+
 ## FigurativeQuiet: literal quiet that should NOT trigger
 
 The room was quiet during the exam.
@@ -510,6 +518,8 @@ The engine's flywheel cracked at high rpm.
 
 The castle's moat was dry that summer.
 
+The moat around the old castle was deep and wide.
+
 Sailors steer by the North Star.
 
 Settlers joined the Oklahoma land grab of 1889.
@@ -643,3 +653,35 @@ The survey covers four categories of feedback.
 ### 2. Introduction to the test suite
 
 <!-- vale ai-tells-experimental.HeadingTitleCase = NO -->
+
+## ConclusionMarkers: adjective/adverb senses that should NOT trigger
+
+The team weighed the overall design against throughput.
+
+The rollout ultimately depends on the vendor timeline.
+
+## FormalTransitions: mid-sentence adverbs that should NOT trigger
+
+We built the module specifically for low latency.
+
+Fundamentally sound architecture keeps the team productive.
+
+Both approaches are essentially interchangeable in practice.
+
+There are several items of note in the audit report.
+
+## FalseBalance: precise technical compounds that should NOT trigger
+
+The scheduler is context-dependent by design, and timeouts are situation-dependent.
+
+## FormalRegister: precise technical nouns that should NOT trigger
+
+The framework is documented in the appendix.
+
+The methodology is documented in the appendix.
+
+## VocabularySwap: technical adjective senses that should NOT trigger
+
+The streamlined process saved hours of manual work.
+
+The job ran with elevated privileges on the host.

@@ -91,6 +91,12 @@ The updated regex appears to resolve the parsing errors.
 
 This should help with the slow query times on the dashboard.
 
+Rework mutex so the deadlock seems to be fixed
+
+Negative case (should not fire — diagnostic, not hedging the fix):
+
+- Note the root cause seems to be a race condition
+
 ## CommitEmoji
 
 ✨ feat: add user authentication middleware
@@ -156,6 +162,13 @@ Coverage: 87%
 47/47 tests pass
 
 All tests green after the migration.
+
+Update CI report showing 3 passed, 1 failed
+
+Negative cases (should not fire — single count, no passed/failed pair):
+
+- Retry the 3 failed uploads after network timeout
+- Skip the 2 passed health checks on restart
 
 ## CommitAttribution
 
@@ -232,10 +245,13 @@ Implement enterprise-grade authentication.
 
 Build battle-tested retry logic.
 
+Make the release pipeline production-ready
+
 Negative cases (should not fire):
 
 - Add caching layer with TTL eviction.
 - Implement OIDC authentication via go-oidc.
+- Add first-class support for async handlers
 
 ## CommitUnquantifiedClaims
 
@@ -248,6 +264,8 @@ Blazingly fast hot path.
 Huge performance win on the auth path.
 
 Much faster than before.
+
+Rewrite loop to run significantly faster
 
 Negative cases (should not fire — quantified or evidence-backed):
 
@@ -274,6 +292,12 @@ Paths with trailing annotations should fire:
 - src/auth/login.ts: add the retry handler
 - **src/auth/session.ts**: pool the connections
 - src/auth/api.ts - route the callback
+
+Reorganized module bullets with trailing annotations should fire:
+
+- src/app.ts: add handler
+- src/util.ts: tweak helper
+- lib/parse.go: fix parser
 
 Negative cases (should not fire):
 

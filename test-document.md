@@ -83,6 +83,18 @@ Given the above, migration is strongly recommended.
 
 In light of this, the team updated the guidelines.
 
+Specifically, the parser rejects unknown keys.
+
+Significantly, the throughput numbers rose after the rewrite.
+
+Essentially, the layer caches every response.
+
+Fundamentally, the scheduling model changed this quarter.
+
+Worth noting: the default timeout changed to thirty seconds.
+
+Of note, the schema gained two columns.
+
 ## Sequence rules (new patterns)
 
 ### OverusedVocabularyVerbs: verb forms that should trigger
@@ -110,6 +122,8 @@ The seamless integration delivers an unprecedented experience.
 Our innovative platform supports sophisticated workflows.
 
 The transformative impact of this groundbreaking framework is unparalleled.
+
+The seamless integration shipped on time.
 
 ### HedgingPhrases (expanded): new patterns that should trigger
 
@@ -151,6 +165,8 @@ The incident calls into question the entire process.
 
 This reminds us that safety cannot be an afterthought.
 
+It's worth mentioning the caveat about retries.
+
 ## UrgencyInflation
 
 The importance of this cannot be overstated.
@@ -190,6 +206,8 @@ Quick overview: this tool handles authentication, routing, and logging.
 To put it plainly, the old approach doesn't scale.
 
 To put this in perspective, the previous implementation took three weeks.
+
+The takeaway here is that latency dominates the budget.
 
 ## AbsoluteAssertions
 
@@ -246,6 +264,14 @@ Let me dig into the root cause of the error.
 Let's examine the tradeoffs between these approaches.
 
 Let's explore the available options.
+
+Let me explain how the scheduler works.
+
+Let's consider the alternatives before deciding.
+
+Let's look at the latency numbers together.
+
+Let's break down the cost per request.
 
 ## OverusedVocabulary (expanded tokens)
 
@@ -391,6 +417,8 @@ You read the config, initialize the client, or use the defaults.
 
 They carefully parse input, thoroughly validate records, and efficiently format output.
 
+Once triggered they process requests, validate payloads, and format responses.
+
 ### Shared "to" infinitive tricolons
 
 The goal is to simplify workflows, reduce errors, and improve efficiency.
@@ -454,6 +482,8 @@ The pipeline handles three formats. That scales.
 Every module follows the same pattern. It shows.
 
 After refactoring, the test suite runs in half the time. It counts.
+
+The build is green across every target. It works.
 
 ### Pronoun + copula + adjective declarations
 
@@ -599,6 +629,8 @@ Security is non-negotiable. Full stop.
 
 We do not ship on Fridays. Period.
 
+The whole abstraction leaks under load. Period.
+
 ## ColloquialAssessments
 
 ### Figurative "lands"
@@ -704,6 +736,10 @@ The whole rollout hinges on whether the cache holds.
 The query narrows itself to the smallest range.
 
 The config tunes itself over time.
+
+The refactor is paying for itself already.
+
+The new index is paying dividends across every read.
 
 ## FigurativeQuiet
 
@@ -1009,6 +1045,8 @@ No setup, no config, no credit card.
 
 Fast startup, no heavy dependencies.
 
+No cache, no coherence.
+
 ## FigurativeRides
 
 Everything rides on this migration.
@@ -1024,6 +1062,10 @@ The plan rides on whether CI stays green.
 The query rides the index.
 
 The lookup rides the cache.
+
+The logging fix can ride along in the next release.
+
+The rollout plan should ride on this assumption for now.
 
 ## FigurativeCarries
 
@@ -1101,6 +1143,10 @@ This phrase strikes the right tone.
 
 The rewrite struck gold on the first try.
 
+The closing paragraph could strike a chord with skeptical reviewers.
+
+We rewrote the intro to strike the right note before the demo.
+
 ## FigurativeLends
 
 The structure lends itself to reuse.
@@ -1177,6 +1223,8 @@ The plan is to close a seed funding round and build the minimum viable product.
 
 The company prefers organic growth over acquisitions.
 
+The nascent market still has plenty of room to grow.
+
 ## SemicolonUsage
 
 The result was clear; a total failure.
@@ -1208,6 +1256,8 @@ Pick a north star metric and stick to it.
 Strong network effects take over.
 
 This is about first-mover advantage in a market land grab.
+
+Their pricing forms a moat around the business nobody can cross.
 
 ## EmptyPadding
 
@@ -1316,3 +1366,111 @@ The findings fall into three categories.
 The plugins break down into four groups.
 
 The requests are sorted into two buckets.
+
+## ConclusionMarkers
+
+Overall, the migration held up under production load.
+
+Ultimately, the design comes down to a single tradeoff.
+
+The bottom line is that costs dropped sharply.
+
+## FormalRegister
+
+Utilize the helper before you start the job.
+
+## FalseBalance
+
+It varies depending on load and the time of day.
+
+## ParallelStaccato
+
+Workers push.
+
+## DoubleHyphen
+
+Pass the extra args after -- to the runner.
+
+## EmDashUsage
+
+This sentence uses a real em dash — like that.
+
+## VocabularySwap
+
+We facilitated the migration last week.
+
+The team bolstered the pipeline yesterday.
+
+She elucidated the design in review.
+
+They reimagined the onboarding flow.
+
+The scope encompassed three teams.
+
+We endeavored to fix the flaky test.
+
+We endeavoured to fix the flaky test.
+
+## RestatementMarkers
+
+To put it another way, the plan holds together.
+
+In other words, the API stayed stable across the release.
+
+## PromotionalPuffery
+
+The natural beauty of the coastline drew many visitors.
+
+The museum left an enduring legacy across the whole region.
+
+## DefensiveHedges
+
+Admittedly, the parser is slow, but it handles every edge case cleanly.
+
+## DespiteChallenges
+
+Despite these challenges, the team shipped the release on time.
+
+## EmphaticCopula
+
+This design *is* intentional.
+
+## FalseExclusivity
+
+This is the dirty secret of most caching layers.
+
+## MicDropHeadings
+
+### Correct, not clever
+
+## ParticipialPadding
+
+The museum expanded its collection, highlighting its importance to the region.
+
+## RhetoricalDevices
+
+Ask yourself: does the abstraction earn its keep?
+
+## RhetoricalSelfAnswer
+
+The result? A faster build and a smaller binary.
+
+## SelfReference
+
+As mentioned above, the cache reduces read latency.
+
+## SequencingMarkers
+
+Firstly, we validate the schema before touching the database.
+
+## VagueAttributions
+
+Experts argue that caching is essential for read-heavy workloads.
+
+## VerbTricolonDensity
+
+The service parses requests, validates payloads, and formats responses. The worker fetches records, transforms rows, and writes output.
+
+## TransitionRepetition
+
+Furthermore, the cache warms on boot. Furthermore, the index rebuilds nightly. Furthermore, the queue drains cleanly on shutdown.

@@ -40,3 +40,13 @@ jobs:
           vale_flags: "--glob=!test-*.md --minAlertLevel=error"
           fail_on_error: "true"
           filter_mode: nofilter
+
+      - name: Install Vale and just for fixture tests
+        run: |
+          VALE_VERSION=3.13.0
+          curl -sfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" \
+            | sudo tar -xz -C /usr/local/bin vale
+          curl -sfL https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
+
+      - name: Test fixtures
+        run: just test

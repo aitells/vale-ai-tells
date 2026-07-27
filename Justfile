@@ -70,6 +70,60 @@ prek-all:
 prek-install:
   prek install -t commit-msg -t pre-commit
 
+# Run the fixture guard: tells fire, past-tense subjects smoke-test, no false positives
+test: test-fires test-commit-past-tense test-clean
+
+# Assert the tell corpus fires a healthy volume of errors under the test gate.
+# .vale-test.ini binds ai-tells + ai-tells-experimental to test-document.md and
+# ai-tells-commits to test-commit-messages.md at MinAlertLevel=error. The
+# experimental rules ship at warning level, so only the error-level styles
+# contribute here (ai-tells on the doc, ai-tells-commits on the commit corpus);
+# the density metrics are validated separately. The floors catch a whole style
+# silently ceasing to fire without pinning an exact count.
+[script]
+test-fires:
+  set -uo pipefail
+  doc=$(vale --config=.vale-test.ini --output=JSON test-document.md | grep -c '"Severity": "error"' || true)
+  commit=$(vale --config=.vale-test.ini --output=JSON test-commit-messages.md | grep -c '"Severity": "error"' || true)
+  echo "test-document.md: $doc errors (ai-tells)"
+  echo "test-commit-messages.md: $commit errors (ai-tells-commits)"
+  fail=0
+  if [[ "$doc" -lt 400 ]]; then echo "FAIL: test-document.md fired $doc errors, expected at least 400"; fail=1; fi
+  if [[ "$commit" -lt 40 ]]; then echo "FAIL: test-commit-messages.md fired $commit errors, expected at least 40"; fail=1; fi
+  [[ "$fail" -eq 0 ]] && echo "Tell corpus fires as expected."
+  exit "$fail"
+
+# Smoke-test CommitPastTense on single-subject inputs. The rule's \A raw anchor
+# only sees line 1, so the corpus fixture cannot exercise it. This feeds each
+# documented subject through Vale on its own and checks the rule fires on
+# past-tense or participle subjects and stays quiet on imperative ones.
+[script]
+test-commit-past-tense:
+  set -uo pipefail
+  dir=$(mktemp -d)
+  cfg="$dir/smoke.ini"
+  subj="$dir/subject.md"
+  printf 'StylesPath = %s/styles\nMinAlertLevel = error\n[*]\nBasedOnStyles = ai-tells-commits\n' "$(pwd)" > "$cfg"
+  fail=0
+  check() {
+    printf '%s\n' "$2" > "$subj"
+    hits=$(vale --config="$cfg" --output=JSON "$subj" | grep -c 'CommitPastTense' || true)
+    if [[ "$1" == fire && "$hits" -eq 0 ]]; then echo "FAIL (expected fire): $2"; fail=1
+    elif [[ "$1" == clean && "$hits" -ne 0 ]]; then echo "FAIL (expected clean): $2"; fail=1
+    else echo "ok ($1): $2"; fi
+  }
+  check fire 'Added rate limiting middleware'
+  check fire 'Fixed off-by-one in iterator'
+  check fire 'feat: Added rate limiting'
+  check fire 'fix(auth): Fixed session expiry'
+  check fire 'Refactoring the parser'
+  check clean 'Add rate limiting middleware'
+  check clean 'fix: Resolve race condition in scheduler'
+  check clean 'feat(auth): Drop legacy session check'
+  rm -rf "$dir"
+  [[ "$fail" -eq 0 ]] && echo "CommitPastTense smoke test passed."
+  exit "$fail"
+
 # Assert test-false-positives.md produces zero Vale errors
 test-clean:
   @echo "Checking for false positives..."
