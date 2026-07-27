@@ -16,6 +16,7 @@ swap:
   facilitate: help|enable|support
   facilitates: helps|enables|supports
   facilitating: helping|enabling|supporting
+  facilitated: helped|enabled|supported
   commence: start|begin
   commences: starts|begins
   commencing: starting|beginning
@@ -29,6 +30,8 @@ swap:
   endeavors: efforts|attempts|tries
   endeavour: effort|attempt|try
   endeavours: efforts|attempts|tries
+  endeavored: attempted|tried
+  endeavoured: attempted|tried
   leverage: use|apply|build on
   leverages: uses|applies|builds on
   leveraging: using|applying|building on
@@ -36,21 +39,29 @@ swap:
   streamline: simplify|speed up
   streamlines: simplifies|speeds up
   streamlining: simplifying|speeding up
+  # streamlined -ed key omitted on purpose: "streamlined process/pipeline"
+  # is a settled technical adjective, so the past-tense swap would misfire.
   bolster: strengthen|support|boost
   bolsters: strengthens|supports|boosts
   bolstering: strengthening|supporting|boosting
+  bolstered: strengthened|supported|boosted
   elucidate: explain|clarify
   elucidates: explains|clarifies
   elucidating: explaining|clarifying
+  elucidated: explained|clarified
   elevate: raise|improve|increase
   elevates: raises|improves|increases
   elevating: raising|improving|increasing
+  # elevated -ed key omitted on purpose: "elevated privileges/permissions"
+  # is a settled technical adjective, so the past-tense swap would misfire.
   reimagine: rethink|redesign|redo
   reimagines: rethinks|redesigns|redoes
   reimagining: rethinking|redesigning|redoing
+  reimagined: rethought|redesigned|redid
   encompass: include|cover
   encompasses: includes|covers
   encompassing: including|covering
+  encompassed: included|covered
   comprehensive: complete|full|thorough
   methodology: method|approach
   paradigm: model|pattern|approach

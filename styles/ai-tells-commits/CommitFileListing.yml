@@ -1,7 +1,7 @@
 ---
 extends: existence
 message: "AI commit tell: file-by-file listing. The diff already shows what files changed. Describe what changed about the code."
-level: warning
+level: error
 # scope: raw so markdown list parsing does not strip the bullet markers
 # the regex relies on.
 #

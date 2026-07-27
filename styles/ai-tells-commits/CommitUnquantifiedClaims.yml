@@ -1,7 +1,7 @@
 ---
 extends: existence
 message: "AI commit tell: unquantified claim '%s'. Back it with numbers. 'X faster' is meaningless without a baseline. The kernel guide is explicit: quantify optimizations."
-level: warning
+level: error
 raw:
   - '(?i)(?:'
   - '\b(?:significantly|substantially|notably|considerably|dramatically|vastly|greatly|massively|markedly)\s+(?:faster|slower|better|reduced|reduces|reducing|improved|improves|improving|increased|increases|increasing|decreased|decreases|decreasing|optimized|enhanced)\b'
