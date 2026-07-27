@@ -32,6 +32,8 @@ Then run:
 vale sync
 ```
 
+The `ai-tells-experimental` structural rules install as a separate opt-in package with their own steps, described in [EXPERIMENTAL.md](EXPERIMENTAL.md). The `.vale.ini` at the root of this repository is a development setup that turns on every style at once, so build your own configuration from the install snippet rather than from that file.
+
 ## Linting commit messages
 
 <!-- vale ai-tells.OverusedVocabulary = NO -->
@@ -61,8 +63,8 @@ The `ai-tells-commits` style provides 13 rules purpose-built for commit messages
 | `CommitPastTense` | Past-tense or present-participle verbs on the subject line: "Added X," "Fixed Y," "Refactoring Z." Use imperative mood. |
 | `CommitChangelogStyle` | Keep-a-Changelog-style headings inside a single commit body: `## Added`, `### Fixed`, `### Breaking Changes`, etc. CHANGELOG.md is the place for that format. |
 | `CommitMarketingAdjectives` | Marketing intensifiers: "production-ready," "enterprise-grade," "mission-critical," "battle-tested," "bulletproof," etc. State what changed and why. |
-| `CommitUnquantifiedClaims` | Unquantified performance, size, or speed claims: "significantly faster," "much smaller," "blazingly fast," etc. Currently at `warning` level. Back claims with numbers. |
-| `CommitFileListing` | Three or more consecutive bullets that look like file paths, bare ("src/app.ts"), backticked, bolded, or with a trailing annotation ("src/app.ts: add handler"). Currently at `warning` level. The diff already shows files changed; describe what changed about the code. |
+| `CommitUnquantifiedClaims` | Unquantified performance, size, or speed claims: "significantly faster," "much smaller," "blazingly fast," etc. Back claims with numbers. |
+| `CommitFileListing` | Three or more consecutive bullets that look like file paths, bare ("src/app.ts"), backticked, bolded, or with a trailing annotation ("src/app.ts: add handler"). The diff already shows files changed; describe what changed about the code. |
 
 <!-- vale on -->
 
@@ -138,14 +140,14 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 76 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 77 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
 | Rule | Description |
 |------|-------------|
 | `AbsoluteAssertions` | AI overconfidence: "the only way to," "the only real solution," "make no mistake," "there is no denying," "above all else," etc. Verify the claim or soften it. |
-| `AIAdjectiveNounPairs` | AI adjective immediately preceding a noun: "holistic approach," "seamless integration," "transformative impact," etc. Currently at `warning` level. |
+| `AIAdjectiveNounPairs` | AI adjective immediately preceding a noun: "holistic approach," "seamless integration," "transformative impact," etc. |
 | `AICompoundPhrases` | Compound phrases: "rich tapestry," "intricate interplay," "paradigm shift," "double-edged sword," "moving the needle," "unlocks new," etc. |
 | `AnnouncementHeadings` | Headings that narrate content rather than being it: "What You'll Learn," "What We'll Cover," "What to Expect," "Here's What You'll Get," etc. |
 | `AnthropomorphicJustification` | Treating abstractions like employees: "earns its keep," "does the heavy lifting," "pulls its weight," "pays for itself," "speaks for itself," "load-bearing," "does the real work," etc. Also the bare grant ("earns a caveat"), coronation ("crowns the release," "crowning achievement"), rank-claiming ("claims the top spot"), and agency verbs ("behaves itself," "pretends otherwise," "cares deeply," "delivers on its promise," "hangs on a single assumption," "hinges on whether," reflexive "the query narrows itself," "the config tunes itself"). Also the adjudication family, where a fact gets the gavel: "availability settles the question," "the benchmark decides the debate," "latency puts the matter to rest." |
@@ -159,6 +161,7 @@ This package contains 76 rule files covering different categories of AI tells. A
 | `ContrastiveNegation` | Telegraphic negation cadence that replaces the "not X; it's Y" formula once it gets flagged: stacked "no setup, no config, no hassle" and the single clause-final fragment "cleartext repo names, no k-anonymity gate." Aggressive; it can fire on "coffee, no sugar," so disable it for terse spec lists. |
 | `DefensiveHedges` | Preemptive concessions: "This may seem X, but..." "Admittedly, X, but..." "At first glance," etc. |
 | `DespiteChallenges` | The "despite challenges" dismissal formula: "despite these challenges," "while challenges remain," "challenges notwithstanding," etc. |
+| `DoubleHyphen` | A literal double hyphen, the ASCII stand-in AI types when it cannot produce an em dash. Split from `EmDashUsage` so the fix can differ: backtick it as a CLI flag or literal, or use a real em dash character for punctuation. |
 | `EmDashUsage` | Em-dashes, which AI uses excessively |
 | `EmphaticCopula` | Italicized copula verbs and determiners for manufactured profundity |
 | `EmptyPadding` | Empty modifiers before a noun the noun does not need: "named stakeholders," "various stakeholders," "respective roles," "given task," "particular concerns," etc. Sequence-based (modifier plus noun), so it casts a wide net and flags literal uses too ("named pipe," "various reasons," "a certain amount"). Deliberately broad; suppress per-section or disable where the literal sense is common. |

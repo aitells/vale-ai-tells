@@ -7,6 +7,97 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **DoubleHyphen**: New rule. Splits the literal double-hyphen token out
+  of `EmDashUsage` into a dedicated rule whose message gives the two real
+  fixes: backtick it when it is a CLI flag or literal, or use a real em
+  dash character when it is punctuation. `EmDashUsage` keeps the true em
+  dash tokens and its own message. Brings the main-style rule count to 77.
+- **Fixture CI gate**: New `just test` recipe suite and a `lint.yml` step
+  that run `test-document.md` and `test-commit-messages.md` through
+  `.vale-test.ini` and assert both fire a healthy volume of errors, while
+  `test-false-positives.md` stays clean. Adds a `CommitPastTense` smoke
+  test that feeds single subject lines through Vale, since the rule's raw
+  anchor only sees line 1 and the corpus fixture cannot exercise it.
+  Positive fixtures were also added for the 14 main rules that never fired
+  on `test-document.md`.
+
+### Changed
+
+- **AIAdjectiveNounPairs**, **CommitFileListing**,
+  **CommitUnquantifiedClaims**: Promoted from `warning` to `error`, so the
+  package's "all rules default to error" claim now holds across every
+  style. `AIAdjectiveNounPairs` also gains `ignorecase` to match its
+  sibling sequence rules.
+- **OverusedVocabulary**: Reframed as the miscellaneous vocabulary bucket.
+  Removed the nine words a more specific rule already owns (cornerstone,
+  pivotal, nascent, testament, tapestry, multifaceted, intricate, seamless,
+  transformative) so one span raises one alert; `nascent` now belongs to
+  `GrowthMetaphors`. A header comment records the bucket principle. Inflected
+  forms no sibling rule catches (the adverb, the plural) stay.
+- **FormalRegister**: Add `ignorecase` so sentence-initial imperatives
+  ("Utilize the helper.") no longer escape, and stop flagging `framework`
+  and `methodology`, precise technical nouns the suggested swaps cannot
+  replace.
+- **FormalTransitions**: Anchor the pure-adverb tokens (Significantly,
+  Fundamentally, Specifically, Essentially) to sentence-initial position
+  so mid-sentence degree adverbs ("runs significantly faster") stay clean.
+- **Cross-rule ownership**: Gave each shared phrase family one owner to end
+  duplicate alerts. `UnpackExplore` owns "Let's explore/unpack/dive into"
+  (dropped from `Metacommentary`); `StructureAnnouncements` owns "the
+  takeaway is" (dropped from `Metacommentary` and `AffirmativeFormulas`);
+  `HedgingPhrases` owns "it's worth noting/mentioning" (dropped from
+  `Metacommentary`); `ContrastiveNegation` owns the two-item "no X, no Y"
+  (dropped from `StackedAnaphora`, which keeps the three-plus shape);
+  `MicDrop` owns pronoun one-liners like "It works." (excluded from
+  `ParallelStaccato`); `ConclusionMarkers` owns "the bottom line is"
+  (dropped from `AffirmativeFormulas`); `DefensiveHedges` owns the "to be
+  honest, X, but Y" shape (narrowed in `FillerPhrases`).
+- **AnthropomorphicJustification**: Add "paying for itself" and "paying
+  dividends" to the paying family, matching the fuller weight family.
+- **FigurativeStrikes**, **FigurativeRides**: Extend the verb stems to the
+  base forms ("strike a chord," "ride on this assumption"), which the
+  inflected-only stems missed.
+- **ParallelStaccato**: Fix the solo-verb token so "push" matches, not
+  only "pushes."
+- **VerbTricolon**: Add lowercase pronoun subjects so mid-sentence "they
+  process X, validate Y, and format Z" is covered, matching the lowercase
+  modal arm.
+- **VocabularySwap** (experimental): Add the missing past-tense swap keys
+  (facilitated, bolstered, elucidated, reimagined, encompassed, endeavored
+  and endeavoured). The keys whose past tense doubles as a technical
+  adjective (streamlined, elevated) stay omitted with a comment. The rule
+  is now documented as an alternative to, not an addition on top of, the
+  core vocabulary rules.
+
+### Fixed
+
+- **ConclusionMarkers**: Anchor the bare "Overall" and "Ultimately" to
+  sentence-initial discourse-marker position so the ordinary adverb senses
+  ("the overall design," "ultimately depends on") stay clean.
+- **MicDrop**: Restrict the "Period." token to the standalone emphatic
+  sentence so a noun ending ("billing period.") no longer fires.
+- **StrategyBuzzwords**: Stop the "moat around" arm from matching the
+  literal castle sense the file's own header promises stays clean.
+- **FalseBalance**: Drop the "-dependent" compounds (context-dependent,
+  situation-dependent), precise technical vocabulary with no evasive
+  reading; the dodge "varies depending on" stays.
+- **CommitTestEnumeration**: Require the comma-separated pass and fail pair
+  so "retry 3 failed uploads" no longer trips the rule.
+- **CommitMarketingAdjectives**: Drop "first-class" and "first class,"
+  which match standard computer-science terminology.
+- **CommitHedging**: Drop bare "seems to be," which fires on diagnostic
+  prose ("the root cause seems to be a race condition").
+- **Dead tokens**: Remove entries that never matched or duplicated a
+  sibling: the duplicate "To put it another way" in `RestatementMarkers`,
+  the duplicate emoji in `CommitEmoji`, and the shadowed "natural beauty
+  of" and "an enduring legacy" in `PromotionalPuffery`.
+
+<!-- vale on -->
+
 ## [1.25.0] - 2026-07-17
 
 <!-- vale off -->

@@ -201,6 +201,20 @@ A substitution rule that provides concrete inline rewrite suggestions for common
 
 **Known limitation:** Can't distinguish noun vs verb usage. "Financial leverage" (legitimate noun) triggers with a suggestion to use "use" or "apply," which misses the mark in that context. The main `ai-tells` style handles this with POS-tag-aware sequence rules (`OverusedVocabularyVerbs`), but the substitution extension doesn't support POS tags.
 
+**Turn it on in place of the core vocabulary rules, never alongside them:** the swap map overlaps `OverusedVocabulary` and `FormalRegister`, so running both double-flags one word.
+
+### FigurativeAnchor
+
+An existence rule that flags "anchor" used figuratively to ground or center an abstraction.
+
+<!-- vale off -->
+
+Example matches: "anchored in our values," "anchor the strategy," "an emotional anchor," "serves as an anchor."
+
+**Why experimental:** anchor is heavily homographic, and no regular expression cleanly separates the figurative sense from the literal HTML anchor tag, a news anchor, an anchor tenant, or the anchoring bias. The rule stays at warning for that reason. Its exemptions cover the physical objects a thing literally anchors to, such as a wall or the seabed. The rest leans on the figurative shape. Turn the rule off in maritime, broadcast, or HTML writing.
+
+<!-- vale on -->
+
 <!-- vale ai-tells.FormalTransitions = NO -->
 <!-- vale ai-tells.OverusedVocabulary = NO -->
 <!-- vale ai-tells.ConclusionMarkers = NO -->

@@ -8,14 +8,23 @@ vale-ai-tells provides a Vale package for detecting linguistic patterns commonly
 
 ```text
 vale-ai-tells/
-├── styles/ai-tells/          # Vale rule files (*.yml)
-├── .github/workflows/        # Release automation
+├── styles/
+│   ├── ai-tells/               # Core prose rules (*.yml)
+│   ├── ai-tells-commits/       # Commit-message rules (*.yml)
+│   ├── ai-tells-experimental/  # Opt-in structural and metric rules (*.yml)
+│   └── config/                 # Tengo scripts plus the message view and vocabularies
+├── .github/workflows/          # Lint and release automation
 ├── .pre-commit-config.yaml
 ├── .yamllint.yaml
-├── .vale.ini                 # Sample configuration
+├── .vale.ini                   # Repo dev config (enables all three styles)
 ├── Justfile
-├── test-document.md          # Test file with AI patterns
-└── test-false-positives.md   # Test file for false positive checks
+├── README.md
+├── EXPERIMENTAL.md             # Experimental-rule reference
+├── CHANGELOG.md
+├── TODO.md
+├── test-document.md            # Positive fixtures (patterns should fire)
+├── test-false-positives.md     # Negative fixtures (should stay clean)
+└── test-commit-messages.md     # Commit-message fixtures
 ```
 
 ## Development workflow
@@ -23,7 +32,7 @@ vale-ai-tells/
 **First-time setup:**
 
 ```bash
-just sync          # fetch external Vale styles (Google, write-good, proselint)
+just vale-sync     # fetch external Vale styles (Google, write-good, proselint)
 just prek-install  # install pre-commit hooks
 ```
 
@@ -62,7 +71,7 @@ The GitHub Actions workflow automatically creates a release with `ai-tells.zip`.
 
 ## Rule conventions
 
-All rules use `error` level by default. Users can override this in their `.vale.ini`. Rule files use Vale's `existence` or `sequence` extensions. Each rule needs:
+All rules use `error` level by default. Users can override this in their `.vale.ini`. Core rules use Vale's `existence` and `sequence` extensions, plus `occurrence` for the density rule. The experimental style adds `script` (Tengo), `metric`, `capitalization`, and `substitution` rules. Each rule needs:
 
 - `message`: Clear explanation of why the rule flags the pattern
 - `level`: Always `error`
