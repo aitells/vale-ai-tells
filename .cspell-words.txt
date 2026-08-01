@@ -26,6 +26,7 @@ cli
 cocogitto
 codespell
 colour
+commitlint
 coreference
 dasel
 dedup

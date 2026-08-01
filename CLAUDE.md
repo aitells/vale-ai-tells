@@ -1,4 +1,6 @@
-# Claude.md
+# Claude Code instructions
+
+Refer to @AGENTS.md for commit conventions and the prose-lint output contract. What follows is specific to this repository.
 
 ## Project overview
 
@@ -12,13 +14,14 @@ vale-ai-tells/
 │   ├── ai-tells/               # Core prose rules (*.yml)
 │   ├── ai-tells-commits/       # Commit-message rules (*.yml)
 │   ├── ai-tells-experimental/  # Opt-in structural and metric rules (*.yml)
-│   └── config/                 # Tengo scripts plus the message view and vocabularies
-├── .github/workflows/          # Lint and release automation
+│   └── config/                 # Tengo scripts, the agent template, the message view, vocabularies
+├── .github/workflows/          # CI, security, release, and Renovate automation
 ├── .pre-commit-config.yaml
-├── .yamllint.yaml
 ├── .vale.ini                   # Repo dev config (enables all three styles)
-├── Justfile
+├── Justfile                    # Every gate and release recipe
+├── Brewfile                    # Local toolchain
 ├── README.md
+├── AGENTS.md                   # Commit and prose-output contract for agents
 ├── EXPERIMENTAL.md             # Experimental-rule reference
 ├── CHANGELOG.md
 ├── TODO.md
@@ -32,25 +35,31 @@ vale-ai-tells/
 **First-time setup:**
 
 ```bash
-just vale-sync     # fetch external Vale styles (Google, write-good, proselint)
-just prek-install  # install pre-commit hooks
+just setup   # brew bundle, vale sync, prek install
 ```
 
 **Testing rules locally:**
 
 ```bash
 vale --config=.vale.ini test-document.md
+just test    # the fixture guard: tells fire, subjects smoke-test, no false positives
 ```
 
-**Running all linters:**
+**Running the gates:**
 
 ```bash
-just lint           # run all linters (yaml, prose, markdown, spelling, messages)
-just lint-yaml      # yamllint on all YAML files
-just lint-prose     # Vale on all files
-just lint-markdown  # rumdl on all Markdown files
-just lint-spelling  # codespell
-just lint-messages  # Vale on each rule's own message: field (dogfooding)
+just lint            # every linter below, in one pass
+just lint-yaml       # yamllint
+just lint-markdown   # rumdl
+just lint-config     # biome on JSON
+just lint-spelling   # cspell
+just lint-prose      # Vale on the docs
+just lint-messages   # Vale on each rule's own message: field (dogfooding)
+just lint-toml       # tombi
+just lint-just       # just --fmt --check
+just lint-editorconfig
+just lint-workflows  # actionlint
+just check-all       # lint, test, and the full-history gitleaks scan
 ```
 
 **Pre-commit hooks:**
@@ -60,14 +69,12 @@ just prek          # run hooks on staged files
 just prek-all      # run hooks on all files
 ```
 
-**Creating a release:**
+**Building and releasing:**
 
 ```bash
-git tag vX.Y.Z
-git push --tags
+just build-package # write the three release zips locally
+just release vX.Y.Z
 ```
-
-The GitHub Actions workflow automatically creates a release with `ai-tells.zip`.
 
 ## Rule conventions
 

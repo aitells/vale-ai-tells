@@ -1,5 +1,9 @@
 ---
-default_stages: [commit-msg, pre-commit, pre-push]
+default_stages: [pre-commit, pre-push]
+
+# Hooks never touch Vale's synced style packages; that content is
+# upstream and not reformatted to match this project's style.
+exclude: ^styles/(Google|write-good|proselint)/
 
 repos:
   - repo: builtin
@@ -14,47 +18,94 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/adrienverge/yamllint
-    rev: cba56bcde1fdd01c1deb3f945e69764c291a6530 # v1.38.0
+    rev: cba56bcde1fdd01c1deb3f945e69764c291a6530  # frozen: v1.38.0
     hooks:
       - id: yamllint
         name: Check YAML files with yamllint
         entry: yamllint -c .yamllint.yaml --strict
         types: [yaml]
 
-  - repo: https://github.com/errata-ai/vale
-    rev: f544f4923eb1c7d322c18e35f96333ef8ac29efa # v3.13.1
+  - repo: https://github.com/vale-cli/vale
+    rev: d32b532e2f5ba703ba06a5a6829f9db1fc78a92c  # frozen: v3.15.2
     hooks:
-      # Render findings through the agent template, matching `just lint-prose`.
+      # Scope the hook to Markdown, the only file type .vale.ini
+      # configures prose rules for. The upstream hook defaults to
+      # types: [text], which would hand it the commit-message buffer as
+      # well; the commit-msg stage below owns that. The cog-generated
+      # CHANGELOG.md is excluded because the [*.md] rule activations
+      # still fire on it, the way `just lint-prose` already skips it,
+      # and the test-*.md fixtures trip rules on purpose.
       - id: vale
-        args: [--output=ai-tells-agent.tmpl, --minAlertLevel=error]
-        exclude: ^test.*\.md$
-      - id: vale
-        name: vale (commit message)
-        stages: [commit-msg]
-        args: [--output=ai-tells-agent.tmpl, --ext=.md, --minAlertLevel=error]
+        types_or: [markdown]
+        exclude: ^(CHANGELOG\.md|test-.*\.md)$
+        # Render findings through the agent template, matching `just lint-prose`.
+        args: [--output=ai-tells-agent.tmpl]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: 9f07a8f89dc360f6db3cc0ad9c1953148e9f706f # v0.1.44
+    rev: 75cad3ecfe02b58e8165d3ac08d117bee207ed3d  # frozen: v0.2.43
     hooks:
       - id: rumdl-fmt
       - id: rumdl
 
+  # Shared commit-msg gates. All four run on the commit-msg stage (see the
+  # manifest); commitlint and commit-trailers need only bash and git, while
+  # vale-commit-msg and cspell-commit-msg lean on this repo's vale/cspell
+  # plus the commit-message scope in .vale.ini and .cspell.jsonc. Pinned by
+  # SHA with a `# frozen:` tag comment so Renovate's pre-commit manager
+  # tracks it, the same as the other hook repos above.
+  - repo: https://github.com/tbhb/pre-commit-hooks
+    rev: 8ad309e61a0298394beef2b07b14ceca44b5a7e8  # frozen: v0.1.0
+    hooks:
+      - id: commit-trailers
+      - id: commitlint
+      - id: vale-commit-msg
+      - id: cspell-commit-msg
+
   - repo: local
     hooks:
-      - id: cog-verify
-        name: conventional commits
-        entry: cog verify --file
+      - id: biome-check
+        name: biome check
+        entry: biome check --write --files-ignore-unknown=true --no-errors-on-unmatched
         language: system
-        stages: [commit-msg]
-        always_run: true
+        types: [text]
+        files: "\\.(jsx?|tsx?|c(js|ts)|m(js|ts)|d\\.(ts|cts|mts)|jsonc?|json5|css|svelte|vue|astro|graphql|gql)$"
+
+      # Tree-wide spell check at pre-commit and pre-push. The commit
+      # buffer is handled by cspell-commit-msg above, which resolves this
+      # worktree's dictionary rather than the main checkout's.
       - id: cspell
         name: cspell
         entry: cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files
         language: system
+        stages: [pre-commit, pre-push]
         types: [text]
-      - id: cspell-commit
-        name: cspell-commit
-        entry: cspell --config .cspell.jsonc --no-summary --no-progress --language-id commit-msg
+
+      - id: tombi
+        name: tombi (TOML lint + format-check)
+        entry: just lint-toml
         language: system
-        stages: [commit-msg]
+        types: [toml]
+        pass_filenames: false
+
+      # just's own formatter, gating the file that defines every other
+      # gate. --fmt rewrites whichever justfile just resolves, so the
+      # hook passes no filenames and fires on the Justfile alone.
+      - id: just-fmt
+        name: just --fmt --check
+        entry: just lint-just
+        language: system
+        files: ^Justfile$
+        pass_filenames: false
+
+      # editorconfig-checker. Scope lives in .editorconfig-checker.json,
+      # and the top-level exclude above already keeps the synced Vale
+      # style packages out, so run the recipe unfiltered rather than
+      # feeding it the staged paths: the checker walks the git-tracked
+      # tree itself and applying its own excludes to that walk is the
+      # tested path.
+      - id: editorconfig-checker
+        name: editorconfig-checker
+        entry: just lint-editorconfig
+        language: system
         types: [text]
+        pass_filenames: false
