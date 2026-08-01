@@ -16,6 +16,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   apostrophe, so a document that went through a typographer counted as
   having no contractions at all and tripped the rule regardless of how it
   was written. The script now normalizes the apostrophe before counting.
+- **VerbTricolon**: Anchor every token that begins with a word character at
+  a word boundary. The rule sets `nonword: true`, which suppresses the
+  boundaries Vale adds by default, so a token that leads with a literal
+  word matched inside longer words. Prose naming an identifier that ends
+  in "can" tripped the modal token, and words such as "into" and "bayou"
+  tripped the infinitive and pronoun tokens. Tokens that lead with `\w+`
+  never had the problem, because a match found inside a word is also found
+  from the word start, so `VerbTricolonDensity` needed no change. This
+  narrows the rule and drops false positives only. Alerts on the test
+  fixtures are unchanged.
 
 <!-- vale on -->
 
