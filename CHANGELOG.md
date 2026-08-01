@@ -7,6 +7,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **Agent output template**: `styles/config/templates/ai-tells-agent.tmpl`
+  prints one line per finding, carrying the location, the severity, the
+  rule name, the exact matched text, and the replacement when a rule
+  defines one, followed by a totals line. Vale's default report spreads a
+  finding across two lines and omits the match, so a coding assistant has
+  to reopen the file before it can act on one. The template sits beside
+  the Tengo scripts under `styles/config`, which carries it into
+  `ai-tells-experimental.zip`. Invoke it with
+  `vale --output=ai-tells-agent.tmpl`.
+
+### Changed
+
+- **README**: The commit-msg hook snippet now names `vale-cli/vale` at a
+  frozen revision. The `errata-ai` repository stopped publishing that hook
+  after 3.13, so the old snippet pinned a revision that no longer receives
+  updates. A new section lists the recipes that gate this repository and
+  names the container runtime that two of them need.
+
+No rule changed, so `ai-tells.zip` and `ai-tells-commits.zip` unzip
+identical to the v1.27.2 assets.
+
+<!-- vale on -->
+
 ## [1.27.2] - 2026-08-01
 
 <!-- vale off -->
