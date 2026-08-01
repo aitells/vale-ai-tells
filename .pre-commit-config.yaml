@@ -24,13 +24,14 @@ repos:
   - repo: https://github.com/errata-ai/vale
     rev: f544f4923eb1c7d322c18e35f96333ef8ac29efa # v3.13.1
     hooks:
+      # Render findings through the agent template, matching `just lint-prose`.
       - id: vale
-        args: [--minAlertLevel=error]
+        args: [--output=ai-tells-agent.tmpl, --minAlertLevel=error]
         exclude: ^test.*\.md$
       - id: vale
         name: vale (commit message)
         stages: [commit-msg]
-        args: [--ext=.md, --minAlertLevel=error]
+        args: [--output=ai-tells-agent.tmpl, --ext=.md, --minAlertLevel=error]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
     rev: 9f07a8f89dc360f6db3cc0ad9c1953148e9f706f # v0.1.44

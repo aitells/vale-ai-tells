@@ -152,19 +152,21 @@ lint-config *args:
 lint-spelling *args:
     cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG {{ if args == "" { "." } else { args } }}
 
-# Lint prose in Markdown via vale. The test fixtures trip rules on
+# Lint prose in Markdown via vale. Findings render through the agent
+# template committed in this repo's StylesPath, so a fix never needs a
+# second context-gathering pass. The test fixtures trip rules on
 # purpose, and the generated CHANGELOG.md carries cog's Title-Case
 # section headings, so both stay out of the walk. The apm* entries cover
 # the APM manifest, lockfile, and gitignored package cache, none of which
 # carry prose to lint.
 lint-prose *args:
-    vale --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,COMMIT_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' {{ if args == "" { "." } else { args } }}
+    vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,COMMIT_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' {{ if args == "" { "." } else { args } }}
 
 # Lint each rule file's own `message:` field with the ai-tells prose style, so
 # the package's diagnostics don't contain the patterns they flag. Uses the
 # RuleMessage View (styles/config/views/RuleMessage.yml) to select the field.
 lint-messages:
-    vale --config=.vale-messages.ini styles/ai-tells styles/ai-tells-commits styles/ai-tells-experimental
+    vale --config=.vale-messages.ini --output=ai-tells-agent.tmpl styles/ai-tells styles/ai-tells-commits styles/ai-tells-experimental
 
 # tombi is the TOML gate (tombi 1.2.0): it lint-checks every tracked *.toml.
 # cog.toml, .rumdl.toml, and tombi.toml itself get syntax + style checks, validated

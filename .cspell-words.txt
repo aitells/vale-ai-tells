@@ -97,6 +97,7 @@ tbhb
 Tengo
 tfvars
 throughlines
+tmpl
 tombi
 tricolon
 tricolons
