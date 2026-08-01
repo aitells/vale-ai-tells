@@ -40,3 +40,6 @@ Thumbs.db
 *~
 .idea/
 .vscode/
+
+# APM dependencies
+apm_modules/
