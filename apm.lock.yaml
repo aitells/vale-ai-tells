@@ -1,17 +1,17 @@
 lockfile_version: '1'
-generated_at: '2026-08-01T10:25:34.016884+00:00'
+generated_at: '2026-08-01T13:46:51.669820+00:00'
 apm_version: 0.19.0
 dependencies:
 - repo_url: tbhb/agent-tools
   host: github.com
-  resolved_commit: 784f3502d2c59b9a356f9218dd418e42a316d615
-  resolved_ref: v0.1.0
+  resolved_commit: c8ec0e2c92cecf488e219918dea06f733a83fca0
+  resolved_ref: v0.1.1
   package_type: apm_package
   deployed_files:
   - .claude/rules/worktree-wip.md
   - .claude/skills/commit
   - .claude/skills/commit/SKILL.md
   deployed_file_hashes:
-    .claude/rules/worktree-wip.md: sha256:b78405376189bcb85cb5db7f9e8e42c9bbcc635df80ccc5b5b79011141ee691f
-    .claude/skills/commit/SKILL.md: sha256:562a94f94451b9d3a110a43902cecc7f8124cf67beb4427a4cfbd0c162949d44
-  content_hash: sha256:358447a32086b62a4d68ac50b328671ba9db4d5456eb69753e6fc009866b7078
+    .claude/rules/worktree-wip.md: sha256:0204082643d1ea505ae20eaf93e7d94dd52b65046f3e4f290ec7bbc5c6093634
+    .claude/skills/commit/SKILL.md: sha256:533f0c78cde63f97d2e27e41431fb91905fc45dd5886662fee0df3acab5f397c
+  content_hash: sha256:cfa1b565c5c4b1c35376d81ca5a62be61993be644a911794da9c0e9a57e5b613
