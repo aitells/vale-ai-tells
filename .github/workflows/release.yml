@@ -1,5 +1,18 @@
 ---
-name: Release
+# Release pipeline. Fires on every `v*` tag push: builds the three Vale
+# package zips through `just build-package` (the recipe stays the single
+# definition of the package layout), extracts the tag's section from
+# CHANGELOG.md as the release notes, and publishes the GitHub release
+# with the `gh` CLI under the workflow's own token, with no third-party
+# release action. `contents: write` is scoped to the job; the workflow
+# default stays read-only.
+#
+# Asset names are consumer-visible: other repositories pin
+# ai-tells.zip, ai-tells-commits.zip, and ai-tells-experimental.zip by
+# tag in their own .vale.ini, so neither the names nor the tag scheme
+# can change here.
+
+name: release
 
 on:
   push:
@@ -7,34 +20,30 @@ on:
       - "v*"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   release:
-    runs-on: ubuntu-latest
+    name: release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
     steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
 
-      - name: Create packages
-        run: |
-          cd styles
+      - name: Set up just
+        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
 
-          # ai-tells and ai-tells-commits are style-only packages (flat zip)
-          zip -r ../ai-tells.zip ai-tells
-          zip -r ../ai-tells-commits.zip ai-tells-commits
-
-          # ai-tells-experimental includes Tengo scripts in config/.
-          # Vale's package sync expects a top-level dir wrapping
-          # a styles/ subtree so it can merge into StylesPath.
-          cd ..
-          mkdir -p pkg/ai-tells-experimental/styles
-          cp -r styles/ai-tells-experimental pkg/ai-tells-experimental/styles/
-          # Copy config but exclude the project vocabulary and the dev-only
-          # message view (not part of the package; scripts/ is all the Tengo
-          # rules need)
-          rsync -a --exclude='vocabularies/' --exclude='views/' styles/config/ pkg/ai-tells-experimental/styles/config/
-          cd pkg && zip -r ../ai-tells-experimental.zip ai-tells-experimental
+      - name: Build the packages
+        run: just build-package
 
       - name: Extract release notes from CHANGELOG
         run: |
@@ -55,11 +64,11 @@ jobs:
           cat release-notes.md
 
       - name: Create release
-        uses: softprops/action-gh-release@v2
-        with:
-          files: |
-            ai-tells.zip
-            ai-tells-commits.zip
-            ai-tells-experimental.zip
-          body_path: release-notes.md
-          generate_release_notes: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          gh release create "$TAG" \
+            ai-tells.zip ai-tells-commits.zip ai-tells-experimental.zip \
+            --title "$TAG" \
+            --notes-file release-notes.md

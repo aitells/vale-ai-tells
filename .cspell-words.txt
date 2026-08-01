@@ -87,6 +87,7 @@ rhysd
 RLHF
 rumdl
 rvben
+SARIF
 setext
 shellcheck
 shopt
