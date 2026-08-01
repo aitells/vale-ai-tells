@@ -7,6 +7,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Changed
+
+- **EmphaticCopula**: Add six italicized intensifiers (actually, really,
+  never, always, truly, literally) in both the asterisk and the underscore
+  form, so the rule covers stress italics alongside the copula pattern it
+  started with. The message now says "common word" instead of "copula",
+  which the determiner and conjunction tokens had already outgrown. Vale
+  3.17 added an `emphasis` scope that reads these spans without markup
+  patterns, but that scope aborts the whole style on older Vale, so the
+  rule stays on `scope: raw` until a dedicated inline-scope package lands.
+
+<!-- vale on -->
+
 ## [1.26.0] - 2026-07-27
 
 <!-- vale off -->

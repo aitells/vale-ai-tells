@@ -1435,6 +1435,12 @@ Despite these challenges, the team shipped the release on time.
 
 This design *is* intentional.
 
+The parser *actually* handles nested quotes.
+
+The cache *never* returns stale reads.
+
+Retries are *really* the last resort.
+
 ## FalseExclusivity
 
 This is the dirty secret of most caching layers.

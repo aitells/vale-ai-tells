@@ -1,6 +1,6 @@
 ---
 extends: existence
-message: "AI emphasis: '%s'. Remove the italics. Emphasizing a copula rarely adds meaning."
+message: "AI emphasis: '%s'. Remove the italics. Emphasizing a common word rarely adds meaning."
 level: error
 nonword: true
 scope: raw
@@ -28,3 +28,21 @@ tokens:
   - " _not_"
   - "\\*or\\*"
   - " _or_"
+
+  # Italicized intensifiers, where the italics do the work the sentence should
+  # ("It *actually* works"). Vale 3.17 added an `emphasis` scope that reads
+  # these without markup patterns, but it hard-fails on older Vale, so this
+  # rule stays on `raw` until the inline-scope package lands.
+  # Note: underscore patterns require space prefix to avoid matching __dunder__ methods
+  - "\\*actually\\*"
+  - " _actually_"
+  - "\\*really\\*"
+  - " _really_"
+  - "\\*never\\*"
+  - " _never_"
+  - "\\*always\\*"
+  - " _always_"
+  - "\\*truly\\*"
+  - " _truly_"
+  - "\\*literally\\*"
+  - " _literally_"
