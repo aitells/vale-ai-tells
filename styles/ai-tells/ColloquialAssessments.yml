@@ -11,8 +11,8 @@ tokens:
   # arrival-verb sense (a request lands on a node, a PR lands in main) lives in
   # FigurativeLands, which exempts these assessment nouns and literal landings.
   # ==========================================================================
-  - "[Tt]he (?:joke|point|argument|line|metaphor|analogy|comparison|critique|distinction|observation|framing|insight|takeaway|punchline|callback|bit|reference|callout) (?:really |actually |just |finally )?lands?\\b"
-  - "[Tt]he (?:joke|point|argument|line|metaphor|analogy|comparison|critique|distinction|observation|framing|insight|takeaway|punchline|callback|bit|reference|callout) (?:really|actually|just|finally) landed\\b"
+  - "\\b[Tt]he (?:joke|point|argument|line|metaphor|analogy|comparison|critique|distinction|observation|framing|insight|takeaway|punchline|callback|bit|reference|callout) (?:really |actually |just |finally )?lands?\\b"
+  - "\\b[Tt]he (?:joke|point|argument|line|metaphor|analogy|comparison|critique|distinction|observation|framing|insight|takeaway|punchline|callback|bit|reference|callout) (?:really|actually|just|finally) landed\\b"
   - "\\b(?:really|actually) lands\\b"
   - "\\b(?:really|actually) landed\\b"
   # Figurative "lands" beyond the curated nouns: abstract subjects and

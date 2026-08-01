@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Fixed
+
+- **ColloquialAssessments**, **DefensiveHedges**, **Metacommentary**,
+  **MicDrop**, **MicDropHeadings**, **ParallelStaccato**,
+  **RhetoricalDevices**, **RhetoricalSelfAnswer**, **StackedAnaphora**:
+  Anchor the tokens at word boundaries. These rules set `nonword: true`,
+  which drops the boundaries Vale adds by default on both ends, so 280
+  tokens could start matching inside a word and 42 could match the front
+  of a longer one. An audit of every rule carrying that setting found
+  these nine. ColloquialAssessments was reachable from ordinary prose
+  because it also folds case, and a word such as "blithe" ends with the
+  article the token starts with. The rest needed a capital letter inside
+  a word, which happens when a camel case identifier appears in a
+  sentence. MicDropHeadings also matched the front of a longer adverb, so
+  a heading that ended in "secondly" tripped the token ending in
+  "second". Alerts on the fixtures and across the consumer repositories
+  are unchanged.
+
+<!-- vale on -->
+
 ## [1.27.1] - 2026-07-31
 
 <!-- vale off -->
