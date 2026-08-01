@@ -1,0 +1,29 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+
+  // This repo's Renovate config pulls the shared policy from the
+  // renovate-config.json5 preset in tbhb/github-actions via extends — the
+  // repository-level rules plus the Justfile and Vale custom managers
+  // shared by every repo. Those managers already track the docker image
+  // pins and the vale pin in this repo's Justfile, so nothing stays
+  // inline here.
+  //
+  // The global-only options (identity, rate limits, requireConfig) are
+  // inlined below instead of using globalExtends: Renovate resolves
+  // globalExtends presets before hostRules are registered, so the preset
+  // fetch is always anonymous and intermittently hits GitHub's per-IP
+  // anonymous rate limit on shared runners (config-presets-invalid).
+  // extends is resolved after platform init with token auth, so it is
+  // unaffected.
+  requireConfig: "ignored",
+  username: "tbhb-renovate[bot]",
+  gitAuthor: "tbhb-renovate[bot] <311633125+tbhb-renovate[bot]@users.noreply.github.com>",
+  prConcurrentLimit: 0,
+  prHourlyLimit: 0,
+  extends: [
+    "github>tbhb/github-actions//.github/renovate-config.json5",
+  ],
+
+  // Single-repo scope. Differs per repo.
+  repositories: ["tbhb/vale-ai-tells"],
+}
