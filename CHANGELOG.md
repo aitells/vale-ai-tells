@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.27.1] - 2026-07-31
+
 <!-- vale off -->
 
 ### Fixed
@@ -1555,6 +1557,7 @@ Initial release with 11 rules for detecting AI writing patterns.
 - **FillerPhrases**: Padding language that adds no meaning
 - **FormalRegister**: Unnecessarily formal vocabulary choices
 
+[1.27.1]: https://github.com/tbhb/vale-ai-tells/compare/v1.27.0...v1.27.1
 [1.27.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.26.0...v1.27.0
 [1.26.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.25.0...v1.26.0
 [1.25.0]: https://github.com/tbhb/vale-ai-tells/compare/v1.24.0...v1.25.0
