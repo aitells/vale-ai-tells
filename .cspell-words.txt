@@ -53,6 +53,7 @@ Jaccard
 Justfile
 Justfiles
 Kassorla
+linuxbrew
 listicle
 lockfiles
 Metacommentary
@@ -67,7 +68,9 @@ oneline
 operationalizes
 operationalizing
 optimi
+orbstack
 orcid
+osxkeychain
 Overexplanation
 peakoss
 pipefail
@@ -79,10 +82,12 @@ pyproject
 reimagines
 reimagining
 Reinhart
+rhysd
 RLHF
 rumdl
 rvben
 setext
+shellcheck
 shopt
 softprops
 stylometric
