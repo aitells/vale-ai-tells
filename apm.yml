@@ -1,0 +1,12 @@
+---
+# APM consumer manifest. Pulls the shared agent primitives
+# (the commit skill and the worktree rules) from tbhb/agent-tools.
+name: vale-ai-tells
+version: 0.1.0
+description: APM consumer manifest for vale-ai-tells
+target:
+  - claude
+dependencies:
+  apm:
+    - tbhb/agent-tools#v0.1.0
+  mcp: []

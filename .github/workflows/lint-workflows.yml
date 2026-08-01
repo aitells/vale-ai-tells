@@ -1,0 +1,29 @@
+---
+# Lint every workflow under `.github/workflows/` via actionlint, so a broken
+# workflow fails review instead of landing on `main`. Runs on every PR that
+# touches a workflow file and on every push to `main`, so the gate guards both
+# ends of the integration path.
+#
+# Delegates to the shared reusable workflow in tbhb/github-actions,
+# which runs actionlint from its SHA-pinned Docker image (bundling shellcheck
+# for run: blocks) against the caller's checked-out tree. The reusable workflow
+# owns its concurrency group, so this caller stays thin. Pinned by commit SHA;
+# the trailing tag comment marks the matching release for Renovate.
+name: lint-workflows
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/**']
+  pull_request:
+    paths: ['.github/workflows/**']
+
+permissions:
+  contents: read
+
+jobs:
+  lint-workflows:
+    permissions:
+      contents: read
+    # yamllint disable-line rule:line-length
+    uses: tbhb/github-actions/.github/workflows/lint-workflows.yml@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0

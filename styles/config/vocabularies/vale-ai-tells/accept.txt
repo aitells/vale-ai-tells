@@ -41,6 +41,7 @@ templated
 [Tt]ricolon
 [Tt]ricolons
 tokenizer
+[Tt]oolchain
 whitepaper
 yamllint
 

@@ -1,0 +1,9 @@
+# Review routing for vale-ai-tells. GitHub applies the last matching
+# rule, so the rule below overrides the default for the path it names.
+
+# Default owner for everything.
+*           @tbhb
+
+# CI and supply-chain surface. The /.github/ rule covers renovate.json5
+# and every workflow, including the release pipeline.
+/.github/   @tbhb

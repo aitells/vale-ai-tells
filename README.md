@@ -85,8 +85,8 @@ The glob covers both how pre-commit passes the path and direct Vale invocations.
 Add the commit-msg hook to your `.pre-commit-config.yaml`:
 
 ```yaml
-  - repo: https://github.com/errata-ai/vale
-    rev: 27593b0e0e7eb8f0c2b7fae0d93fa1cfaabceb2f # v3.13.0
+  - repo: https://github.com/vale-cli/vale
+    rev: d32b532e2f5ba703ba06a5a6829f9db1fc78a92c  # frozen: v3.15.2
     hooks:
       - id: vale
       - id: vale
@@ -395,6 +395,23 @@ When writing or editing prose, vary your structure:
 ```
 
 This covers structural patterns that lexical analysis can't catch.
+
+## Working on this repository
+
+Every gate runs through a `just` recipe, and CI runs the same recipes, so a clean local run predicts a clean pull request.
+
+```bash
+just setup    # brew bundle, vale sync, install the git hooks
+just lint     # yamllint, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
+just test     # fixture guard: tells fire, subjects smoke-test, false positives stay clean
+just check    # lint and test together
+```
+
+The [Brewfile](Brewfile) lists the local toolchain. `just lint-workflows` and `just gitleaks` run from digest-pinned Docker images, so those two need a container runtime. Vale itself is pinned to the version CI installs, and `just check-vale-version` warns when the local binary drifts off it.
+
+Commit messages go through the shared [`pre-commit-hooks`](https://github.com/tbhb/pre-commit-hooks) gates at the `commit-msg` stage. One hook enforces the Conventional Commits shape and the length bounds. Another enforces the trailer rules, including a DCO `Signed-off-by` on every message. The remaining pair spell-check the buffer and lint it with this package's own `ai-tells` and `ai-tells-commits` styles. [AGENTS.md](AGENTS.md) describes the drafting workflow and the prose-lint output contract.
+
+`just build-package` writes the three release zips locally, and `just release vX.Y.Z` tags, pushes, and waits on the release run before rewriting the notes from the changelog.
 
 ## Sources
 

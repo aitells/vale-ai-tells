@@ -1,14 +1,26 @@
+# https://editorconfig.org
+
 root = true
 
 [*]
 charset = utf-8
 end_of_line = lf
-indent_style = space
-indent_size = 2
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{json,jsonc}]
+[*.{html,j2}]
+indent_style = space
+indent_size = 2
+
+[*.css]
+indent_style = space
+indent_size = 2
+
+[*.{js,ts}]
+indent_style = space
+indent_size = 2
+
+[*.{json,jsonc,json5}]
 indent_style = space
 indent_size = 2
 
@@ -16,13 +28,17 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
 [*.toml]
 indent_style = space
 indent_size = 2
 
-[*.md]
-trim_trailing_whitespace = false
-max_line_length = off
+[Justfile]
+indent_style = space
+indent_size = 2
 
 [*.sh]
 indent_style = space
@@ -32,6 +48,6 @@ indent_size = 2
 indent_style = space
 indent_size = 2
 
-[Justfile]
+[*.{xml,svg}]
 indent_style = space
 indent_size = 2

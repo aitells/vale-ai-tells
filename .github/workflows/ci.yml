@@ -1,0 +1,117 @@
+---
+# Main quality gate. This repo's content is a set of Vale styles and the
+# docs around them, so the prose, spelling, Markdown, config, TOML, and
+# YAML linters are its code gates and run here rather than staying
+# local-only. Both jobs install the Brewfile toolchain (Homebrew is
+# preinstalled on the ubuntu-24.04 runners) and sync the Vale styles,
+# then run their gates through the `just` recipes so the Justfile stays
+# the single definition of what each gate runs: the lint job runs the
+# full bar via `just lint`, and the test job runs the fixture suite via
+# `just test` (vale must be present to evaluate the fixtures).
+# actionlint is absent from the lint bar: the standalone lint-workflows
+# workflow already covers it.
+
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  lint:
+    name: lint
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up just
+        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+
+      # The runner image ships Homebrew but leaves its prefix off PATH.
+      - name: Put Homebrew on the PATH
+        run: echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
+
+      # vale comes from the pinned composite rather than the Brewfile, so
+      # the prose gates run a known binary instead of whatever Homebrew
+      # serves that day. It lands on PATH ahead of Homebrew's prefix, so
+      # the Brewfile copy never shadows it.
+      - name: Set up vale
+        uses: tbhb/github-actions/.github/actions/setup-vale@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+
+      # The image pins an older Homebrew and sets HOMEBREW_NO_AUTO_UPDATE,
+      # but `brew bundle` reads formula metadata from the JSON API, which
+      # serves current definitions. ca-certificates now declares a `run`
+      # install step that the pinned Homebrew cannot parse, failing every
+      # formula that depends on it. Update Homebrew itself first.
+      - name: Update Homebrew
+        run: brew update
+
+      - name: Install Homebrew dependencies
+        run: brew bundle install
+
+      - name: Sync Vale styles
+        run: just install-tools
+
+      - name: Lint
+        run: just lint
+
+  test:
+    name: test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Set up just
+        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+
+      # The runner image ships Homebrew but leaves its prefix off PATH.
+      - name: Put Homebrew on the PATH
+        run: echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
+
+      # vale comes from the pinned composite rather than the Brewfile, so
+      # the fixture assertions run a known binary instead of whatever
+      # Homebrew serves that day. It lands on PATH ahead of Homebrew's
+      # prefix, so the Brewfile copy never shadows it.
+      - name: Set up vale
+        uses: tbhb/github-actions/.github/actions/setup-vale@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+
+      # The image pins an older Homebrew and sets HOMEBREW_NO_AUTO_UPDATE,
+      # but `brew bundle` reads formula metadata from the JSON API, which
+      # serves current definitions. ca-certificates now declares a `run`
+      # install step that the pinned Homebrew cannot parse, failing every
+      # formula that depends on it. Update Homebrew itself first.
+      - name: Update Homebrew
+        run: brew update
+
+      - name: Install Homebrew dependencies
+        run: brew bundle install
+
+      - name: Sync Vale styles
+        run: just install-tools
+
+      - name: Test
+        run: just test

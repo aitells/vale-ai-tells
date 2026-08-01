@@ -4,8 +4,21 @@ styles/Google/
 styles/proselint/
 styles/write-good/
 
+# Agent commit-message draft. Authored at the repo root so vale's
+# [formats] mapping resolves it, linted via `just lint-commit-msg`,
+# then consumed with `git commit -F COMMIT_AGENTMSG`. Never committed.
+COMMIT_AGENTMSG
+
 # Linter caches
 .rumdl_cache/
+.cspell-cache
+node_modules/
+
+# Package build artifacts
+pkg/
+ai-tells.zip
+ai-tells-commits.zip
+ai-tells-experimental.zip
 
 # Git worktrees
 .worktrees/
@@ -27,3 +40,6 @@ Thumbs.db
 *~
 .idea/
 .vscode/
+
+# APM dependencies
+apm_modules/

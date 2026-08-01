@@ -1,0 +1,44 @@
+---
+# Self-hosted Renovate. Authenticates as the tbhb-renovate[bot]
+# GitHub App so commits carry a DCO sign-off matching the committer (the
+# stock Mend hosted App commits as renovate[bot], which can't match this
+# repo's gitAuthor + gitSignOff pair).
+#
+# Delegates to the shared reusable workflow in tbhb/github-actions,
+# which mints the App token, checks out this repo, and runs the pinned
+# Renovate image against this repo's .github/renovate.json5. Pinned by commit
+# SHA; the trailing tag comment marks the matching release for Renovate.
+#
+# Execution depends on the tbhb-renovate App credentials reaching the
+# run: this repository carries RENOVATE_CLIENT_ID and
+# RENOVATE_PRIVATE_KEY as its own Actions secrets.
+name: Renovate
+
+on:
+  schedule:
+    # Hourly on weekdays, every two hours on weekends. Matches Cilium's
+    # cadence: fast enough to catch CVEs the same business day, slack
+    # enough to avoid wasting API budget on quiet weekends.
+    - cron: "11 * * * 1-5"
+    - cron: "11 */2 * * 6,0"
+  workflow_dispatch:
+    inputs:
+      renovate_log_level_debug:
+        type: boolean
+        description: "Run Renovate with debug log levels"
+        default: true
+
+permissions:
+  contents: read
+
+jobs:
+  renovate:
+    permissions:
+      contents: read
+    # yamllint disable-line rule:line-length
+    uses: tbhb/github-actions/.github/workflows/renovate.yaml@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+    with:
+      renovate_log_level_debug: ${{ inputs.renovate_log_level_debug || false }}
+    secrets:
+      RENOVATE_CLIENT_ID: ${{ secrets.RENOVATE_CLIENT_ID }}
+      RENOVATE_PRIVATE_KEY: ${{ secrets.RENOVATE_PRIVATE_KEY }}

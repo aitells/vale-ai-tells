@@ -1,0 +1,47 @@
+---
+# Secret scanning. gitleaks (from its pinned Docker image, via `just
+# gitleaks`) walks the full commit history and the working tree against
+# its bundled rule set, so a credential committed anywhere in the repo's
+# past fails the gate. Runs on every pull request and push to `main`,
+# plus a daily cron that catches rules added to gitleaks after a commit
+# merged.
+
+name: security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "26 6 * * *"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  gitleaks:
+    name: gitleaks
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Harden the runner
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2.20.0
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Full history so gitleaks scans every commit's diff, not just
+          # the checkout tip.
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Set up just
+        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+
+      - name: Scan for committed secrets
+        run: just gitleaks

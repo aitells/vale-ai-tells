@@ -1,0 +1,36 @@
+{
+  "language": "en",
+  "ignorePaths": [
+    "**/*.log",
+    ".claude/worktrees/**/*",
+    ".rumdl_cache/**/*",
+    ".vale-config/**/*",
+    "LICENSE",
+    "node_modules/**/*",
+    "pkg/**/*",
+    "styles/Google/**/*",
+    "styles/proselint/**/*",
+    "styles/write-good/**/*",
+    "tmp/**/*"
+  ],
+  "overrides": [
+    {
+      "filename": [
+        "styles/**/*.yml",
+        "styles/config/vocabularies/**/accept.txt"
+      ],
+      // Rule tokens split words across character classes ("optimi[sz]e"),
+      // which cspell reads as two unknown fragments. Drop the class so the
+      // surrounding fragments never need dictionary entries of their own.
+      "ignoreRegExpList": ["/\\[[A-Z][a-z]\\]\\w+/g"]
+    }
+  ],
+  "dictionaryDefinitions": [
+    {
+      "name": "vale-ai-tells",
+      "path": "./.cspell-words.txt",
+      "addWords": true
+    }
+  ],
+  "dictionaries": ["vale-ai-tells"]
+}

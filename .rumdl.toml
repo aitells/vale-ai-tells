@@ -1,7 +1,7 @@
 [global]
 disable = [
-  "MD013", # Line length
-  "MD033", # Inline HTML
+  "MD013",  # Line length
+  "MD033",  # Inline HTML
 ]
 respect_gitignore = true
 exclude = [".git", ".vale", "tmp"]
