@@ -1,9 +1,10 @@
 set unstable := true
 set positional-arguments := true
-# Several recipes use `set -o pipefail`, which just's default `sh` lacks on
-# runners where /bin/sh is dash. macOS maps sh to bash, so those recipes pass
-# locally and fail in CI without this.
-set shell := ["bash", "-cu"]
+# The [script] recipes use `set -o pipefail`, which the default `sh -eu`
+# interpreter lacks where /bin/sh is dash. macOS maps sh to bash, so they pass
+# locally and fail on CI runners without this. Note that `set shell` does not
+# apply to [script] recipes, only this.
+set script-interpreter := ["bash", "-eu"]
 
 # Default recipe
 default: lint
