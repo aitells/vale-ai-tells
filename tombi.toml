@@ -1,0 +1,68 @@
+#:schema tombi://www.schemastore.org/tombi.json
+# Standard tombi config (tombi 1.2.0) propagated verbatim to every tbhb repo.
+# Gate commands are invoked only via `just lint-toml` / `just format-toml`, never raw:
+#   tombi format --check --diff             (non-mutating format gate)
+#   tombi lint --offline --error-on-warnings
+# Re-verify the tombi pin whenever the version literals move.
+
+toml-version = "v1.0.0"
+
+[files]
+# Trees that may hold vendored or generated *.toml we must never lint/format.
+# Most are already .gitignored (respect-ignore-files re-covers them), but they are
+# listed explicitly so the exclusion is unambiguous for CLI and editor and survives a
+# repo that forgets to gitignore one of them. Every entry is intentional (an
+# undocumented ignore is a review defect).
+exclude = [
+  "vendor/**/*.toml",
+  ".venv/**/*.toml",
+  "target/**/*.toml",
+  "tmp/**/*.toml",
+  ".claude/**/*.toml",
+  "apm_modules/**/*.toml",
+  "node_modules/**/*.toml",
+  # Generated lockfiles stay out of the format gate. They end in .lock not .toml,
+  # so the default include already skips them; listed here to make that choice
+  # explicit and durable.
+  "Cargo.lock",
+  "uv.lock",
+]
+# Honor .gitignore/.ignore so generated trees (.cosmic-ray/, .rumdl_cache/, target/,
+# .venv/, node_modules/, apm_modules/) are skipped without enumerating each here.
+respect-ignore-files = true
+
+[schema]
+# Validation stays ON: Cargo.toml validates offline against the embedded SchemaStore
+# cargo.json; pyproject.toml against its embedded schema. strict is OFF everywhere because
+# SchemaStore schemas lag real config surfaces (e.g. rumdl's valid `respect_gitignore`
+# key is absent from schemastore rumdl.json) and under `--error-on-warnings` a strict
+# "unknown key" warning would hard-fail the gate on a legitimate key. Non-strict still
+# checks types, enums, and deprecations. Tighten per-file only if a repo authors local
+# schemas (escape valve: a `#:schema none` directive or a `[[schemas]]` entry per file).
+enabled = true
+strict = false
+
+# Preserve author key/array order. When a file has an associated schema, tombi's
+# formatter otherwise reorders keys and array values to the schema's canonical
+# order — a semantic rewrite of hand-authored manifests. The format gate is
+# whitespace/style only, so schema-driven reordering is disabled for the two
+# schema-bearing file kinds these repos carry (Cargo.toml, pyproject.toml). tombi
+# 1.2.0 has no global toggle for this (a top-level `[format.rules]` with
+# `table-keys-order` / `array-values-order` fails to parse under the pinned
+# binary); these per-schema overrides are the 1.2.0 mechanism. An entry whose
+# `include` matches no file in a given repo is inert, which keeps this config
+# byte-identical across repos. Validation is unchanged: the `tombi://` paths
+# name the same embedded SchemaStore documents the built-in catalog would
+# associate, so type, enum, and deprecation checks still run offline.
+
+[[schemas]]
+path = "tombi://www.schemastore.org/cargo.json"
+include = ["**/Cargo.toml"]
+format.rules.array-values-order.enabled = false
+format.rules.table-keys-order.enabled = false
+
+[[schemas]]
+path = "tombi://www.schemastore.org/pyproject.json"
+include = ["**/pyproject.toml"]
+format.rules.array-values-order.enabled = false
+format.rules.table-keys-order.enabled = false

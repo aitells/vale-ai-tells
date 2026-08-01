@@ -44,7 +44,8 @@ jobs:
       - name: Install Vale and just for fixture tests
         run: |
           VALE_VERSION=3.13.0
-          curl -sfL "https://github.com/errata-ai/vale/releases/download/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" \
+          VALE_BASE="https://github.com/errata-ai/vale/releases/download"
+          curl -sfL "${VALE_BASE}/v${VALE_VERSION}/vale_${VALE_VERSION}_Linux_64-bit.tar.gz" \
             | sudo tar -xz -C /usr/local/bin vale
           curl -sfL https://just.systems/install.sh | sudo bash -s -- --to /usr/local/bin
 

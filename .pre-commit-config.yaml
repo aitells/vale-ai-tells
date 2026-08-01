@@ -48,12 +48,12 @@ repos:
         always_run: true
       - id: cspell
         name: cspell
-        entry: cspell --no-summary --no-progress --no-must-find-files
+        entry: cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files
         language: system
         types: [text]
       - id: cspell-commit
         name: cspell-commit
-        entry: cspell --no-summary --no-progress --language-id commit-msg
+        entry: cspell --config .cspell.jsonc --no-summary --no-progress --language-id commit-msg
         language: system
         stages: [commit-msg]
         types: [text]

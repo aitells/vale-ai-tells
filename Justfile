@@ -49,7 +49,7 @@ lint-markdown *args:
 
 # Check spelling
 lint-spelling *args:
-  cspell {{ if args == "" { "." } else { args } }}
+  cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files {{ if args == "" { "." } else { args } }}
 
 # Lint each rule file's own `message:` field with the ai-tells prose style, so
 # the package's diagnostics don't contain the patterns they flag. Uses the

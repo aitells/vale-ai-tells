@@ -1,0 +1,4 @@
+styles/
+.env
+.env.local
+mise.local.toml
