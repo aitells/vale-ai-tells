@@ -289,7 +289,7 @@ This rule and its two companions replace `Google.Passive`, `write-good.Passive`,
 
 The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` covers the adverb gap. `write-good.E-Prime` needs no replacement: it flags every form of "to be," including "it's" and "here's," which makes it a philosophy rather than a passive detector.
 
-**Known limitations:** Participles that double as adjectives ("tired," "excited") tag as VBN even in predicate-adjective position, so "she was tired" fires. The rule deliberately carries no exception list: an allowlist would hide the passive sense of those same verbs ("the electron is excited by a photon"), and the project's stance is that users decide what to except. The tagger also guesses VBN for some words outside its vocabulary, which produces an occasional flag on a non-participle.
+**Known limitations:** Participles that double as adjectives ("tired," "excited") tag as VBN even in predicate-adjective position, so "she was tired" fires. The rule deliberately carries no exception list. An allowlist would hide the passive sense of those same verbs ("the electron is excited by a photon"). The project's stance is that users decide what to except. The tagger also guesses VBN for some words outside its vocabulary, which produces an occasional flag on a non-participle.
 
 ### PassiveVoiceAdverb
 
