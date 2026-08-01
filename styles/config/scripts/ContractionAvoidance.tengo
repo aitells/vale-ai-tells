@@ -6,6 +6,11 @@ matches := []
 clean := text.re_replace("(?s)```.*?```", scope, "")
 clean = text.re_replace("(?s)<!--.*?-->", clean, "")
 
+// Normalize the typographic apostrophe. A document that went through a
+// typographer writes every contraction with U+2019, which the straight
+// apostrophe in the patterns below would count as zero.
+clean = text.re_replace("’", clean, "'")
+
 // Gate check: only flag informal/conversational documents.
 // Formal docs (specs, legal, academic) legitimately avoid contractions.
 informal_markers := 0

@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Fixed
+
+- **ContractionAvoidance**: Count contractions written with the typographic
+  apostrophe (U+2019). Every pattern in the script used the straight
+  apostrophe, so a document that went through a typographer counted as
+  having no contractions at all and tripped the rule regardless of how it
+  was written. The script now normalizes the apostrophe before counting.
+
+<!-- vale on -->
+
 ## [1.27.0] - 2026-07-31
 
 <!-- vale off -->
