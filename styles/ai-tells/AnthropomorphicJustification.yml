@@ -44,6 +44,19 @@ tokens:
   # provenance and the same zero measurement.
   - (?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+hands?\s+(?:the|a|it|them)\b
 
+  # Candidate not yet implemented: the occupational metaphor with no
+  # possessive anchor. Every idiom in the earning and paying families gates
+  # itself on "its" ("earns its keep", "pays its rent"), which is what keeps
+  # a person out of the subject slot. "Negates for a living" carries no such
+  # anchor, so a bare token would flag "she writes for a living" too, and
+  # that is ordinary English about a person with a job.
+  #
+  # Measured at zero across the Go and Python standard libraries, the
+  # markdown in the Go source tree, and this project's accepted commit
+  # history. That silence cuts both ways: it leaves the person-subject false
+  # positive unmeasured, so the gating problem has to be solved on other
+  # evidence before a token lands.
+
   # "Paying" family
   - pays? for itself
   - pays? dividends
@@ -211,3 +224,24 @@ tokens:
   - causes? harm
   - causing harm
   - without causing harm
+
+  # "Naming" and "wanting" families, deliberately left uncovered in prose.
+  # Both verbs take inanimate subjects the way the families above do, and
+  # both were rejected on corpus evidence rather than by omission. Recorded
+  # here so a later audit does not reopen either without new data.
+  #
+  # "Names" as an act of designation reads like a tell ("it names a kind of
+  # file", "the field names the target"), but it is ordinary Go and Python
+  # documentation style: "IsDir reports whether the path names a directory",
+  # "charset names the character set to use", "it names an importable
+  # package". Every instance found in the two standard libraries is the
+  # precise verb for what an identifier denotes. A commit message is the one
+  # place the same phrasing reads as a substitution rather than a definition,
+  # so ai-tells-commits does flag it through CommitFigurativeVerbs. The split
+  # is deliberate: uncovered here, covered there.
+  #
+  # "Wants" with an inanimate subject is more entrenched still: "gcc wants
+  # to 8-align int64s", "the package wants to make the data available", "the
+  # scheduler wants to preempt us". The same libraries reach for it freely
+  # with software subjects, and no complement or subject gate separates that
+  # register from the AI usage, so a rule here would flood.

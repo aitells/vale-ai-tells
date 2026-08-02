@@ -327,7 +327,7 @@ Counts the determiner "no" heading a noun phrase and flags paragraphs holding mo
 
 **Threshold rationale:** Agent-authored prose sampled from 798 sessions runs 38.3 of these per 10k words. The Go standard library runs 13.5 and the Python standard library 11.1, close to a third of the agent rate. Per paragraph the separation is sharper. Across 4477 paragraphs of human-written markdown in the Go source tree, not one paragraph reached two. A max of 2 triggers only at three or more. That covers 0.073% of agent paragraphs and leaves the two-instance paragraph alone, since two independent negations in one paragraph are ordinary.
 
-**Known limitation:** Prose that negates for a living exceeds the max for good reason. Specifications, license text, RFC language, and security controls stating what a system must not do should disable the rule.
+**Known limitation:** Prose whose purpose is prohibition exceeds the max for good reason. Specifications, license text, RFC language, and security controls stating what a system must not do should disable the rule.
 
 ## Calibration status
 

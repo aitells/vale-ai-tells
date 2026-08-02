@@ -23,7 +23,7 @@ max: 2
 # three are excluded; none of them is the determiner this rule measures. The
 # optional leading dot keeps dotfile and dotted-identifier objects countable,
 # as in a repository that has no .apm directory.
-# Prose that negates for a living (specifications, license text, RFC language,
+# Prose whose purpose is prohibition (specifications, license text, RFC language,
 # security controls stating what a system must not do) will exceed the max for
 # good reason and should disable the rule.
 token: '\bno (?!longer\b|one\b|matter\b)\.?[a-z][a-z''-]*'
