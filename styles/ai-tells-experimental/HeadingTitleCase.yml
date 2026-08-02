@@ -5,8 +5,14 @@ level: warning
 scope: heading
 match: $sentence
 style: AP
-# Ordinal prefixes ("Section 1:", "Appendix A", "1.1") are stripped before
-# the case check; the first word after the prefix must still be capitalized.
+# Ordinal prefixes ("Section 1:", "Appendix A", "1.1") are stripped, case
+# converted, then re-attached verbatim, so the prefix itself becomes token 0
+# of the check. Vale hard-fails only on token 0 and scores the rest against a
+# 0.8 threshold, which leaves the word after the prefix unenforced: both
+# "Step 0: Open the task list" and "Step 0: open the task list" pass. The
+# prefix tokens also pad the denominator, so a prefixed heading absorbs one
+# more stray capital than a bare one. A fully title-cased remainder
+# ("Step 0: Open the Task List") still flags.
 prefix: '^(?:(?:Appendix|Chapter|Example|Figure|Part|Phase|Section|Stage|Step|Table)\s+(?:\d+(?:\.\d+)*|[A-Z]\b|[IVXLCDM]+\b)|\d+(?:\.\d+)*)[.:]?(?:\s+|$)'
 exceptions:
   - API
