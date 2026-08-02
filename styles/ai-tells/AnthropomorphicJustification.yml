@@ -168,6 +168,15 @@ tokens:
   # letting the noun rule on it.
   - settles? the (?:question|debate|matter|argument|issue|dispute)
   - settled the (?:question|debate|matter|argument|issue|dispute)
+  # The same gavel with a pronoun or a bare interrogative for an object
+  # ("the histogram settles what kind of session ran", "the reconfirmation
+  # settles it"). The curated objects above miss this shape entirely, and
+  # it is the commoner one, since the writer rarely names the question
+  # being closed. The literal senses take different complements and stay
+  # clear: settle on a heuristic, settle for a simpler form, settle ties
+  # by string ordering, and wait for the dust to settle. Measured at zero
+  # across the Go and Python standard libraries.
+  - (?:settles|settled) (?:it|that|this|which|what|whether)\b
   - decides? the (?:question|debate|matter|argument|issue|dispute)
   - decided the (?:question|debate|matter|argument|issue|dispute)
   - puts? the (?:question|debate|matter|argument|issue|dispute) to (?:rest|bed)

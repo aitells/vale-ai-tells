@@ -482,6 +482,12 @@ The team settled into the new office.
 
 Dust settles on the shelf overnight.
 
+They settled on the heuristic that names without dots are packages.
+
+Settle ties using string ordering when the lengths match.
+
+We settle for the simpler form here.
+
 ## FigurativeRuns: literal running that should NOT trigger
 
 Run the tests before you push.

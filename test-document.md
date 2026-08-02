@@ -733,6 +733,12 @@ The whole design hangs on a single assumption.
 
 Availability settles the question.
 
+The reconfirmation settles it at four.
+
+The histogram settles what kind of session ran.
+
+That benchmark settled whether the cache helps.
+
 The benchmark decided the debate.
 
 Latency puts the matter to rest.
