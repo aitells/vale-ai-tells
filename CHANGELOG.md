@@ -11,6 +11,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- **NegationDensity** (`ai-tells-experimental`): New rule. Counts the
+  determiner heading a negated noun phrase and reports a paragraph
+  holding more than two of them. Each instance is correct English and
+  reads fine alone, so the rule measures rate rather than judging any
+  single use, in the way `TricolonDensityDocument` does for a structure
+  its per-instance sibling cannot see. Agent-authored prose runs these
+  at close to triple the rate of the Go and Python standard libraries.
+  Warning level, matching the other density rules.
+
+- **CommitFigurativeVerbs** and **CommitGitJargon**
+  (`ai-tells-commits`): New rules drawn from commit messages a
+  maintainer sent back across the four toolchain repositories. The
+  first reports figurative verbs taking an inanimate subject, the
+  second bare git nouns left unexplained. Both stay scoped to commit
+  messages, because the same shapes are ordinary elsewhere: a table
+  really does hold values, and outside a repository those nouns mean
+  syntax trees and array indices.
+
+- **FigurativeIdioms** (`ai-tells`): New rule for fixed figurative
+  phrases standing in for a plain statement of what happened. A whole
+  idiom leaves no literal reading to protect, so no subject gate is
+  needed. Disable it for runtime and memory-management prose, where a
+  value is literally out of reach.
+
 - **Agent output template**: `styles/config/templates/ai-tells-agent.tmpl`
   prints one line per finding, carrying the location, the severity, the
   rule name, the exact matched text, and the replacement when a rule
@@ -23,14 +47,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **FigurativeSits**: Two tokens for placement where the complement
+  proves nothing and the subject carries the discriminator. One curates
+  the subject to parts of a document or a config; the other leaves it
+  open and accepts literal placement as a known cost, which the rule
+  header already tells furniture and layout prose to disable.
+
+- **FigurativeCarries**: A token for a file or a section treated as the
+  bearer of a policy rather than the place the policy is written. The
+  lookahead now excludes the phrasal senses on both sides, so bringing
+  a setting forward from a previous release stays clean.
+
+- **AnthropomorphicJustification**: Tokens for the typographic and
+  structural grant, for the bare earning and handing shapes with an
+  open object, and for adjudication where the object collapses to a
+  pronoun. The file also records three verbs left uncovered on corpus
+  evidence, so a later audit does not reopen them without new data.
+
 - **README**: The commit-msg hook snippet now names `vale-cli/vale` at a
   frozen revision. The `errata-ai` repository stopped publishing that hook
   after 3.13, so the old snippet pinned a revision that no longer receives
   updates. A new section lists the recipes that gate this repository and
   names the container runtime that two of them need.
 
-No rule changed, so `ai-tells.zip` and `ai-tells-commits.zip` unzip
-identical to the v1.27.2 assets.
+### Fixed
+
+- **VerbTricolonDensity**: The alert printed a Go format error where the
+  match count belonged, because the message asked for a string and the
+  occurrence extension passes an integer.
+
+- **VerbTricolon**: Matches no longer run past the sentence they start
+  in. Vale flattens a document to one string before matching, and the
+  gaps between items excluded only the comma, so clauses drawn from
+  separate sentences read as one series. A Conventional Commits subject
+  carries no terminal punctuation either, which let the colon after the
+  type reach into the body and pair the subject with commas from prose
+  holding no tricolon at all.
 
 <!-- vale on -->
 
