@@ -271,6 +271,23 @@ lint-pr-description:
 lint-squash-msg:
     prek run --stage commit-msg --commit-msg-filename SQUASH_AGENTMSG
 
+# Every other prose recipe runs one checker over many files, so a
+# document that clears `lint-prose` can still fail spelling and
+# structure afterwards, which is how a short draft turns into four lint
+# rounds. This runs vale, cspell, and rumdl over one document and
+# reports all three at once.
+#
+# It also probes the path before trusting a clean run. Vale matches a
+# path against the sections in .vale.ini exactly, and a path no section
+# binds styles to loads no styles, reads the file, prints nothing, and
+# exits 0 — byte for byte what a clean document produces. The recipe
+# sends known-bad text through vale under the target's own path and
+# reports an unscoped path rather than a pass.
+
+# Lint one drafted document through every prose gate at once.
+lint-draft file:
+    bash tools/lint-draft.sh {{ file }}
+
 # --- Test ---
 
 # Run the fixture guard: tells fire, past-tense subjects smoke-test, no false positives

@@ -21,3 +21,9 @@ That hook stage is the real gate. `just lint-commit-msg` only previews it, so a 
 The toolchain defaults to the agent template: `just lint-prose`, `just lint-messages`, and the vale pre-commit hook all pass `--output=ai-tells-agent.tmpl`. Name the flag yourself only when invoking `vale` directly. The template prints one self-contained line per finding (location, severity, rule, the exact matched text, and the replacement parameter when the rule defines one) plus a totals line, so you can apply fixes without re-reading context through separate commands. Empty output means a clean run, and the exit code carries the result.
 
 The template is tracked at `styles/config/templates/ai-tells-agent.tmpl`, which puts it inside the `ai-tells-experimental` release zip alongside the Tengo scripts.
+
+## Drafting a document
+
+Each recipe named so far runs one checker over many files, so a draft that clears `just lint-prose` can still fail spelling and structure afterwards, which is how a short document turns into four rounds of linting. `just lint-draft <file>` runs vale, cspell, and rumdl over one document and reports all three at once.
+
+It also probes the path before it trusts a clean run. Vale matches a path against the sections in `.vale.ini` exactly, and a path no section binds styles to loads no styles at all. Vale then reads that file and exits 0 without printing anything, which is what a clean document produces too. The recipe sends known-bad text through vale under the target's own path and reports `unscoped-path` rather than a pass. Silence from that probe means a draft under `styles/`, `tmp/`, or `.claude/` answers to nothing. Move it to a path `.vale.ini` names.

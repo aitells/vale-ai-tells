@@ -83,6 +83,7 @@ prek
 prepositionless
 punche
 pyproject
+PYTHONUTF
 reimagines
 reimagining
 Reinhart
@@ -104,6 +105,7 @@ tfvars
 throughlines
 tmpl
 tombi
+toplevel
 tricolon
 tricolons
 venv
