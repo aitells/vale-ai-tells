@@ -1,13 +1,13 @@
 lockfile_version: '1'
-generated_at: '2026-08-02T19:08:46.747231+00:00'
+generated_at: '2026-08-02T20:55:12.115617+00:00'
 apm_version: 0.26.0
 dependencies:
-- repo_url: tbhb/agent-tools
-  name: agent-tools
+- repo_url: tbhb/repotools
+  name: repotools
   host: github.com
-  resolved_commit: c6ea9d6eb66d8fcf52a4f3adab708450ff2a08ba
-  resolved_ref: main
-  version: 0.2.0
+  resolved_commit: 9d5de432457f431d8fb300aedc6cd35315f6c30e
+  resolved_ref: v0.3.0
+  version: 0.3.0
   package_type: apm_package
   deployed_files:
   - .claude/rules/worktree-wip.md
@@ -131,7 +131,7 @@ dependencies:
     .claude/skills/fix-pr/tokens.json: sha256:77629266b5b84e194c4701a57832a44198bba6c10c5eb2c7228602dbd1c47e4d
     .claude/skills/fix-prose/SKILL.md: sha256:ddc759424ef24a29eae573b2e7129d13bf43d283ad1d5a4960e462cdd349d24e
     .claude/skills/fix-prose/scripts/arm-guard.sh: sha256:3ce428c3846103b58ecd8e45249f7ea7dd46bc7d313f30a69ee5ee68a08c47ad
-    .claude/skills/fix-prose/scripts/check-suppressions.sh: sha256:d595670ec3ccbd9559a7875b0079e3bcd791d079975c0fed5b292cba6875cdd7
+    .claude/skills/fix-prose/scripts/check-suppressions.sh: sha256:037ffa7ad42ec224e1ab51961a07dc3f555bc526082b8d4705f7fceae4abffa5
     .claude/skills/fix-prose/scripts/guard-target.sh: sha256:3b037b7f3dd0533619a86d1309eed86cfdd1a191e8cc0577e69af59e120a376a
     .claude/skills/fix-prose/scripts/preflight.sh: sha256:7833798bf2c3e5ca489f5594d678d889431acaf9da19090ee64f5891fbf33361
     .claude/skills/fix-prose/tokens.json: sha256:bc3a1ff8fde6cfdcd8b6540c3a4fb6307781d723fe780c85e5390f4532ccb79d
@@ -186,7 +186,7 @@ dependencies:
     .claude/skills/write-prose-fix/SKILL.md: sha256:23f044d7c8fcf7906896341cfc62c86352a0f11d66e68ddc6d196a81ee99a5a1
     .claude/skills/write-prose-fix/scripts/context.sh: sha256:f7654bc01ea9c280f0d8cde6d8821058745997bbe8c364e524c47a95532c3b69
     .claude/skills/write-prose-fix/tokens.json: sha256:0c0cb63db37bfaccfca5e2f7888eaeb9e5d88c6e75e468430d5398215479777c
-  content_hash: sha256:5944ba2d3f752a4bb83b7ac556c3a18d95df0d0320c99e090e39b3a74dee82f9
+  content_hash: sha256:f08fb8167baf21ceb04f0da1fe275832c369d0a012239663a3a29c41545ba0b0
   declared_license: Apache-2.0
 deployments:
 - kind: project-relative
@@ -195,8 +195,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:0204082643d1ea505ae20eaf93e7d94dd52b65046f3e4f290ec7bbc5c6093634
 - kind: project-relative
   target: claude
@@ -204,8 +204,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -213,8 +213,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:c5c028c3044eb7696f325d5159c98f9390a4fb3285e6a25dfb1f4b9c8ce35755
 - kind: project-relative
   target: claude
@@ -222,8 +222,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:23e0959d80ec494ae065faed8be1204fe5642d3b0abd0f0fdc9c24b1874e9ff0
 - kind: project-relative
   target: claude
@@ -231,8 +231,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:b060c50fb6d90fd537bd894f011d9bfac5ff61a313e96d817adfafa565f20263
 - kind: project-relative
   target: claude
@@ -240,8 +240,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:0aeee7e7efcfe395e1d784ccaa184187d9c142ac3324e35cda1382c8b02541dc
 - kind: project-relative
   target: claude
@@ -249,8 +249,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:05cfbca669e4e446819a1099c7e20309b2a480db6f8f6bdd2a94662ad5f8180d
 - kind: project-relative
   target: claude
@@ -258,8 +258,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:6b40ccc7b76da3522ad2ddff7ef2f229da24e197906a0df3191b9320a672f999
 - kind: project-relative
   target: claude
@@ -267,8 +267,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:7e47481644dcb13467539920f496207e928c170657baf3dcd85fcd47d121ccfe
 - kind: project-relative
   target: claude
@@ -276,8 +276,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:ad11430b0d896026c419802ffbdb198589c239cbabf74e0f1eb59a36fde5594b
 - kind: project-relative
   target: claude
@@ -285,8 +285,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:e95b3104d4e83e5f2b6eda7ad3b3da471cd16eb28a847b55459aa8866f5ca049
 - kind: project-relative
   target: claude
@@ -294,8 +294,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:41986025d5a6277fbe32bf35e78baf77ffbbbb19ff623621bb9bf3915867e1d9
 - kind: project-relative
   target: claude
@@ -303,8 +303,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:b1ebade2f14d382f1afe25956defe55964e045ce73b5b1f0f5a1376b840ad586
 - kind: project-relative
   target: claude
@@ -312,8 +312,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -321,8 +321,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:94f6247e467e0c8a2b9cce524bfd54ee1fca64e8552bb898694327f263203ae6
 - kind: project-relative
   target: claude
@@ -330,8 +330,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:5d60d85e655062fd7c63dfac3d4b0615c2aac8f166a41833bc248db1e3ddeb36
 - kind: project-relative
   target: claude
@@ -339,8 +339,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:ac7965a1f42ac73e6e2e43210db708157d5e0080a7ba67dba88d89ca20f06924
 - kind: project-relative
   target: claude
@@ -348,8 +348,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:aa86398adae53090838087b2556d7514cd27b11ec0a6faaa118d3fac2318e1e3
 - kind: project-relative
   target: claude
@@ -357,8 +357,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:60ef7d05931d2773764a4be8aedfa44bb6de3bb364da503f7d52e0f3b5e45f1e
 - kind: project-relative
   target: claude
@@ -366,8 +366,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:8cda3b7bac131944a065235198b7f8720a942da773fbb73746edeb10d4b33890
 - kind: project-relative
   target: claude
@@ -375,8 +375,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -384,8 +384,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:8a56c7e8c8c49baa525099d6d8baec28ed71b94366fc2f5bbcaf33f55cb3ed2f
 - kind: project-relative
   target: claude
@@ -393,8 +393,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:767cb1d690577d182be7c2f80b62ba4259c08cc8d5125838c2ed0926cadcd60a
 - kind: project-relative
   target: claude
@@ -402,8 +402,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:051720bb9d98d43d8a84176b4a5a01cb35c119973aba896df77785c5044af848
 - kind: project-relative
   target: claude
@@ -411,8 +411,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:69f249fcc5f07fdca7d74e8db832a7e8ba368bd7bc4b5738dbc01cb3d356ad83
 - kind: project-relative
   target: claude
@@ -420,8 +420,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:77629266b5b84e194c4701a57832a44198bba6c10c5eb2c7228602dbd1c47e4d
 - kind: project-relative
   target: claude
@@ -429,8 +429,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -438,8 +438,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:ddc759424ef24a29eae573b2e7129d13bf43d283ad1d5a4960e462cdd349d24e
 - kind: project-relative
   target: claude
@@ -447,8 +447,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:3ce428c3846103b58ecd8e45249f7ea7dd46bc7d313f30a69ee5ee68a08c47ad
 - kind: project-relative
   target: claude
@@ -456,17 +456,17 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
-  content_hash: sha256:d595670ec3ccbd9559a7875b0079e3bcd791d079975c0fed5b292cba6875cdd7
+  - tbhb/repotools
+  active_owner: tbhb/repotools
+  content_hash: sha256:037ffa7ad42ec224e1ab51961a07dc3f555bc526082b8d4705f7fceae4abffa5
 - kind: project-relative
   target: claude
   value: .claude/skills/fix-prose/scripts/guard-target.sh
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:3b037b7f3dd0533619a86d1309eed86cfdd1a191e8cc0577e69af59e120a376a
 - kind: project-relative
   target: claude
@@ -474,8 +474,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:7833798bf2c3e5ca489f5594d678d889431acaf9da19090ee64f5891fbf33361
 - kind: project-relative
   target: claude
@@ -483,8 +483,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:bc3a1ff8fde6cfdcd8b6540c3a4fb6307781d723fe780c85e5390f4532ccb79d
 - kind: project-relative
   target: claude
@@ -492,8 +492,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -501,8 +501,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:40c6a48a1ddcdac0eaac7a4701d70f55981fb727272f1a1fb7a6cff67ed36eb4
 - kind: project-relative
   target: claude
@@ -510,8 +510,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:f36c2f0410b6ed7c3b874e946e5da7ba4ded171e673b088a121010942d75bbef
 - kind: project-relative
   target: claude
@@ -519,8 +519,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:69f249fcc5f07fdca7d74e8db832a7e8ba368bd7bc4b5738dbc01cb3d356ad83
 - kind: project-relative
   target: claude
@@ -528,8 +528,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:800297e011e1a0fef777441bfcf9bdd01e71a01928d2b18037509af4977e661f
 - kind: project-relative
   target: claude
@@ -537,8 +537,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:7bdc46b8ba74ee427c44544ab3bcd9436616ff0ad051e193ef458838c5ca4c5b
 - kind: project-relative
   target: claude
@@ -546,8 +546,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:b843880e1234a49e98060e42a0b175ec2c007b2c72abf32d62f8a8eebb3b2364
 - kind: project-relative
   target: claude
@@ -555,8 +555,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:447cd0d742c563df240b1aa60f5c9032683ce5825d0c51327159c2a1ec7abe71
 - kind: project-relative
   target: claude
@@ -564,8 +564,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:7effc2d47b2d77593bc7bf1e1ed51a1bcf47655ab2ae57554d5ea2bf04da4283
 - kind: project-relative
   target: claude
@@ -573,8 +573,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -582,8 +582,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:10e2d137cedd9c7c03044be8f3045a44a50644ef739ef5d0d41117c55ca496eb
 - kind: project-relative
   target: claude
@@ -591,8 +591,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:666eb5654bdb01717eef09c1e9e29381f13fb9b04ea88b1004fa7fd0b90fcff0
 - kind: project-relative
   target: claude
@@ -600,8 +600,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:4d45156f8b21f4f505fdb33a4e40973d36a0115a8d49af1cb70e696c75275564
 - kind: project-relative
   target: claude
@@ -609,8 +609,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:d6799fe11c94cc0db5d7cfe7edb8c301ee9603e1cdf48d2c6f2247c3824ff48f
 - kind: project-relative
   target: claude
@@ -618,8 +618,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:0d6b83eec9b59dd205632f1254fd8bc31bd8f860d45c7bb5f2cf1ec84d00e3db
 - kind: project-relative
   target: claude
@@ -627,8 +627,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:198b887cf78c83c596e39ee9703bc8948030340827c65fb6439d6736ff3fd260
 - kind: project-relative
   target: claude
@@ -636,8 +636,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:024882b913c0e42ea39a667b99d7e3932f1e575e4ac3b002ebd64d3306d63861
 - kind: project-relative
   target: claude
@@ -645,8 +645,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:084db2b3ac67a275519f7bb84f2d17c59ff7fbbec6f44078c095c110e2bdd18c
 - kind: project-relative
   target: claude
@@ -654,8 +654,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -663,8 +663,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:bf45880197d67eac4121afa9f96924f17b3a7794a7de657a460802cf5090f55e
 - kind: project-relative
   target: claude
@@ -672,8 +672,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:fb1ccf0da995591e1aedf7e036d5ae121ae960467970663a84c60e779ce79d6d
 - kind: project-relative
   target: claude
@@ -681,8 +681,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:40e79e3bf7e3455a3409b39c2c335e5c8d996529db5bb1fc4d60986ee411c560
 - kind: project-relative
   target: claude
@@ -690,8 +690,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:98856035e530c7dec6decb59d78f0e7b4a14d89d203cfcad0630b6ddd26056f5
 - kind: project-relative
   target: claude
@@ -699,8 +699,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:3cd036e26f16e54ad3511ac53f51f792aa02e34730a383cbddfeb54a1421e57f
 - kind: project-relative
   target: claude
@@ -708,8 +708,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:f1540162c2b844a711aa08d28a041ffa2df7e73837e2b023d0106b75d9449dc4
 - kind: project-relative
   target: claude
@@ -717,8 +717,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:8d5692f8830f5348ef01f7bde46e543b8bb5eed562aec676bc96884c0576c32c
 - kind: project-relative
   target: claude
@@ -726,8 +726,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:d0075dd6cb508c0920b1d224ac72c27a8a7a42d17f5faef465d34eda42f73625
 - kind: project-relative
   target: claude
@@ -735,8 +735,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:9b1e70ff2325e98e8d89862bc17d887dc68a58eefc919a22c60a25ac41565fe4
 - kind: project-relative
   target: claude
@@ -744,8 +744,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -753,8 +753,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:a98ee564d8a23370a629ade4f70808c554e016250adc95a5e1c294486fb9bf73
 - kind: project-relative
   target: claude
@@ -762,8 +762,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:6ae6eb37cce0e1073ebbc77e5e0da38773400e1e6a2e1049c7436da404291757
 - kind: project-relative
   target: claude
@@ -771,8 +771,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:0a1f238ebc623ad607f8070578ea3d0b3739f35c4869075fbcd8f7bc3300295e
 - kind: project-relative
   target: claude
@@ -780,8 +780,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:455c4c816b9cb977900facfd82584e6a0a81952bae2159cb745b4641e6c27467
 - kind: project-relative
   target: claude
@@ -789,8 +789,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:12c578ab424823c0f9524d51f275b6c04b3f0efdd48fb6966a422157c02ae320
 - kind: project-relative
   target: claude
@@ -798,8 +798,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:2a5b50f4ad840ec240f630c8b4bd1fd51b8a5df193406154c07beb333db78f71
 - kind: project-relative
   target: claude
@@ -807,8 +807,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:9a18fe600ae3e7b6a571e274d56e8c87f552e760cfc52f24d1d290b7cf265f4c
 - kind: project-relative
   target: claude
@@ -816,8 +816,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -825,8 +825,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:5a02ff2ee3419a12dc71b2e298ee97f9d02928e51f92eb769a75762a5866414c
 - kind: project-relative
   target: claude
@@ -834,8 +834,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:97d50df77eb89bbba01e7c17408ba6fd228ad036d6c27537660c566d3e77fa05
 - kind: project-relative
   target: claude
@@ -843,8 +843,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -852,8 +852,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:b73e53c7011fbd9f16d922b2fe7482bbc2ba13628c8d53d9f897625a202aaeb7
 - kind: project-relative
   target: claude
@@ -861,8 +861,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:44eb0e93c0e155142f79b8101fab86ac6cba62c6d451fc9ac68006d8f955f9c2
 - kind: project-relative
   target: claude
@@ -870,8 +870,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -879,8 +879,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:c17f0f5944d4ee09c6c3e89b5833d7dc92686ea31657b1908ef4174841f01abf
 - kind: project-relative
   target: claude
@@ -888,8 +888,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:b8fa2bd099d312f303730dacaa5380cb320ebdc23080873db6cbb5c76c4567f0
 - kind: project-relative
   target: claude
@@ -897,8 +897,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -906,8 +906,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:32ec7ad57bdb68e1d261e7db75927a99968338313974ced76838982904169ba2
 - kind: project-relative
   target: claude
@@ -915,8 +915,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:8cfb2c18a6cc112ba6c7deb21f4f73df679d03be85de521b1fb1dc5254361284
 - kind: project-relative
   target: claude
@@ -924,8 +924,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -933,8 +933,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:69438c816533f7f0f9428323e9fd1bb489bb1dc93b5f4245c2a958eef70a1c2a
 - kind: project-relative
   target: claude
@@ -942,8 +942,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:267f29c29cd76de5f4e61ebb6b73245c838b9b7e15d076828a5db79d5b467946
 - kind: project-relative
   target: claude
@@ -951,8 +951,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:585f8d32f05d9653ce0766a8fb0bee23754a386c048365a70431fff4443ce461
 - kind: project-relative
   target: claude
@@ -960,8 +960,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:4e017dfa7a18071a590171d8eb4c879d6006ace847b79688be6989ef5239a9d2
 - kind: project-relative
   target: claude
@@ -969,8 +969,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -978,8 +978,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:72c12902b1d9c3032ec4cf42f51f618498f95352c507cfc4a4e5b9788f19301d
 - kind: project-relative
   target: claude
@@ -987,8 +987,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:13baf0c514f6a0ff36a214dfe143fcbcc874208e0b41701c300cfce292430c4d
 - kind: project-relative
   target: claude
@@ -996,8 +996,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:9a0e2dfa4359273a75e9ec6b067142587732ddeb4f9029ad834f1da7e78e1f7a
 - kind: project-relative
   target: claude
@@ -1005,8 +1005,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:c27073b0132f9288e7169af6c432c9ef7e0abeaa2d67f371ea8fcd8355a0181c
 - kind: project-relative
   target: claude
@@ -1014,8 +1014,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: null
 - kind: project-relative
   target: claude
@@ -1023,8 +1023,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:23f044d7c8fcf7906896341cfc62c86352a0f11d66e68ddc6d196a81ee99a5a1
 - kind: project-relative
   target: claude
@@ -1032,8 +1032,8 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:f7654bc01ea9c280f0d8cde6d8821058745997bbe8c364e524c47a95532c3b69
 - kind: project-relative
   target: claude
@@ -1041,6 +1041,6 @@ deployments:
   runtime: null
   scope: project
   owners:
-  - tbhb/agent-tools
-  active_owner: tbhb/agent-tools
+  - tbhb/repotools
+  active_owner: tbhb/repotools
   content_hash: sha256:0c0cb63db37bfaccfca5e2f7888eaeb9e5d88c6e75e468430d5398215479777c

@@ -92,6 +92,7 @@ PYTHONUTF
 reimagines
 reimagining
 Reinhart
+repotools
 rhysd
 RLHF
 rstrip

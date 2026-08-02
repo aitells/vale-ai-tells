@@ -4,7 +4,7 @@
 # touches a workflow file and on every push to `main`, so the gate guards both
 # ends of the integration path.
 #
-# Delegates to the shared reusable workflow in tbhb/github-actions,
+# Delegates to the shared reusable workflow in tbhb/repotools,
 # which runs actionlint from its SHA-pinned Docker image (bundling shellcheck
 # for run: blocks) against the caller's checked-out tree. The reusable workflow
 # owns its concurrency group, so this caller stays thin. Pinned by commit SHA;
@@ -26,4 +26,4 @@ jobs:
     permissions:
       contents: read
     # yamllint disable-line rule:line-length
-    uses: tbhb/github-actions/.github/workflows/lint-workflows.yml@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+    uses: tbhb/repotools/.github/workflows/lint-workflows.yml@9d5de432457f431d8fb300aedc6cd35315f6c30e # v0.3.0

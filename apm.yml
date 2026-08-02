@@ -1,9 +1,9 @@
 ---
 # APM consumer manifest. Pulls the shared agent primitives from
-# tbhb/agent-tools: the worktree rules, the go-lint and guard-markdown
+# tbhb/repotools: the worktree rules, the go-lint and guard-markdown
 # hooks, and the commit and pull request lifecycle skills.
 #
-# Bump the pin with `just apm-sync` rather than a bare `apm install`,
+# Bump the pin with `mise run apm-sync` rather than a bare `apm install`,
 # which leaves hook drift no later command can clear.
 name: vale-ai-tells
 version: 0.1.0
@@ -12,5 +12,5 @@ target:
   - claude
 dependencies:
   apm:
-    - tbhb/agent-tools#main
+    - tbhb/repotools#v0.3.0
   mcp: []

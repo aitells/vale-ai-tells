@@ -12,7 +12,7 @@ exclude: ^styles/(Google|write-good|proselint)/
 # appear in one gate and not the other. yamllint and rumdl drifted the same
 # way. mise.toml is now the only place any of those versions appears.
 #
-# The tbhb/pre-commit-hooks block below keeps its own `rev:`. Those are the
+# The tbhb/repotools block below keeps its own `rev:`. Those are the
 # shared commit-msg gates rather than tool wrappers, and the consolidation
 # owns that pin.
 
@@ -34,8 +34,8 @@ repos:
   # plus the commit-message scope in .vale.ini and .cspell.jsonc. Pinned by
   # SHA with a `# frozen:` tag comment so Renovate's pre-commit manager
   # tracks it.
-  - repo: https://github.com/tbhb/pre-commit-hooks
-    rev: bbb2b8c0b599248dca5c55cf71e75247513f7a84  # frozen: v0.2.0
+  - repo: https://github.com/tbhb/repotools
+    rev: 9d5de432457f431d8fb300aedc6cd35315f6c30e  # frozen: v0.3.0
     hooks:
       - id: commit-trailers
       - id: commitlint

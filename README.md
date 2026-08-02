@@ -412,7 +412,7 @@ mise run check    # lint and test together
 
 [mise.toml](mise.toml) lists the local toolchain and [mise.lock](mise.lock) records the digest of every download, so a contributor and CI run the same binaries. `just lint-workflows` and `just gitleaks` run from digest-pinned Docker images instead, so those two need a container runtime. `mise run check-toolchain` gates the installed tools against both files and fails rather than warning.
 
-Commit messages go through the shared [`pre-commit-hooks`](https://github.com/tbhb/pre-commit-hooks) gates at the `commit-msg` stage. One hook enforces the Conventional Commits shape and the length bounds. Another enforces the trailer rules, including a DCO `Signed-off-by` on every message. The remaining pair spell-check the buffer and lint it with this package's own `ai-tells` and `ai-tells-commits` styles. [AGENTS.md](AGENTS.md) describes the drafting workflow and the prose-lint output contract.
+Commit messages go through the shared [`repotools`](https://github.com/tbhb/repotools) gates at the `commit-msg` stage. One hook enforces the Conventional Commits shape and the length bounds. Another enforces the trailer rules, including a DCO `Signed-off-by` on every message. The remaining pair spell-check the buffer and lint it with this package's own `ai-tells` and `ai-tells-commits` styles. [AGENTS.md](AGENTS.md) describes the drafting workflow and the prose-lint output contract.
 
 `mise run build-package` writes the three release zips locally, and `mise run release vX.Y.Z` tags, pushes, and waits on the release run before rewriting the notes from the changelog.
 
