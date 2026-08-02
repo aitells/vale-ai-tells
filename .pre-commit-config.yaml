@@ -42,7 +42,7 @@ repos:
         args: [--output=ai-tells-agent.tmpl]
 
   - repo: https://github.com/rvben/rumdl-pre-commit
-    rev: 75cad3ecfe02b58e8165d3ac08d117bee207ed3d  # frozen: v0.2.43
+    rev: 9930066c775a2a82838c0b479cd40a83b3788b75  # frozen: v0.2.45
     hooks:
       - id: rumdl-fmt
       - id: rumdl
