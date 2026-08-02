@@ -2,7 +2,7 @@
 name: merge-pr
 license: Apache-2.0
 description: >-
-  Squash merge a pull request under a commit message this workflow writes rather than one GitHub concatenates. Drafts that message in SQUASH_AGENTMSG from the published description, then puts it through an independent review plus the commit-msg gates and an operator confirmation before merging and cleaning up. Use this whenever the user asks to merge or land a pull request, including one nobody here authored such as a dependency bump.
+  Squash merge a pull request. The commit message comes from this workflow rather than from GitHub, whose own version concatenates every commit on the branch into text no linter ever reads. A briefing script prints the published description, every commit the squash collapses, and the diffstat, then leaves a SQUASH_AGENTMSG skeleton whose body the caller writes. Review, the commit-msg gates, and an operator confirmation all run before the merge. Use this whenever the user asks to merge or land a pull request, including one nobody here authored such as a dependency bump.
 hooks:
   PreToolUse:
     - matcher: Write|Edit
@@ -36,8 +36,8 @@ Create these with `TaskCreate`, then move each through `in_progress` and `comple
 
 1. Confirm the pull request is mergeable
 2. Settle the published description
-3. Draft the squash message in SQUASH_AGENTMSG
-4. Review the draft with review-squash-message
+3. Write the squash message in SQUASH_AGENTMSG
+4. Review the message with review-squash-message
 5. Run the commit-msg gates
 6. Confirm the message with the operator
 7. Merge and clean up
@@ -49,6 +49,8 @@ Stop before any of it where preflight reports a missing precondition, a draft pu
 Preflight printed the state, the check rollup, and the review decision. Merging needs an open pull request that nobody marked as a draft, with every check green.
 
 A failing check goes to `fix-pr`, and a running one goes to `watch-pr`. Neither belongs here, and the merge script refuses both anyway.
+
+A `mergeStateStatus` of `BEHIND` or `DIRTY` is the third case. The branch needs the base underneath it before anything merges, so run the `rebase` skill and push the result. Don't reach for GitHub's own update button: it merges the base into the branch, which leaves a merge commit this workflow never wrote a message for.
 
 Where the repository requires a review decision, respect it. `CHANGES_REQUESTED` means the merge waits, whatever the checks say.
 
@@ -68,47 +70,61 @@ Read what preflight printed under `== description as published ==` against the c
 
 Most merges skip this. A description that still fits needs no pass, and a pull request nobody here authored has none of this machinery behind it, so take its description as it stands.
 
-## Step 3: draft the squash message
+## Step 3: write the squash message
 
 ```text
 bash .claude/skills/merge-pr/scripts/squash-message.sh <number>
 ```
 
-That writes `SQUASH_AGENTMSG` at the repository root from the published description. Summary, Why, and Risk become the body. Related becomes closing references, and the trailers come from the commits themselves. A gitignore entry keeps the file out of history.
+That prints a briefing and writes a skeleton. Nothing in it converts the description into a message, because no rewriting rule produces one. What merges here is the single commit a whole branch leaves behind, so writing it means reading everything that landed and deciding what a reader years from now still needs.
 
-What it writes is a starting draft. Rewrite it before going on.
+Your briefing carries the description as published, every commit message the squash collapses in full, the diffstat, and the trailers those commits carry. Read it before writing a word. Commit bodies matter most. Each one already argued for itself once, and this is the last place that argument survives.
+
+`SQUASH_AGENTMSG` at the repository root holds the skeleton, which a gitignore entry keeps out of history. Subject and footer come filled in. The body stays empty until you write it.
 
 ### Subject
 
-The script sets `<pull request title> (#<number>)`. Keep the reference, and fix the rest where the title described one commit rather than the branch. A squash leaves one commit behind, so the subject names what the whole branch did.
+The script sets `<pull request title> (#<number>)`. Keep the reference, because `squash-merge.sh` reads it back to confirm the draft belongs to this pull request. Fix the rest where the title described one commit rather than the branch. A squash leaves one commit behind, so the subject names what the whole stack did.
 
 ### Body
 
-The description was Markdown for a reviewer. This is plain text for whoever runs `git log` in three years, and the two read differently.
+The description was Markdown, written for a reviewer with the diff open beside it. This is plain text, and whoever reads it three years from now has neither.
 
-Write:
+Take from the description:
 
-- The problem, the constraint, or the tradeoff that made this the answer
-- Why this approach rather than the obvious alternative
-- What breaks without it, or where the need came from
+- Summary and Why, which carry the reason the branch exists
+- Risk, but only where it names a rollback the reader wouldn't guess
+
+Leave behind:
+
+- Verification, entirely. It reported what a reviewer needed at the time, and the moment the suite changes it describes a run nobody can repeat.
+- Risk that only says the change could be wrong.
+
+Then read the result back against the commits. The commits outrank it. Descriptions get published early while branches keep growing, so the commits record what landed rather than what someone expected to land. Where a commit body gives a reason the description never carried, that reason belongs in the message. Otherwise it goes at the merge, with the commit that held it.
 
 Avoid:
 
 - Restating the diff. A reader who wants the what reads the diff.
+- Walking the stack. A branch of eight commits becomes one account rather than eight paragraphs.
 - Counting. No file, line, test, or commit counts.
 - Provenance filler. Nothing about requests, review rounds, sessions, prompts, models, or tools.
-- Anything addressed to a reviewer. Verification notes belonged to the pull request.
 - Markdown. No fenced blocks, headings, emphasis, links, or tables. Backticks around a literal identifier are fine.
 
 Hard wrap the body at 72 characters and the trailers at 100.
 
-## Step 4: review the draft
+### Footer
 
-Invoke the `review-squash-message` skill, passing the repository root as its argument. It runs as an independent agent that hasn't watched you work, so it reads the message against the diff with no memory of what you meant to write.
+The script fills this in. `Closes` lines come from the description's Related section, and the trailers come from the commits themselves, ordered with attribution first and sign-off last.
+
+Check the closing references before going on. Related lists whatever the author put there, so a number that names a pull request or a document rather than an issue this branch closes comes out of the footer.
+
+## Step 4: review the message
+
+Invoke the `review-squash-message` skill, passing the repository root as its argument. It runs as an independent agent that hasn't watched you work, and it reads the message against every commit the squash collapses. Its first question is the one you can no longer ask yourself by this point: whether anything that mattered in those commits failed to reach the message.
 
 This step is mandatory, and the merge script enforces it. A clean verdict signs the exact bytes of the draft, a finding erases any earlier signature, and editing the draft afterward voids it the same way.
 
-Fix everything it returns. Push back only where it's demonstrably wrong about the diff, and say why.
+Fix everything it returns. Push back only where it's demonstrably wrong about the commits, and say why.
 
 ## Step 5: run the commit-msg gates
 

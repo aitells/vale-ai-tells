@@ -3,21 +3,31 @@
 #
 # The skill body already states these rules. This hook is what makes them
 # hold: instructions degrade under a long context, an exit-2 deny does
-# not. It stays scoped to the skill's frontmatter rather than to
-# settings.json so it governs a commit workflow and nothing else.
+# not. Declaring it in the skill's frontmatter rather than in
+# settings.json keeps it out of a session that never asked for it, and
+# the workflow scope below keeps it out of the rest of a session that
+# did.
 #
-# Three rules, in order of how they fire:
+# Two rules, in order of how they fire:
 #
 #   1. Whole-tree staging (`git add -A`, `git add .`) is refused. An
 #      atomic commit names its paths; a wildcard sweeps in whatever else
 #      the worktree happens to be carrying.
-#   2. `git commit -m`, `-am`, and `--no-verify` are refused. The message
-#      comes from COMMIT_AGENTMSG so it passes the same gates twice, and
-#      the hooks are the gate rather than an obstacle.
-#   3. `git commit` is refused unless review-commit-message has signed
-#      off on the exact bytes now in COMMIT_AGENTMSG. Editing the draft
-#      after the review invalidates the signature, which is the point:
-#      the reviewed text and the committed text are the same text.
+#   2. A direct `git commit` is refused whatever flags it carries. The
+#      workflow commits through scripts/commit.sh, and an inline -m or
+#      a --no-verify is refused with its own reason before the general
+#      one, because those two are wrong for reasons of their own.
+#
+# The review-signature check used to sit here and now sits in that
+# script. A PreToolUse hook reads the Bash tool call, and the
+# `git commit` inside a script is not one, so a gate placed here would
+# go unread on the path the workflow actually takes. The script is also
+# the only place that can compare the finished commit against what was
+# staged for it, which a hook running before the commit cannot do.
+#
+# One entry point is what makes that split hold. Leaving a second,
+# hook-gated way to commit would mean keeping both copies of the
+# signature check in step with each other forever.
 #
 # Exit 2 blocks and hands stderr back as the reason. Exit 0 defers to the
 # normal permission flow. Verified against Claude Code 2.1.220: a
@@ -47,6 +57,30 @@ deny() {
   printf 'Blocked by the commit skill guard.\n\n%s\n' "$1" >&2
   exit 2
 }
+
+# --- workflow scope ---------------------------------------------------
+# A skill's frontmatter hooks outlive the turn that invoked the skill.
+# Without a scope of its own this guard would go on policing every later
+# `git add` and `git commit` in the session, and it did: a legitimate
+# `git commit --amend` during unrelated release work was refused long
+# after the commit workflow it belonged to had ended.
+#
+# preflight.sh arms the guard by recording the commit HEAD sat at when
+# the workflow opened. A commit workflow leaves HEAD alone until it
+# commits, so the mark matches for as long as the workflow is open, and
+# the commit that ends the workflow moves HEAD past the mark and stands
+# the guard down. Nothing has to remember to clear anything, which is
+# the point: an end-of-workflow cleanup step is exactly the kind of
+# thing an abandoned run skips.
+#
+# The mark is read from the repository holding the session rather than
+# from wherever the command retargets, because the workflow is anchored
+# where the skill ran. Outside a repository there is no workflow to
+# scope, so the guard stands aside.
+session_git_dir=$(git rev-parse --absolute-git-dir 2>/dev/null) || exit 0
+armed_at=$(cat "$session_git_dir/commit-workflow.head" 2>/dev/null) || exit 0
+head_now=$(git rev-parse HEAD 2>/dev/null) || head_now=unborn
+[ "$armed_at" = "$head_now" ] || exit 0
 
 # Heredoc bodies are data, not commands. A script written through a
 # heredoc can discuss git in its comments or its prose, and matching
@@ -117,7 +151,7 @@ if [[ $invocation =~ (--no-verify|[[:space:]]-[a-zA-Z]*n([[:space:]]|$)) ]]; the
   deny "--no-verify skips the commit-msg gates this workflow exists to satisfy.
 Commit the drafted message instead:
 
-  git commit -F COMMIT_AGENTMSG
+  bash .claude/skills/commit/scripts/commit.sh
 
 The one sanctioned --no-verify is the throwaway work-in-progress commit
 in the worktree rules, which is not part of a commit workflow."
@@ -127,69 +161,20 @@ if [[ $invocation =~ (--message|[[:space:]]-[a-zA-Z]*m([[:space:]]|=|$)) ]]; the
   deny "An inline -m message skips COMMIT_AGENTMSG, so nothing lints it and
 nothing reviews it. Write the message to COMMIT_AGENTMSG, then:
 
-  git commit -F COMMIT_AGENTMSG"
+  bash .claude/skills/commit/scripts/commit.sh"
 fi
 
-if [[ ! $invocation =~ (--file|[[:space:]]-F)([[:space:]]|=) ]]; then
-  deny "This workflow commits the drafted file, so the editor never opens:
+# Every other spelling lands here, including the sanctioned flags. The
+# script is the entry point, so a hand-written git commit is refused
+# even when its flags are the right ones.
+deny "This workflow commits through one script, which is where the gates a
+hook on the tool call cannot reach live:
 
-  git commit -F COMMIT_AGENTMSG"
-fi
+  bash .claude/skills/commit/scripts/commit.sh
 
-# Rule 3: the reviewed bytes and the committed bytes must match.
-#
-# Resolve the repository the command acts on rather than the one this
-# hook happens to run in. A command can retarget git with `git -C` or a
-# leading `cd`, and reading that target keeps the gate pointed at the
-# repository about to receive the commit. Skipping this step fails open:
-# a draft and signature sitting in the hook's own repository would clear
-# a commit in some other one, which nothing reviewed.
-target=""
-if [[ $command =~ git[[:space:]]+-C[[:space:]]+([^[:space:]]+) ]]; then
-  target=${BASH_REMATCH[1]}
-elif [[ $command =~ ^[[:space:]]*cd[[:space:]]+([^[:space:]\;\&\|]+) ]]; then
-  target=${BASH_REMATCH[1]}
-fi
+That script checks that review-commit-message signed the exact bytes now
+in COMMIT_AGENTMSG, records what is staged, commits, then reads the
+commit back and names any staged path that did not land in it.
 
-if [ -n "$target" ]; then
-  root=$(git -C "$target" rev-parse --show-toplevel 2>/dev/null) ||
-    deny "Cannot resolve a git repository at ${target}."
-  git_dir=$(git -C "$target" rev-parse --absolute-git-dir 2>/dev/null)
-else
-  root=$(git rev-parse --show-toplevel)
-  git_dir=$(git rev-parse --absolute-git-dir)
-fi
-
-draft="$root/COMMIT_AGENTMSG"
-stamp="$git_dir/commit-agentmsg.reviewed"
-
-[ -s "$draft" ] || deny "COMMIT_AGENTMSG is empty or missing. Draft the message first."
-
-# sha256 of $1, portable across the coreutils and BSD spellings.
-digest() {
-  if command -v sha256sum >/dev/null 2>&1; then
-    sha256sum "$1" | cut -d' ' -f1
-  else
-    shasum -a 256 "$1" | cut -d' ' -f1
-  fi
-}
-
-current=$(digest "$draft")
-
-if [ ! -f "$stamp" ]; then
-  deny "review-commit-message has not run against this draft.
-
-That review is the only gate on the things linting cannot see: claims the
-diff does not support, restating the diff instead of explaining it, and
-whether the staged change is really one logical change. Invoke the
-review-commit-message skill, resolve what it returns, then commit."
-fi
-
-if [ "$(cat "$stamp")" != "$current" ]; then
-  deny "COMMIT_AGENTMSG changed after review-commit-message signed off, so the
-reviewed text and the text about to be committed are no longer the same.
-
-Run review-commit-message again against the current draft, then commit."
-fi
-
-exit 0
+Add --amend to fold the staged change into the commit already there. No
+other flag passes through."

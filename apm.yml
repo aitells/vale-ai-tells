@@ -12,5 +12,5 @@ target:
   - claude
 dependencies:
   apm:
-    - tbhb/agent-tools#v0.2.0
+    - tbhb/agent-tools#main
   mcp: []

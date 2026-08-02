@@ -10,9 +10,11 @@
 # Only a clean verdict signs; a finding erases any earlier signature, so
 # a draft that once passed cannot ride an old stamp into a commit.
 #
-# guard-git.sh compares the signature against the draft on disk when the
-# commit is attempted, so a draft edited after review reads as unreviewed
-# rather than as reviewed.
+# commit.sh compares the signature against the draft on disk before it
+# commits, so a draft edited after review reads as unreviewed rather
+# than as reviewed. That comparison sits there rather than in
+# guard-git.sh because a PreToolUse hook reads the Bash tool call, and
+# the `git commit` inside a script is not one.
 #
 # The signature lives in the per-worktree git directory of the repository
 # the reviewer actually read, which the skill argument names. Parallel
@@ -49,9 +51,12 @@ review-commit-message | */review-commit-message | *:review-commit-message) ;;
 *) exit 0 ;;
 esac
 
-# The skill takes the repository root as its argument. Without one it
-# reviewed the directory this hook runs in.
+# The skill takes the repository root as its argument, and an amend adds
+# a second word after it. Reading the whole string as a path sends git -C
+# at "<root> --amend", which resolves nothing, and the hook then exits
+# without stamping a review that passed. Take the first word only.
 repo=$(jq -r '.tool_input.args // ""' <<<"$payload")
+repo=${repo%% *}
 [ -n "$repo" ] || repo=$(pwd)
 
 git_dir=$(git -C "$repo" rev-parse --absolute-git-dir 2>/dev/null) || exit 0

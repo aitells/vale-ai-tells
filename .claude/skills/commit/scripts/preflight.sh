@@ -10,7 +10,9 @@
 #
 # Output is plain text under `== section ==` headers, each self-contained
 # so a partially-read report still answers something. Nothing here
-# mutates the repository. The one network call fetches the base branch;
+# touches the worktree, the index, or the branch. The one write is the
+# guard mark in the git directory, which arms the commit guard for this
+# run. The one network call fetches the base branch;
 # COMMIT_PREFLIGHT_FETCH=0 skips it.
 set -euo pipefail
 
@@ -147,6 +149,16 @@ elif [ -f "$git_dir/CHERRY_PICK_HEAD" ]; then
   in_progress="cherry-pick (finish or abort it first)"
 fi
 printf 'in progress: %s\n' "$in_progress"
+
+# Arm the commit guard for this run. That guard is a skill-frontmatter
+# hook, so it stays registered for the rest of the session and needs a
+# signal telling it a workflow is actually open. HEAD is that signal:
+# the workflow leaves HEAD alone until it commits, and the commit that
+# ends the workflow moves HEAD past this mark and stands the guard down
+# without anyone having to clear it.
+guard_head=$(git rev-parse HEAD 2>/dev/null || printf 'unborn')
+printf '%s' "$guard_head" >"$(git rev-parse --absolute-git-dir)/commit-workflow.head"
+printf 'commit guard: armed at %s, inert again once HEAD moves\n' "$guard_head"
 
 section "rebase base"
 fetch_state=skipped
