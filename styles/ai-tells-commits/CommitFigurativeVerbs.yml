@@ -1,0 +1,72 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. Name the literal action the change performs."
+level: error
+nonword: true
+ignorecase: true
+# Every token here comes from a commit message a maintainer rejected across
+# the four toolchain repositories. The rejections named figurative language,
+# and the phrases below are what they quoted.
+#
+# These live in the commit style rather than the prose style because the
+# subject-plus-verb shape floods ordinary technical writing. Measured against
+# the Go and Python standard libraries, "holds" alone reports fifty times and
+# "carries" twenty-nine, all of them literal: a table holds values, a buffer
+# carries bytes. The same tokens report a handful of times across thousands
+# of lines of accepted commit prose, and those reads as the tell. A commit
+# message describes what a person did to a repository, so an inanimate
+# subject performing a human action is nearly always the substitution this
+# rule exists to catch.
+#
+# Tokens whose false positive rate in general prose measured at zero live in
+# the prose style instead, where they cover more ground: placement by "sits"
+# belongs to FigurativeSits, the earning and handing shapes to
+# AnthropomorphicJustification, and the fixed idioms to FigurativeIdioms.
+#
+# "Carry out" is a phrasal verb rather than a metaphor, so the conveyance
+# token excludes it. Without that lookahead the rule fires on "the
+# instruction the commit carries out", which is literal. Vale's regex engine
+# supports lookahead even though Go's stock library does not.
+tokens:
+  # --- Arrival: a change "arrives" instead of shipping, merging, or
+  # releasing. The largest group in the rejection sweep.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all|every|each|one|two|no|some)\s+\w+\s+arrives?\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+arrived\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+(?:enters?|entered)\s+the\b'
+
+  # --- Conveyance and possession: a file "carries" a setting rather than
+  # defining one, a script "holds" a draft rather than storing it.
+  # The bare infinitive is left out. "The arithmetic carry" and "the carry
+  # bit" put a noun in that slot, and the determiner plus a word ahead of it
+  # cannot tell the two apart; the rejection corpus only ever inflects the
+  # verb, so dropping it costs no coverage.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all|which)\s+\w+\s+carr(?:ies|ied)\b(?!\s+out)'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+holds?\s+(?:its|their|the|a)\b'
+
+  # --- Survival and loss: a file "survives" a rebase, a format "loses" a
+  # correction. Say the file is unchanged, or that the correction is dropped.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+survives?\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+loses?\s+(?:one|a|the|its)\b'
+  # A bare proper noun as the subject ("Markdown loses one correction"). The
+  # rule sets ignorecase, so a leading [A-Z] would match any letter and widen
+  # this to every noun; the determiner-free form is spelled out instead and
+  # kept to the formats and tools a commit message actually names.
+  - '\b(?:Markdown|YAML|JSON|TOML|HTML|CSS|Git|Vale|Go|Python)\s+loses?\s+(?:one|a|the|its)\b'
+
+  # --- Agency and obligation given to an inanimate subject: a gate "demands"
+  # a clean run, files "answer to" a scope, a recipe "names" a gate.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+demands?\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+answers? to\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+asks?\s+(?:for|that)\b'
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+(?:joins?|joined)\b'
+  - '\bnever sees?\b'
+  # "Names" as an act of designation. Ordinary Go and Python documentation
+  # uses it precisely ("the path names a directory"), which is why the prose
+  # style leaves it alone, but in a commit message it stands in for a plain
+  # verb like references or selects.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+names?\s+(?:the|a|its)\b'
+
+  # --- Hand-work applied to software. The objection is literal: none of
+  # these has hands. Say who edited the file, or that the edit was manual.
+  - '\bhand-(?:edited|authored|written|rolled)\b'
+  - '\b(?:by|per) hand\b'

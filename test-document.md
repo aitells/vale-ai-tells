@@ -1512,3 +1512,31 @@ Furthermore, the cache warms on boot. Furthermore, the index rebuilds nightly. F
 ## NegationDensity
 
 The runner has no cache, no network access, and no way to reach the registry. Each job starts cold.
+
+## FigurativeIdioms
+
+The rename costs little and the regex fares no better.
+
+The fix is out of reach.
+
+The template gives something up in exchange.
+
+The hook fires for want of a better trigger.
+
+The guard hands the merge an empty slate.
+
+That approach dodges the rule.
+
+The file survives the rebase untouched.
+
+Nothing catches where this bites, and the change sails through every gate.
+
+The team keeps moving the goalposts, so the blast radius grows.
+
+## FigurativeSits and AnthropomorphicJustification, widened
+
+The rules sit in the config.
+
+A figurative sat in this message.
+
+The change earns a mention.

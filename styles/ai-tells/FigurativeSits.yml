@@ -93,3 +93,19 @@ tokens:
   # The past-tense "sat" appears only here; the complement-gated tokens
   # above match "sits" and "sitting" alone.
   - "\\b(?:the|this|that|each|every|a|an) (?:\\w+ )?(?:entry|word|rule|flag|setting|option|field|block|section|clause|token|value|default|exemption|convention|definition|pattern) (?:\\w+ )?(?:sits|sat|sitting) (?:in|on|at|above|below|under|beneath|within|inside|between|near|beside|alongside|behind)\\b"
+
+  # --- The same placement with the subject left open. The curated token
+  # above proved too narrow against a corpus of rejected commit messages,
+  # which produced "the rules sit in the config" and "a figurative sat in
+  # this message" — a plural subject and one outside the set, both missed.
+  # A bare word in the subject slot measured at zero matches across the Go
+  # and Python standard libraries, so the determiner and the preposition
+  # carry the discriminator between them.
+  #
+  # What this does catch is literal sitting with an animate or physical
+  # subject, which is the cost the rule already accepts at the top of the
+  # file: prose about furniture, landscape, or page layout disables it
+  # rather than the tokens contorting to admit a cat on a mat. The curated
+  # token stays because it admits a modifier between the subject and the
+  # verb, which this one does not.
+  - "\\b(?:a|an|the|this|that|these|those|its|their|both|all)\\s+\\w+\\s+(?:sits?|sat)\\s+(?:in|on|at|with|beside|under|behind)\\b"

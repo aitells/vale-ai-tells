@@ -1,0 +1,71 @@
+---
+extends: existence
+message: "AI idiom: '%s'. State the literal outcome instead."
+level: error
+nonword: true
+ignorecase: true
+# Fixed figurative phrases that stand in for a plain statement of what
+# happened. The sibling of the Figurative* verb rules, which gate on a verb
+# and its complement; these are whole idioms, so the phrase itself is the
+# discriminator and no subject gate is needed.
+#
+# That difference is why they belong in the prose style rather than the
+# commit style. A subject-plus-verb shape floods ordinary technical writing,
+# because a table really does hold values. A fixed idiom carries no such
+# literal reading, and every token below measured at one or zero matches
+# across the Go and Python standard libraries and the Markdown shipped in
+# the Go source tree.
+#
+# The first group comes from commit messages a maintainer rejected. The
+# second comes from a skill reference that recorded four phrases clearing
+# every gate in its own repository while its author was writing them.
+tokens:
+  # --- Substitutes for a plain cost or comparison. "Costs little" and
+  # "fares no better" both dodge the number the sentence wanted.
+  - '\bcosts? little\b'
+  - '\bfares? no better\b'
+  # The one measured false positive in either standard library is a garbage
+  # collector comment where a value is literally unreachable. Runtime and
+  # memory-management prose should disable the rule.
+  - '\bout of reach\b'
+  - '\bgives? something up in exchange\b'
+
+  # --- Substitutes for a plain cause. "For want of" is a proverb fragment
+  # standing in for because.
+  - '\bfor want of\b'
+
+  # --- Blank-start and evasion metaphors. A merge gets an "empty slate," a
+  # change "dodges" the rule that should have caught it.
+  - '\bempty slate\b'
+  - '\bclean slate\b'
+  - '\b(?:dodges?|dodging|dodged)\s+(?:the|a|that|this)\b'
+  - '\bput\s+\w+\s+in front of\b'
+
+  # --- Endurance: a file "survives untouched" rather than being unchanged.
+  - '\bsurvives?\s+(?:the|a|that|this)\s+\w+\s+untouched\b'
+
+  # --- Consequence and evasion metaphors that cleared every gate in the
+  # repository whose own documentation recorded them. A check does not bite,
+  # a document does not sail, and a change has no blast radius.
+  - '\bwhere (?:this|that|it) bites\b'
+  - '\b(?:bites?|biting) hardest\b'
+  - '\bsails? through\b'
+  - '\bsailed through\b'
+  - '\bmov(?:e|es|ed|ing) the goalposts?\b'
+  - '\bblast radius\b'
+
+  # Candidate not yet implemented: the substitution frame, where one thing
+  # is named as another wearing its clothes. Recorded here rather than
+  # guessed at, because the family does not come apart evenly.
+  #
+  # "Disguised as" and "masquerading as" carry real technical use. Pointers
+  # into the stack disguised as integers is literally accurate about type
+  # punning, and commits masquerading as real ones describes a genuine
+  # forgery. Both appear in the Go standard library meaning exactly that.
+  #
+  # The "dressed as" variant measured at zero outside this project, which
+  # is the shape worth catching. Landing it means rewording this package
+  # first: the messages on FigurativeLoud and FigurativeQuiet both explain
+  # a tell in those words, and the comments on FigurativeRuns,
+  # FigurativeRides, and OrganicConsequence do the same. A token would
+  # fail the project's own message lint before it ever reached a user.

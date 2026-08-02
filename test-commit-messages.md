@@ -344,3 +344,23 @@ The new tokenizer is blazingly fast. Coverage: 92%.
 - src/parser/lexer.ts
 - tests/parser/tokenizer.test.ts
 ```
+
+## CommitFigurativeVerbs
+
+The fix arrived in the release. The change arrives with the next tag. The hook fires for want of a better trigger.
+
+The setting carries the value through. The draft carried the trailer order. The scripts hold their drafts.
+
+The file survives the rebase untouched. Markdown loses one correction.
+
+The message was hand-edited before the commit. Correcting it by hand takes a moment. The setting was hand-authored.
+
+The reviewer never sees the diff. Both drafts join the same directory. These files answer to the commit scope.
+
+The recipe names the failing gate. The gate demands a clean run. The guard hands the merge a fresh start.
+
+## CommitGitJargon
+
+The workflow starts from an empty tree. Every path in the tree resolves.
+
+The tree is red after that push. The index still holds the old blob.

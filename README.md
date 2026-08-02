@@ -44,7 +44,7 @@ AI-generated commit messages carry the same fingerprints as AI-generated prose, 
 <!-- vale ai-tells.OverusedVocabulary = YES -->
 <!-- vale ai-tells.AIAdjectiveNounPairs = YES -->
 
-The `ai-tells-commits` style provides 13 rules purpose-built for commit messages, separate from the prose rules so you can opt in without pulling them into your docs.
+The `ai-tells-commits` style provides 15 rules purpose-built for commit messages, separate from the prose rules so you can opt in without pulling them into your docs.
 
 ### Commit message rules
 
@@ -57,6 +57,8 @@ The `ai-tells-commits` style provides 13 rules purpose-built for commit messages
 | `CommitBuzzwords` | Vague adjective+noun combos: "comprehensive tests," "robust error handling," "proper validation," "various fixes," "relevant components," "necessary changes," etc. |
 | `CommitHedging` | Inappropriate uncertainty for changes already made: "This should fix...," "This may help...," "seems to resolve...," etc. |
 | `CommitEmoji` | Systematic gitmoji prefixes (✨🐛♻️📝⚡✅🔧🔥🚀 etc.) — emoji commit adoption has jumped from ~25% to ~75% of organizations, driven almost entirely by AI tools. |
+| `CommitFigurativeVerbs` | Figurative verbs with an inanimate subject, drawn from commit messages a maintainer rejected: a fix that "arrived," a setting that "carries" a value, a file that "survives" a rebase, a gate that "demands" a clean run, a message that was "hand-edited." Lives in the commit style rather than the prose style because the subject-plus-verb shape floods ordinary technical writing, where a table really does hold values. |
+| `CommitGitJargon` | Bare git nouns used without explanation: "the tree" went red, "the index" still holds the old blob. Not an AI tell but a clarity rule, and the only one here that flags a reader's confusion; the qualified forms ("the working tree," "the git index") name themselves and stay legal. Commit-scoped, since these words mean syntax trees and array indices everywhere else. |
 | `CommitOverexplanation` | Filler that pads without informing: "As part of this change...," "The purpose of this commit...," "Summary of changes," "The following changes were made," etc. |
 | `CommitTestEnumeration` | Scoreboard-style test reporting: "All 47 tests passing," "Tests: 12 passed, 0 failed," "Coverage: 87%," "100% test coverage," etc. Link the CI run instead. |
 | `CommitAttribution` | Agent marketing trailers: robot-emoji "Generated with" lines, "Co-Authored-By: Claude/Copilot/Cursor," "<noreply@anthropic.com>," etc. Use kernel-style `Assisted-by: AGENT:VERSION` instead. |
@@ -140,7 +142,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 77 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 78 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -171,6 +173,7 @@ This package contains 77 rule files covering different categories of AI tells. A
 | `FalseExclusivity` | False insider drama: "nobody talks about," "what most people miss," "the dirty secret," "the elephant in the room," etc. |
 | `FigurativeFalls` | "Falls" as an overused verb for shortcoming, membership, and neglect: a result that "falls short," a design that "falls apart," a case that "falls under" a category or "falls within scope," a task that "falls by the wayside" or "through the cracks," a request that "falls on deaf ears," responsibility that "falls to" a team. Gated on the figurative complement, so literal falling (prices, temperature, night, rain) stays quiet; disable the rule for gravity or weather writing. The past-tense "things fell into place" stays in `NarrativePivots`, and "falls into three categories" stays in `CataphoricForecasting`. |
 | `FigurativeHolds` | "Holds" as an overused possession verb for abstractions: a chart that "holds the same wide spread," a result that "holds across datasets," a claim that "holds up under scrutiny," an approach that "holds great promise," "the correlation still holds." Gated on the figurative complement or a curated abstract subject, so literal holding (hands, jars, court sessions) stays quiet; disable the rule for legal or wrestling writing. "Holds its own" stays in `AnthropomorphicJustification`. |
+| `FigurativeIdioms` | Fixed figurative phrases standing in for a plain statement of what happened: "costs little," "fares no better," "out of reach," "for want of," "empty slate," "dodges the rule," "survives the rebase untouched," plus the consequence metaphors "where this bites," "sails through," "moving the goalposts," and "blast radius." Whole idioms rather than a gated verb, so no subject gate is needed; disable for runtime and memory-management prose, where a value is literally out of reach. |
 | `FigurativeLands` | "Lands" as an overused arrival verb: "the request lands on the node," "the PR lands in main," "where the idea lands." Also catches the prepositionless arrival after a temporal or conditional subordinator ("once the feature lands," "when the PR lands," "until the fix lands"). Exempts common literal landers (a plane, a bird, a probe); rare ones fire, so disable the rule for aviation or nature writing. |
 | `FigurativeCarries` | "Carries" as an overused freighting verb: a term that "carries baggage," a change that "carries significant risk," an approach that "carries a caveat," one test that "carries the suite," and an inanimate component treated as a vessel for abstract cargo ("the daemon carries no pipeline logic," "the packet carries the payload," "the signal carries data"), or as the bearer of a policy rather than the place it is written ("the lower block carries the pattern," "the config carries the exemption"). Gated on the figurative complement, so literal physical carrying (bags, freight) and the phrasal "carries out" (execute) and "carried over" (bring forward) stay quiet; disable the rule for freight, logistics, or arithmetic writing. "Carries its weight" stays in `AnthropomorphicJustification`. |
 | `FigurativeRides` | "Rides" as an overused dependence verb: "everything rides on this migration," a fix that "rides along" in a release, a cache that "rides on top of" Redis, a launch "riding the wave," and an operation dressed as a passenger on the infrastructure it uses ("the query rides the index," "the lookup rides the cache"). Gated on the figurative complement, so literal riding (buses, horses) stays quiet; disable the rule for transit or equestrian writing. |

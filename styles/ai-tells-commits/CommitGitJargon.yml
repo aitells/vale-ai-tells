@@ -1,0 +1,34 @@
+---
+extends: existence
+message: "AI commit tell: '%s'. Name the thing, such as the working tree or the staging area."
+level: error
+nonword: true
+ignorecase: true
+# Not an AI tell as such, and the only rule in this package that flags a
+# reader's confusion rather than a machine's habit. It earns a place here
+# because the confusion showed up repeatedly in real review: a maintainer
+# asked what the tree was three separate times across the rejected commit
+# messages, and what the index was once.
+#
+# Both are real git nouns, which is how they slip past a figurative-language
+# rule. In a commit message they still read as metaphor, because the reader
+# is told a tree went red without being told what the tree is. The qualified
+# forms name themselves and stay legal, so the tokens require the bare noun
+# and the exceptions release the rest.
+#
+# This rule is confined to the commit style deliberately. In general prose
+# these words belong to other domains entirely, where they carry no git
+# meaning: measured against the Go and Python standard libraries the same
+# tokens report hundreds of times, every one of them a syntax tree, a search
+# tree, or an array index. Enabling it for Markdown or source comments would
+# bury a reader in noise.
+tokens:
+  - '\bthe tree(?:\b(?!\s+(?:of|structure)))'
+  - '\bthe index\b'
+  - '\bin-tree\b'
+  - '\b(?:an?|the)\s+empty\s+tree\b'
+exceptions:
+  - '(?i)the working tree'
+  - '(?i)the source tree'
+  - '(?i)the git index'
+  - '(?i)the staging index'

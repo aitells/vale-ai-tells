@@ -33,6 +33,16 @@ tokens:
   # these has a literal sense a person could be paid in, so the
   # determiner is optional here rather than required.
   - earn(?:s|ed)? (?:no |the |its )?(?:capitalization|capitalisation|italics|boldface|small caps|backticks|quotes|quotation marks)
+  # The bare shape with no curated object at all, gated on a determiner and
+  # a subject instead ("the change earns a mention", "that rename earns
+  # nothing"). Drafted from rejected commit messages and measured at zero
+  # matches across the Go and Python standard libraries, which is what lets
+  # the object stay open here.
+  - (?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+earns?\b
+  # Handing: an inanimate subject passes something to another as though
+  # across a counter ("the guard hands the merge a clean start"). Same
+  # provenance and the same zero measurement.
+  - (?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+hands?\s+(?:the|a|it|them)\b
 
   # "Paying" family
   - pays? for itself
