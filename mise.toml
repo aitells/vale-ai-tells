@@ -45,7 +45,7 @@ cspell = "10.0.1"
 "go:github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker" = "v3.9.0"
 # Required by the go: backend above, which compiles rather than downloads.
 # The Brewfile never named it because Homebrew shipped a prebuilt bottle.
-go = "1.26.4"
+go = "1.26.5"
 # Still needed: the Justfile survives as a shim, and lint-just gates it.
 just = "1.57.0"
 # cspell ships only as an npm package. Homebrew was installing node too --
