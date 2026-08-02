@@ -2,23 +2,23 @@
 name: review-squash-message
 license: Apache-2.0
 description: >-
-  Review the conversion of a published pull request description into the squash commit message drafted in SQUASH_AGENTMSG, as an independent agent. Judges what the rewrite did to the text rather than what the text claims. Covers meaning dropped on the way across, surviving Markdown, a broken subject reference, and misplaced trailers. The merge-pr skill invokes this before every squash merge, passing the repository root.
+  Review the squash commit message drafted in SQUASH_AGENTMSG against every commit it collapses, as an independent agent. Its distinct question is coverage. One message has to stand for a whole stack of commits, and this review asks what the collapse lost. Findings also cover claims the commits don't support, restating the diff, provenance filler, surviving Markdown, and a wrong subject reference. The merge-pr skill invokes this before every squash merge, passing the repository root.
 context: fork
 agent: Explore
 background: false
 ---
 
-# Review a squash message conversion
+# Review a squash commit message
 
-A published pull request description already passed an independent review before anyone published it. That review checked its claims against the diff, and squashing changes nothing about what the branch did. This one covers a single question instead: whether the conversion into a commit message kept faith with the description it came from.
+Review a drafted squash message against the whole stack of commits it collapses, then return a verdict. You're the independent check. You didn't write this message and you didn't watch the branch happen, so read what it claims rather than what its author meant to claim.
 
-Read both texts and return a verdict. Leave the description itself alone. A finding that the branch is incoherent, or that some claim overreaches, belonged to the review that ran before the pull request opened, and repeating it here wastes the round trip.
+Every other reviewer in this toolchain reads one text against one change, whether that's a commit message against its staged diff or a pull request description against its branch. This message has a harder job. It stands for a stack of commits that each carried a message of their own, and those messages disappear into it. Whether the collapse lost anything is the question only this review asks, and after the merge nothing remains to ask it of.
 
 ## The repository
 
 `$ARGUMENTS`
 
-Treat that path as the repository under review. An empty value means the current working directory.
+Treat that path as the repository under review. An empty value means the current working directory. Bind it once and use it throughout:
 
 ```bash
 REPO="${ARGUMENTS:-$(pwd)}"
@@ -28,48 +28,73 @@ REPO="${ARGUMENTS:-$(pwd)}"
 
 The draft's subject ends in the pull request number, so read the draft first and take the number from there.
 
-- `cat "$REPO/SQUASH_AGENTMSG"` for the converted message
-- `gh pr view <number> --json title,body` for the description it came from
+- `cat "$REPO/SQUASH_AGENTMSG"` for the message under review
+- `gh pr view <number> --json commits --jq '.commits[] | "--- " + .oid[0:7] + "\n" + .messageHeadline + "\n" + .messageBody'` for every commit message in full
+- `gh pr diff <number>` for what those commits actually changed
+- `gh pr view <number> --json title,body` for the published description
 
-Those two texts are the whole input.
+Read the commit bodies rather than skimming the subjects. A subject names what a commit did. The reason belongs in the body, and a reason is the first thing a squash loses.
 
-A missing or empty draft, or a subject naming no pull request, is itself a finding. Report it and stop.
+Read them through `gh` rather than from local refs. This skill also runs against pull requests nobody here authored, and often nothing local holds those commits at all.
+
+A missing or empty draft, a draft carrying no body, or a subject naming no pull request, is itself a finding. Report it and stop.
 
 ## What's already settled
 
-The commit-msg linters run over this draft before and again after you, so leave their rules alone. Wrapping, subject length, the Conventional Commits shape, trailer order, and spelling all belong to them.
+Gates run on either side of you. Repeating what they already cover wastes the round trip, so here is what they cover.
+
+The commit-msg linters read this draft before this review and again after it. Subject length, line width, the Conventional Commits shape, trailer order, and spelling all answer to them. Leave every one of those alone.
+
+The published description already passed its own review against this branch. Judge the message. Where the two disagree, the message is the text that merges, so treat the disagreement as a fact about the message rather than as a reason to reopen the description.
 
 ## What to check
 
-Four questions, each about the gap between the two texts.
+Work these four groups. Every finding names the exact offending text and the fix.
 
-### Did meaning survive
+### Coverage
 
-- Flag a reason the description gives and the message drops. Summary and Why carry why the change exists, and a reader running `git log` needs that most.
-- Flag a sentence the conversion garbled into something the description never claimed.
-- Verification notes and reviewer pointers belonged to the pull request, so their absence is correct rather than a finding.
+This group is why the review exists. Take the commits one at a time and ask whether someone reading the message alone would know that work is in here.
 
-### Did Markdown survive
+- Flag a commit whose reason the message drops. Not its diff, its reason, meaning the constraint or the problem its body named. That sentence goes with the commit at the merge, and nothing else records it.
+- Flag a message that describes one commit as though it were the branch. The last commit and the largest commit are the ones that stand in for the rest.
+- Flag a message that covers the early commits and stops. A branch that grew after someone published its description is the common case, and the message inherits the gap.
+- Flag two commits giving different reasons where the message keeps only one. Either it covers both, or it says which one subsumes the other.
+- Not every commit owes the message a sentence. A correction folded back in, or a formatting pass, landed as part of the work rather than as work of its own, and its absence is correct.
+- Flag the reverse failure as well. A body that walks the stack commit by commit turns eight commits into eight paragraphs, where the branch deserves one account of what it did.
 
-- Flag headings, fenced blocks, emphasis, link syntax, or tables still sitting in the message. Backticks around a literal identifier are fine.
-- Flag a body reading as a list of section titles rather than as prose.
+### Truthfulness
 
-### Is the subject right
+The body is new prose. No earlier review cleared it, so you are the first reader every claim in it gets.
 
-- Flag a subject missing its `(#<number>)` reference, or carrying the wrong number.
-- Flag a subject the conversion truncated into something ungrammatical.
+- Flag any claim the commits and the diff don't support. A message naming a file, a flag, a behavior, or a guarantee absent from the branch is wrong, whatever else it gets right.
+- Flag counts of any kind: files, lines, tests, commits, percentages. A count goes stale as soon as other work merges, and it pads a message rather than informing it.
+- Flag results nobody verified: benchmark figures, `fixes the flake`, `no longer leaks`, claims about what CI does.
+- Flag a claim the message inherited from the description that the branch has since outgrown. Commits pushed after publication are where this comes from.
 
-### Did the footer come across
+### Substance
 
-- Flag a `Closes` reference the description asked for and the message dropped.
-- Flag a closing reference to a number the description never mentioned.
+The body answers why the branch exists. The diff already carries what changed.
+
+- Flag body text that restates the diff. `Adds a helper to foo.go and calls it from bar.go` describes a diff the reader can already read.
+- Flag provenance filler: requests, review rounds, sessions, prompts, iterations, models, assistants, tools. Attribution belongs in the `Assisted-by` trailer and nowhere else.
+- Flag selling: `robust`, `comprehensive`, `significantly`, `seamlessly`, `powerful`, `elegantly`, and their neighbors.
+- Flag a body that repeats the subject in longer words.
+- Verification notes belonged to the pull request, and their absence here is correct rather than a finding.
+- Risk belongs here only where it names a rollback the reader wouldn't guess. Flag a risk sentence that says the change could be wrong and stops.
+
+### Form
+
+- Plain text throughout, with no fenced code blocks, headings, markdown emphasis, links, or tables. Backticks around a literal identifier are fine.
+- Flag a body reading as a run of section titles from the description rather than as prose.
+- Flag a subject missing its `(#<number>)` reference, or carrying the wrong number. The merge script reads that reference back, and a wrong one merges this message onto another pull request.
+- Flag a `Closes` reference to something this branch doesn't close, and a missing one the description asked for. A cross-repository reference reduced to a bare number closes an unrelated local issue on merge.
 - Flag a missing `Signed-off-by`, or an `Assisted-by` sitting after it rather than before.
 
 ## What to return
 
-Your verdict is what lets the merge proceed. A hook on the caller's side reads the line below and signs the draft you cleared. Keep the wording exact, because a verdict that hook can't parse leaves the merge blocked. Write nothing to disk yourself, and don't edit the draft to make it pass.
+Your verdict is what lets the merge proceed. A hook on the caller's side reads the line below and signs the draft you cleared. Keep the wording exact, because a verdict that hook can't parse leaves the merge blocked. Write nothing to disk yourself, and don't edit the draft to make it pass. Reporting the finding is the job.
 
-Return the verdict block and stop there. Skip the preamble and the praise.
+Return the verdict block and stop there. Skip the preamble, the commit listing, and the praise.
 
 ```text
 VERDICT: PASS
@@ -80,11 +105,15 @@ or
 ```text
 VERDICT: CHANGES REQUIRED
 
-1. [meaning] <what the conversion lost or changed>
-   text: <the offending text, or the description text that went missing>
+1. [coverage] <what the message fails to account for>
+   text: <the commit or the reason that went missing>
+   fix:  <the specific correction>
+
+2. [form] <what is wrong>
+   text: <the exact offending text>
    fix:  <the specific correction>
 ```
 
-Tag each finding `meaning`, `markdown`, `subject`, or `footer`.
+Tag each finding `coverage`, `truthfulness`, `substance`, or `form`.
 
-Return `PASS` when the conversion holds up. A faithful rewrite counts as a real outcome, and inventing a finding to look thorough wastes the round trip.
+Return `PASS` when the message holds up. A message that really does stand for its whole stack counts as a real outcome, and inventing a finding to look thorough wastes the round trip. Report only what you can point at in the draft or in the commits behind it.

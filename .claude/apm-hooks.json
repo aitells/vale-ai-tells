@@ -1,43 +1,4 @@
 {
-  "PostToolUse": [
-    {
-      "matcher": "Edit|Write|MultiEdit",
-      "hooks": [
-        {
-          "type": "command",
-          "command": ".claude/hooks/agent-tools/hooks/go-lint.sh",
-          "timeout": 120
-        }
-      ],
-      "_apm_source": "agent-tools"
-    }
-  ],
-  "PostToolBatch": [
-    {
-      "matcher": "*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": ".claude/hooks/agent-tools/hooks/go-lint.sh",
-          "timeout": 180
-        }
-      ],
-      "_apm_source": "agent-tools"
-    }
-  ],
-  "Stop": [
-    {
-      "matcher": "*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": ".claude/hooks/agent-tools/hooks/go-lint.sh",
-          "timeout": 180
-        }
-      ],
-      "_apm_source": "agent-tools"
-    }
-  ],
   "PreToolUse": [
     {
       "matcher": "Write|Edit",

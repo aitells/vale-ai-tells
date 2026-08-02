@@ -55,8 +55,8 @@ occurrence before editing.
 
 Run:
 
-- `just lint-yaml`: confirm any new YAML files pass
-- `just test-clean`: confirm false positives file remains clean
+- `mise run lint-yaml`: confirm any new YAML files pass
+- `mise run test-clean`: confirm false positives file remains clean
 
 ## 5. Commit
 
@@ -80,7 +80,7 @@ Never include the names of flagged phrases or tokens in the commit message body.
 Run:
 
 ```sh
-just release $ARGUMENTS
+mise run release $ARGUMENTS
 ```
 
 This creates the annotated tag (using `-a -m`), pushes the

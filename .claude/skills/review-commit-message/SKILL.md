@@ -2,12 +2,7 @@
 name: review-commit-message
 license: Apache-2.0
 description: >-
-  Review a drafted commit message in COMMIT_AGENTMSG against the staged
-  diff, as an independent agent, for the things mechanical linting can't
-  see: claims the diff doesn't support, counting, provenance filler,
-  restating the diff, subject mood and bounds, plain-text form, and
-  whether the staged change is one logical change. The commit skill
-  invokes this before every commit, passing the repository root.
+  Review a drafted commit message in COMMIT_AGENTMSG against the staged diff, as an independent agent, for the things mechanical linting can't see: claims the diff doesn't support, counting, provenance filler, restating the diff, subject mood and bounds, plain-text form, and whether the staged change is one logical change. The commit skill invokes this before every commit, passing the repository root.
 context: fork
 agent: Explore
 background: false

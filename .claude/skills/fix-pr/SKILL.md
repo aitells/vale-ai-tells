@@ -55,8 +55,11 @@ The mapping from job name to recipe is a guess, so treat a recipe that passes lo
 - The job runs something the recipe doesn't. Read the workflow.
 - The failure depends on the environment, such as a pinned tool version or a container image the worktree isn't running.
 - The failure is a flake, which makes the run worth repeating before anything changes.
+- A stale branch. CI tested it merged with a base this worktree doesn't have, and the gate that fails arrived on that base. Nothing here reproduces it until the branch moves, so run the `rebase` skill and diagnose again.
 
 Say which one applies rather than editing until the symptom moves.
+
+Recognizing that last shape matters, because it produces a failure no commit on the branch caused. The base added a gate and the branch added something that gate rejects, so neither side was red alone. Running the gates against the combined tree is what the `rebase` skill's verification step is for.
 
 ## Step 3: fix the cause
 

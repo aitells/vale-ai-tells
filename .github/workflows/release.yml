@@ -1,6 +1,6 @@
 ---
 # Release pipeline. Fires on every `v*` tag push: builds the three Vale
-# package zips through `just build-package` (the recipe stays the single
+# package zips through `mise run build-package` (the task stays the single
 # definition of the package layout), extracts the tag's section from
 # CHANGELOG.md as the release notes, and publishes the GitHub release
 # with the `gh` CLI under the workflow's own token, with no third-party
@@ -22,6 +22,10 @@ on:
 permissions:
   contents: read
 
+# See ci.yml: without this a pin can move without its lockfile entry.
+env:
+  MISE_LOCKED: "1"
+
 jobs:
   release:
     name: release
@@ -39,11 +43,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up just
-        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+      - name: Set up the toolchain
+        uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
 
       - name: Build the packages
-        run: just build-package
+        run: mise run build-package
 
       - name: Extract release notes from CHANGELOG
         run: |
