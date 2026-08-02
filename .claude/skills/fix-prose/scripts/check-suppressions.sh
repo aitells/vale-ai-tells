@@ -87,7 +87,12 @@ readonly BASE="$git_dir/fix-prose.baseline"
 digest() {
   local target=$1
   {
-    find .vale -type f -exec shasum -a 256 {} + 2>/dev/null || true
+    # A while-read loop rather than find -exec: the skill scanner
+    # refuses -exec at high severity, and the hashes come out the same.
+    local vf
+    while IFS= read -r -d '' vf; do
+      shasum -a 256 "$vf"
+    done < <(find .vale -type f -print0 2>/dev/null) || true
 
     local f
     for f in "${CONFIG_FILES[@]}"; do

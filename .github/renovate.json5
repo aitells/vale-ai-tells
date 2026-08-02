@@ -2,7 +2,7 @@
   $schema: "https://docs.renovatebot.com/renovate-schema.json",
 
   // This repo's Renovate config pulls the shared policy from the
-  // renovate-config.json5 preset in tbhb/github-actions via extends — the
+  // renovate-config.json5 preset in tbhb/repotools via extends — the
   // repository-level rules plus the Justfile and Vale custom managers
   // shared by every repo. Those managers already track the docker image
   // pins and the vale pin in this repo's Justfile, so nothing stays
@@ -21,7 +21,7 @@
   prConcurrentLimit: 0,
   prHourlyLimit: 0,
   extends: [
-    "github>tbhb/github-actions//.github/renovate-config.json5",
+    "github>tbhb/repotools//.github/renovate-config.json5",
   ],
 
   // Single-repo scope. Differs per repo.

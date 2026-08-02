@@ -2,7 +2,7 @@
   "language": "en",
   "ignorePaths": [
     "**/*.log",
-    // Agent primitives, mostly deployed from tbhb/agent-tools and pinned
+    // Agent primitives, mostly deployed from tbhb/repotools and pinned
     // by content hash in apm.lock.yaml. Shell builtins and awk variables
     // carry a vocabulary of their own that upstream owns, and the same
     // scope is exempt from the prose rules in .vale.ini.

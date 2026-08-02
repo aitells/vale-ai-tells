@@ -12,7 +12,7 @@ set positional-arguments
 #      the pins would silently drop them from Renovate's view.
 #
 #   2. The delegation recipes at the bottom. The APM primitives in .claude/
-#      are pinned to tbhb/agent-tools and still spell their gates
+#      are pinned to tbhb/repotools and still spell their gates
 #      `just <recipe>`; three of them refuse to run when the recipe is
 #      absent. Each one forwards to the mise task of the same name, so
 #      mise.toml stays the single definition.
