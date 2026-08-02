@@ -3,3 +3,8 @@
 *.md text eol=lf
 
 *.lock -diff
+
+# mise.lock is the exception: it carries the download digests, and a
+# toolchain bump's diff is the only place a reviewer sees them change.
+# Suppressed, a Renovate pin bump renders as `Bin NNNNN bytes`.
+mise.lock diff

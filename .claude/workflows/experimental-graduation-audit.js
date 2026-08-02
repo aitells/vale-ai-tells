@@ -37,7 +37,7 @@ const CRITERIA = `Recommend exactly one of:
   built-in exception lists, but wrong-sense matches on ordinary human prose disqualify); (c) no unresolved
   double-flag overlap with a core rule or with the bundled write-good/proselint/Google styles, or a concrete
   dedup plan; (d) message can be made to fit the core template "AI <label>: '%s'. <concrete action>." and pass
-  just lint-messages.
+  mise run lint-messages.
 - "keep-metrics": stays in the renamed metrics tier at level: warning. For document-level/threshold/statistical
   heuristics that are useful signals but wrong as hard errors. State whether the current threshold is sensible.
 - "retire": delete in 2.0. For rules that are redundant with core or bundled styles, unsound, or not actually

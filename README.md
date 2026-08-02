@@ -401,20 +401,20 @@ This covers structural patterns that lexical analysis can't catch.
 
 ## Working on this repository
 
-Every gate runs through a `just` recipe, and CI runs the same recipes, so a clean local run predicts a clean pull request.
+Every gate runs through a mise task, and CI runs the same tasks against the same pinned tools, so a clean local run predicts a clean pull request.
 
 ```bash
-just setup    # brew bundle, vale sync, install the git hooks
-just lint     # yamllint, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
-just test     # fixture guard: tells fire, subjects smoke-test, false positives stay clean
-just check    # lint and test together
+mise run setup    # install the toolchain, vale sync, install the git hooks
+mise run lint     # yamllint, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
+mise run test     # fixture guard: tells fire, subjects smoke-test, false positives stay clean
+mise run check    # lint and test together
 ```
 
-The [Brewfile](Brewfile) lists the local toolchain. `just lint-workflows` and `just gitleaks` run from digest-pinned Docker images, so those two need a container runtime. Vale itself is pinned to the version CI installs, and `just check-vale-version` warns when the local binary drifts off it.
+[mise.toml](mise.toml) lists the local toolchain and [mise.lock](mise.lock) records the digest of every download, so a contributor and CI run the same binaries. `just lint-workflows` and `just gitleaks` run from digest-pinned Docker images instead, so those two need a container runtime. `mise run check-toolchain` gates the installed tools against both files and fails rather than warning.
 
 Commit messages go through the shared [`pre-commit-hooks`](https://github.com/tbhb/pre-commit-hooks) gates at the `commit-msg` stage. One hook enforces the Conventional Commits shape and the length bounds. Another enforces the trailer rules, including a DCO `Signed-off-by` on every message. The remaining pair spell-check the buffer and lint it with this package's own `ai-tells` and `ai-tells-commits` styles. [AGENTS.md](AGENTS.md) describes the drafting workflow and the prose-lint output contract.
 
-`just build-package` writes the three release zips locally, and `just release vX.Y.Z` tags, pushes, and waits on the release run before rewriting the notes from the changelog.
+`mise run build-package` writes the three release zips locally, and `mise run release vX.Y.Z` tags, pushes, and waits on the release run before rewriting the notes from the changelog.
 
 ## Sources
 

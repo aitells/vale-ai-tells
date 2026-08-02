@@ -2,12 +2,11 @@
 # Main quality gate. This repo's content is a set of Vale styles and the
 # docs around them, so the prose, spelling, Markdown, config, TOML, and
 # YAML linters are its code gates and run here rather than staying
-# local-only. Both jobs install the Brewfile toolchain (Homebrew is
-# preinstalled on the ubuntu-24.04 runners) and sync the Vale styles,
-# then run their gates through the `just` recipes so the Justfile stays
-# the single definition of what each gate runs: the lint job runs the
-# full bar via `just lint`, and the test job runs the fixture suite via
-# `just test` (vale must be present to evaluate the fixtures).
+# local-only. Both jobs install the pinned toolchain through mise and sync
+# the Vale styles, then run their gates through `mise run` so mise.toml
+# stays the single definition of what each gate runs: the lint job runs the
+# full bar via `mise run lint`, and the test job runs the fixture suite via
+# `mise run test` (vale must be present to evaluate the fixtures).
 # actionlint is absent from the lint bar: the standalone lint-workflows
 # workflow already covers it.
 
@@ -20,6 +19,15 @@ on:
 
 permissions:
   contents: read
+
+# A lockfile only binds a version it has already seen. Without this, moving
+# a pin in mise.toml and leaving mise.lock alone makes mise fetch the new
+# version, compute a fresh digest, and rewrite the lockfile in place -- so a
+# Renovate PR that touched only the manifest would go green while the
+# committed digests drifted from the pins under review. MISE_LOCKED makes
+# that a hard failure instead.
+env:
+  MISE_LOCKED: "1"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -40,36 +48,19 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up just
-        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+      # Installs every tool in mise.toml at the version and digest recorded
+      # in mise.lock, replacing the Brewfile and the setup-just and
+      # setup-vale composites.
+      - name: Set up the toolchain
+        uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
 
-      # The runner image ships Homebrew but leaves its prefix off PATH.
-      - name: Put Homebrew on the PATH
-        run: echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
-
-      # vale comes from the pinned composite rather than the Brewfile, so
-      # the prose gates run a known binary instead of whatever Homebrew
-      # serves that day. It lands on PATH ahead of Homebrew's prefix, so
-      # the Brewfile copy never shadows it.
-      - name: Set up vale
-        uses: tbhb/github-actions/.github/actions/setup-vale@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
-
-      # The image pins an older Homebrew and sets HOMEBREW_NO_AUTO_UPDATE,
-      # but `brew bundle` reads formula metadata from the JSON API, which
-      # serves current definitions. ca-certificates now declares a `run`
-      # install step that the pinned Homebrew cannot parse, failing every
-      # formula that depends on it. Update Homebrew itself first.
-      - name: Update Homebrew
-        run: brew update
-
-      - name: Install Homebrew dependencies
-        run: brew bundle install
-
+      # mise installs the vale binary but does not fetch the style packages
+      # .vale.ini declares.
       - name: Sync Vale styles
-        run: just install-tools
+        run: mise run install-tools
 
       - name: Lint
-        run: just lint
+        run: mise run lint
 
   test:
     name: test
@@ -85,33 +76,11 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up just
-        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
-
-      # The runner image ships Homebrew but leaves its prefix off PATH.
-      - name: Put Homebrew on the PATH
-        run: echo "/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
-
-      # vale comes from the pinned composite rather than the Brewfile, so
-      # the fixture assertions run a known binary instead of whatever
-      # Homebrew serves that day. It lands on PATH ahead of Homebrew's
-      # prefix, so the Brewfile copy never shadows it.
-      - name: Set up vale
-        uses: tbhb/github-actions/.github/actions/setup-vale@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
-
-      # The image pins an older Homebrew and sets HOMEBREW_NO_AUTO_UPDATE,
-      # but `brew bundle` reads formula metadata from the JSON API, which
-      # serves current definitions. ca-certificates now declares a `run`
-      # install step that the pinned Homebrew cannot parse, failing every
-      # formula that depends on it. Update Homebrew itself first.
-      - name: Update Homebrew
-        run: brew update
-
-      - name: Install Homebrew dependencies
-        run: brew bundle install
+      - name: Set up the toolchain
+        uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
 
       - name: Sync Vale styles
-        run: just install-tools
+        run: mise run install-tools
 
       - name: Test
-        run: just test
+        run: mise run test

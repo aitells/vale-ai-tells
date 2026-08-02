@@ -18,6 +18,10 @@ on:
 permissions:
   contents: read
 
+# See ci.yml: without this a pin can move without its lockfile entry.
+env:
+  MISE_LOCKED: "1"
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
@@ -40,8 +44,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up just
-        uses: tbhb/github-actions/.github/actions/setup-just@d40ae6bd774fdf78c631c4d851ed9d22ee840ca1 # v0.1.0
+      # gitleaks itself comes from a SHA-pinned image; mise supplies the
+      # `just` that invokes it.
+      - name: Set up the toolchain
+        uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
 
       - name: Scan for committed secrets
         run: just gitleaks

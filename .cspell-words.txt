@@ -40,6 +40,7 @@ EDITMSG
 elif
 endeavours
 engo
+errexit
 etacommentary
 favourable
 frontmatter
@@ -55,6 +56,7 @@ innovatively
 irregardless
 IVXLCDM
 Jaccard
+jdx
 Justfile
 Justfiles
 Kassorla
@@ -67,6 +69,7 @@ ning
 nofilter
 nominalizations
 nonword
+nounset
 nullglob
 Nuxt
 oneline
@@ -79,6 +82,7 @@ osxkeychain
 Overexplanation
 peakoss
 pipefail
+pipx
 PNAS
 prek
 prepositionless
@@ -103,6 +107,7 @@ subordinator
 Supabase
 tbhb
 Tengo
+Tera
 tfvars
 throughlines
 tmpl

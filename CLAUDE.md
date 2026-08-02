@@ -19,7 +19,8 @@ vale-ai-tells/
 ├── .pre-commit-config.yaml
 ├── .vale.ini                   # Repo dev config (enables all three styles)
 ├── Justfile                    # Every gate and release recipe
-├── Brewfile                    # Local toolchain
+├── mise.toml                   # Toolchain pins and every task
+├── mise.lock                   # Resolved versions, URLs, and digests
 ├── README.md
 ├── AGENTS.md                   # Commit and prose-output contract for agents
 ├── EXPERIMENTAL.md             # Experimental-rule reference
@@ -35,45 +36,45 @@ vale-ai-tells/
 **First-time setup:**
 
 ```bash
-just setup   # brew bundle, vale sync, prek install
+mise run setup   # mise install, vale sync, prek install
 ```
 
 **Testing rules locally:**
 
 ```bash
 vale --config=.vale.ini test-document.md
-just test    # the fixture guard: tells fire, subjects smoke-test, no false positives
+mise run test    # the fixture guard: tells fire, subjects smoke-test, no false positives
 ```
 
 **Running the gates:**
 
 ```bash
-just lint            # every linter below, in one pass
-just lint-yaml       # yamllint
-just lint-markdown   # rumdl
-just lint-config     # biome on JSON
-just lint-spelling   # cspell
-just lint-prose      # Vale on the docs
-just lint-messages   # Vale on each rule's own message: field (dogfooding)
-just lint-toml       # tombi
-just lint-just       # just --fmt --check
-just lint-editorconfig
+mise run lint            # every linter below, in one pass
+mise run lint-yaml       # yamllint
+mise run lint-markdown   # rumdl
+mise run lint-config     # biome on JSON
+mise run lint-spelling   # cspell
+mise run lint-prose      # Vale on the docs
+mise run lint-messages   # Vale on each rule's own message: field (dogfooding)
+mise run lint-toml       # tombi
+mise run lint-just       # just --fmt --check
+mise run lint-editorconfig
 just lint-workflows  # actionlint
-just check-all       # lint, test, and the full-history gitleaks scan
+mise run check-all       # lint, test, and the full-history gitleaks scan
 ```
 
 **Pre-commit hooks:**
 
 ```bash
-just prek          # run hooks on staged files
-just prek-all      # run hooks on all files
+mise run prek          # run hooks on staged files
+mise run prek-all      # run hooks on all files
 ```
 
 **Building and releasing:**
 
 ```bash
-just build-package # write the three release zips locally
-just release vX.Y.Z
+mise run build-package # write the three release zips locally
+mise run release vX.Y.Z
 ```
 
 ## Rule conventions
@@ -87,8 +88,8 @@ All rules use `error` level by default. Users can override this in their `.vale.
 Messages must pass the `ai-tells` style themselves: avoid em-dashes, anthropomorphic
 or cliché idioms, and quoted examples of the flagged word (give the good word instead).
 Write each message as `AI <label>: '%s'. <concrete action>.` so agents can act on it.
-`just lint-messages` enforces this via the `RuleMessage` View (selects the `message`
-field with Dasel and lints it as prose). It runs as part of `just lint`.
+`mise run lint-messages` enforces this via the `RuleMessage` View (selects the `message`
+field with Dasel and lints it as prose). It runs as part of `mise run lint`.
 
 ## Tone
 

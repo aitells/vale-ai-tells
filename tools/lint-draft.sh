@@ -3,7 +3,7 @@
 # single call, and report all of it at once.
 #
 # The recipes this replaces each run one checker over many files.
-# `just lint-prose x.md` runs vale and says nothing about spelling or
+# `mise run lint-prose x.md` runs vale and says nothing about spelling or
 # structure, so a document that clears it can still fail cspell and
 # rumdl afterwards. Answering them one at a time is how a twenty-line
 # file turns into four rounds. Every gate reports here, whatever the
@@ -65,7 +65,7 @@ case $file in
   exit 2
   ;;
 *.yml | *.yaml)
-  printf '%s:1 [error] wrong-recipe  rule file; use just lint-messages\n' "$file"
+  printf '%s:1 [error] wrong-recipe  rule file; use mise run lint-messages\n' "$file"
   exit 2
   ;;
 esac
