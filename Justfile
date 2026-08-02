@@ -148,6 +148,19 @@ format-just:
 fix-markdown *args:
     rumdl check --fix {{ if args == "" { "." } else { args } }}
 
+# Some of a typical vale run needs no judgment: the rule's own action
+# carries the correction, and the agent output template already prints
+# it as replace_with= on the finding line. Reading those into a model so
+# it can retype the answer spends tokens on a lookup. Only the Google
+# and proselint rules define a replacement here — the ai-tells styles
+# describe what is wrong rather than substitute for it. This applies
+# them and leaves the rest, refusing any finding whose span no longer
+# holds the text the report quoted.
+
+# Apply every vale finding that carries its own replacement.
+fix-prose-replacements file:
+    bash tools/fix-prose-replacements.sh {{ file }}
+
 # --- Lint ---
 
 # Run every linter over the source tree.
