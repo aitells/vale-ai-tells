@@ -9,6 +9,14 @@ styles/write-good/
 # then consumed with `git commit -F COMMIT_AGENTMSG`. Never committed.
 COMMIT_AGENTMSG
 
+# Agent pull request drafts, the same idea one stage later.
+# PR_AGENTDESC.md holds the description for as long as the pull request
+# stays open, and merge-pr removes it once the branch merges.
+# SQUASH_AGENTMSG holds the squash commit message that skill writes.
+# Linted via `just lint-pr-description` and `just lint-squash-msg`.
+PR_AGENTDESC.md
+SQUASH_AGENTMSG
+
 # Linter caches
 .rumdl_cache/
 .cspell-cache

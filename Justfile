@@ -86,6 +86,23 @@ install-brew:
 install-tools:
     vale sync
 
+# APM merges hook declarations into .claude/settings.json additively and
+# never reconciles, while `apm audit --ci` replays the same merge from an
+# empty tree and compares. A plain `apm install` therefore leaves two
+# kinds of wreckage: a reordering the replay disagrees with forever, and
+# entries for a hook upstream has since deleted, still firing. Clearing
+# the keys APM owns first hands the merge the empty slate its replay
+# assumes, so what lands is what the audit expects. Drop only the hooks
+# key, so a hand-authored setting elsewhere in the file survives.
+[script]
+apm-sync: && lint-apm
+    if [[ -f .claude/settings.json ]]; then
+        jq 'del(.hooks)' .claude/settings.json > .claude/settings.json.tmp
+        mv .claude/settings.json.tmp .claude/settings.json
+    fi
+    rm -f .claude/apm-hooks.json
+    apm install
+
 # Warn when the locally installed vale differs from the version CI pins.
 # Advisory rather than fatal: local vale comes from Homebrew and drifts
 # ahead on its own schedule, and that is fine so long as it stays
@@ -150,7 +167,7 @@ lint-config *args:
 
 # Check spelling against the project dictionary (.cspell-words.txt).
 lint-spelling *args:
-    cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG {{ if args == "" { "." } else { args } }}
+    cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG --exclude PR_AGENTDESC.md --exclude SQUASH_AGENTMSG {{ if args == "" { "." } else { args } }}
 
 # Lint prose in Markdown via vale. Findings render through the agent
 # template committed in this repo's StylesPath, so a fix never needs a
@@ -160,7 +177,7 @@ lint-spelling *args:
 # the APM manifest, lockfile, and gitignored package cache, none of which
 # carry prose to lint.
 lint-prose *args:
-    vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,COMMIT_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' {{ if args == "" { "." } else { args } }}
+    vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,COMMIT_AGENTMSG,PR_AGENTDESC.md,SQUASH_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' {{ if args == "" { "." } else { args } }}
 
 # Lint each rule file's own `message:` field with the ai-tells prose style, so
 # the package's diagnostics don't contain the patterns they flag. Uses the
@@ -224,10 +241,35 @@ lint-editorconfig:
 lint-workflows:
     {{ actionlint }}
 
+# Check the deployed APM primitives against the lockfile. Drift here
+# means .claude/ and apm.lock.yaml disagree; `just apm-sync` is the fix.
+# --no-policy skips the org policy lookup, which resolves to nothing on a
+# personal account.
+lint-apm:
+    apm audit --ci --no-policy
+
 # Preview the commit-msg gates against the COMMIT_AGENTMSG draft.
 # prek needs .pre-commit-config.yaml staged to run.
 lint-commit-msg:
     prek run --stage commit-msg --commit-msg-filename COMMIT_AGENTMSG
+
+# Check a drafted pull request description. The validator settles the
+# mechanical questions (frontmatter, title shape, the template's
+# sections, paths that exist); vale and cspell then read the prose the
+# same way they read any other Markdown in the tree.
+lint-pr-description:
+    bash .claude/skills/pr/scripts/validate-description.sh
+    vale --output=ai-tells-agent.tmpl PR_AGENTDESC.md
+    cspell --config .cspell.jsonc --no-summary --no-progress PR_AGENTDESC.md
+
+# The squash message merge-pr writes never passes through git's
+# commit-msg hook, because GitHub authors that commit rather than this
+# machine. Running the same four hooks over the draft here is what keeps
+# a squash commit answerable to the rules every other commit meets.
+
+# Pre-validate a drafted squash commit message against the commit-msg gates.
+lint-squash-msg:
+    prek run --stage commit-msg --commit-msg-filename SQUASH_AGENTMSG
 
 # --- Test ---
 
@@ -386,9 +428,9 @@ prek:
 prek-all:
     prek run --all-files
 
-# Install the project's git hooks (commit-msg, pre-commit, pre-push).
+# Install the project's git hooks (commit-msg, pre-commit, pre-push, post-commit).
 prek-install:
-    prek install -t commit-msg -t pre-commit -t pre-push
+    prek install -t commit-msg -t pre-commit -t pre-push -t post-commit
 
 # --- Changelog ---
 

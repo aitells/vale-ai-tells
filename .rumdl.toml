@@ -6,6 +6,12 @@ disable = [
 respect_gitignore = true
 exclude = [".git", ".vale", "tmp"]
 
+# The pull request template opens at level 2: GitHub renders the pull
+# request title above the body, so a level 1 heading inside the template
+# would repeat it.
+[per-file-ignores]
+".github/pull_request_template.md" = ["MD041"]
+
 [MD003]
 style = "atx"
 

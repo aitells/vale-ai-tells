@@ -1,4 +1,5 @@
 adoc
+AGENTDESC
 agentic
 AGENTMSG
 aitells
@@ -40,6 +41,7 @@ endeavours
 engo
 etacommentary
 favourable
+frontmatter
 gitignorable
 gitmoji
 Gorrie

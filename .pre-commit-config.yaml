@@ -54,12 +54,18 @@ repos:
   # SHA with a `# frozen:` tag comment so Renovate's pre-commit manager
   # tracks it, the same as the other hook repos above.
   - repo: https://github.com/tbhb/pre-commit-hooks
-    rev: 8ad309e61a0298394beef2b07b14ceca44b5a7e8  # frozen: v0.1.0
+    rev: bbb2b8c0b599248dca5c55cf71e75247513f7a84  # frozen: v0.2.0
     hooks:
       - id: commit-trailers
       - id: commitlint
       - id: vale-commit-msg
       - id: cspell-commit-msg
+
+      # The one post-commit hook, and the reason `just prek-install`
+      # installs that stage. It deletes the COMMIT_AGENTMSG draft once a
+      # commit succeeds, so the next commit starts from an absent path
+      # rather than a stale draft.
+      - id: clear-commit-agentmsg
 
   - repo: local
     hooks:
@@ -79,6 +85,18 @@ repos:
         language: system
         stages: [pre-commit, pre-push]
         types: [text]
+
+      # Catches the two ways APM's additive hook merge goes wrong: an
+      # ordering its own audit replay never agrees with, and entries for
+      # a hook deleted upstream that keep firing. apm.lock.yaml records
+      # no hook declarations, so it stays byte-identical across either
+      # and is useless as a trigger; watch .apm/ and apm.yml instead.
+      - id: apm-audit
+        name: apm audit
+        entry: just lint-apm
+        language: system
+        files: ^(\.apm/|apm\.yml$|\.claude/(settings|apm-hooks)\.json$)
+        pass_filenames: false
 
       - id: tombi
         name: tombi (TOML lint + format-check)
