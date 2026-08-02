@@ -149,6 +149,12 @@ Once the bird lands on the branch, it sings.
 
 Before the rocket lands, deploy the legs.
 
+## VerbTricolon: clauses from separate sentences that should NOT trigger
+
+We begin the pass. Later, we widen the scope, we close the loop.
+
+The gate reads the file. Once it clears, the hook exits, the branch moves on.
+
 ## FigurativeSits: literal sitting that should NOT trigger
 
 The cat sits on the mat by the window.
