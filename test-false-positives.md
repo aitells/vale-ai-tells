@@ -173,6 +173,12 @@ The painting sits above the fireplace in the den.
 
 The toddler will not sit still for the photo.
 
+The return address sits one word above the frame pointer.
+
+A validation wrapper sits between the app and the server.
+
+That byte sits between the file data and the next header.
+
 ## ColloquialAssessments ("move"): literal uses that should NOT trigger
 
 The next move in the protocol is a handshake.
@@ -381,6 +387,10 @@ She carried the groceries upstairs.
 The function carries out the validation logic.
 
 The team carries out data processing nightly.
+
+The build carried over settings from the previous release.
+
+The release notes carry over exceptions we already documented.
 
 ## FigurativeFalls: literal falling that should NOT trigger
 

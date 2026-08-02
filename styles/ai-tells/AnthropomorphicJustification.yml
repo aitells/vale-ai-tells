@@ -16,6 +16,23 @@ tokens:
   # caveat," "earned the name"). The determiner plus a curated object
   # keeps literal wages out.
   - earn(?:s|ed)? (?:a|an|the) (?:caveat|mention|footnote|call-?out|closer look|second look|spot|place|slot|pass|nod|name|title|label|badge|crown|shout-?out|asterisk|gold star)
+  # Typographic and structural grant: the same bare-grant shape, but the
+  # reward is a mark on the page or a place in a file rather than notice
+  # or rank ("nothing about the word earns a capital," "the file earns
+  # that exemption"). Style and documentation writing reaches for this
+  # constantly; say who capitalizes it, or that the convention does not
+  # apply. The demonstrative and possessive determiners appear here
+  # because the shape resists "a" ("earns that exemption," not "earns an
+  # exemption"). "Capital" stays gated on a determiner so that the
+  # financial sense ("the fund earns capital gains") never reaches the
+  # rule; no one earns a hyphen for a day's work, so literal wages stay
+  # out on their own.
+  - earn(?:s|ed)? (?:a|an|the|that|this|its|no) (?:capital|hyphen|entry|exemption|exception|override|line|section|treatment|designation|distinction|upgrade|promotion)
+  # The same grant with a mass noun for a reward, which takes no article
+  # ("the term earns italics," "that identifier earns backticks"). None of
+  # these has a literal sense a person could be paid in, so the
+  # determiner is optional here rather than required.
+  - earn(?:s|ed)? (?:no |the |its )?(?:capitalization|capitalisation|italics|boldface|small caps|backticks|quotes|quotation marks)
 
   # "Paying" family
   - pays? for itself

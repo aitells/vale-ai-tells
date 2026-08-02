@@ -715,6 +715,12 @@ This migration causes harm if run twice.
 
 The helper earns a caveat.
 
+Nothing about the word earns a capital.
+
+The file earns that exemption from the formatter.
+
+The term earns italics on first use.
+
 That commit crowns the release.
 
 The parser claims the top spot in the benchmark.
@@ -999,6 +1005,14 @@ The framework sits astride research and product.
 
 The cache sits above the database tier.
 
+The entry sits in the proper-noun block of the vocabulary.
+
+The word changelog sat in the upper section of that file.
+
+The flag sits under the lint configuration.
+
+That default sits above the per-project override.
+
 Onboarding sits at the top of the backlog.
 
 ## ShipOveruse
@@ -1086,6 +1100,14 @@ The packet carries the payload across the link.
 The header carries the auth token.
 
 The signal carries data to the receiver.
+
+The lower block carries the pattern for exactly this case.
+
+The config carries the exemption for generated files.
+
+That section carries the rule about trailing commas.
+
+The schema carries every constraint the parser enforces.
 
 ## FigurativeFalls
 

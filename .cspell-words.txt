@@ -21,6 +21,7 @@ bnurtur
 bresonat
 bstrik
 burstiness
+capitalisation
 cataphoric
 categori
 chatbots
