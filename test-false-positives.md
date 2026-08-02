@@ -701,3 +701,9 @@ The methodology is documented in the appendix.
 The streamlined process saved hours of manual work.
 
 The job ran with elevated privileges on the host.
+
+## NegationDensity: ordinary negation that should NOT trigger
+
+Vale has no narrower setting for that format. The option in this section has no effect either.
+
+The file is no longer present and no one has read it, no matter when it was written.

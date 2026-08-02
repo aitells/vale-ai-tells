@@ -314,6 +314,21 @@ Measures the share of sentences in each section that contain a passive construct
 <!-- vale ai-tells-experimental.PassiveVoice = YES -->
 <!-- vale ai-tells-experimental.PassiveVoiceAdverb = YES -->
 
+### NegationDensity
+
+Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any single use. It catches the writer who reaches for one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
+
+**How it works:**
+
+1. Counts matches of the determiner "no" followed by a noun phrase within each paragraph
+2. Excludes the adverbial "no longer" and "no matter" and the pronoun "no one," none of which is the determiner being measured
+3. Counts a dotted object, so a repository with no .apm directory registers
+4. Flags at three or more in one paragraph
+
+**Threshold rationale:** Agent-authored prose sampled from 798 sessions runs 38.3 of these per 10k words. The Go standard library runs 13.5 and the Python standard library 11.1, close to a third of the agent rate. Per paragraph the separation is sharper. Across 4477 paragraphs of human-written markdown in the Go source tree, not one paragraph reached two. A max of 2 triggers only at three or more. That covers 0.073% of agent paragraphs and leaves the two-instance paragraph alone, since two independent negations in one paragraph are ordinary.
+
+**Known limitation:** Prose that negates for a living exceeds the max for good reason. Specifications, license text, RFC language, and security controls stating what a system must not do should disable the rule.
+
 ## Calibration status
 
 <!-- vale Google.Headings = YES -->

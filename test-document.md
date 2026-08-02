@@ -1502,3 +1502,7 @@ The service parses requests, validates payloads, and formats responses. The work
 ## TransitionRepetition
 
 Furthermore, the cache warms on boot. Furthermore, the index rebuilds nightly. Furthermore, the queue drains cleanly on shutdown.
+
+## NegationDensity
+
+The runner has no cache, no network access, and no way to reach the registry. Each job starts cold.

@@ -1,0 +1,29 @@
+---
+extends: occurrence
+message: "AI negation monotony: %d negated noun phrases in one paragraph. Recast some positively or name what is absent."
+level: warning
+scope: paragraph
+max: 2
+# Counts the determiner "no" heading a noun phrase ("no narrower setting," "no
+# effect," "no Go file"). The construction is correct English and each instance
+# reads fine; the tell is reaching for it as the only negation on hand, so the
+# rule measures rate rather than judging any single use.
+#
+# Threshold rationale: agent-authored prose sampled from 798 sessions runs 38.3
+# of these per 10k words against 13.5 for the Go standard library and 11.1 for
+# the Python standard library, close to triple. Per paragraph the separation is
+# sharper still: across 4477 paragraphs of human-written markdown shipped in
+# the Go source tree,
+# not one paragraph reached two. A max of 2 therefore fires only at three or
+# more, which lands on 0.073% of agent paragraphs and leaves the two-instance
+# paragraph untouched, since two genuinely independent negations in one
+# paragraph are ordinary.
+#
+# "No longer" and "no matter" are adverbial and "no one" is a pronoun, so all
+# three are excluded; none of them is the determiner this rule measures. The
+# optional leading dot keeps dotfile and dotted-identifier objects countable,
+# as in a repository that has no .apm directory.
+# Prose that negates for a living (specifications, license text, RFC language,
+# security controls stating what a system must not do) will exceed the max for
+# good reason and should disable the rule.
+token: '\bno (?!longer\b|one\b|matter\b)\.?[a-z][a-z''-]*'

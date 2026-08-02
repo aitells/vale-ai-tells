@@ -7,7 +7,7 @@
 export const meta = {
   name: 'experimental-graduation-audit',
   description: 'Evaluate each ai-tells-experimental rule for promotion to core, retention as a metrics-tier rule, or retirement, ahead of 2.0',
-  whenToUse: 'Phase 0 of the 2.0 release: decides the fate of all 17 experimental rules before the core migration and Tengo rename.',
+  whenToUse: 'Phase 0 of the 2.0 release: decides the fate of all 18 experimental rules before the core migration and Tengo rename.',
   phases: [
     { title: 'Evaluate', detail: 'one agent per rule: read, test on human + AI prose, recommend', model: 'opus' },
     { title: 'Challenge', detail: 'skeptic reviews each promote/retire call', model: 'opus' },
