@@ -197,10 +197,10 @@ if git check-ignore --quiet COMMIT_AGENTMSG 2>/dev/null; then
 else
   printf 'COMMIT_AGENTMSG gitignored: NO — add it to .gitignore before drafting\n'
 fi
-if command -v just >/dev/null 2>&1 && just --summary 2>/dev/null | tr ' ' '\n' | grep -qx lint-commit-msg; then
-  printf 'just lint-commit-msg: present\n'
+if command -v mise >/dev/null 2>&1 && mise task info lint-commit-msg >/dev/null 2>&1; then
+  printf 'mise run lint-commit-msg: present\n'
 else
-  printf 'just lint-commit-msg: ABSENT — stop and tell the operator\n'
+  printf 'mise run lint-commit-msg: ABSENT — stop and tell the operator\n'
 fi
 
 # prek installs shims into git's effective hooks directory, which
@@ -211,7 +211,7 @@ for hook in commit-msg pre-commit post-commit; do
   if [ -x "$hooks_dir/$hook" ]; then
     printf '%s hook: installed\n' "$hook"
   else
-    printf '%s hook: not installed — run just prek-install\n' "$hook"
+    printf '%s hook: not installed — run mise run repotools:prek-install\n' "$hook"
   fi
 done
 if [ -s COMMIT_AGENTMSG ]; then

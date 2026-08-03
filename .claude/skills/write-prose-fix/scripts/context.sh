@@ -91,11 +91,21 @@ section "whether that silence means anything"
 # success having done nothing. Known-bad text under the target's own
 # path settles which one happened.
 readonly CONTROL='This is a very robust and comprehensive design that does not use contractions and it is significantly better.'
+# A third case hides behind the same silence. vale exits 2 or above when
+# it fails outright, printing nothing on stdout, and a bare finding count
+# reads that as zero the same way it reads an unscoped path. The status
+# tells the two apart, so read it before counting.
 if command -v vale >/dev/null 2>&1; then
-  hits=$(printf '%s\n' "$CONTROL" |
-    vale --path="$target" --output=project-agent.tmpl 2>/dev/null |
-    grep -c '^[0-9]' || true)
-  if [ "${hits:-0}" -eq 0 ]; then
+  probe=$(printf '%s\n' "$CONTROL" |
+    vale --path="$target" --output=ai-tells-agent.tmpl 2>&1)
+  rc=$?
+  hits=$(printf '%s\n' "$probe" | grep -c '^[0-9]' || true)
+  if [ "$rc" -gt 1 ]; then
+    printf 'ERROR: vale exited %s and linted nothing, so neither the\n' "$rc"
+    printf 'silence above nor this probe measured the document:\n'
+    printf '%s\n' "$probe" | sed 's/^/  /'
+    printf 'Report BLOCKED.\n'
+  elif [ "${hits:-0}" -eq 0 ]; then
     printf 'UNSCOPED: no .vale.ini section matches %s, so vale loads no\n' "$target"
     printf 'styles here. A clean run proves nothing. Report BLOCKED.\n'
   else
@@ -108,14 +118,21 @@ fi
 
 section "what a replacement pass would clear"
 # Findings whose rule carries its own correction need no judgment. The
-# count is here so the fixer knows what the recipe below is worth before
+# count is here so the fixer knows what the task below is worth before
 # running it.
 if command -v vale >/dev/null 2>&1; then
-  auto=$(vale --output=project-agent.tmpl "$target" 2>/dev/null |
-    grep -c 'replace_with=' || true)
-  printf '%s of the vale findings carry a replacement.\n' "${auto:-0}"
-  if [ "${auto:-0}" -gt 0 ]; then
-    printf 'Clear them first with:\n  just fix-prose-replacements %s\n' "$target"
+  found=$(vale --output=ai-tells-agent.tmpl "$target" 2>&1)
+  rc=$?
+  if [ "$rc" -gt 1 ]; then
+    printf 'Unknown: vale exited %s rather than linting, so the count below\n' "$rc"
+    printf 'would be zero for the wrong reason:\n'
+    printf '%s\n' "$found" | sed 's/^/  /'
+  else
+    auto=$(printf '%s\n' "$found" | grep -c 'replace_with=' || true)
+    printf '%s of the vale findings carry a replacement.\n' "${auto:-0}"
+    if [ "${auto:-0}" -gt 0 ]; then
+      printf 'Clear them first with:\n  mise run fix-prose-replacements %s\n' "$target"
+    fi
   fi
 else
   printf '(vale not on PATH)\n'

@@ -59,6 +59,7 @@ Gates the vendored payload defines carry a `repotools:` prefix. The rest belong 
 ```bash
 mise run lint                        # every linter below, in one pass
 mise run repotools:check-vendored    # the vendored payload matches what git holds
+mise run repotools:check-pins        # every tbhb/repotools pin site names one release
 mise run repotools:lint-yaml         # ryl
 mise run repotools:lint-markdown     # rumdl
 mise run repotools:lint-config       # biome on JSON

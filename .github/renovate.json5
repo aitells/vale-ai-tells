@@ -3,10 +3,10 @@
 
   // This repo's Renovate config pulls the shared policy from the
   // renovate-config.json5 preset in tbhb/repotools via extends — the
-  // repository-level rules plus the Justfile and Vale custom managers
-  // shared by every repo. Those managers already track the docker image
-  // pins and the vale pin in this repo's Justfile, so nothing stays
-  // inline here.
+  // repository-level rules, the grouping rules, and the custom managers
+  // covering the pin sites no built-in manager reads: the vale package
+  // pins in .vale.ini, the apm.yml dependency, and the extends pin
+  // below. Nothing stays inline here.
   //
   // The global-only options (identity, rate limits, requireConfig) are
   // inlined below instead of using globalExtends: Renovate resolves
@@ -20,8 +20,12 @@
   gitAuthor: "tbhb-renovate[bot] <311633125+tbhb-renovate[bot]@users.noreply.github.com>",
   prConcurrentLimit: 0,
   prHourlyLimit: 0,
+  // Pinned to a commit rather than the default branch, so the one file
+  // governing every other pin answers to the same discipline. The
+  // trailing comment is the only human-readable version at this site,
+  // and `mise run repotools:check-pins` reads it.
   extends: [
-    "github>tbhb/repotools//.github/renovate-config.json5",
+    "github>tbhb/repotools//.github/renovate-config.json5#87b519adea788c76cdac922d087b2f00298c2eed", // v0.5.0
   ],
 
   // Single-repo scope. Differs per repo.

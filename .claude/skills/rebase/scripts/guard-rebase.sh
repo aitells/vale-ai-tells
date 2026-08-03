@@ -144,7 +144,7 @@ if [[ $command =~ ${AT_START}${GIT_CMD}rebase ]]; then
     # more. What it gives up is the pre-rebase record, and
     # verify-rebase.sh already falls back to ORIG_HEAD without it.
     #
-    # The gate sweep is the second, running a recipe at every commit.
+    # The gate sweep is the second, running a task at every commit.
     # That one is a verification rather than a move, so pinning
     # updateRefs is enough; a fixup! commit it collapsed would have to
     # exist in the range first, and nothing here creates one.
@@ -170,7 +170,7 @@ uses at the end of its own run:
 
 So does the sweep that runs a gate at every commit:
 
-  git -c rebase.updateRefs=false rebase --exec 'just lint' <base>"
+  git -c rebase.updateRefs=false rebase --exec 'mise run lint' <base>"
   fi
 fi
 

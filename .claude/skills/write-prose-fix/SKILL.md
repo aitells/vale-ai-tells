@@ -79,7 +79,7 @@ No linter checks these. An independent reviewer does, reading your before and af
 
 ## Reading the output
 
-The vale recipes print one self-contained line per finding:
+The vale tasks print one self-contained line per finding:
 
 ```text
 12:5-19 [error] Google.Contractions match="do not" replace_with="don't" msg="Use 'don't' instead of 'do not'."
@@ -94,7 +94,7 @@ cspell prints its own shape, one line per unknown word with a location.
 Run this first, before you read the findings at all:
 
 ```bash
-just fix-prose-replacements <target>
+mise run fix-prose-replacements <target>
 ```
 
 It applies every finding whose rule carries its own correction, which is roughly a third of a typical run. Contractions, WordList, Semicolons, Ellipses, Ranges, and HeadingPunctuation all qualify. It refuses any finding whose span no longer holds the text the report quoted, so a stale report skips rather than corrupts the line.
@@ -139,7 +139,7 @@ The other half is a token cspell doesn't know but the document is right to use, 
 
 ## Never
 
-- Edit any file except the target. You may not edit the linter configuration, which covers `.vale.ini`, the `.vale/` styles, `.cspell.jsonc`, `.cspell-words.txt`, the Justfile, and the hook configuration.
+- Edit any file except the target. You may not edit the linter configuration, which covers `.vale.ini`, the `.vale/` styles, `.cspell.jsonc`, `.cspell-words.txt`, `mise.toml`, and the hook configuration.
 - Add an inline vale exception, or turn a rule off anywhere. Clearing a finding by silencing its rule is the one thing that must never happen here.
 - Change the target's wrapping convention. Markdown in this repository puts each paragraph on a single line and a hook enforces it. A commit message wraps its body at 72 columns and its trailers at 100.
 - Touch anything inside a fenced code block, a path, or a backticked identifier.

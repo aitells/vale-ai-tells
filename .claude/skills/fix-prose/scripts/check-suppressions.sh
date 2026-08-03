@@ -61,12 +61,15 @@ gitr() {
 }
 
 # Linter configuration outside .vale/. Changing any of these clears a
-# finding by changing the rules rather than the prose.
+# finding by changing the rules rather than the prose. Justfile stays
+# alongside mise.toml for a consumer that has not retired its own; a
+# name absent from the tree costs nothing to watch.
 readonly CONFIG_FILES=(
   .vale.ini
   .cspell.jsonc
   .cspell-words.txt
   .pre-commit-config.yaml
+  mise.toml
   Justfile
 )
 
@@ -182,7 +185,7 @@ case $mode in
   while IFS= read -r path; do
     [ -n "$path" ] || continue
     case $path in
-    .vale/* | .vale.ini | .cspell* | .pre-commit-config.yaml | Justfile)
+    .vale/* | .vale.ini | .cspell* | .pre-commit-config.yaml | mise.toml | Justfile)
       report "$path" 1 linter-config-changed \
         "the fixer changed linter configuration, which clears findings by changing the rules rather than the prose; revert it and record the finding as unresolved"
       ;;

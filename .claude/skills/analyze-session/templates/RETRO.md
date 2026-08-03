@@ -27,7 +27,7 @@ Cite a line number for every claim, in `L1938` form. Where the session reached a
 
 ## Mechanical fixes
 
-Prefer a script, a recipe, or a hook over an instruction. Number them in the order you would build them.
+Prefer a script, a task, or a hook over an instruction. Number them in the order you would build them.
 
 ## Agent constructs
 

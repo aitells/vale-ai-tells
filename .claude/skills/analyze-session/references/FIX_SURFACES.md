@@ -10,7 +10,7 @@ Give every agent the retro directory rather than the transcript. The canned repo
 | ---- | ---------------- |
 | Agent constructs | The hook event, subagent or skill that removes a failure outright |
 | Commit-time gates | Anything belonging in prek, the commit-msg chain or CI |
-| Repo tooling | The script or `just` recipe that turns many round trips into one |
+| Repo tooling | The script or `mise` task that turns many round trips into one |
 | Configuration | A linter rule or ignore file tuned wrong for how the repo works |
 | Instructions | What only `AGENTS.md` or a skill can fix, because no tool does |
 
@@ -53,7 +53,7 @@ Agent({
 
 **Commit-time gates.** Look at `.pre-commit-config.yaml`, the commit-msg chain, and the CI workflows. Find what a gate would have caught earlier, and what a gate is catching too late to be cheap. Check whether a gate enumerates files through `git ls-files`, which excludes anything an agent just created and reports success without inspecting untracked work.
 
-**Repo tooling.** Look at the `Justfile` and `tools/`. Find the script or recipe that turns a run of round trips into one call. A recipe reporting every finding at once costs less than a loop reporting them one at a time.
+**Repo tooling.** Look at `mise.toml`, the task files it includes, and `tools/`. Find the script or task that turns a run of round trips into one call. A task reporting every finding at once costs less than a loop reporting them one at a time.
 
 **Configuration.** Look at the linter configs, the ignore files, and the settings. Find a rule tuned wrong for how this repository works, one matching text it should exempt, and one whose fix is mechanical rather than editorial. Separate a rule needing a config change from a rule needing an upstream fix.
 

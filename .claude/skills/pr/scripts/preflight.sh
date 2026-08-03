@@ -278,10 +278,10 @@ if git check-ignore --quiet "$DRAFT" 2>/dev/null; then
 else
   printf '%s gitignored: NO — add it to .gitignore before drafting\n' "$DRAFT"
 fi
-if command -v just >/dev/null 2>&1 && just --summary 2>/dev/null | tr ' ' '\n' | grep -qx lint-pr-description; then
-  printf 'just lint-pr-description: present\n'
+if command -v mise >/dev/null 2>&1 && mise task info lint-pr-description >/dev/null 2>&1; then
+  printf 'mise run lint-pr-description: present\n'
 else
-  printf 'just lint-pr-description: ABSENT — stop and tell the operator\n'
+  printf 'mise run lint-pr-description: ABSENT — stop and tell the operator\n'
 fi
 for skill in pr review-pr-description; do
   if [ -f ".claude/skills/$skill/SKILL.md" ]; then

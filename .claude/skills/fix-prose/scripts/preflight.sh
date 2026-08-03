@@ -73,10 +73,23 @@ printf 'lint:     %s\n' "${lint:-(none given)}"
 # silencing that means the kind of ignore comment this skill refuses.
 readonly CONTROL='This is a very robust and comprehensive design that does not use contractions and it is significantly better.'
 
+# vale exits 0 having found nothing, 1 having found something, and 2 or
+# above having failed. Reading the finding count alone conflates the last
+# case with the first: a missing template or an unreadable config prints
+# nothing on stdout, and counting that as zero findings reports the path
+# as unscoped when nothing was measured at all. The status separates
+# them, so keep vale last in the pipeline and read it before the count.
 if command -v vale >/dev/null 2>&1; then
-  hits=$(printf '%s\n' "$CONTROL" |
-    vale --path="$rel" --output=project-agent.tmpl 2>/dev/null |
-    grep -c '^[0-9]' || true)
+  probe=$(printf '%s\n' "$CONTROL" |
+    vale --path="$rel" --output=ai-tells-agent.tmpl 2>&1)
+  rc=$?
+  hits=$(printf '%s\n' "$probe" | grep -c '^[0-9]' || true)
+  if [ "$rc" -gt 1 ]; then
+    printf 'scoping:  ERROR (vale exited %s; it did not lint anything)\n' "$rc"
+    printf '%s\n' "$probe" | sed 's/^/          /'
+    printf 'verdict:  BLOCKED (vale could not run, so this says nothing about the document)\n'
+    exit 0
+  fi
   if [ "${hits:-0}" -eq 0 ]; then
     printf 'scoping:  UNSCOPED (no .vale.ini section matches this path)\n'
     printf 'verdict:  BLOCKED (vale loads no styles here, so a clean run would prove nothing)\n'

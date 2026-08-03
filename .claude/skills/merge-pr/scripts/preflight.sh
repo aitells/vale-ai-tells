@@ -120,10 +120,10 @@ if git check-ignore --quiet "$DRAFT" 2>/dev/null; then
 else
   printf '%s gitignored: NO — add it to .gitignore before drafting\n' "$DRAFT"
 fi
-if command -v just >/dev/null 2>&1 && just --summary 2>/dev/null | tr ' ' '\n' | grep -qx lint-squash-msg; then
-  printf 'just lint-squash-msg: present\n'
+if command -v mise >/dev/null 2>&1 && mise task info lint-squash-msg >/dev/null 2>&1; then
+  printf 'mise run lint-squash-msg: present\n'
 else
-  printf 'just lint-squash-msg: ABSENT — stop and tell the operator\n'
+  printf 'mise run lint-squash-msg: ABSENT — stop and tell the operator\n'
 fi
 if [ -f .claude/skills/review-squash-message/SKILL.md ]; then
   printf 'review-squash-message skill deployed: yes\n'

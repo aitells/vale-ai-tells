@@ -4,13 +4,13 @@
 #
 # A failing check answers "something broke" and nothing else. Turning
 # that into work means finding the run, pulling the failing step's log,
-# and knowing which local recipe covers the same ground. Done by hand
+# and knowing which local task covers the same ground. Done by hand
 # that is three or four calls per failure, and the log is long enough
 # that most of it is noise.
 #
 # So this does the three calls once and prints what remains: the failing
-# step, the lines around the failure, and the recipe that reproduces it.
-# The recipe mapping is a guess from the job name, and the report says
+# step, the lines around the failure, and the task that reproduces it.
+# The task mapping is a guess from the job name, and the report says
 # so rather than pretending otherwise.
 #
 # Usage: diagnose.sh [pull-request-number]
@@ -89,31 +89,33 @@ if [ -z "$failed" ]; then
   exit 0
 fi
 
-# reproducer maps a job name onto the local recipe covering the same
+# reproducer maps a job name onto the local task covering the same
 # ground. The names come from this repository's own workflows, and an
-# unrecognized job says so rather than guessing.
+# unrecognized job says so rather than guessing. A repotools: prefix
+# marks a task the shared payload owns; the rest a repository defines
+# itself.
 reproducer() {
   case $(printf '%s' "$1" | tr '[:upper:]' '[:lower:]') in
-  *prose* | *vale*) printf 'just lint-prose\n' ;;
-  *spell*) printf 'just lint-spelling\n' ;;
-  *markdown* | *rumdl*) printf 'just lint-markdown\n' ;;
-  *shell*) printf 'just lint-shell && just lint-shell-fmt\n' ;;
-  *yaml*) printf 'just lint-yaml\n' ;;
-  *toml*) printf 'just lint-toml\n' ;;
-  *workflow* | *actionlint*) printf 'just lint-workflows\n' ;;
-  *editorconfig*) printf 'just lint-editorconfig\n' ;;
-  *arch*) printf 'just lint-go-arch\n' ;;
-  *deadcode*) printf 'just lint-go-deadcode\n' ;;
-  *lint*) printf 'just lint\n' ;;
-  *race*) printf 'just test-race\n' ;;
-  *cover*) printf 'just cover-check\n' ;;
-  *test*) printf 'just test\n' ;;
-  *vendor*) printf 'just vendor-check\n' ;;
-  *vuln*) printf 'just vuln\n' ;;
+  *prose* | *vale*) printf 'mise run lint-prose\n' ;;
+  *spell*) printf 'mise run repotools:lint-spelling\n' ;;
+  *markdown* | *rumdl*) printf 'mise run repotools:lint-markdown\n' ;;
+  *shell*) printf 'mise run lint-shell && mise run lint-shell-fmt\n' ;;
+  *yaml*) printf 'mise run repotools:lint-yaml\n' ;;
+  *toml*) printf 'mise run repotools:lint-toml\n' ;;
+  *workflow* | *actionlint*) printf 'mise run repotools:lint-workflows\n' ;;
+  *editorconfig*) printf 'mise run lint-editorconfig\n' ;;
+  *arch*) printf 'mise run lint-go-arch\n' ;;
+  *deadcode*) printf 'mise run lint-go-deadcode\n' ;;
+  *lint*) printf 'mise run lint\n' ;;
+  *race*) printf 'mise run test-go-race\n' ;;
+  *cover*) printf 'mise run cover-go-check\n' ;;
+  *test*) printf 'mise run test\n' ;;
+  *vendor*) printf 'mise run vendor-check\n' ;;
+  *vuln*) printf 'mise run vuln\n' ;;
   *gitleaks* | *secret*) printf 'mise run repotools:gitleaks\n' ;;
   *apm* | *validate*) printf 'apm install --frozen && apm audit --ci\n' ;;
-  *fuzz*) printf 'just fuzz\n' ;;
-  *) printf '(no local recipe maps to this job; read the log)\n' ;;
+  *fuzz*) printf 'mise run fuzz\n' ;;
+  *) printf '(no local task maps to this job; read the log)\n' ;;
   esac
 }
 

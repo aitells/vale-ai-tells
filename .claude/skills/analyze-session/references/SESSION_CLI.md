@@ -38,7 +38,7 @@ The counts here answer different questions. The `is_error` flag counts what the 
 
 Clusters repeated calls of the same shape, ranked by rounds. `--min-rounds N` sets how few rounds still count, default 3.
 
-A pair of calls counts as one attempt when the signature matches. For Bash that signature is the recipes and commands invoked rather than the arguments, so repeated edit-then-relint rounds group into one cluster. Calls more than 40 records apart start a new cluster.
+A pair of calls counts as one attempt when the signature matches. For Bash that signature is the tasks and commands invoked rather than the arguments, so repeated edit-then-relint rounds group into one cluster. Calls more than 40 records apart start a new cluster.
 
 Rounds beyond the first are the wasted round trips. Rank findings by this number.
 

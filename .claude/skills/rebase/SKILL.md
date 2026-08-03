@@ -116,17 +116,17 @@ A rebase that ends without complaint has proved one thing: every commit applied.
 Run the gate the script names:
 
 ```text
-just check
+mise run check
 ```
 
-Or `just lint` where the repository has no `check`. Either way, run it against the tree as it now stands rather than against any one commit, because the tree is the thing nothing has tested yet.
+Or `mise run lint` where the repository has no `check`. Either way, run it against the tree as it now stands rather than against any one commit, because the tree is the thing nothing has tested yet.
 
 A failure here is an ordinary fix rather than a rebase problem. Correct it, and commit through the `commit` skill. Where the fix belongs inside a commit the rebase just replayed, say so and let the operator choose between a follow-up commit and an amend.
 
 Where the branch runs long enough for a mid-history break to matter, the thorough form runs the gate at every commit:
 
 ```text
-git -c rebase.updateRefs=false rebase --exec 'just lint' <base>
+git -c rebase.updateRefs=false rebase --exec 'mise run lint' <base>
 ```
 
 The script also names any path the repository declares generated through `rebase-resolve=regenerate`. The resolution took one side of those whole, on the understanding that the generator would overwrite it. Run the generator now, and commit what it changes.
@@ -145,6 +145,6 @@ The `commit` skill rebases onto the base itself as its last step, and for a clea
 
 - a git repository with a resolvable default branch
 - the `resolve-rebase-conflicts` skill deployed alongside this one
-- a `just check` or `just lint` recipe for the verification to run
+- a `mise run check` or `mise run lint` task for the verification to run
 
 Preflight checks each and says which are missing.

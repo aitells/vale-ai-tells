@@ -59,9 +59,10 @@ gitleaks = "8.30.1"
 # directive's version whenever this pin trails it.
 go = "1.26.5"
 golangci-lint = "2.12.2"
-# Still needed: the Justfile survives for the Windows-run Go test and
-# coverage recipes and the APM delegation recipes, and lint-just gates
-# its formatting.
+# Still needed by a consumer that has not retired its own Justfile.
+# repotools has none, so nothing here calls just; the pin and the
+# lint-just and format-just tasks stay until the last consumer drops
+# theirs.
 just = "1.57.0"
 # cspell ships only as an npm package. Homebrew was installing node too --
 # its formula's shebang already pointed at one. The difference is that

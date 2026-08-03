@@ -129,7 +129,7 @@ Fix everything it returns. Push back only where it's demonstrably wrong about th
 ## Step 5: run the commit-msg gates
 
 ```text
-just lint-squash-msg
+mise run lint-squash-msg
 ```
 
 The same four hooks a commit answers to:
@@ -179,7 +179,7 @@ Report the merged commit. Where this worktree stands on the branch that merged, 
 ## Preconditions
 
 - `gh` installed and authenticated
-- a `just lint-squash-msg` recipe
+- a `mise run lint-squash-msg` task
 - a gitignore entry for `SQUASH_AGENTMSG`
 - the `review-squash-message` skill deployed alongside this one
 
