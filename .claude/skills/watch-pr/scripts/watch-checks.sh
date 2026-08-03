@@ -33,7 +33,7 @@ export GH_PAGER=cat
 export GH_PROMPT_DISABLED=1
 export PYTHONUTF8=1
 unset CDPATH GH_REPO GH_HOST GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 readonly INTERVAL=${PR_CHECKS_INTERVAL:-30}
 readonly TIMEOUT=${PR_CHECKS_TIMEOUT:-1800}

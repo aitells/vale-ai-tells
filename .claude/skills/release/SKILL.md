@@ -55,7 +55,7 @@ occurrence before editing.
 
 Run:
 
-- `mise run lint-yaml`: confirm any new YAML files pass
+- `mise run repotools:lint-yaml`: confirm any new YAML files pass
 - `mise run test-clean`: confirm false positives file remains clean
 
 ## 5. Commit

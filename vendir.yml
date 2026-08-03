@@ -1,0 +1,37 @@
+---
+# The shared repotools payload, vendored into the two directories vendir
+# owns outright: anything undeclared inside them is deleted on sync, so
+# nothing else may write there. Repo-owned mise config lives in
+# mise.toml, which vendir never touches and which overrides the conf.d
+# drop-ins for both tools and tasks.
+#
+# vendir.lock.yml records the resolved commit SHA rather than the ref
+# alone, which is what makes a sync reproducible after a tag moves.
+# `mise run repotools:check-vendored` is the drift gate over both
+# directories; Renovate's built-in vendir manager tracks the `ref` below.
+#
+# One entry per directory, each taking the whole payload and narrowing
+# it with includePaths, because a directory's contents are rooted at the
+# repository root of the source: newRootPath re-roots the surviving
+# subtree onto the target path.
+apiVersion: vendir.k14s.io/v1alpha1
+kind: Config
+directories:
+  - path: .config/mise/conf.d
+    contents:
+      - path: .
+        git:
+          url: https://github.com/tbhb/repotools
+          ref: v0.4.0
+        includePaths:
+          - .config/mise/conf.d/**
+        newRootPath: .config/mise/conf.d
+  - path: .repotools
+    contents:
+      - path: .
+        git:
+          url: https://github.com/tbhb/repotools
+          ref: v0.4.0
+        includePaths:
+          - .repotools/**
+        newRootPath: .repotools

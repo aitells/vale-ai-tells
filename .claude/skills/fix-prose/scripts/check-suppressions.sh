@@ -46,7 +46,7 @@ set -euo pipefail
 # makes a relative path resolve somewhere else entirely.
 export LC_ALL=C
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 # gitr runs git for output this script parses, with the formatting knobs
 # pinned. core.quotePath matters most here: a non-ASCII path comes back

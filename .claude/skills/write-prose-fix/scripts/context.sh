@@ -25,7 +25,7 @@ set -uo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 section() { printf '\n== %s ==\n' "$1"; }
 

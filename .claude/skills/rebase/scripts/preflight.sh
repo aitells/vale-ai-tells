@@ -24,7 +24,7 @@ export LC_ALL=C
 export GH_PAGER=cat
 export PYTHONUTF8=1
 unset CDPATH GH_REPO GH_HOST GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 # gitr runs git for output this script parses, with every formatting
 # knob pinned. log.showSignature is the one that matters most: it

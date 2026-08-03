@@ -1,0 +1,44 @@
+# Shared format tasks, reaching a consumer through [task_config]
+# includes against the vendored .repotools/tasks directory. This is a
+# mise task file rather than a config file: tables are bare task names
+# (a [tasks.] prefix is a hard parse error here), and the file cannot
+# carry [tools], [env], or [task_templates].
+#
+# Namespaced `repotools:` so a consumer's own task names can never
+# collide. Includes invert precedence -- an included task beats a
+# same-named local one in either declaration order -- so a consumer
+# customizes a task by declining the file that carries it and writing
+# its own, not by redefining.
+#
+# No task here declares a tools block. Every binary these tasks invoke
+# is pinned once in .config/mise/conf.d/10-repotools-tools.toml, which
+# arrives in the same vendir sync, and a consumer's root mise.toml
+# overrides any of those pins. Renovate's mise manager reads [tools] in
+# conf.d but nothing in an included task file, so a version literal
+# here would sit outside every automated bump.
+
+# In-place TOML formatter -- the fixer paired with the lint-toml gate's
+# --check mode. Rewrites whitespace and style only; key and array order
+# are preserved (schema-driven reordering is disabled in tombi.toml).
+# Excludes and lockfile skips come from the consumer's tombi.toml.
+["repotools:format-toml"]
+description = "Format TOML in place via tombi"
+run = "tombi format"
+
+["repotools:format-markdown"]
+description = "Format Markdown in place (whitespace, list markers, code fences)"
+usage = 'arg "<paths>..." default="."'
+run = "rumdl fmt $usage_paths"
+
+["repotools:format-config"]
+description = "Format JSON / JS / TS in place via biome"
+usage = 'arg "<paths>..." default="."'
+run = "biome format --write $usage_paths"
+
+# --fmt is still an unstable just feature; pass --unstable explicitly so
+# the task works regardless of the consumer Justfile's `set unstable`.
+# Takes no path args: --fmt only ever rewrites the justfile just
+# resolved for this invocation.
+["repotools:format-just"]
+description = "Format the Justfile in place with just's own formatter"
+run = "just --fmt --unstable"

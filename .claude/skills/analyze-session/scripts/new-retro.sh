@@ -23,7 +23,7 @@ set -euo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GIT_DIR GIT_WORK_TREE GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 here=$(cd "$(dirname "$0")" && pwd)
 skill_dir=$(dirname "$here")

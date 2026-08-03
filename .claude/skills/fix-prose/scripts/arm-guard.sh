@@ -23,9 +23,12 @@
 # Agent tool and leaves its own frontmatter plain.
 #
 # The lock lives under the git directory, which is per-worktree, and it
-# holds a single slot that each invocation overwrites. It affects one
-# path for the rest of the session, because a skill's hooks stop firing
-# once the session ends and a leftover file then guards nothing.
+# holds a single slot that each invocation overwrites. It protects one
+# path for as long as that path holds a document: guard-target.sh
+# releases the lock on the first edit it sees after the file is gone.
+# A session running several commits writes a new COMMIT_AGENTMSG for each
+# one, and without that release the first commit's lock refused the
+# second commit's draft.
 #
 # Never blocks. A PostToolUse hook that fails would only obstruct the
 # invocation it exists to protect.
@@ -36,7 +39,7 @@ set -euo pipefail
 # because it makes a relative path resolve somewhere else entirely.
 export LC_ALL=C
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 payload=$(cat)
 

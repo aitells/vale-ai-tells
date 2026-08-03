@@ -16,11 +16,15 @@ vale-ai-tells/
 │   ├── ai-tells-experimental/  # Opt-in structural and metric rules (*.yml)
 │   └── config/                 # Tengo scripts, the agent template, the message view, vocabularies
 ├── .github/workflows/          # CI, security, release, and Renovate automation
+├── .config/mise/conf.d/        # Vendored repotools tool pins (vendir owns this)
+├── .repotools/tasks/           # Vendored repotools shared tasks (vendir owns this)
 ├── .pre-commit-config.yaml
 ├── .vale.ini                   # Repo dev config (enables all three styles)
-├── Justfile                    # Every gate and release recipe
-├── mise.toml                   # Toolchain pins and every task
+├── Justfile                    # The APM delegation recipes, and nothing else
+├── mise.toml                   # Repo-specific pins and tasks; selects the shared ones
 ├── mise.lock                   # Resolved versions, URLs, and digests
+├── vendir.yml                  # The repotools payload: source, tag, target directories
+├── vendir.lock.yml             # The commit each directory resolved to
 ├── README.md
 ├── AGENTS.md                   # Commit and prose-output contract for agents
 ├── EXPERIMENTAL.md             # Experimental-rule reference
@@ -36,8 +40,10 @@ vale-ai-tells/
 **First-time setup:**
 
 ```bash
-mise run setup   # mise install, vale sync, prek install
+mise run bootstrap   # vendir sync, mise install, vale sync, prek install
 ```
+
+A clone already contains the vendored payload, because it is committed. Delete it and every `mise` command that reads tasks fails while loading the configuration, because the stamps in `mise.toml` extend templates only the payload defines. That is the enforcement, not a bug. `mise install` and `vendir sync` keep working through it, which is what recovers the tree.
 
 **Testing rules locally:**
 
@@ -48,26 +54,30 @@ mise run test    # the fixture guard: tells fire, subjects smoke-test, no false 
 
 **Running the gates:**
 
+Gates the vendored payload defines carry a `repotools:` prefix. The rest belong to this repository.
+
 ```bash
-mise run lint            # every linter below, in one pass
-mise run lint-yaml       # yamllint
-mise run lint-markdown   # rumdl
-mise run lint-config     # biome on JSON
-mise run lint-spelling   # cspell
-mise run lint-prose      # Vale on the docs
-mise run lint-messages   # Vale on each rule's own message: field (dogfooding)
-mise run lint-toml       # tombi
-mise run lint-just       # just --fmt --check
+mise run lint                        # every linter below, in one pass
+mise run repotools:check-vendored    # the vendored payload matches what git holds
+mise run repotools:lint-yaml         # ryl
+mise run repotools:lint-markdown     # rumdl
+mise run repotools:lint-config       # biome on JSON
+mise run repotools:lint-spelling     # cspell
+mise run lint-prose                  # Vale on the docs
+mise run lint-messages               # Vale on each rule's own message: field (dogfooding)
+mise run repotools:lint-toml         # tombi
+mise run repotools:lint-just         # just --fmt --check
+mise run repotools:lint-mise         # mise fmt --check
 mise run lint-editorconfig
-just lint-workflows  # actionlint
-mise run check-all       # lint, test, and the full-history gitleaks scan
+mise run repotools:lint-workflows    # actionlint
+mise run check-all                   # lint, test, and the full-history gitleaks scan
 ```
 
 **Pre-commit hooks:**
 
 ```bash
-mise run prek          # run hooks on staged files
-mise run prek-all      # run hooks on all files
+mise run repotools:prek          # run hooks on staged files
+mise run repotools:prek-all      # run hooks on all files
 ```
 
 **Building and releasing:**
@@ -85,11 +95,7 @@ All rules use `error` level by default. Users can override this in their `.vale.
 - `level`: Always `error`
 - `tokens` or `swap`: The patterns to match
 
-Messages must pass the `ai-tells` style themselves: avoid em-dashes, anthropomorphic
-or cliché idioms, and quoted examples of the flagged word (give the good word instead).
-Write each message as `AI <label>: '%s'. <concrete action>.` so agents can act on it.
-`mise run lint-messages` enforces this via the `RuleMessage` View (selects the `message`
-field with Dasel and lints it as prose). It runs as part of `mise run lint`.
+Messages must pass the `ai-tells` style themselves. Avoid em-dashes and anthropomorphic or cliché idioms. Name the good word rather than quoting the flagged one. Write each message as `AI <label>: '%s'. <concrete action>.` so agents can act on it. `mise run lint-messages` enforces this via the `RuleMessage` View (selects the `message` field with Dasel and lints it as prose). It runs as part of `mise run lint`.
 
 ## Tone
 

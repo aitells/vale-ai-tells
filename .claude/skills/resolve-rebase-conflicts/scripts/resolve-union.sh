@@ -9,7 +9,7 @@
 # to confirm that is being asked to rubber-stamp arithmetic.
 #
 # What makes it safe to automate is the condition, not the file name.
-# conflict-shape.sh refuses unless all three versions are sorted and
+# conflict_shape.py refuses unless all three versions are sorted and
 # unique and neither side removed a line, and this script refuses
 # whatever that refuses. A file that stops meeting those conditions
 # stops being resolved here, which is what keeps a name-based shortcut
@@ -31,7 +31,7 @@ set -euo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 gitr() {
   command git --no-pager \
@@ -77,13 +77,29 @@ for path in "$@"; do
   done
 
   declared=$(git check-attr rebase-resolve -- "$path" | sed 's/.*: //')
-  if ! DECLARED="$declared" bash "${BASH_SOURCE%/*}/conflict-shape.sh" \
-    union "$path" "$scratch/1" "$scratch/2" "$scratch/3" >"$scratch/out"; then
+  # Exit 3 is the refusal, and every other nonzero status is the tool
+  # breaking. Collapsing the two would report a traceback mid-rebase as a
+  # routine "read this one yourself", which is the wrong instruction and
+  # hides the defect that produced it.
+  set +e
+  DECLARED="$declared" uv run --script "${BASH_SOURCE%/*}/conflict_shape.py" \
+    union "$path" "$scratch/1" "$scratch/2" "$scratch/3" >"$scratch/out"
+  shape=$?
+  set -e
+  case "$shape" in
+  0) ;;
+  3)
     printf 'Resolve this one by reading it. classify-conflicts.sh prints what each\n'
     printf 'side changed.\n\n'
     failed=1
     continue
-  fi
+    ;;
+  *)
+    printf 'conflict_shape.py failed with status %s, which is not a verdict about\n' "$shape"
+    printf 'this file. Stop and fix the tool; do not continue the rebase.\n\n'
+    exit 1
+    ;;
+  esac
 
   cp "$scratch/out" "$path"
 

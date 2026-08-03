@@ -1,20 +1,19 @@
 #:schema https://mise.jdx.dev/schema/mise.json
-# Toolchain and task definitions. This file replaces the Brewfile, which
-# could not pin a version, and holds every recipe that provisions its tools
-# from the pins below.
+# The repo-specific half of the task and toolchain definitions. The shared
+# half arrives through vendir as the vendored repotools payload: tool pins
+# in .config/mise/conf.d/, tasks under .repotools/tasks/ selected by the
+# task_config includes below. See vendir.yml.
 #
-# What stayed in the Justfile, and why:
-#
-#   - The container-pinned gates (lint-workflows, gitleaks, security). Their
-#     image digests are tracked by the shared Renovate preset's `^Justfile$`
-#     custom manager, and this phase does not convert container-run tools.
-#   - Thin delegation recipes for the names the APM primitives invoke. Those
-#     skills are pinned upstream and still spell their gates `just <recipe>`.
+# What stayed in the Justfile: thin delegation recipes for the names the
+# APM primitives invoke. Those skills are pinned upstream and still spell
+# their gates `just <recipe>`. Nothing else, now that gitleaks runs from a
+# payload pin rather than a container image.
 
 [settings]
-# Record resolved versions, URLs, and digests in mise.lock. The file has to
-# exist before mise will populate it; `lockfile = true` alone does not create
-# it. Refresh both platforms with:
+# Record resolved versions, URLs, and digests in a lockfile beside each
+# config: mise.lock for this file, .config/mise/mise.lock for the vendored
+# drop-ins. Both have to exist before mise will populate them; `lockfile =
+# true` alone does not create either. Refresh both with:
 #   mise lock --platform linux-x64,macos-arm64
 lockfile = true
 
@@ -28,84 +27,71 @@ lockfile = true
 # is bash in POSIX mode and tolerates [[ ]], while the ubuntu runners' /bin/sh
 # is dash and does not.
 
-# Renovate's built-in mise manager reads this table directly and needs no
-# `# renovate:` marker: it derives the datasource from each backend (aqua,
-# npm, core, go, pipx) and reads mise.lock for the locked version. The
-# markers the Justfile carried existed because a bare `x_version := "..."`
-# string is invisible without one.
+# The toolchain now arrives through the vendored baseline drop-in at
+# .config/mise/conf.d/10-repotools-tools.toml, which pins every tool the
+# shared tasks invoke. This table holds only what this repository needs
+# ahead of that payload, and any entry here overrides the same-named
+# baseline pin -- root config beats conf.d, which is the consumer-override
+# mechanism.
+#
+# Renovate's built-in mise manager reads this table and the conf.d
+# drop-ins directly and needs no `# renovate:` markers: it derives the
+# datasource from each backend and reads the lockfiles for the locked
+# versions.
 [tools]
-biome = "2.5.6"
-cocogitto = "7.0.0"
-cspell = "10.0.1"
-# editorconfig-checker builds from source: v3.9.0 publishes no release
-# assets, and the aqua package tops out at 3.8.0 and installs the binary
-# under its per-platform asset name rather than the name lint-editorconfig
-# invokes. Integrity comes from the Go checksum database rather than a
-# mise.lock digest.
-"go:github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker" = "v3.9.0"
-# Required by the go: backend above, which compiles rather than downloads.
-# The Brewfile never named it because Homebrew shipped a prebuilt bottle.
-go = "1.26.5"
-# Still needed: the Justfile survives as a shim, and lint-just gates it.
-just = "1.57.0"
-# cspell ships only as an npm package. Homebrew was installing node too --
-# its formula's shebang already pointed at one. The difference is that this
-# node is pinned and locked.
-node = "24.18.1"
-prek = "0.4.11"
-rumdl = "0.2.48"
-tombi = "1.2.5"
-vale = "3.17.0"
-# pipx-backed, which is uv underneath. Locks by version only, with no
-# per-platform digest -- the same integrity trade as the go: backend above.
-yamllint = "1.38.0"
+# vendir cannot come from the payload it delivers, and the shared
+# baseline deliberately omits it: bootstrap syncs before it installs, and
+# a payload bump moves the very pins that sync writes. The pin lives
+# here, ahead of the payload.
+vendir = "0.46.0"
+
+# The platform list this repository's two lockfiles cover. The shared
+# repotools:check-toolchain task reads it for its failure hint.
+[env]
+REPOTOOLS_LOCK_PLATFORMS = "linux-x64,macos-arm64"
+
+# The live half of the shared payload, selected file by file from the
+# vendored .repotools/tasks directory. vendir delivers every task file;
+# this table names the ones this repository takes -- today, all of them,
+# including the drift gate the publisher itself cannot run.
+[task_config]
+includes = [
+  ".repotools/tasks/fix.toml",
+  ".repotools/tasks/format.toml",
+  ".repotools/tasks/git-hooks.toml",
+  ".repotools/tasks/lint.toml",
+  ".repotools/tasks/security.toml",
+  ".repotools/tasks/toolchain.toml",
+  ".repotools/tasks/vendir.toml",
+]
 
 # --- Setup ---
 
-# `depends` runs in parallel, so an ordered sequence has to be a run array:
-# install-tools runs `vale sync` against the vale the previous step installs.
-[tasks.setup]
-description = "Set up the dev environment, refresh Vale styles, and install git hooks"
+# `depends` runs in parallel, so an ordered sequence has to be a run array.
+# `vendir sync` runs first because the vendored conf.d drop-ins carry most
+# of the tool pins the next step installs; mise re-reads config between
+# steps, so the nested install sees pins the sync just delivered.
+# install-tools then runs `vale sync` against the vale that step installs.
+[tasks.bootstrap]
+description = "Sync the vendored payload, set up the dev environment, and install git hooks"
+alias = "setup"
 run = [
+  "vendir sync",
   "mise run install-toolchain",
   "mise run install-tools",
-  "mise run prek-install",
+  "mise run repotools:prek-install",
 ]
 
 [tasks.install-toolchain]
-description = "Install the pinned toolchain from mise.toml"
+description = "Install the pinned toolchain from mise.toml and the vendored conf.d"
 run = "mise install"
 
 [tasks.install-tools]
 description = "Refresh non-mise tooling (today: Vale's synced style packages)"
 run = "vale sync"
 
-# Replaces check-vale-version and check-tombi-version, which only warned.
-# This gates: --dry-run-code exits 1 when a pinned tool is missing.
-#
-# MISE_LOCKED=1 makes a version absent from mise.lock a failure rather than
-# something mise silently fetches and re-locks, which is what would let a
-# Renovate PR bumping mise.toml alone pass while the committed digests drift.
-#
-# The empty MISE_CONFIG_DIR is what scopes that check to this repository.
-# `locked` applies to the merged tool set, so without it the gate fails on
-# whatever unlocked tools a developer happens to declare in their own
-# ~/.config/mise/config.toml -- tools this repo neither declares nor uses.
-[tasks.check-toolchain]
-description = "Gate the installed toolchain against mise.toml and mise.lock"
-run = '''
-#!/usr/bin/env bash
-set -euo pipefail
-empty_cfg=$(mktemp -d)
-trap 'rm -rf "$empty_cfg"' EXIT
-if MISE_CONFIG_DIR="$empty_cfg" MISE_LOCKED=1 mise install --dry-run-code; then
-  echo "toolchain matches mise.toml and mise.lock"
-else
-  echo "toolchain is out of date, or a pin is missing from mise.lock" >&2
-  echo "         run 'mise run install-toolchain', or 'mise lock --platform linux-x64,macos-arm64' after moving a pin" >&2
-  exit 1
-fi
-'''
+# The lockfile gate is the shared repotools:check-toolchain task, whose
+# failure hint reads REPOTOOLS_LOCK_PLATFORMS above.
 
 # APM merges hook declarations into .claude/settings.json additively and
 # never reconciles, while `apm audit --ci` replays the same merge from an
@@ -130,40 +116,11 @@ apm install
 '''
 
 # --- Format ---
-
-[tasks.format-markdown]
-description = "Format Markdown in place (whitespace, list markers, code fences)"
-usage = 'arg "<paths>..." default="."'
-run = "rumdl fmt $usage_paths"
-
-[tasks.format-config]
-description = "Format JSON / JS / TS in place via biome"
-usage = 'arg "<paths>..." default="."'
-run = "biome format --write $usage_paths"
-
-# In-place TOML formatter -- the fixer paired with `lint-toml`'s --check
-# gate. Rewrites whitespace/style only; key and array order are preserved
-# (schema-driven reordering is disabled in tombi.toml). Excludes and lockfile
-# skips come from tombi.toml.
-[tasks.format-toml]
-description = "Format TOML in place via tombi"
-run = "tombi format"
-
-# In-place Justfile formatter -- the fixer paired with `lint-just`'s --check
-# gate. `--fmt` is still an unstable just feature; the Justfile's own `set
-# unstable` already unlocks it, but pass --unstable explicitly so the task
-# keeps working if that setting ever goes away. Takes no path args: --fmt
-# only ever rewrites the justfile just resolved for this invocation.
-[tasks.format-just]
-description = "Format the Justfile in place with just's own formatter"
-run = "just --fmt --unstable"
+# The format and fix tasks (repotools:format-markdown, format-config,
+# format-toml, format-just, fix-markdown) come from the vendored task
+# files under .repotools/tasks/, selected above.
 
 # --- Fix ---
-
-[tasks.fix-markdown]
-description = "Apply rumdl's auto-fixable Markdown rules"
-usage = 'arg "<paths>..." default="."'
-run = "rumdl check --fix $usage_paths"
 
 # Some of a typical vale run needs no judgment: the rule's own action
 # carries the correction, and the agent output template already prints
@@ -173,9 +130,12 @@ run = "rumdl check --fix $usage_paths"
 # describe what is wrong rather than substitute for it. This applies
 # them and leaves the rest, refusing any finding whose span no longer
 # holds the text the report quoted.
+#
+# The name and usage come from the skill-contract template in the
+# vendored conf.d; the body stays local because the script is this
+# repository's own.
 [tasks.fix-prose-replacements]
-description = "Apply every vale finding that carries its own replacement"
-usage = 'arg "<file>"'
+extends = "repotools:fix-prose-replacements"
 run = "bash tools/fix-prose-replacements.sh $usage_file"
 
 # --- Lint ---
@@ -184,41 +144,26 @@ run = "bash tools/fix-prose-replacements.sh $usage_file"
 # interleaves the findings from several linters into one unreadable stream.
 # The agent output template exists to make a finding self-contained, and
 # scrambling the order defeats it. actionlint is absent from the bar --
-# the standalone lint-workflows workflow already covers it.
+# the standalone lint-workflows workflow already covers it. The name comes
+# from the skill-contract template; the member list is exactly what varies
+# per repo, which is why the body stays local. The repotools: members are
+# the vendored shared tasks, and the drift gate runs first so every gate
+# after it reads a payload that matches the committed tree.
 [tasks.lint]
-description = "Run every linter over the source tree"
+extends = "repotools:lint"
 run = [
-  "mise run lint-yaml",
-  "mise run lint-markdown",
-  "mise run lint-config",
-  "mise run lint-spelling",
+  "mise run repotools:check-vendored",
+  "mise run repotools:lint-yaml",
+  "mise run repotools:lint-markdown",
+  "mise run repotools:lint-config",
+  "mise run repotools:lint-spelling",
   "mise run lint-prose",
   "mise run lint-messages",
-  "mise run lint-toml",
-  "mise run lint-just",
-  "mise run lint-mise",
+  "mise run repotools:lint-toml",
+  "mise run repotools:lint-just",
+  "mise run repotools:lint-mise",
   "mise run lint-editorconfig",
 ]
-
-[tasks.lint-yaml]
-description = "Lint YAML via yamllint (--strict; config in .yamllint.yaml)"
-usage = 'arg "<paths>..." default="."'
-run = "yamllint --strict $usage_paths"
-
-[tasks.lint-markdown]
-description = "Lint Markdown structure against .rumdl.toml"
-usage = 'arg "<paths>..." default="."'
-run = "rumdl check $usage_paths"
-
-[tasks.lint-config]
-description = "Lint JSON / JS / TS via biome"
-usage = 'arg "<paths>..." default="."'
-run = "biome check --files-ignore-unknown=true $usage_paths"
-
-[tasks.lint-spelling]
-description = "Check spelling against the project dictionary (.cspell-words.txt)"
-usage = 'arg "<paths>..." default="."'
-run = "cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG --exclude PR_AGENTDESC.md --exclude SQUASH_AGENTMSG $usage_paths"
 
 # Lint prose in Markdown via vale. Findings render through the agent
 # template committed in this repo's StylesPath, so a fix never needs a
@@ -228,9 +173,8 @@ run = "cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-f
 # the APM manifest, lockfile, and gitignored package cache, none of which
 # carry prose to lint.
 [tasks.lint-prose]
-description = "Lint prose in Markdown via vale"
-usage = 'arg "<paths>..." default="."'
-run = "vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,COMMIT_AGENTMSG,PR_AGENTDESC.md,SQUASH_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' $usage_paths"
+extends = "repotools:lint-prose"
+run = "vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.md,styles/*,pkg/*,tmp/*,.claude/worktrees/*,.repotools/*,COMMIT_AGENTMSG,PR_AGENTDESC.md,SQUASH_AGENTMSG,apm.yml,apm.lock.yaml,apm_modules/*}' $usage_paths"
 
 # Lint each rule file's own `message:` field with the ai-tells prose style, so
 # the package's diagnostics don't contain the patterns they flag. Uses the
@@ -239,43 +183,9 @@ run = "vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.m
 description = "Lint each rule's own message field with the ai-tells style"
 run = "vale --config=.vale-messages.ini --output=ai-tells-agent.tmpl styles/ai-tells styles/ai-tells-commits styles/ai-tells-experimental"
 
-# tombi is the TOML gate: it lint-checks every tracked *.toml. cog.toml,
-# .rumdl.toml, mise.toml, and tombi.toml itself get syntax + style checks,
-# validated offline against embedded SchemaStore schemas where one exists. We
-# run the format gate in --check --diff mode here as well, so an unformatted
-# TOML file fails the bar without being rewritten (`format-toml` is the
-# in-place fixer). --offline keeps the check hermetic against SchemaStore;
-# --error-on-warnings promotes warnings to hard failures. Scope
-# (include/exclude, lockfile skips, schema.strict=false) lives in tombi.toml,
-# so this task passes NO path args -- tombi walks the tree per that config.
-# This deliberately departs from the sibling paths-default-`.` idiom because
-# tombi centralizes scoping in tombi.toml rather than on the CLI.
-[tasks.lint-toml]
-description = "Lint and format-check TOML via tombi"
-run = [
-  "tombi format --check --diff",
-  "tombi lint --offline --error-on-warnings",
-]
-
-# Format-check the Justfile with just's own formatter, so the file that still
-# carries the container gates and the APM compatibility recipes is itself
-# gated. --check reports the difference and exits non-zero without touching
-# the file; `format-just` is the in-place fixer. just prints the whole
-# justfile as diff context rather than a minimal hunk, so a failure here is
-# long: run `mise run format-just` and read `git diff` instead.
-[tasks.lint-just]
-description = "Format-check the Justfile with just's own formatter"
-run = "just --fmt --check --unstable"
-
-# Format-check this file with mise's own formatter, so the file that now
-# defines the toolchain and most of the gates is itself gated -- the same
-# argument lint-just makes for the Justfile. It does not overlap with
-# lint-toml: mise fmt is the stricter of the two (it insists on exploded
-# arrays where tombi accepts either), and a file mise fmt has normalized
-# passes tombi unchanged. `mise fmt` with no flag is the in-place fixer.
-[tasks.lint-mise]
-description = "Format-check mise.toml with mise's own formatter"
-run = "mise fmt --check"
+# The lint-toml, lint-just, and lint-mise gates come from the vendored
+# task files, alongside lint-yaml, lint-markdown, lint-config, and
+# lint-spelling above.
 
 # Enforce .editorconfig (charset, line endings, final newline, trailing
 # whitespace, indentation) with editorconfig-checker. Nothing else in the bar
@@ -284,9 +194,9 @@ run = "mise fmt --check"
 # already keeps it off the gitignored Vale style packages; the remaining
 # scope lives in .editorconfig-checker.json, whose Exclude list also covers
 # CHANGELOG.md -- `cog changelog` regenerates that file wholesale, and the
-# prose tasks already skip it for the same reason. Indent width is not turned
-# off tree-wide: the one block that needs an exemption (the container-runtime
-# probe in the Justfile) carries inline disable/enable markers.
+# prose tasks already skip it for the same reason. Indent width stays on
+# tree-wide, and no file needs an inline exemption now that the Justfile's
+# container-runtime probe is gone.
 [tasks.lint-editorconfig]
 description = "Enforce .editorconfig via editorconfig-checker"
 run = "editorconfig-checker"
@@ -299,18 +209,18 @@ run = "editorconfig-checker"
 description = "Check the deployed APM primitives against apm.lock.yaml"
 run = "apm audit --ci --no-policy"
 
-# Preview the commit-msg gates against the COMMIT_AGENTMSG draft.
+# The two draft gates whose bodies are byte-identical across repos come
+# whole from the skill-contract templates: name, interface, and body.
 # prek needs .pre-commit-config.yaml staged to run.
 [tasks.lint-commit-msg]
-description = "Preview the commit-msg gates against the COMMIT_AGENTMSG draft"
-run = "prek run --stage commit-msg --commit-msg-filename COMMIT_AGENTMSG"
+extends = "repotools:lint-commit-msg"
 
 # Check a drafted pull request description. The validator settles the
 # mechanical questions (frontmatter, title shape, the template's
 # sections, paths that exist); vale and cspell then read the prose the
 # same way they read any other Markdown in the tree.
 [tasks.lint-pr-description]
-description = "Check a drafted pull request description"
+extends = "repotools:lint-pr-description"
 run = [
   "bash .claude/skills/pr/scripts/validate-description.sh",
   "vale --output=ai-tells-agent.tmpl PR_AGENTDESC.md",
@@ -322,8 +232,7 @@ run = [
 # the same four hooks over the draft here is what keeps a squash commit
 # answerable to the rules every other commit meets.
 [tasks.lint-squash-msg]
-description = "Pre-validate a drafted squash commit message against the commit-msg gates"
-run = "prek run --stage commit-msg --commit-msg-filename SQUASH_AGENTMSG"
+extends = "repotools:lint-squash-msg"
 
 # Every other prose task runs one checker over many files, so a document
 # that clears `lint-prose` can still fail spelling and structure afterwards,
@@ -337,8 +246,7 @@ run = "prek run --stage commit-msg --commit-msg-filename SQUASH_AGENTMSG"
 # text through vale under the target's own path and reports an unscoped path
 # rather than a pass.
 [tasks.lint-draft]
-description = "Lint one drafted document through every prose gate at once"
-usage = 'arg "<file>"'
+extends = "repotools:lint-draft"
 run = "bash tools/lint-draft.sh $usage_file"
 
 # --- Test ---
@@ -502,29 +410,20 @@ echo "  Grand total: $((total + commits_total))"
 description = "Fast quality bar: lint then test"
 run = ["mise run lint", "mise run test"]
 
-# gitleaks stays a Just recipe: it runs from a SHA-pinned container image
-# whose digest the shared Renovate preset tracks in the Justfile.
+# gitleaks arrives with the payload, which pins it alongside every other
+# converted tool. No root pin here: a root entry would override the shared
+# baseline, which is the duplication the move removes.
 [tasks.check-all]
 description = "Deeper bar: check plus the full-history gitleaks scan"
-run = ["mise run check", "just gitleaks"]
+run = ["mise run check", "mise run repotools:gitleaks"]
 
 # --- Utilities ---
+# The prek entry points (repotools:prek, prek-all, prek-install) come
+# from the vendored task files.
 
 [tasks.vale-sync]
 description = "Sync Vale styles and dictionaries"
 run = "vale sync"
-
-[tasks.prek]
-description = "Run pre-commit hooks on changed files"
-run = "prek"
-
-[tasks.prek-all]
-description = "Run pre-commit hooks on every file in the tree"
-run = "prek run --all-files"
-
-[tasks.prek-install]
-description = "Install the project's git hooks (commit-msg, pre-commit, pre-push, post-commit)"
-run = "prek install -t commit-msg -t pre-commit -t pre-push -t post-commit"
 
 # --- Changelog ---
 

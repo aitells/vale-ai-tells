@@ -1,0 +1,52 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+# The task names the published skills hard-code. Eight skills invoke
+# seven tasks by name -- lint-commit-msg, lint-pr-description,
+# lint-squash-msg, lint, lint-draft, lint-prose, and
+# fix-prose-replacements -- and before this file both repos defined all
+# seven independently, working only because they happened to choose the
+# same names. These templates make that contract payload-owned: the
+# name and interface come from here, and each repo stamps out the
+# unprefixed task the skills call, supplying its own body where the
+# work is repo-specific:
+#
+#   [tasks.lint-draft]
+#   extends = "repotools:lint-draft"
+#   run = "bash tools/lint-draft.sh $usage_file"
+#
+# Templates are inert until extended, so delivering them costs a
+# consumer nothing. The enforcement runs the other way: a task
+# extending an absent template is a config-load error that stops every
+# mise invocation in the repo, so a repo that stamps the contract fails
+# loudly the moment the payload half goes missing.
+#
+# lint-commit-msg and lint-squash-msg carry full bodies, byte-identical
+# across the repos. The other five carry the interface alone, because
+# their bodies are genuinely repo-specific: an aggregate's member list
+# is exactly what varies between repos, and the prose three differ in
+# vale output template and scoped paths.
+
+[task_templates."repotools:lint-commit-msg"]
+description = "Pre-validate a drafted commit message against the commit-msg gates"
+run = "prek run --stage commit-msg --commit-msg-filename COMMIT_AGENTMSG"
+
+[task_templates."repotools:lint-squash-msg"]
+description = "Pre-validate a drafted squash commit message against the commit-msg gates"
+run = "prek run --stage commit-msg --commit-msg-filename SQUASH_AGENTMSG"
+
+[task_templates."repotools:lint-pr-description"]
+description = "Validate a drafted pull request description"
+
+[task_templates."repotools:lint"]
+description = "Run every linter that operates on the source tree"
+
+[task_templates."repotools:lint-prose"]
+description = "Lint prose via vale"
+usage = 'arg "<paths>..." default="."'
+
+[task_templates."repotools:lint-draft"]
+description = "Lint one drafted document through every prose gate at once"
+usage = 'arg "<file>"'
+
+[task_templates."repotools:fix-prose-replacements"]
+description = "Apply every vale finding that carries its own replacement"
+usage = 'arg "<file>"'

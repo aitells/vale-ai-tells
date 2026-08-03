@@ -27,6 +27,7 @@ coreference
 gitmoji
 H_max
 Jaccard
+lockfiles
 lookups
 lowercased
 [Mm]etacommentary
@@ -34,6 +35,7 @@ lowercased
 proselint
 rumdl
 cspell
+ryl
 stylometric
 substring
 templated
@@ -42,6 +44,7 @@ templated
 [Tt]ricolons
 tokenizer
 [Tt]oolchain
+[Vv]endored
 whitepaper
 yamllint
 

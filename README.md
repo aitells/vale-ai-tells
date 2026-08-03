@@ -404,13 +404,13 @@ This covers structural patterns that lexical analysis can't catch.
 Every gate runs through a mise task, and CI runs the same tasks against the same pinned tools, so a clean local run predicts a clean pull request.
 
 ```bash
-mise run setup    # install the toolchain, vale sync, install the git hooks
-mise run lint     # yamllint, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
-mise run test     # fixture guard: tells fire, subjects smoke-test, false positives stay clean
-mise run check    # lint and test together
+mise run bootstrap  # vendir sync, install the toolchain, vale sync, install the git hooks
+mise run lint       # ryl, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
+mise run test       # fixture guard: tells fire, subjects smoke-test, false positives stay clean
+mise run check      # lint and test together
 ```
 
-[mise.toml](mise.toml) lists the local toolchain and [mise.lock](mise.lock) records the digest of every download, so a contributor and CI run the same binaries. `just lint-workflows` and `just gitleaks` run from digest-pinned Docker images instead, so those two need a container runtime. `mise run check-toolchain` gates the installed tools against both files and fails rather than warning.
+Most of the toolchain and the tasks that run it arrive from [`repotools`](https://github.com/tbhb/repotools) as a vendored payload: [vendir.yml](vendir.yml) names the tag, [vendir.lock.yml](vendir.lock.yml) records the commit it resolved to, and `vendir sync` writes the tool pins to `.config/mise/conf.d/` and the shared tasks to `.repotools/tasks/`. [mise.toml](mise.toml) holds what is specific to this repository and overrides any shared pin by name. Each configuration locks its downloads by digest beside itself, in [mise.lock](mise.lock) and `.config/mise/mise.lock`, so a contributor and CI run the same binaries. `mise run repotools:check-toolchain` measures the installed tools against those lockfiles, and `mise run repotools:check-vendored` catches a vendored file edited in place or a sync nobody committed. Both fail rather than warn. No gate needs a container runtime.
 
 Commit messages go through the shared [`repotools`](https://github.com/tbhb/repotools) gates at the `commit-msg` stage. One hook enforces the Conventional Commits shape and the length bounds. Another enforces the trailer rules, including a DCO `Signed-off-by` on every message. The remaining pair spell-check the buffer and lint it with this package's own `ai-tells` and `ai-tells-commits` styles. [AGENTS.md](AGENTS.md) describes the drafting workflow and the prose-lint output contract.
 

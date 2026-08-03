@@ -1,0 +1,17 @@
+#:schema https://mise.jdx.dev/schema/mise.json
+# The payload anchors itself. Anything that references the vendored
+# .repotools directory -- a task invoking a shared script, a consumer
+# aggregate, documentation -- goes through this variable rather than a
+# literal relative path. A literal works in a flat repo and breaks in a
+# monorepo, because {{ config_root }} inside a task body is evaluated
+# where the task runs, so a subproject resolves it to itself. [env] in
+# this drop-in is evaluated at the drop-in's own scope, where
+# config_root is the project root, and subprojects inherit the result.
+#
+# Setting it here rather than in each consumer's mise.toml is the
+# point: vendir delivers the config, the task files, and the variable
+# joining them as one unit, so a consumer needs no prerequisite line of
+# its own.
+
+[env]
+REPOTOOLS_DIR = "{{ config_root }}/.repotools"
