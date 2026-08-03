@@ -9,12 +9,20 @@
 - [ ] Promote from `warning` to `error` in `styles/ai-tells/AIAdjectiveNounPairs.yml`
 - [ ] Update README rule table description: remove "Currently at `warning` level" note
 
-## vale-commit-msg: name the Markdown parser with `--ext=.md`
+## Vale reports a punctuation match inside a masked code span
 
-A commit message reaches vale as a buffer with no file extension, so vale parses it as plain text and never strips code spans. A CLI flag inside a code span trips `ai-tells.DoubleHyphen` in a commit message while the same text stays clean in a document, which contradicts the rule's own message. `.vale.ini` cannot repair this: vale keys `[formats]` on a file extension, and `COMMIT_AGENTMSG = md`, `.COMMIT_AGENTMSG = md`, and `* = md` all leave the buffer as plain text.
+Vale masks a Markdown code span before matching, replacing what it holds with asterisks. A rule whose token is punctuation still draws a finding at the raw position inside the span, though only when that same token also matches elsewhere in the same paragraph. Reduced with one throwaway rule on token `\+\+` at `nonword: true`:
 
-The fix is `--ext=.md` on the vale invocation in the `vale-commit-msg` hook in `repotools`, alongside the `--path` that already selects the scope. It preserves that scope. The `ai-tells-commits` rules and a bare `--` both still fire, and only the flag inside the code span stops. Handed to an in-progress `repotools` session on 2026-08-03.
+- Inside a code span only: nothing, so the mask does its job.
+- Inside a span and once outside, same paragraph: two findings, the extra one pointing inside the span.
+- That same pair split across two paragraphs: one finding, correctly placed.
+- Outside only: one finding, correctly placed.
 
-- [ ] Land `--ext=.md` in the upstream `scripts/vale-commit-msg.sh`, and correct its comment claiming `[formats]` resolves the parser
-- [ ] Move this repo's `.pre-commit-config.yaml` rev and `apm.yml` pin onto the tag carrying it
-- [ ] Check that `--all-files` inside a code span survives `mise run lint-commit-msg` afterwards
+Paragraphs bound this, not lines. Moving the loose token down a line keeps the extra finding, and only a blank line clears it.
+
+The `nonword` setting does not cause this. The same experiment with a word token draws one correctly placed finding under `nonword: true` and under the default. Punctuation is what separates the two, and `ai-tells.DoubleHyphen` carries `nonword` only so its token can match at all.
+
+A commit message meets this through `DoubleHyphen`. One that names a command-line flag in a code span and also holds a loose pair of hyphens elsewhere draws a finding on the flag that no rewording of the flag clears. The parser work that made code spans mask at all is part of `repotools` v0.4.0, which this repo now pins, so this is what remains of it.
+
+- [ ] Report it to vale upstream with the reduced case recorded here
+- [ ] Decide whether `ai-tells` can narrow the token usefully, or whether the rule waits on a vale fix
