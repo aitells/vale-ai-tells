@@ -20,7 +20,6 @@ vale-ai-tells/
 ├── .repotools/tasks/           # Vendored repotools shared tasks (vendir owns this)
 ├── .pre-commit-config.yaml
 ├── .vale.ini                   # Repo dev config (enables all three styles)
-├── Justfile                    # The APM delegation recipes, and nothing else
 ├── mise.toml                   # Repo-specific pins and tasks; selects the shared ones
 ├── mise.lock                   # Resolved versions, URLs, and digests
 ├── vendir.yml                  # The repotools payload: source, tag, target directories
@@ -67,7 +66,6 @@ mise run repotools:lint-spelling     # cspell
 mise run lint-prose                  # Vale on the docs
 mise run lint-messages               # Vale on each rule's own message: field (dogfooding)
 mise run repotools:lint-toml         # tombi
-mise run repotools:lint-just         # just --fmt --check
 mise run repotools:lint-mise         # mise fmt --check
 mise run lint-editorconfig
 mise run repotools:lint-workflows    # actionlint

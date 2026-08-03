@@ -1,6 +1,7 @@
 #:schema tombi://www.schemastore.org/tombi.json
 # Standard tombi config (tombi 1.2.0) propagated verbatim to every tbhb repo.
-# Gate commands are invoked only via `just lint-toml` / `just format-toml`, never raw:
+# Gate commands are invoked only via `mise run repotools:lint-toml` and
+# `mise run repotools:format-toml`, never raw:
 #   tombi format --check --diff             (non-mutating format gate)
 #   tombi lint --offline --error-on-warnings
 # Re-verify the tombi pin whenever the version literals move.
