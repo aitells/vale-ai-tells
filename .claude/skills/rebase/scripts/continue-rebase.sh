@@ -28,7 +28,7 @@ export PYTHONUTF8=1
 export GIT_EDITOR=true
 export GIT_SEQUENCE_EDITOR=true
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 gitr() {
   command git --no-pager \

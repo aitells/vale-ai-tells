@@ -32,7 +32,7 @@ set -uo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 root=$(git rev-parse --show-toplevel 2>/dev/null) || {
   printf 'verdict: BLOCKED (not a git repository)\n'

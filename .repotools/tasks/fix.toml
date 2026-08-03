@@ -1,0 +1,9 @@
+# Shared fix tasks. Same task-file syntax, namespace, selection, and
+# pin rules as format.toml in this directory.
+
+# Complement to repotools:format-markdown, which only rewrites
+# whitespace and ordering, not semantic lints.
+["repotools:fix-markdown"]
+description = "Apply rumdl's auto-fixable Markdown rules"
+usage = 'arg "<paths>..." default="."'
+run = "rumdl check --fix $usage_paths"

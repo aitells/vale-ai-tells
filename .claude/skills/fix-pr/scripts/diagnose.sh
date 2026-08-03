@@ -28,7 +28,7 @@ export GH_PAGER=cat
 export GH_PROMPT_DISABLED=1
 export PYTHONUTF8=1
 unset CDPATH GH_REPO GH_HOST GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 readonly LOG_LINES=${FIX_PR_LOG_LINES:-80}
 
@@ -110,7 +110,7 @@ reproducer() {
   *test*) printf 'just test\n' ;;
   *vendor*) printf 'just vendor-check\n' ;;
   *vuln*) printf 'just vuln\n' ;;
-  *gitleaks* | *secret*) printf 'just gitleaks\n' ;;
+  *gitleaks* | *secret*) printf 'mise run repotools:gitleaks\n' ;;
   *apm* | *validate*) printf 'apm install --frozen && apm audit --ci\n' ;;
   *fuzz*) printf 'just fuzz\n' ;;
   *) printf '(no local recipe maps to this job; read the log)\n' ;;

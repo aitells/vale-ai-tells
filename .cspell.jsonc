@@ -9,6 +9,10 @@
     ".claude/hooks/**/*",
     ".claude/skills/**/*",
     ".claude/worktrees/**/*",
+    // The vendored repotools payload. Its comments answer to the
+    // publisher's dictionary, not this repo's.
+    ".config/mise/conf.d/**/*",
+    ".repotools/**/*",
     ".rumdl_cache/**/*",
     ".vale-config/**/*",
     "LICENSE",

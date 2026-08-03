@@ -1,0 +1,28 @@
+# Shared prek entry points. Same task-file syntax, namespace,
+# selection, and pin rules as format.toml in this directory. These
+# moved out of the consumers' root mise.toml files because their bodies
+# were byte-identical in every repo, and the prek-install stage list is
+# exactly the kind of text that drifts silently: forget post-commit in
+# one repo and stale COMMIT_AGENTMSG drafts start reaching commits
+# there.
+#
+# The commit-message draft gates (lint-commit-msg, lint-squash-msg)
+# are not here: they belong to the skill-name contract, so they travel
+# as task_templates in the 30-repotools-skill-contract drop-in and each
+# repo stamps them out under the unprefixed names the skills call.
+
+["repotools:prek"]
+description = "Run pre-commit hooks on changed files"
+run = "prek"
+
+# Useful after a hook config change or before a release sweep.
+["repotools:prek-all"]
+description = "Run pre-commit hooks on every file in the tree"
+run = "prek run --all-files"
+
+# post-commit removes the COMMIT_AGENTMSG draft once a commit succeeds.
+# Skip that stage and drafts accumulate across commits, which is how an
+# agent ends up committing a message it wrote for an earlier change.
+["repotools:prek-install"]
+description = "Install the project's git hooks (commit-msg, pre-commit, pre-push, post-commit)"
+run = "prek install -t commit-msg -t pre-commit -t pre-push -t post-commit"

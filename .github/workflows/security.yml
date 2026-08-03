@@ -1,10 +1,12 @@
 ---
-# Secret scanning. gitleaks (from its pinned Docker image, via `just
-# gitleaks`) walks the full commit history and the working tree against
-# its bundled rule set, so a credential committed anywhere in the repo's
-# past fails the gate. Runs on every pull request and push to `main`,
-# plus a daily cron that catches rules added to gitleaks after a commit
-# merged.
+# Secret scanning. gitleaks walks the full commit history and the working
+# tree against its bundled rule set, so a credential committed anywhere in
+# the repo's past fails the gate. Runs on every pull request and push to
+# `main`, plus a daily cron that catches rules added to gitleaks after a
+# commit merged. The gate is the shared `repotools:gitleaks` task, which
+# pins the binary through the vendored payload and asserts the walk
+# reached a commit -- gitleaks otherwise exits 0 on a git failure and an
+# empty scan reads as a clean one.
 
 name: security
 
@@ -44,10 +46,10 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      # gitleaks itself comes from a SHA-pinned image; mise supplies the
-      # `just` that invokes it.
+      # Installs gitleaks at the version and digest the vendored payload
+      # pins, the same way every other gate here resolves its binary.
       - name: Set up the toolchain
         uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
 
       - name: Scan for committed secrets
-        run: just gitleaks
+        run: mise run repotools:gitleaks

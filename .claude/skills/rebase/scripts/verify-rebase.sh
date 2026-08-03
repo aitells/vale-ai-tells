@@ -29,7 +29,7 @@ set -euo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 gitr() {
   command git --no-pager \

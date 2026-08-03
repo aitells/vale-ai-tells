@@ -3,10 +3,12 @@
 # docs around them, so the prose, spelling, Markdown, config, TOML, and
 # YAML linters are its code gates and run here rather than staying
 # local-only. Both jobs install the pinned toolchain through mise and sync
-# the Vale styles, then run their gates through `mise run` so mise.toml
-# stays the single definition of what each gate runs: the lint job runs the
-# full bar via `mise run lint`, and the test job runs the fixture suite via
-# `mise run test` (vale must be present to evaluate the fixtures).
+# the Vale styles, then run their gates through `mise run` so the mise
+# config stays the single definition of what each gate runs: the lint job
+# runs the full bar via `mise run lint`, and the test job runs the fixture
+# suite via `mise run test` (vale must be present to evaluate the
+# fixtures). Gates named `repotools:` come from the vendored payload the
+# lint job checks for drift first.
 # actionlint is absent from the lint bar: the standalone lint-workflows
 # workflow already covers it.
 
@@ -48,11 +50,19 @@ jobs:
         with:
           persist-credentials: false
 
-      # Installs every tool in mise.toml at the version and digest recorded
-      # in mise.lock, replacing the Brewfile and the setup-just and
-      # setup-vale composites.
+      # Installs every tool the mise config pins -- vendir from mise.toml
+      # and the rest from the vendored conf.d drop-in -- at the version and
+      # digest recorded in the lockfile beside each config.
       - name: Set up the toolchain
         uses: jdx/mise-action@7e36c90d9ab29c415a2384db3006f3ec8a8cc654 # v4.2.4
+
+      # Resyncs the repotools payload and fails on any difference from the
+      # committed tree, so a vendored file edited in place or a sync nobody
+      # committed is caught before the gates below run against it. The lint
+      # bar runs this too; naming it here makes the failure its own step
+      # rather than the first line of a lint run.
+      - name: Check the vendored payload
+        run: mise run repotools:check-vendored
 
       # mise installs the vale binary but does not fetch the style packages
       # .vale.ini declares.

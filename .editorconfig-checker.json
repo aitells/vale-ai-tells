@@ -1,3 +1,9 @@
 {
-  "Exclude": ["^styles/(Google|write-good|proselint)/", "^CHANGELOG\\.md$"]
+  "Exclude": [
+    "^styles/(Google|write-good|proselint)/",
+    "^CHANGELOG\\.md$",
+    "^\\.config/mise/conf\\.d/",
+    "^\\.repotools/",
+    "^vendir\\.lock\\.yml$"
+  ]
 }

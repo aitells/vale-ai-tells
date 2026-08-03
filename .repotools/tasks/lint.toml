@@ -1,0 +1,97 @@
+# Shared lint tasks. Same task-file syntax, namespace, selection, and
+# pin rules as format.toml in this directory. Only gates whose bodies
+# are identical between the consuming repos live here; a gate whose
+# scope or idiom is repo-specific (lint-prose's glob,
+# lint-editorconfig's file listing) stays in the consumer's root
+# mise.toml.
+
+# tombi lint-checks every tracked *.toml, validated offline against
+# embedded SchemaStore schemas where one exists. The format gate runs in
+# --check --diff mode as well, so an unformatted TOML file fails the bar
+# without being rewritten (repotools:format-toml is the in-place fixer).
+# --offline keeps the check hermetic against SchemaStore;
+# --error-on-warnings promotes warnings to hard failures. Scope lives in
+# the consumer's tombi.toml, so this task passes no path args.
+["repotools:lint-toml"]
+description = "Lint and format-check TOML via tombi"
+run = [
+  "tombi format --check --diff",
+  "tombi lint --offline --error-on-warnings",
+]
+
+["repotools:lint-markdown"]
+description = "Lint Markdown structure against .rumdl.toml"
+usage = 'arg "<paths>..." default="."'
+run = "rumdl check $usage_paths"
+
+["repotools:lint-config"]
+description = "Lint JSON / JS / TS via biome"
+usage = 'arg "<paths>..." default="."'
+run = "biome check --files-ignore-unknown=true $usage_paths"
+
+# Both flags beyond --strict exist to hold ryl to yamllint's behavior,
+# and dropping either changes what the gate reports.
+#
+# -c pins the config. Left to discover one, ryl resolves a config per
+# directory the way ruff and biome do, so a nested .yamllint.yaml
+# anywhere in the tree governs its own subtree -- this repository vendors
+# one under vendor/github.com/spf13/viper/, and it produced six findings
+# in a tree yamllint calls clean. yamllint has no such notion: one config
+# covers the whole run. Naming the file restores that.
+#
+# -f auto -o - sends findings to stdout. ryl writes the console formats
+# to stderr by default where yamllint uses stdout, which would break any
+# caller that redirects or pipes this task's output. -o - binds to the
+# preceding --format and is rejected without one, so the otherwise
+# redundant `-f auto` names the default explicitly: colored on a
+# terminal, plain when piped, which is what yamllint's own default does.
+#
+# ryl resolves ignore-from-file entries relative to the config file
+# rather than the working directory. Both land on the repository root
+# here, since the config sits there and mise runs tasks from the project
+# root, so .gitignore and .yamllintignore resolve identically.
+["repotools:lint-yaml"]
+description = "Lint YAML via ryl (--strict; config in .yamllint.yaml)"
+usage = 'arg "<paths>..." default="."'
+run = "ryl --strict -c .yamllint.yaml -f auto -o - $usage_paths"
+
+# The COMMIT_AGENTMSG exclusions keep a work-in-progress commit-message
+# draft out of the tree-wide check; the commit-msg stage owns those under
+# the stricter commit scope.
+["repotools:lint-spelling"]
+description = "Check spelling against the project dictionary (.cspell-words.txt)"
+usage = 'arg "<paths>..." default="."'
+run = "cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG --exclude PR_AGENTDESC.md --exclude SQUASH_AGENTMSG $usage_paths"
+
+# Format-check the Justfile with just's own formatter. --check reports
+# the difference and exits non-zero without touching the file;
+# repotools:format-just is the in-place fixer.
+["repotools:lint-just"]
+description = "Format-check the Justfile with just's own formatter"
+run = "just --fmt --check --unstable"
+
+# actionlint walks `.github/workflows/` by default, parses each
+# workflow, and flags unknown actions, mis-typed expressions, shellcheck
+# issues inside `run:` blocks, and SHA-pin drift. Complements the
+# ryl gate (which checks YAML structure) with workflow-shape rules a
+# YAML linter can't see. shellcheck is pinned in the baseline drop-in
+# beside actionlint because actionlint shells out to whatever
+# `shellcheck` binary it finds: the container image this task replaces
+# bundled one, and without that pin the `run:`-block checks would
+# silently vanish on a machine with no shellcheck rather than fail.
+["repotools:lint-workflows"]
+description = "Lint GitHub Actions workflow files via actionlint"
+run = "actionlint"
+
+# Format-check the mise configuration with mise's own formatter, so the
+# files that define the toolchain and most of the gates are themselves
+# gated. It does not overlap with lint-toml: mise fmt is the stricter of
+# the two (it insists on exploded arrays above a width threshold where
+# tombi accepts either), and a file mise fmt has normalized passes tombi
+# unchanged. `mise fmt` with no flag is the in-place fixer. Its scope is
+# the config files mise discovers -- mise.toml and the conf.d drop-ins.
+# It does not read included task files like this one; tombi is the
+# format gate for those.
+["repotools:lint-mise"]
+description = "Format-check the mise config with mise's own formatter"
+run = "mise fmt --check"

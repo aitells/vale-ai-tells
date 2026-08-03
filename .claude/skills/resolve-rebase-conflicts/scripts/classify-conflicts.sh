@@ -37,7 +37,7 @@ set -euo pipefail
 export LC_ALL=C
 export PYTHONUTF8=1
 unset CDPATH GREP_OPTIONS
-IFS=$(printf ' \t\n')
+IFS=$' \t\n'
 
 gitr() {
   command git --no-pager \
@@ -143,8 +143,14 @@ while IFS= read -r path; do
     git cat-file blob ":$stage:$path" >"$scratch/$stage" 2>/dev/null || true
   done
 
-  DECLARED="$declared" bash "${BASH_SOURCE%/*}/conflict-shape.sh" \
-    classify "$path" "$scratch/1" "$scratch/2" "$scratch/3"
+  # classify mode has no refusal path, so any nonzero here is the tool
+  # breaking rather than a verdict. Named explicitly so this call does not
+  # rest on a property of the other mode.
+  DECLARED="$declared" uv run --script "${BASH_SOURCE%/*}/conflict_shape.py" \
+    classify "$path" "$scratch/1" "$scratch/2" "$scratch/3" || {
+    printf 'conflict_shape.py failed with status %s while classifying %s.\n' "$?" "$path"
+    exit 1
+  }
 
   # For a genuine content conflict, what each side was trying to do is
   # the thing that settles it, and neither the markers nor the merged

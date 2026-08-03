@@ -10,7 +10,9 @@ exclude: ^styles/(Google|write-good|proselint)/
 # prek built its own environments from its own `rev:` pins: vale ran at
 # 3.15.2 here and 3.17.0 through the Justfile, so a prose finding could
 # appear in one gate and not the other. yamllint and rumdl drifted the same
-# way. mise.toml is now the only place any of those versions appears.
+# way. The mise config is now the only place any of those versions appears,
+# and the `repotools:` entries below name tasks the vendored payload
+# defines rather than tasks this repo writes.
 #
 # The tbhb/repotools block below keeps its own `rev:`. Those are the
 # shared commit-msg gates rather than tool wrappers, and the consolidation
@@ -35,14 +37,14 @@ repos:
   # SHA with a `# frozen:` tag comment so Renovate's pre-commit manager
   # tracks it.
   - repo: https://github.com/tbhb/repotools
-    rev: 9d5de432457f431d8fb300aedc6cd35315f6c30e  # frozen: v0.3.0
+    rev: 1173f5614bc6dda43548c1916cc9e1e0f451a513  # frozen: v0.4.0
     hooks:
       - id: commit-trailers
       - id: commitlint
       - id: vale-commit-msg
       - id: cspell-commit-msg
 
-      # The one post-commit hook, and the reason `mise run prek-install`
+      # The one post-commit hook, and the reason `mise run repotools:prek-install`
       # installs that stage. It deletes the COMMIT_AGENTMSG draft once a
       # commit succeeds, so the next commit starts from an absent path
       # rather than a stale draft.
@@ -50,9 +52,9 @@ repos:
 
   - repo: local
     hooks:
-      - id: yamllint
-        name: yamllint
-        entry: mise run lint-yaml
+      - id: ryl
+        name: ryl
+        entry: mise run repotools:lint-yaml
         language: system
         types: [yaml]
 
@@ -72,13 +74,13 @@ repos:
 
       - id: rumdl-fmt
         name: rumdl fmt
-        entry: mise run format-markdown
+        entry: mise run repotools:format-markdown
         language: system
         types_or: [markdown]
 
       - id: rumdl
         name: rumdl check
-        entry: mise run lint-markdown
+        entry: mise run repotools:lint-markdown
         language: system
         types_or: [markdown]
 
@@ -94,7 +96,7 @@ repos:
       # worktree's dictionary rather than the main checkout's.
       - id: cspell
         name: cspell
-        entry: mise run lint-spelling
+        entry: mise run repotools:lint-spelling
         language: system
         stages: [pre-commit, pre-push]
         types: [text]
@@ -113,30 +115,44 @@ repos:
 
       - id: tombi
         name: tombi (TOML lint + format-check)
-        entry: mise run lint-toml
+        entry: mise run repotools:lint-toml
         language: system
         types: [toml]
         pass_filenames: false
 
-      # just's own formatter, gating the file that still carries the
-      # container gates and the APM compatibility recipes. --fmt rewrites
-      # whichever justfile just resolves, so the hook passes no filenames
-      # and fires on the Justfile alone.
+      # just's own formatter, gating the file that still carries the APM
+      # compatibility recipes. --fmt rewrites whichever justfile just
+      # resolves, so the hook passes no filenames and fires on the
+      # Justfile alone.
       - id: just-fmt
         name: just --fmt --check
-        entry: mise run lint-just
+        entry: mise run repotools:lint-just
         language: system
         files: ^Justfile$
         pass_filenames: false
 
-      # The same argument for mise.toml, which now defines the toolchain
-      # and most of the gates. mise fmt rewrites the config it resolved,
-      # so this passes no filenames either.
+      # The same argument for the mise config, which now defines the
+      # toolchain and most of the gates. mise fmt rewrites the config it
+      # resolved, so this passes no filenames either. The conf.d drop-ins
+      # are in scope because mise fmt reads them; the vendored task files
+      # under .repotools are not -- mise fmt never opens included task
+      # files, and tombi is their format gate in the publisher.
       - id: mise-fmt
         name: mise fmt --check
-        entry: mise run lint-mise
+        entry: mise run repotools:lint-mise
         language: system
-        files: ^mise\.toml$
+        files: ^(mise\.toml|\.config/mise/conf\.d/.*\.toml)$
+        pass_filenames: false
+
+      # The vendir drift gate: resync and fail on any difference against
+      # what git holds, so an edit to a vendored file, a stale sync after
+      # a payload bump, or a hand-edited vendir.yml is caught at the
+      # commit that introduces it.
+      - id: check-vendored
+        name: vendir drift check
+        entry: mise run repotools:check-vendored
+        language: system
+        files: ^(vendir\.(yml|lock\.yml)$|\.config/mise/conf\.d/|\.repotools/)
         pass_filenames: false
 
       # editorconfig-checker. Scope lives in .editorconfig-checker.json,

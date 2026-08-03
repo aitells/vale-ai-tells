@@ -12,7 +12,7 @@ Draft every message in a repo-root `COMMIT_AGENTMSG` file before you run `git co
 2. Run `mise run lint-commit-msg` and resolve whatever it reports.
 3. Commit the validated draft with `git commit -s -F COMMIT_AGENTMSG`.
 
-The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits shape and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run prek-install` once so the hooks fire on every commit.
+The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits shape and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run repotools:prek-install` once so the hooks fire on every commit.
 
 That hook stage is the real gate. `mise run lint-commit-msg` only previews it, so a clean recipe run predicts a clean commit without replacing the hook.
 

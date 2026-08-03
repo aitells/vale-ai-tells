@@ -1,0 +1,39 @@
+# The lockfile gate, shared because its body was byte-identical in
+# every repo and it is the check this whole toolchain rests on. Same
+# task-file syntax, namespace, selection, and pin rules as format.toml
+# in this directory.
+
+# Replaces the per-repo drift recipes, which only warned. This gates:
+# --dry-run-code exits 1 when a pinned tool is missing.
+#
+# MISE_LOCKED=1 makes a version absent from the lockfiles a failure
+# rather than something mise silently fetches and re-locks, which is
+# what would let a Renovate PR bumping a pin alone pass while the
+# committed digests drift.
+#
+# The empty MISE_CONFIG_DIR is what scopes that check to the repository.
+# `locked` applies to the merged tool set, so without it the gate fails
+# on whatever unlocked tools a developer happens to declare in their own
+# ~/.config/mise/config.toml -- tools the repo neither declares nor
+# uses.
+#
+# The failure hint reads REPOTOOLS_LOCK_PLATFORMS, which each repo sets
+# in its root mise.toml [env] to the platform list its lockfiles cover.
+# The list is the one genuinely repo-specific byte in this task, so it
+# travels as an env var rather than forcing a local copy of the whole
+# body.
+["repotools:check-toolchain"]
+description = "Gate the installed toolchain against the mise config and lockfiles"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+empty_cfg=$(mktemp -d)
+trap 'rm -rf "$empty_cfg"' EXIT
+if MISE_CONFIG_DIR="$empty_cfg" MISE_LOCKED=1 mise install --dry-run-code; then
+  echo "toolchain matches the mise config and lockfiles"
+else
+  echo "toolchain is out of date, or a pin is missing from a lockfile" >&2
+  echo "         run 'mise run install-toolchain', or 'mise lock --platform ${REPOTOOLS_LOCK_PLATFORMS:-<your platform list>}' after moving a pin" >&2
+  exit 1
+fi
+'''
