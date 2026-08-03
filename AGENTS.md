@@ -20,7 +20,9 @@ That hook stage is the real gate. `mise run lint-commit-msg` only previews it, s
 
 The toolchain defaults to the agent template: `mise run lint-prose`, `mise run lint-messages`, and the vale pre-commit hook all pass `--output=ai-tells-agent.tmpl`. Name the flag yourself only when invoking `vale` directly. The template prints one self-contained line per finding (location, severity, rule, the exact matched text, and the replacement parameter when the rule defines one) plus a totals line, so you can apply fixes without re-reading context through separate commands. Empty output means a clean run, and the exit code carries the result.
 
-The template is tracked at `styles/config/templates/ai-tells-agent.tmpl`, which puts it inside the `ai-tells-experimental` release zip alongside the Tengo scripts.
+`ai-tells.zip` carries the template, tracked here at `styles/config/templates/ai-tells-agent.tmpl`, so a repository syncing the core style alone can name the flag. A `vale sync` puts it under `StylesPath/config/templates/`, where vale looks up an `--output` name.
+
+Treat the output shape as a published interface. The prose-fix skills in [`repotools`](https://github.com/tbhb/repotools) parse it: they count findings with `grep -c '^[0-9]'` and read the `replace_with=` field to apply a correction. Reshaping a line or renaming a field breaks those skills and anything else reading the format, so a change there is a breaking change for consumers rather than a local edit.
 
 ## Drafting a document
 

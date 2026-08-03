@@ -328,24 +328,30 @@ vale --config=.vale-test.ini test-false-positives.md && echo "Clean -- no false 
 
 # --- Package ---
 
-# Build the three release zips. ai-tells and ai-tells-commits are style-only
-# packages and zip flat, so their layout matches what every consumer's `vale
-# sync` already expects. ai-tells-experimental needs the wrapper shape (a
-# top-level dir holding a styles/ subtree) because its Tengo scripts live
-# under styles/config, and that is also where the agent output template rides
-# along. The project vocabulary and the dev-only message view stay out of the
-# package. pkg/ and the zips are gitignored build output.
+# Build the three release zips. ai-tells-commits is style-only and zips flat.
+# The other two take the wrapper shape (a top-level dir holding a styles/
+# subtree) because each carries a file under styles/config that a flat zip
+# has no room for: the agent output template in ai-tells, the Tengo scripts
+# in ai-tells-experimental. Every file under styles/config ships from exactly
+# one package, so the two copies can never diverge; the template used to ride
+# along in ai-tells-experimental, which left it out of reach of a consumer
+# syncing the core style alone. The project vocabulary and the dev-only
+# message view stay out of both. pkg/ and the zips are gitignored build
+# output.
 [tasks.build-package]
 description = "Build the three release zips"
 run = '''
 #!/usr/bin/env bash
 set -euo pipefail
 rm -rf pkg ai-tells.zip ai-tells-commits.zip ai-tells-experimental.zip
-(cd styles && zip -r ../ai-tells.zip ai-tells)
+mkdir -p pkg/ai-tells/styles/config
+cp -r styles/ai-tells pkg/ai-tells/styles/
+cp -r styles/config/templates pkg/ai-tells/styles/config/
+(cd pkg && zip -r ../ai-tells.zip ai-tells)
 (cd styles && zip -r ../ai-tells-commits.zip ai-tells-commits)
 mkdir -p pkg/ai-tells-experimental/styles
 cp -r styles/ai-tells-experimental pkg/ai-tells-experimental/styles/
-rsync -a --exclude='vocabularies/' --exclude='views/' styles/config/ pkg/ai-tells-experimental/styles/config/
+rsync -a --exclude='vocabularies/' --exclude='views/' --exclude='templates/' styles/config/ pkg/ai-tells-experimental/styles/config/
 (cd pkg && zip -r ../ai-tells-experimental.zip ai-tells-experimental)
 echo "Built ai-tells.zip, ai-tells-commits.zip, ai-tells-experimental.zip"
 '''

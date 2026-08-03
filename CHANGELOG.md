@@ -7,6 +7,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Changed
+
+- **Packaging**: `ai-tells.zip` now takes the wrapper shape (a
+  top-level directory holding a `styles/` subtree) that
+  `ai-tells-experimental.zip` already used, and carries
+  `styles/config/templates/ai-tells-agent.tmpl`. A `vale sync` lands
+  the styles at `StylesPath/ai-tells/` from either shape and the
+  template at `StylesPath/config/templates/`, so
+  `--output=ai-tells-agent.tmpl` resolves for a repository syncing the
+  core style alone. The template used to ship only in the opt-in
+  experimental package, where a consumer without it got a template
+  runtime error rather than a report. `ai-tells-experimental.zip` no
+  longer carries the file, which leaves one publisher per path and no
+  way for two copies to disagree. `ai-tells-commits.zip` is unchanged.
+  Existing pins name a release, so a consumer sees the new layout on
+  its next version bump.
+
+<!-- vale on -->
+
 ## [1.28.0] - 2026-08-02
 
 <!-- vale off -->
