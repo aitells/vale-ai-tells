@@ -67,6 +67,12 @@ The rule set names a few figurative verbs and misses the category around them.
 
 The mechanical check already reports this, so read its output rather than re-deriving it. A `linter-config-changed` or `suppression-comment` finding there is automatically `CHANGES REQUIRED`.
 
+## Sweep before you write the verdict
+
+One editing pass produces one class of damage in more than one place at once, because the writer cleared a rule the same way everywhere it fired. Take each finding you have and read the rest of the diff for the same damage. A pronoun the reorder stranded, a clause a reword reattached to the wrong thing, an identifier paraphrased away, a parallel the edit broke on one item and kept on the next. Where the diff holds one, look for the second.
+
+Report every instance. Handing back one at a time costs a fixing round and a review round to say what this verdict could have said, and the writer only sweeps the list you give it.
+
 ## What to return
 
 Return the verdict block and stop there. Skip the preamble, the summary of the diff, and the praise. Write nothing to disk, and don't edit the document to make it pass. Reporting the finding is the job.

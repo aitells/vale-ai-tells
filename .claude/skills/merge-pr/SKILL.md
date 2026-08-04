@@ -78,7 +78,7 @@ bash .claude/skills/merge-pr/scripts/squash-message.sh <number>
 
 That prints a briefing and writes a skeleton. Nothing in it converts the description into a message, because no rewriting rule produces one. What merges here is the single commit a whole branch leaves behind, so writing it means reading everything that landed and deciding what a reader years from now still needs.
 
-Your briefing carries the description as published, every commit message the squash collapses in full, the diffstat, and the trailers those commits carry. Read it before writing a word. Commit bodies matter most. Each one already argued for itself once, and this is the last place that argument survives.
+Your briefing carries the description as published, every commit message the squash collapses in full, the diffstat, and the trailers those commits carry. Read it before writing a word. Commit bodies matter most. Each one already argued for itself once, and this is the last place that argument survives. Run the command on its own and read the whole thing. Piping it through `head` or `tail` keeps the trailing skeleton and drops those bodies, which nothing else in this workflow prints, and the script caps nothing on purpose, so a cap you add is one nobody downstream can see you added.
 
 `SQUASH_AGENTMSG` at the repository root holds the skeleton, which a gitignore entry keeps out of history. Subject and footer come filled in. The body stays empty until you write it.
 
@@ -125,6 +125,8 @@ Invoke the `review-squash-message` skill, passing the repository root as its arg
 This step is mandatory, and the merge script enforces it. A clean verdict signs the exact bytes of the draft, a finding erases any earlier signature, and editing the draft afterward voids it the same way.
 
 Fix everything it returns. Push back only where it's demonstrably wrong about the commits, and say why.
+
+A finding names one instance rather than the fault itself. Fix the instance, then read the rest of the message for the same fault, because a reviewer that found one instance finds the next one on the next round.
 
 ## Step 5: run the commit-msg gates
 

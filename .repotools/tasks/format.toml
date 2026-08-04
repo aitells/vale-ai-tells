@@ -34,11 +34,3 @@ run = "rumdl fmt $usage_paths"
 description = "Format JSON / JS / TS in place via biome"
 usage = 'arg "<paths>..." default="."'
 run = "biome format --write $usage_paths"
-
-# --fmt is still an unstable just feature; pass --unstable explicitly so
-# the task works regardless of the consumer Justfile's `set unstable`.
-# Takes no path args: --fmt only ever rewrites the justfile just
-# resolved for this invocation.
-["repotools:format-just"]
-description = "Format the Justfile in place with just's own formatter"
-run = "just --fmt --unstable"
