@@ -114,6 +114,30 @@ section "files"
 gh pr view "$number" --json files \
   --jq '.files[] | "\(.additions)+ \(.deletions)- \(.path)"' 2>/dev/null || none
 
+# The operator's standing answer to step 6, granted out of band through
+# `mise run preapprove` and keyed on the Claude Code session. Absence is
+# the default and the safe one: no record, no grant, and the
+# confirmation stands as written. A missing session id reads the same
+# way, so nothing here depends on the harness exporting one.
+#
+# `mise run preapprove` never implies this scope. A merge is the one
+# action in this toolchain that no later step can walk back, so the
+# operator names it.
+section "pre-approval"
+preapproval=""
+if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then
+  preapproval="$(git rev-parse --absolute-git-dir)/preapprovals/$CLAUDE_CODE_SESSION_ID"
+fi
+if [ -n "$preapproval" ] && grant=$(grep '^merge ' "$preapproval" 2>/dev/null); then
+  case ${grant##* } in
+  touchid) how="a Touch ID prompt stands behind it" ;;
+  *) how="no biometric prompt stood behind it" ;;
+  esac
+  printf 'merge: GRANTED, %s — step 6 skips the confirmation once every gate and the review pass\n' "$how"
+else
+  printf 'merge: not granted — step 6 confirms with the operator as written\n'
+fi
+
 section "preconditions"
 if git check-ignore --quiet "$DRAFT" 2>/dev/null; then
   printf '%s gitignored: yes\n' "$DRAFT"

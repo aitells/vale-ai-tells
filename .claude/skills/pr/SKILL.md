@@ -111,7 +111,22 @@ Commits: <count>
 <the entire PR_AGENTDESC.md contents, verbatim>
 ```
 
-Now call `AskUserQuestion` with `question` set to `How far should I take this?`, `header` set to `Pull request`, `multiSelect` set to `false`, and these four options in order, from the most automated to the least:
+Preflight answered both of this step's questions under `== pre-approval ==`. Where it reported `pr: GRANTED`, the operator answered them for the whole session in advance, through `mise run preapprove`. Print the preceding block so the draft still reaches them, name the grant this publish goes under, and take both answers from the grant rather than from a question:
+
+| Preflight line | How far to take it | How fixes land |
+| --- | --- | --- |
+| `pr: GRANTED`, `merge: GRANTED` | `Open, fix, and merge` | Separate commits |
+| `pr: GRANTED`, `merge: not granted` | `Open, watch, and fix` | Separate commits |
+
+Separate commits are the pre-approved shape because amending rewrites a commit the operator already cleared, and a grant covering that would reach past the question it answers. Amend only where the operator asks for it in the session.
+
+Ask anyway where any of these holds:
+
+- the review returned a finding nobody acted on
+- a gate needed more than a mechanical fix
+- the branch reaches past what the session set out to do
+
+Where preflight reported `pr: not granted`, call `AskUserQuestion` with `question` set to `How far should I take this?`, `header` set to `Pull request`, `multiSelect` set to `false`, and these four options in order, from the most automated to the least:
 
 | Label | Description |
 | --- | --- |

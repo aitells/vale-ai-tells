@@ -221,6 +221,26 @@ else
   printf 'COMMIT_AGENTMSG: absent or empty (expected before drafting)\n'
 fi
 
+# The operator's standing answer to step 8, granted out of band through
+# `mise run preapprove` and keyed on the Claude Code session. Absence is
+# the default and the safe one: no record, no grant, and the
+# confirmation stands as written. A missing session id reads the same
+# way, so nothing here depends on the harness exporting one.
+section "pre-approval"
+preapproval=""
+if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then
+  preapproval="$(git rev-parse --absolute-git-dir)/preapprovals/$CLAUDE_CODE_SESSION_ID"
+fi
+if [ -n "$preapproval" ] && grant=$(grep '^commit ' "$preapproval" 2>/dev/null); then
+  case ${grant##* } in
+  touchid) how="a Touch ID prompt stands behind it" ;;
+  *) how="no biometric prompt stood behind it" ;;
+  esac
+  printf 'commit: GRANTED, %s — step 8 skips the confirmation once every gate and the review pass\n' "$how"
+else
+  printf 'commit: not granted — step 8 confirms with the operator as written\n'
+fi
+
 section "staged changes"
 staged=$(gitr diff --no-ext-diff --cached --name-status)
 if [ -n "$staged" ]; then printf '%s\n' "$staged"; else none; fi

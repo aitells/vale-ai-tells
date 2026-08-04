@@ -165,7 +165,18 @@ Staged: <paths, comma separated>
 <the entire COMMIT_AGENTMSG contents, verbatim>
 ```
 
-Now call `AskUserQuestion` with `question` set to `Commit this message?`, `header` set to `Commit`, `multiSelect` set to `false`, and these four options in order:
+Preflight answered this under `== pre-approval ==`. Where it reported `commit: GRANTED`, the operator answered this question for the whole session in advance, through `mise run preapprove`. Print the preceding block so the message still reaches them, name the grant this commit goes under, and move to step 9 without calling `AskUserQuestion`.
+
+The grant answers one question, commit this message, and says nothing about whether this is the right commit. Ask anyway where any of these holds:
+
+- the review returned a finding nobody acted on
+- a gate needed more than a mechanical fix
+- the grouping changed after step 2
+- the commit reaches past what the session set out to do
+
+The operator withdraws a grant with `mise run revoke-preapproval`. Say so where a run keeps arriving at one of those exceptions.
+
+Where preflight reported `commit: not granted`, call `AskUserQuestion` with `question` set to `Commit this message?`, `header` set to `Commit`, `multiSelect` set to `false`, and these four options in order:
 
 | Label | Description |
 | --- | --- |

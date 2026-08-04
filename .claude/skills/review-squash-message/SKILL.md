@@ -16,28 +16,21 @@ Every other reviewer in this toolchain reads one text against one change, whethe
 
 ## The repository
 
-`$ARGUMENTS`
+`$ARGUMENTS` carries the repository under review. An empty value means the current working directory.
 
-Treat that path as the repository under review. An empty value means the current working directory. Bind it once and use it throughout:
+## Context
 
-```bash
-REPO="${ARGUMENTS:-$(pwd)}"
-```
+!`bash ${CLAUDE_SKILL_DIR}/scripts/context.sh $ARGUMENTS`
 
-## Gather the inputs
+The preceding context carries everything the review needs. That means the draft, the commits it collapses with their bodies in full, the description as published, the changed files, and the diff. You are already at the repository root, so nothing below wants a `cd`.
 
-The draft's subject ends in the pull request number, so read the draft first and take the number from there.
+Read the commit bodies rather than skimming the subjects.
 
-- `cat "$REPO/SQUASH_AGENTMSG"` for the message under review
-- `gh pr view <number> --json commits --jq '.commits[] | "--- " + .oid[0:7] + "\n" + .messageHeadline + "\n" + .messageBody'` for every commit message in full
-- `gh pr diff <number>` for what those commits actually changed
-- `gh pr view <number> --json title,body` for the published description
+A subject names what a commit did. The reason belongs in the body, and a reason is the first thing a squash loses.
 
-Read the commit bodies rather than skimming the subjects. A subject names what a commit did. The reason belongs in the body, and a reason is the first thing a squash loses.
+Where the preceding context reports a missing or empty draft, a draft carrying no body, or a subject naming no pull request, that's itself a finding. Report it and stop.
 
-Read them through `gh` rather than from local refs. This skill also runs against pull requests nobody here authored, and often nothing local holds those commits at all.
-
-A missing or empty draft, a draft carrying no body, or a subject naming no pull request, is itself a finding. Report it and stop.
+Reach for a tool call only where the preceding material ran out, and say what you went looking for. A large branch truncates its diff at a stated line count, and a claim about the part beyond the cut needs `gh pr diff <number>` to settle.
 
 ## What's already settled
 
