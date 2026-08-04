@@ -86,7 +86,11 @@ Its verdict drives a loop:
 - `VERDICT: PASS` ends the loop. Go on to step 5.
 - `VERDICT: CHANGES REQUIRED` sends the findings back to `write-pr-description`, verbatim, in its arguments. Then review again.
 
-Bound it at three rounds. Past that, stop, and report which findings keep coming back, because a fourth pass at the same objection rarely resolves it.
+Bound it at three rounds, counting only the rounds a finding caused. A round the branch caused doesn't count against the bound. A remediation commit or a rebase changes what the description has to describe, and the reviewer then reads a branch it has never seen. Say which kind each round was as you go, so the count stays honest.
+
+Past three, stop rather than opening a fourth. Report the count out loud along with the findings that keep coming back, and let the operator decide whether to go on.
+
+A bound nobody reports is one nobody notices breaking.
 
 This step is mandatory, and `create-pr.sh` enforces it. A clean verdict signs the exact bytes of the draft, a finding erases any earlier signature, and a later edit voids it the same way.
 

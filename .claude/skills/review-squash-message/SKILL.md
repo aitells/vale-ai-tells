@@ -83,6 +83,12 @@ The body answers why the branch exists. The diff already carries what changed.
 - Flag a `Closes` reference to something this branch doesn't close, and a missing one the description asked for. A cross-repository reference reduced to a bare number closes an unrelated local issue on merge.
 - Flag a missing `Signed-off-by`, or an `Assisted-by` sitting after it rather than before.
 
+## Sweep before you write the verdict
+
+A gap you found once is rarely the only one. Take each finding you have and read the whole message again for the same kind of gap. A commit whose reason went missing, a claim the branch has outgrown, a count standing where a name belongs, a paragraph restating the diff. Where the message holds one, look for the second, and where instances share a fix, report them as a single finding naming each.
+
+A gap you leave for the next pass costs a drafting round and a review round to say what this verdict could have said. None of that invites padding. Everything in the verdict still has to be something you can point at in the commits.
+
 ## What to return
 
 Your verdict is what lets the merge proceed. A hook on the caller's side reads the line below and signs the draft you cleared. Keep the wording exact, because a verdict that hook can't parse leaves the merge blocked. Write nothing to disk yourself, and don't edit the draft to make it pass. Reporting the finding is the job.

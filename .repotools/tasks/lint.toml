@@ -63,13 +63,6 @@ description = "Check spelling against the project dictionary (.cspell-words.txt)
 usage = 'arg "<paths>..." default="."'
 run = "cspell --config .cspell.jsonc --no-summary --no-progress --no-must-find-files --exclude COMMIT_AGENTMSG --exclude PR_AGENTDESC.md --exclude SQUASH_AGENTMSG $usage_paths"
 
-# Format-check the Justfile with just's own formatter. --check reports
-# the difference and exits non-zero without touching the file;
-# repotools:format-just is the in-place fixer.
-["repotools:lint-just"]
-description = "Format-check the Justfile with just's own formatter"
-run = "just --fmt --check --unstable"
-
 # actionlint walks `.github/workflows/` by default, parses each
 # workflow, and flags unknown actions, mis-typed expressions, shellcheck
 # issues inside `run:` blocks, and SHA-pin drift. Complements the

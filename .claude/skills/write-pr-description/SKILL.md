@@ -66,7 +66,19 @@ Avoid:
 
 Where a draft already exists, the context printed it earlier. Keep the sentences that still hold. A revision that rewrites untouched prose costs the caller another review round for nothing, and it loses wording an earlier review already cleared.
 
+A finding names one instance of a fault rather than the fault itself. Fix the instance, then read the rest of the draft for the same fault, because a reviewer that found one instance finds the next one on the next round. That sweep isn't the rewriting this section warns against, since it changes a sentence only where the sentence is wrong.
+
 Where the published description differs from the draft, the branch has moved since the last publish. Bring the draft forward rather than reverting it to what GitHub shows.
+
+## Read the draft back before returning
+
+The validator covers what a script can check. What follows is what the reviewer sends drafts back for, and the context printed earlier already holds the answer to each, so a round trip spent on one buys nothing.
+
+**Closed enumerations.** A sentence naming the kinds of change on the branch claims to name every one, and a reviewer reads it that way. Walk the changed-file listing against every sentence of that shape, and confirm the sentence covers each path or that you left the path out on purpose. Where you can't confirm it, write the sentence open, so it claims only what you checked.
+
+**Scope words.** `only`, `every`, `never`, and `the one place` each make a claim about the files you didn't quote. Open the file and establish the scope before writing one. A setting described as mattering on a single CI slot is a claim about every other slot, and the workflow in the diff either bears that out or doesn't.
+
+**The Avoid list earlier in this document.** Read the finished draft against it once. Following a rule while writing and satisfying it in the finished text are different things.
 
 ## Clear the validator before returning
 

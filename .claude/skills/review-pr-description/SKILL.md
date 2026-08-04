@@ -88,6 +88,14 @@ Judge the branch, not the description.
 - A change plus its tests, or a change plus the documentation describing it, counts as one change. Leave that alone.
 - Size alone isn't a finding. A wide mechanical rename counts as one change. A small diff touching two unrelated subsystems doesn't.
 
+## Sweep before you write the verdict
+
+A fault you found once is rarely alone. Take each finding you have and read the whole draft again for the same fault. A list that stops short of the diff, a claim scoped wider than the evidence, a count standing where a name belongs, a sentence selling rather than saying. Where the draft holds one, look for the second. Where instances share a fix, report them as a single finding naming each.
+
+Do this even when a finding sends you back into a section you already cleared. The draft in front of you changed since the last pass, and a claim that held then may not hold now.
+
+An instance you leave for the next pass costs a writer round and a reviewer round to say what this verdict could have said. None of that invites padding. Everything in the verdict still has to be something you can point at.
+
 ## What to return
 
 Your verdict is what lets the pull request proceed. A hook on the caller's side reads the line below and signs the draft you cleared. Keep the wording exact, because a verdict that hook can't parse leaves the pull request blocked. Write nothing to disk yourself, and don't edit the draft to make it pass. Reporting the finding is the job.
