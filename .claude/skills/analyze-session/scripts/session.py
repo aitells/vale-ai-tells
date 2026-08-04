@@ -336,16 +336,18 @@ def cmd_show(args: argparse.Namespace) -> None:
 def signature(name: str, inp: dict) -> str:
     """Reduce a tool call to what makes two calls "the same attempt".
 
-    For Bash that means the recipes and commands invoked rather than the
+    For Bash that means the tasks and commands invoked rather than the
     arguments, so an edit-then-relint cycle collapses to one signature
     across its rounds.
     """
     if name != "Bash":
         return f"{name}:{inp.get('file_path', '')}"
     cmd = str(inp.get("command", ""))
-    recipes = re.findall(r"\bjust\s+([a-z0-9-]+)", cmd)
-    if recipes:
-        return "just " + ",".join(sorted(set(recipes)))
+    # Task names carry an optional namespace, as in repotools:lint-toml,
+    # so the colon belongs in the class.
+    tasks = re.findall(r"\bmise\s+run\s+([a-z0-9:-]+)", cmd)
+    if tasks:
+        return "mise run " + ",".join(sorted(set(tasks)))
     heads = re.findall(r"(?:^|\n|&&|\|\||;)\s*([a-z][a-z0-9_-]*)", cmd)
     keep = [h for h in heads if h not in ("cd", "echo", "printf", "set", "export")]
     return "sh:" + ",".join(sorted(set(keep))[:3])

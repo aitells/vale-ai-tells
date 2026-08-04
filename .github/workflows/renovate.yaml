@@ -36,7 +36,7 @@ jobs:
     permissions:
       contents: read
     # yamllint disable-line rule:line-length
-    uses: tbhb/repotools/.github/workflows/renovate.yaml@1173f5614bc6dda43548c1916cc9e1e0f451a513 # v0.4.0
+    uses: tbhb/repotools/.github/workflows/renovate.yaml@01bd1c6e2c0bed9bf75285728669b48b6bcce9be # v0.6.0
     with:
       renovate_log_level_debug: ${{ inputs.renovate_log_level_debug || false }}
     secrets:

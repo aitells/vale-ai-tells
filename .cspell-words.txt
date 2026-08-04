@@ -57,8 +57,6 @@ irregardless
 IVXLCDM
 Jaccard
 jdx
-Justfile
-Justfiles
 Kassorla
 linuxbrew
 listicle
@@ -84,6 +82,7 @@ peakoss
 pipefail
 pipx
 PNAS
+preapproval
 prek
 prepositionless
 punche

@@ -26,4 +26,4 @@ jobs:
     permissions:
       contents: read
     # yamllint disable-line rule:line-length
-    uses: tbhb/repotools/.github/workflows/lint-workflows.yml@1173f5614bc6dda43548c1916cc9e1e0f451a513 # v0.4.0
+    uses: tbhb/repotools/.github/workflows/lint-workflows.yml@01bd1c6e2c0bed9bf75285728669b48b6bcce9be # v0.6.0

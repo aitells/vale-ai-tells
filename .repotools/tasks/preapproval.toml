@@ -1,0 +1,260 @@
+# Operator pre-approval for the confirmation prompts in the commit, pr,
+# and merge-pr skills. Same task-file syntax, namespace, selection, and
+# pin rules as format.toml in this directory.
+#
+# Those three skills each stop at an AskUserQuestion before the step
+# that writes something: the commit, the published pull request, the
+# squash merge. Every automated gate and every independent review has
+# already run by then, so on a long series of commits the prompt is the
+# only thing left that costs a turn. These tasks let the operator answer
+# it once, in advance, for the rest of the session.
+#
+# The grant is per Claude Code session, keyed on CLAUDE_CODE_SESSION_ID,
+# and the record lives in the git directory beside the other
+# session-scoped marks the skills write (commit-workflow.head,
+# pr-agentdesc.reviewed). That location is deliberate: it needs no
+# gitignore entry in any consumer, it is per-worktree, and it leaves
+# with the worktree. A new session gets no grant, which is the safe
+# default and the reason this is keyed on the session at all.
+#
+# The operator runs these directly, usually through the inline `!`
+# prefix so the output lands in the transcript:
+#
+#   ! mise run preapprove              # commit and pr
+#   ! mise run preapprove merge        # adds merge to whatever is held
+#   ! mise run revoke-preapproval      # withdraws everything
+#
+# The skills never run them. They read the record in their preflight and
+# report what it holds; nothing here grants anything an agent asked for.
+#
+# Granting takes a Touch ID confirmation, because nothing else here can
+# tell an operator's shell from an agent's -- both reach the same mise,
+# with the same environment. A fingerprint is the one input an agent
+# cannot produce.
+#
+# Be clear about what that buys. It is not a boundary an agent cannot
+# pass: anything that can run a shell can write this record by hand, or
+# edit the preflight that reads it. What it buys is that the sanctioned
+# path needs a person, so an agent granting itself has to visibly go
+# around the path, in a transcript and a diff someone can read. A record
+# a fingerprint stands behind is signed `touchid`, and the preflights
+# print which it was.
+#
+# Revoking asks for nothing. The safe direction should be the easy one.
+#
+# The file is line-oriented rather than JSON because its readers are the
+# three preflight scripts, and those run in consumer repos that pin no
+# jq. One scope per line keeps the read to a grep.
+
+["repotools:preapprove"]
+description = "Pre-approve the operator confirmations in the commit, pr, and merge-pr skills"
+alias = "preapprove"
+# No usage spec: a spec declaring one argument rejects the trailing
+# ones, and without it every invocation argument arrives as a shell
+# positional. Same reasoning as the `run` task in mise.toml.
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+session=${CLAUDE_CODE_SESSION_ID:-}
+if [ -z "$session" ]; then
+  echo "CLAUDE_CODE_SESSION_ID is unset, so there is no session to grant against" >&2
+  echo "         run this from inside a Claude Code session, through the inline ! prefix" >&2
+  exit 1
+fi
+
+dir="$(git rev-parse --absolute-git-dir)/preapprovals"
+file="$dir/$session"
+mkdir -p "$dir"
+
+# A grant no session will ever read again is litter in the git
+# directory. Records outliving a week go, on the way past.
+find "$dir" -maxdepth 1 -type f -mtime +7 -delete 2>/dev/null || true
+
+# --no-biometrics covers the machines that have no Touch ID to offer: a
+# Linux consumer, a Mac with no sensor, a session over ssh. It has to be
+# typed, and the record says so, so a grant that skipped the sensor
+# never passes for one that did not.
+biometrics=1
+if [ "${1:-}" = "--no-biometrics" ]; then
+  biometrics=0
+  shift
+fi
+
+# Bare invocation grants commit and pr. Merging is the one action here
+# that is hard to walk back, so it is never implied -- name it.
+if [ "$#" -eq 0 ]; then
+  set -- commit pr
+fi
+
+requested=""
+for scope in "$@"; do
+  case $scope in
+  all) requested="$requested commit pr merge" ;;
+  commit | pr | merge) requested="$requested $scope" ;;
+  *)
+    echo "unknown scope '$scope'" >&2
+    echo "         known scopes: commit, pr, merge, all" >&2
+    echo "         flags: --no-biometrics" >&2
+    exit 1
+    ;;
+  esac
+done
+
+method=unconfirmed
+if [ "$biometrics" = "1" ]; then
+  if [ "$(uname -s)" != Darwin ] || ! command -v swiftc >/dev/null 2>&1; then
+    echo "no Touch ID available here: this needs macOS and the Xcode command line tools" >&2
+    echo "         run 'mise run preapprove --no-biometrics ...' to grant without one" >&2
+    exit 1
+  fi
+
+  # The prompt comes from a small LocalAuthentication program, built on
+  # first use and kept in the common git directory so every worktree of
+  # this repository shares one copy. The source is compared rather than
+  # timestamped, so a payload update rebuilds and nothing else does.
+  # swiftc takes several seconds, which is why this is not a per-run
+  # cost.
+  cache="$(git rev-parse --git-common-dir)/repotools"
+  mkdir -p "$cache"
+  cat >"$cache/touchid-confirm.swift.new" <<'SWIFT'
+import Foundation
+import LocalAuthentication
+
+func fail(_ message: String, _ code: Int32) -> Never {
+    FileHandle.standardError.write(Data((message + "\n").utf8))
+    exit(code)
+}
+
+let reason = CommandLine.arguments.dropFirst().first ?? "confirm this action"
+let context = LAContext()
+context.localizedCancelTitle = "Cancel"
+
+var probe: NSError?
+guard context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &probe) else {
+    fail("biometrics unavailable: \(probe?.localizedDescription ?? "unknown reason")", 2)
+}
+
+let done = DispatchSemaphore(value: 0)
+var granted = false
+var failure: String?
+context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { ok, error in
+    granted = ok
+    failure = error?.localizedDescription
+    done.signal()
+}
+done.wait()
+
+if !granted {
+    fail(failure ?? "not confirmed", 1)
+}
+SWIFT
+  if cmp -s "$cache/touchid-confirm.swift.new" "$cache/touchid-confirm.swift" &&
+    [ -x "$cache/touchid-confirm" ]; then
+    rm -f "$cache/touchid-confirm.swift.new"
+  else
+    mv "$cache/touchid-confirm.swift.new" "$cache/touchid-confirm.swift"
+    echo "building the Touch ID prompt, once..."
+    swiftc -O -o "$cache/touchid-confirm" "$cache/touchid-confirm.swift"
+  fi
+
+  # The reason string is what the system dialog shows above the prompt,
+  # so it names the scopes and the session rather than the task.
+  status=0
+  scopes=$(printf '%s' "${requested# }" | sed 's/ /, /g')
+  "$cache/touchid-confirm" \
+    "pre-approve $scopes for Claude Code session ${session%%-*}" || status=$?
+  case $status in
+  0) method=touchid ;;
+  2)
+    echo "         this machine offers no biometric prompt" >&2
+    echo "         run 'mise run preapprove --no-biometrics ...' to grant without one" >&2
+    exit 1
+    ;;
+  *)
+    echo "not confirmed, so nothing was granted" >&2
+    exit 1
+    ;;
+  esac
+fi
+
+stamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
+if [ ! -f "$file" ]; then
+  {
+    printf '# Pre-approval record for Claude Code session %s.\n' "$session"
+    printf '# Repository: %s\n' "$(git rev-parse --show-toplevel)"
+    printf '# Written by `mise run preapprove`. Withdraw it with\n'
+    printf '# `mise run revoke-preapproval`, or by deleting this file.\n'
+  } >"$file"
+fi
+
+# Additive, so a later `preapprove merge` keeps an earlier `preapprove
+# commit`. Re-granting a scope leaves the original timestamp alone,
+# which keeps the record honest about when the operator actually said
+# yes.
+for scope in $requested; do
+  grep -q "^$scope " "$file" || printf '%s %s %s\n' "$scope" "$stamp" "$method" >>"$file"
+done
+
+printf 'pre-approved for session %s:\n' "$session"
+grep -v '^#' "$file" | sed 's/^/  /'
+printf 'The commit, pr, and merge-pr preflights read this. Withdraw it with `mise run revoke-preapproval`.\n'
+'''
+
+["repotools:revoke-preapproval"]
+description = "Withdraw the pre-approval held for this session, in whole or by scope"
+alias = "revoke-preapproval"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+session=${CLAUDE_CODE_SESSION_ID:-}
+if [ -z "$session" ]; then
+  echo "CLAUDE_CODE_SESSION_ID is unset, so there is no session to revoke against" >&2
+  exit 1
+fi
+
+file="$(git rev-parse --absolute-git-dir)/preapprovals/$session"
+if [ ! -f "$file" ]; then
+  echo "no pre-approval held for session $session"
+  exit 0
+fi
+
+# Bare invocation withdraws everything. Revocation is the direction that
+# should be easy to reach for, so it takes the whole record by default
+# where granting takes the narrow half.
+if [ "$#" -eq 0 ]; then
+  rm -f "$file"
+  echo "pre-approval withdrawn for session $session"
+  exit 0
+fi
+
+for scope in "$@"; do
+  case $scope in
+  commit | pr | merge)
+    # grep exits 1 on an empty selection, which set -e would take for a
+    # failure, so the status is discarded and the move is unconditional.
+    grep -v "^$scope " "$file" >"$file.tmp" || true
+    mv "$file.tmp" "$file"
+    ;;
+  all)
+    rm -f "$file"
+    echo "pre-approval withdrawn for session $session"
+    exit 0
+    ;;
+  *)
+    echo "unknown scope '$scope'" >&2
+    echo "         known scopes: commit, pr, merge, all" >&2
+    exit 1
+    ;;
+  esac
+done
+
+if grep -qv '^#' "$file"; then
+  printf 'pre-approved for session %s:\n' "$session"
+  grep -v '^#' "$file" | sed 's/^/  /'
+else
+  rm -f "$file"
+  echo "pre-approval withdrawn for session $session"
+fi
+'''

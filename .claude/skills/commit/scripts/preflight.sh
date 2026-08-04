@@ -197,10 +197,10 @@ if git check-ignore --quiet COMMIT_AGENTMSG 2>/dev/null; then
 else
   printf 'COMMIT_AGENTMSG gitignored: NO — add it to .gitignore before drafting\n'
 fi
-if command -v just >/dev/null 2>&1 && just --summary 2>/dev/null | tr ' ' '\n' | grep -qx lint-commit-msg; then
-  printf 'just lint-commit-msg: present\n'
+if command -v mise >/dev/null 2>&1 && mise task info lint-commit-msg >/dev/null 2>&1; then
+  printf 'mise run lint-commit-msg: present\n'
 else
-  printf 'just lint-commit-msg: ABSENT — stop and tell the operator\n'
+  printf 'mise run lint-commit-msg: ABSENT — stop and tell the operator\n'
 fi
 
 # prek installs shims into git's effective hooks directory, which
@@ -211,7 +211,7 @@ for hook in commit-msg pre-commit post-commit; do
   if [ -x "$hooks_dir/$hook" ]; then
     printf '%s hook: installed\n' "$hook"
   else
-    printf '%s hook: not installed — run just prek-install\n' "$hook"
+    printf '%s hook: not installed — run mise run repotools:prek-install\n' "$hook"
   fi
 done
 if [ -s COMMIT_AGENTMSG ]; then
@@ -219,6 +219,26 @@ if [ -s COMMIT_AGENTMSG ]; then
     "$(wc -l <COMMIT_AGENTMSG | tr -d ' ')"
 else
   printf 'COMMIT_AGENTMSG: absent or empty (expected before drafting)\n'
+fi
+
+# The operator's standing answer to step 8, granted out of band through
+# `mise run preapprove` and keyed on the Claude Code session. Absence is
+# the default and the safe one: no record, no grant, and the
+# confirmation stands as written. A missing session id reads the same
+# way, so nothing here depends on the harness exporting one.
+section "pre-approval"
+preapproval=""
+if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then
+  preapproval="$(git rev-parse --absolute-git-dir)/preapprovals/$CLAUDE_CODE_SESSION_ID"
+fi
+if [ -n "$preapproval" ] && grant=$(grep '^commit ' "$preapproval" 2>/dev/null); then
+  case ${grant##* } in
+  touchid) how="a Touch ID prompt stands behind it" ;;
+  *) how="no biometric prompt stood behind it" ;;
+  esac
+  printf 'commit: GRANTED, %s — step 8 skips the confirmation once every gate and the review pass\n' "$how"
+else
+  printf 'commit: not granted — step 8 confirms with the operator as written\n'
 fi
 
 section "staged changes"

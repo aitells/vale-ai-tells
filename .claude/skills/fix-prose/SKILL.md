@@ -2,7 +2,7 @@
 name: fix-prose
 license: Apache-2.0
 description: >-
-  Clear the vale and cspell findings on a document whose content is already settled. A forked writer does the rounds and an independent reviewer reads the result, so the finding text never reaches this session. Takes the file plus the lint command that judges it. Use it when a draft is written but its prose gates are still red, or when a lint recipe has come back with findings more than once.
+  Clear the vale and cspell findings on a document whose content is already settled. A forked writer does the rounds and an independent reviewer reads the result, so the finding text never reaches this session. Takes the file plus the lint command that judges it. Use it when a draft is written but its prose gates are still red, or when a lint task has come back with findings more than once.
 hooks:
   PreToolUse:
     - matcher: Write|Edit
@@ -35,14 +35,14 @@ The preflight prints counts and verdicts rather than findings, on purpose. This 
 `$ARGUMENTS` carries the file first, then the command that judges it.
 
 ```text
-COMMIT_AGENTMSG just lint-commit-msg
-PR_AGENTDESC.md just lint-pr-description
-docs/design.md just lint-draft docs/design.md
+COMMIT_AGENTMSG mise run lint-commit-msg
+PR_AGENTDESC.md mise run lint-pr-description
+docs/design.md mise run lint-draft docs/design.md
 ```
 
-The command comes from the caller because nobody else knows which gate applies. A commit draft answers to the commit-msg scope, and a description to its own recipe. Anything else takes `just lint-draft`, which runs vale and cspell and rumdl together over one file.
+The command comes from the caller because nobody else knows which gate applies. A commit draft answers to the commit-msg scope, and a description to its own task. Anything else takes `mise run lint-draft`, which runs vale and cspell and rumdl together over one file.
 
-Prefer a recipe that runs every checker at once. `just lint-prose` runs vale alone, so a document clearing it can still fail spelling and structure, and a verdict from that recipe is narrower than it sounds.
+Prefer a task that runs every checker at once. `mise run lint-prose` runs vale alone, so a document clearing it can still fail spelling and structure, and a verdict from that task is narrower than it sounds.
 
 Where the arguments name no file, ask which one. That first word is the path the guard protects. A run starting without it leaves the draft unprotected.
 

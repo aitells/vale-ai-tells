@@ -2,7 +2,7 @@
 name: fix-pr
 license: Apache-2.0
 description: >-
-  Diagnose the failing checks on a pull request and fix them. One call reads the failing logs and names the local recipe that reproduces each failure, so the work starts from a reproduction rather than a guess. The correction goes through the commit skill. Use this whenever a pull request is red, whenever the user asks to fix CI, and whenever watch-pr comes back with failures.
+  Diagnose the failing checks on a pull request and fix them. One call reads the failing logs and names the local task that reproduces each failure, so the work starts from a reproduction rather than a guess. The correction goes through the commit skill. Use this whenever a pull request is red, whenever the user asks to fix CI, and whenever watch-pr comes back with failures.
 hooks:
   PreToolUse:
     - matcher: Write|Edit
@@ -42,17 +42,17 @@ Create these with `TaskCreate`, then move each through `in_progress` and `comple
 bash .claude/skills/fix-pr/scripts/diagnose.sh <number>
 ```
 
-One call gets the failing jobs, the tail of each failing step's log, and the local recipe covering the same ground. Read that output before running anything else. Going straight to `gh run view` repeats work the script already did.
+One call gets the failing jobs, the tail of each failing step's log, and the local task covering the same ground. Read that output before running anything else. Going straight to `gh run view` repeats work the script already did.
 
 The script also compares the local checkout against the commit CI tested. Stop when it reports a mismatch. The logs then describe code this worktree no longer carries, so a fix aimed at them reaches the wrong revision. Check out the branch the pull request names, or pull it forward, and diagnose again.
 
 ## Step 2: reproduce
 
-Run the recipe the script named for each failure. Reproducing first is what separates a fix from a guess.
+Run the task the script named for each failure. Reproducing first is what separates a fix from a guess.
 
-The mapping from job name to recipe is a guess, so treat a recipe that passes locally as a signal rather than a contradiction. Look for the explanation among these:
+The mapping from job name to task is a guess, so treat a task that passes locally as a signal rather than a contradiction. Look for the explanation among these:
 
-- The job runs something the recipe doesn't. Read the workflow.
+- The job runs something the task doesn't. Read the workflow.
 - The failure depends on the environment, such as a pinned tool version or a container image the worktree isn't running.
 - The failure is a flake, which makes the run worth repeating before anything changes.
 - A stale branch. CI tested it merged with a base this worktree doesn't have, and the gate that fails arrived on that base. Nothing here reproduces it until the branch moves, so run the `rebase` skill and diagnose again.

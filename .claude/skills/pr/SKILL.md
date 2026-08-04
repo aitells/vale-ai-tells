@@ -67,10 +67,10 @@ Don't write `PR_AGENTDESC.md` yourself. A guard hook refuses it, because editing
 
 ## Step 3: clear the prose gates
 
-Invoke the `fix-prose` skill, passing the draft and the recipe that judges it:
+Invoke the `fix-prose` skill, passing the draft and the task that judges it:
 
 ```text
-Skill(fix-prose, args: "PR_AGENTDESC.md just lint-pr-description")
+Skill(fix-prose, args: "PR_AGENTDESC.md mise run lint-pr-description")
 ```
 
 It runs the lint rounds in a subagent, so the findings stay out of this session.
@@ -93,10 +93,10 @@ This step is mandatory, and `create-pr.sh` enforces it. A clean verdict signs th
 ## Step 5: run the validator and the prose gates
 
 ```text
-just lint-pr-description
+mise run lint-pr-description
 ```
 
-That recipe runs the mechanical checks, then vale and cspell over the draft. The validator settles the frontmatter shape, the title's form and bounds, section presence and order, empty sections, surviving comments, unclosed fences, dead links, and whether every backticked path exists. Each finding names a line and the fix.
+That task runs the mechanical checks, then vale and cspell over the draft. The validator settles the frontmatter shape, the title's form and bounds, section presence and order, empty sections, surviving comments, unclosed fences, dead links, and whether every backticked path exists. Each finding names a line and the fix.
 
 Resolve every one through `fix-prose` rather than editing it yourself, because a direct edit here spends the context that skill exists to save. Edited the draft either way? Then step 4 runs again, because the gate compares bytes rather than intentions.
 
@@ -111,7 +111,22 @@ Commits: <count>
 <the entire PR_AGENTDESC.md contents, verbatim>
 ```
 
-Now call `AskUserQuestion` with `question` set to `How far should I take this?`, `header` set to `Pull request`, `multiSelect` set to `false`, and these four options in order, from the most automated to the least:
+Preflight answered both of this step's questions under `== pre-approval ==`. Where it reported `pr: GRANTED`, the operator answered them for the whole session in advance, through `mise run preapprove`. Print the preceding block so the draft still reaches them, name the grant this publish goes under, and take both answers from the grant rather than from a question:
+
+| Preflight line | How far to take it | How fixes land |
+| --- | --- | --- |
+| `pr: GRANTED`, `merge: GRANTED` | `Open, fix, and merge` | Separate commits |
+| `pr: GRANTED`, `merge: not granted` | `Open, watch, and fix` | Separate commits |
+
+Separate commits are the pre-approved shape because amending rewrites a commit the operator already cleared, and a grant covering that would reach past the question it answers. Amend only where the operator asks for it in the session.
+
+Ask anyway where any of these holds:
+
+- the review returned a finding nobody acted on
+- a gate needed more than a mechanical fix
+- the branch reaches past what the session set out to do
+
+Where preflight reported `pr: not granted`, call `AskUserQuestion` with `question` set to `How far should I take this?`, `header` set to `Pull request`, `multiSelect` set to `false`, and these four options in order, from the most automated to the least:
 
 | Label | Description |
 | --- | --- |
@@ -170,7 +185,7 @@ Where the description drifts as remediation commits arrive, redraft it, review i
 This skill assumes the shared tbhb toolchain:
 
 - `gh` installed and authenticated
-- a `just lint-pr-description` recipe
+- a `mise run lint-pr-description` task
 - a gitignore entry for `PR_AGENTDESC.md`
 - a pull request template at `.github/pull_request_template.md`
 - the `review-pr-description` and `fix-prose` skills deployed alongside this one

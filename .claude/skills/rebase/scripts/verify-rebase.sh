@@ -225,28 +225,27 @@ else
 fi
 
 section "gates to run"
-# A rebase produces a tree no commit ever tested. Naming the recipes
+# A rebase produces a tree no commit ever tested. Naming the tasks
 # rather than running them keeps the output live in the agent's own
 # terminal, where a failure arrives with its full context.
-if command -v just >/dev/null 2>&1; then
-  summary=$(just --summary 2>/dev/null | tr ' ' '\n' || true)
+if command -v mise >/dev/null 2>&1; then
   ran=0
-  for recipe in check lint; do
-    if printf '%s\n' "$summary" | grep -qx "$recipe"; then
-      printf 'just %s\n' "$recipe"
+  for task in check lint; do
+    if mise task info "$task" >/dev/null 2>&1; then
+      printf 'mise run %s\n' "$task"
       ran=1
       break
     fi
   done
-  [ "$ran" = 1 ] || printf '(no check or lint recipe in this repository)\n'
+  [ "$ran" = 1 ] || printf '(no check or lint task in this repository)\n'
   printf '\nRun it against the tree as it now stands. The commits each passed the\n'
   printf 'hooks in isolation; this combination has never been tested.\n'
   printf '\nWhere the branch is long enough for a mid-history break to matter, the\n'
   printf 'thorough form runs the gate at every commit:\n\n'
-  printf '  git -c rebase.updateRefs=false rebase --exec "just lint" %s\n' \
+  printf '  git -c rebase.updateRefs=false rebase --exec "mise run lint" %s\n' \
     "$(git rev-parse --short "${base:-HEAD}" 2>/dev/null || printf '<base>')"
 else
-  printf 'just is not installed; there is nothing to run here.\n'
+  printf 'mise is not installed; there is nothing to run here.\n'
 fi
 
 exit "$flagged"

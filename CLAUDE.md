@@ -20,7 +20,6 @@ vale-ai-tells/
 ├── .repotools/tasks/           # Vendored repotools shared tasks (vendir owns this)
 ├── .pre-commit-config.yaml
 ├── .vale.ini                   # Repo dev config (enables all three styles)
-├── Justfile                    # The APM delegation recipes, and nothing else
 ├── mise.toml                   # Repo-specific pins and tasks; selects the shared ones
 ├── mise.lock                   # Resolved versions, URLs, and digests
 ├── vendir.yml                  # The repotools payload: source, tag, target directories
@@ -59,6 +58,7 @@ Gates the vendored payload defines carry a `repotools:` prefix. The rest belong 
 ```bash
 mise run lint                        # every linter below, in one pass
 mise run repotools:check-vendored    # the vendored payload matches what git holds
+mise run repotools:check-pins        # every tbhb/repotools pin site names one release
 mise run repotools:lint-yaml         # ryl
 mise run repotools:lint-markdown     # rumdl
 mise run repotools:lint-config       # biome on JSON
@@ -66,7 +66,6 @@ mise run repotools:lint-spelling     # cspell
 mise run lint-prose                  # Vale on the docs
 mise run lint-messages               # Vale on each rule's own message: field (dogfooding)
 mise run repotools:lint-toml         # tombi
-mise run repotools:lint-just         # just --fmt --check
 mise run repotools:lint-mise         # mise fmt --check
 mise run lint-editorconfig
 mise run repotools:lint-workflows    # actionlint

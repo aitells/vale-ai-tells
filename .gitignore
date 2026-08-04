@@ -5,7 +5,7 @@ styles/proselint/
 styles/write-good/
 
 # Agent commit-message draft. Authored at the repo root so vale's
-# [formats] mapping resolves it, linted via `just lint-commit-msg`,
+# [formats] mapping resolves it, linted via `mise run lint-commit-msg`,
 # then consumed with `git commit -F COMMIT_AGENTMSG`. Never committed.
 COMMIT_AGENTMSG
 
@@ -13,7 +13,7 @@ COMMIT_AGENTMSG
 # PR_AGENTDESC.md holds the description for as long as the pull request
 # stays open, and merge-pr removes it once the branch merges.
 # SQUASH_AGENTMSG holds the squash commit message that skill writes.
-# Linted via `just lint-pr-description` and `just lint-squash-msg`.
+# Linted via `mise run lint-pr-description` and `mise run lint-squash-msg`.
 PR_AGENTDESC.md
 SQUASH_AGENTMSG
 

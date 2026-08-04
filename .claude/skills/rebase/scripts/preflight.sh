@@ -264,17 +264,16 @@ printf 'rebase.empty:      %s  (unset means git drops a commit the replay emptie
 printf '                          without stopping; the range-diff at the end is what shows it)\n'
 
 section "gates"
-if command -v just >/dev/null 2>&1; then
-  summary=$(just --summary 2>/dev/null || true)
-  for recipe in check lint test lint-markdown-wrap; do
-    if printf '%s\n' "$summary" | tr ' ' '\n' | grep -qx "$recipe"; then
-      printf 'just %-20s present\n' "$recipe"
+if command -v mise >/dev/null 2>&1; then
+  for task in check lint test lint-markdown-wrap; do
+    if mise task info "$task" >/dev/null 2>&1; then
+      printf 'mise run %-20s present\n' "$task"
     else
-      printf 'just %-20s absent\n' "$recipe"
+      printf 'mise run %-20s absent\n' "$task"
     fi
   done
 else
-  printf 'just: not installed — the post-rebase verification has nothing to run\n'
+  printf 'mise: not installed — the post-rebase verification has nothing to run\n'
 fi
 
 # A rebase replays commits that each passed the hooks in isolation. What

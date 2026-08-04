@@ -36,10 +36,6 @@ max_line_length = off
 indent_style = space
 indent_size = 2
 
-[Justfile]
-indent_style = space
-indent_size = 2
-
 [*.sh]
 indent_style = space
 indent_size = 2

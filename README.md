@@ -405,7 +405,7 @@ Every gate runs through a mise task, and CI runs the same tasks against the same
 
 ```bash
 mise run bootstrap  # vendir sync, install the toolchain, vale sync, install the git hooks
-mise run lint       # ryl, rumdl, biome, cspell, vale, tombi, just --fmt, editorconfig-checker
+mise run lint       # ryl, rumdl, biome, cspell, vale, tombi, mise fmt, editorconfig-checker
 mise run test       # fixture guard: tells fire, subjects smoke-test, false positives stay clean
 mise run check      # lint and test together
 ```

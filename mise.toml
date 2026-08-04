@@ -4,10 +4,9 @@
 # in .config/mise/conf.d/, tasks under .repotools/tasks/ selected by the
 # task_config includes below. See vendir.yml.
 #
-# What stayed in the Justfile: thin delegation recipes for the names the
-# APM primitives invoke. Those skills are pinned upstream and still spell
-# their gates `just <recipe>`. Nothing else, now that gitleaks runs from a
-# payload pin rather than a container image.
+# This is now the only task definition in the repository. The APM
+# primitives under .claude/ spell their gates `mise run <task>` as of
+# repotools v0.5.0, which is what let the delegation Justfile go.
 
 [settings]
 # Record resolved versions, URLs, and digests in a lockfile beside each
@@ -60,6 +59,8 @@ includes = [
   ".repotools/tasks/format.toml",
   ".repotools/tasks/git-hooks.toml",
   ".repotools/tasks/lint.toml",
+  ".repotools/tasks/pins.toml",
+  ".repotools/tasks/preapproval.toml",
   ".repotools/tasks/security.toml",
   ".repotools/tasks/toolchain.toml",
   ".repotools/tasks/vendir.toml",
@@ -117,8 +118,8 @@ apm install
 
 # --- Format ---
 # The format and fix tasks (repotools:format-markdown, format-config,
-# format-toml, format-just, fix-markdown) come from the vendored task
-# files under .repotools/tasks/, selected above.
+# format-toml, fix-markdown) come from the vendored task files under
+# .repotools/tasks/, selected above.
 
 # --- Fix ---
 
@@ -148,11 +149,15 @@ run = "bash tools/fix-prose-replacements.sh $usage_file"
 # from the skill-contract template; the member list is exactly what varies
 # per repo, which is why the body stays local. The repotools: members are
 # the vendored shared tasks, and the drift gate runs first so every gate
-# after it reads a payload that matches the committed tree.
+# after it reads a payload that matches the committed tree. check-pins
+# follows it: both ask whether this repo's picture of repotools is
+# current, and answering that before any linter runs says so in one line
+# rather than through a confusing downstream failure.
 [tasks.lint]
 extends = "repotools:lint"
 run = [
   "mise run repotools:check-vendored",
+  "mise run repotools:check-pins",
   "mise run repotools:lint-yaml",
   "mise run repotools:lint-markdown",
   "mise run repotools:lint-config",
@@ -160,7 +165,6 @@ run = [
   "mise run lint-prose",
   "mise run lint-messages",
   "mise run repotools:lint-toml",
-  "mise run repotools:lint-just",
   "mise run repotools:lint-mise",
   "mise run lint-editorconfig",
 ]
@@ -183,9 +187,9 @@ run = "vale --output=ai-tells-agent.tmpl --glob='!{LICENSE,CHANGELOG.md,test-*.m
 description = "Lint each rule's own message field with the ai-tells style"
 run = "vale --config=.vale-messages.ini --output=ai-tells-agent.tmpl styles/ai-tells styles/ai-tells-commits styles/ai-tells-experimental"
 
-# The lint-toml, lint-just, and lint-mise gates come from the vendored
-# task files, alongside lint-yaml, lint-markdown, lint-config, and
-# lint-spelling above.
+# The lint-toml and lint-mise gates come from the vendored task files,
+# alongside lint-yaml, lint-markdown, lint-config, lint-spelling, and the
+# two pin tasks above.
 
 # Enforce .editorconfig (charset, line endings, final newline, trailing
 # whitespace, indentation) with editorconfig-checker. Nothing else in the bar
@@ -195,8 +199,7 @@ run = "vale --config=.vale-messages.ini --output=ai-tells-agent.tmpl styles/ai-t
 # scope lives in .editorconfig-checker.json, whose Exclude list also covers
 # CHANGELOG.md -- `cog changelog` regenerates that file wholesale, and the
 # prose tasks already skip it for the same reason. Indent width stays on
-# tree-wide, and no file needs an inline exemption now that the Justfile's
-# container-runtime probe is gone.
+# tree-wide, and no file carries an inline exemption.
 [tasks.lint-editorconfig]
 description = "Enforce .editorconfig via editorconfig-checker"
 run = "editorconfig-checker"

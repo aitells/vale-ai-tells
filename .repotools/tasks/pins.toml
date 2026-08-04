@@ -1,0 +1,306 @@
+# The repotools pin tasks. Same task-file syntax, namespace, selection,
+# and pin rules as format.toml in this directory -- and the same twist as
+# vendir.toml: repotools itself does not include this file. It is the
+# publisher, so it pins nothing and has no sites to move or read.
+#
+# A consumer pins repotools in nine places across seven files, in three
+# syntaxes:
+#
+#   apm.yml                          tbhb/repotools#vX.Y.Z
+#   vendir.yml                       two `ref: vX.Y.Z` under the git url
+#   .pre-commit-config.yaml          rev: <sha>  # frozen: vX.Y.Z
+#   .github/workflows/*.y*ml         four `uses: ...@<sha> # vX.Y.Z`
+#   .github/renovate.json5           the preset extends, `...json5#<ref>`
+#
+# Most of those hold a commit SHA beside a tag comment, so moving a
+# version resolves a tag to a commit rather than substituting text. A
+# consumer takes both tasks by naming this file in its [task_config]
+# includes, and wires repotools:check-pins into its own lint aggregate.
+#
+# The workflow callers come from a glob rather than a list, so a fifth
+# one is covered the day it is added. The other four files are named
+# directly. Within a file the `tbhb/repotools` reference selects the
+# site rather than a line number, carried either on the pinned line
+# itself or one key above it.
+
+# One command takes a consumer from one repotools release to the next.
+# It rewrites every site, then runs the follow-ons a bump implies: the
+# vendir sync that delivers the new payload, a lockfile refresh and
+# install for the tool pins that payload may have moved, and the APM
+# redeploy for the primitives. It finishes by running
+# repotools:check-pins, so a site the rewrite missed fails here rather
+# than in CI.
+#
+# The running instance is always the PRE-update version of this task. It
+# rewrites the pins, then syncs a payload that may carry a different
+# version of itself. That is inherent to a self-updating task: a change
+# to this body takes effect on the update AFTER the one that delivers it.
+#
+# The preset extends in .github/renovate.json5 is the one site that has
+# to be pinned by hand once. The substitution below moves an existing
+# ref and adds one to a site that has none, but the `// vX.Y.Z` comment
+# beside it is structural rather than a substitution, so a first pinning
+# writes the comment and every bump after it maintains one.
+#
+# `apm install` is deliberately not called directly. It merges hook
+# declarations into .claude/settings.json additively and never
+# reconciles, so a bare install leaves drift no later command clears.
+# apm-sync is the consumer-side task that clears the hook state first;
+# both repos define it, and a consumer without one has to.
+#
+# The vendir sync runs under a scrubbed git environment for the reason
+# vendir.toml sets out at length: an inherited GIT_DIR redirects vendir's
+# throwaway `git init` onto the consuming repository. Nothing invokes
+# this task from a git hook today, which is exactly why the failure would
+# be a surprise.
+["repotools:update-pins"]
+description = "Move every tbhb/repotools pin to <version> and run the follow-ons (alias: repotools:update)"
+alias = "repotools:update"
+usage = 'arg "<version>" help="The repotools release to move to, e.g. v0.5.0"'
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+version=$usage_version
+case "$version" in v*) ;; *) version="v$version" ;; esac
+
+remote=https://github.com/tbhb/repotools
+
+# ^{} dereferences an annotated tag to the commit it points at. repotools
+# publishes signed annotated tags, so the bare ref is the tag object and
+# pinning it would name something no `uses:` or `rev:` can resolve. The
+# fallback covers a lightweight tag, where no dereferenced ref exists.
+sha=$(git ls-remote "$remote" "refs/tags/$version^{}" | cut -f1)
+if [ -z "$sha" ]; then
+  sha=$(git ls-remote "$remote" "refs/tags/$version" | cut -f1)
+fi
+if [ -z "$sha" ]; then
+  echo "no tag $version at $remote" >&2
+  exit 1
+fi
+echo "$version resolves to $sha"
+
+# Every rewrite below goes through a temporary file rather than an
+# in-place flag. `sed -i` takes a mandatory backup suffix on BSD sed and
+# none on GNU sed, and this task runs wherever a consumer's developers
+# do -- a macOS machine without GNU coreutils ahead of it on PATH would
+# otherwise write a file named by the expression.
+edit() {
+  local file=$1
+  shift
+  "$@" "$file" > "$file.pins.tmp" && mv "$file.pins.tmp" "$file"
+}
+
+# The two tag-string sites and the preset extends are self-contained
+# lines, so each is one substitution.
+if [ -f apm.yml ]; then
+  edit apm.yml sed -E "s|(tbhb/repotools#)v[^[:space:]]+|\\1$version|"
+fi
+
+for wf in .github/workflows/*.yml .github/workflows/*.yaml; do
+  [ -f "$wf" ] || continue
+  edit "$wf" sed -E "s|(uses:[[:space:]]*tbhb/repotools/[^@]*@)[0-9a-f]{7,40}([[:space:]]*#[[:space:]]*)v[^[:space:]]*|\\1$sha\\2$version|"
+done
+
+# Two expressions rather than one: the first moves a pinned ref and adds
+# one to a site that has none, and the second maintains the version
+# comment beside it. A site with no comment yet is left for the hand
+# edit that writes one, and repotools:check-pins names it until then.
+if [ -f .github/renovate.json5 ]; then
+  edit .github/renovate.json5 sed -E "s|(github>tbhb/repotools//\\.github/renovate-config\\.json5)(#[0-9A-Za-z._-]+)?\"|\\1#$sha\"|"
+  edit .github/renovate.json5 sed -E "s|(renovate-config\\.json5#[0-9a-f]{7,40}\",?[[:space:]]*//[[:space:]]*)v[^[:space:]]*|\\1$version|"
+fi
+
+# vendir.yml and .pre-commit-config.yaml carry the version on a line that
+# names no repository. Both are one key below the line that does, so the
+# rewrite tracks whether the block it is inside belongs to repotools and
+# clears that state as soon as it fires.
+if [ -f vendir.yml ]; then
+  awk -v ver="$version" '
+    /url:[[:space:]]*https:\/\/github\.com\/tbhb\/repotools([[:space:]]|$)/ { in_block = 1 }
+    in_block && /^[[:space:]]*ref:[[:space:]]*/ {
+      sub(/ref:[[:space:]]*.*/, "ref: " ver)
+      in_block = 0
+    }
+    { print }
+  ' vendir.yml > vendir.yml.pins.tmp && mv vendir.yml.pins.tmp vendir.yml
+fi
+
+if [ -f .pre-commit-config.yaml ]; then
+  awk -v ver="$version" -v sha="$sha" '
+    /repo:[[:space:]]*https:\/\/github\.com\/tbhb\/repotools([[:space:]]|$)/ { in_block = 1 }
+    in_block && /^[[:space:]]*rev:[[:space:]]*/ {
+      sub(/rev:[[:space:]]*.*/, "rev: " sha "  # frozen: " ver)
+      in_block = 0
+    }
+    { print }
+  ' .pre-commit-config.yaml > .pre-commit-config.yaml.pins.tmp && mv .pre-commit-config.yaml.pins.tmp .pre-commit-config.yaml
+fi
+
+# The payload arrives first: the lock and the install below have to see
+# the tool pins this sync delivers, not the ones it replaced.
+env -u GIT_DIR -u GIT_COMMON_DIR -u GIT_WORK_TREE -u GIT_INDEX_FILE \
+    -u GIT_OBJECT_DIRECTORY vendir sync
+
+if [ -n "${REPOTOOLS_LOCK_PLATFORMS:-}" ]; then
+  mise lock --platform "$REPOTOOLS_LOCK_PLATFORMS"
+else
+  echo "REPOTOOLS_LOCK_PLATFORMS is unset, so the lockfiles were left alone" >&2
+  echo "         set it in the root mise.toml [env], then run 'mise lock --platform <list>'" >&2
+fi
+
+mise install
+mise run apm-sync
+
+# The verification runs against the payload the sync just delivered, so
+# it is the post-update task rather than this one. A release that
+# predates check-pins leaves nothing to run, which is a downgrade rather
+# than a bump and is reported instead of failing: the rewrite above
+# already succeeded.
+if mise tasks ls --all 2>/dev/null | grep -q '^repotools:check-pins[[:space:]]'; then
+  mise run repotools:check-pins
+else
+  echo "$version does not ship repotools:check-pins, so the rewrite went unverified" >&2
+fi
+'''
+
+# The gate over what update-pins writes, and over a hand-edit that moved
+# one site and not the rest.
+#
+# This is not belt-and-braces. Until the shared Renovate preset grew a
+# rule matching tbhb/repotools across every manager, its grouping matched
+# by manager alone, so one release fanned out into three uncoordinated
+# pull requests with the apm.yml pin in none of them. That grouping rule
+# removes the cause; this gate catches whatever it misses -- a hand-edit,
+# a site a future manager still does not see, and any release where only
+# some of the group's pull requests were merged.
+#
+# Offline by design, so the lint aggregate stays hermetic. It proves the
+# nine sites agree with each other rather than that they agree with the
+# remote: every declared version has to match, and every SHA-pinned site
+# has to carry the same commit. Resolving a tag to a commit is
+# update-pins' job, and it writes both halves from one resolution.
+#
+# Finding no sites at all is a failure rather than a pass. A gate that
+# silently verifies nothing is the one outcome worse than a red one.
+["repotools:check-pins"]
+description = "Report the repotools version at every pin site and fail when they disagree"
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Each record is: version <TAB> sha-or-dash <TAB> site. A version of "?"
+# marks a site whose pin was found but whose version could not be read,
+# which is a disagreement in its own right.
+read_sites() {
+  for f in apm.yml vendir.yml .pre-commit-config.yaml \
+    .github/renovate.json5 .github/workflows/*.yml .github/workflows/*.yaml; do
+    [ -f "$f" ] || continue
+    awk -v file="$f" '
+      function emit(ver, sha) { printf "%s\t%s\t%s:%d\n", ver, sha, file, FNR }
+
+      # apm.yml: a bare tag on the dependency line.
+      /tbhb\/repotools#v/ {
+        v = $0
+        sub(/.*tbhb\/repotools#/, "", v)
+        sub(/[[:space:]].*$/, "", v)
+        emit(v, "-")
+      }
+
+      # Reusable-workflow callers: SHA plus a trailing tag comment.
+      /uses:[[:space:]]*tbhb\/repotools\// {
+        line = $0
+        s = line; sub(/.*@/, "", s); sub(/[^0-9a-f].*$/, "", s)
+        v = "?"
+        if (line ~ /#[[:space:]]*v/) {
+          v = line; sub(/.*#[[:space:]]*/, "", v); sub(/[[:space:]].*$/, "", v)
+        }
+        emit(v, s)
+      }
+
+      # The Renovate preset extends. A tag ref is the version outright; a
+      # SHA ref carries its version in the comment beside it, and without
+      # one the site still joins the SHA comparison.
+      /github>tbhb\/repotools\/\/\.github\/renovate-config\.json5/ {
+        line = $0
+        ref = line
+        if (ref ~ /renovate-config\.json5#/) {
+          sub(/.*renovate-config\.json5#/, "", ref); sub(/".*$/, "", ref)
+        } else {
+          ref = ""
+        }
+        if (ref == "") { emit("unpinned", "-") }
+        else if (ref ~ /^v/) { emit(ref, "-") }
+        else {
+          v = "?"
+          if (line ~ /\/\/[[:space:]]*v/) {
+            v = line; sub(/.*\/\/[[:space:]]*/, "", v); sub(/[[:space:],].*$/, "", v)
+          }
+          emit(v, ref)
+        }
+      }
+
+      # vendir.yml and .pre-commit-config.yaml name the repository one key
+      # above the pin, so both are read with the block state the rewrite
+      # in update-pins keeps.
+      /(url|repo):[[:space:]]*https:\/\/github\.com\/tbhb\/repotools([[:space:]]|$)/ { in_block = 1; next }
+      in_block && /^[[:space:]]*ref:[[:space:]]*/ {
+        v = $0; sub(/.*ref:[[:space:]]*/, "", v); sub(/[[:space:]].*$/, "", v)
+        emit(v, "-"); in_block = 0
+      }
+      in_block && /^[[:space:]]*rev:[[:space:]]*/ {
+        line = $0
+        s = line; sub(/.*rev:[[:space:]]*/, "", s); sub(/[^0-9a-f].*$/, "", s)
+        v = "?"
+        if (line ~ /frozen:[[:space:]]*v/) {
+          v = line; sub(/.*frozen:[[:space:]]*/, "", v); sub(/[[:space:]].*$/, "", v)
+        }
+        emit(v, s); in_block = 0
+      }
+    ' "$f"
+  done
+}
+
+sites=$(read_sites)
+
+if [ -z "$sites" ]; then
+  echo "no tbhb/repotools pins found -- check-pins verified nothing" >&2
+  echo "         run it from a repository that vendors repotools" >&2
+  exit 1
+fi
+
+printf '%s\n' "$sites" | awk -F'\t' '{ printf "  %-10s %-42s %s\n", $1, $2, $3 }'
+
+versions=$(printf '%s\n' "$sites" | cut -f1 | sort -u)
+shas=$(printf '%s\n' "$sites" | cut -f2 | grep -v '^-$' | sort -u || true)
+
+# A disagreement reports each distinct value with the sites carrying it,
+# because the site that did not move is the whole answer and reading it
+# off the table above is the work this gate exists to save.
+report() {
+  local field=$1 label=$2 value
+  echo "repotools pins disagree on the $label:" >&2
+  for value in $3; do
+    echo "  $value" >&2
+    printf '%s\n' "$sites" | awk -F'\t' -v f="$field" -v v="$value" \
+      '$f == v { print "    " $3 }' >&2
+  done
+}
+
+rc=0
+if [ "$(printf '%s\n' "$versions" | wc -l)" -ne 1 ]; then
+  report 1 version "$versions"
+  rc=1
+fi
+if [ -n "$shas" ] && [ "$(printf '%s\n' "$shas" | wc -l)" -ne 1 ]; then
+  report 2 commit "$shas"
+  rc=1
+fi
+
+if [ "$rc" -ne 0 ]; then
+  echo "         run 'mise run repotools:update-pins <version>' to move every site together" >&2
+  exit 1
+fi
+
+echo "every repotools pin is on $versions"
+'''

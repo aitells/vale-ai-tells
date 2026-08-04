@@ -54,7 +54,7 @@ Override the bounds through the environment when a run is unusually slow. `PR_CH
 
 Say which checks failed and hand back. Name the pull request, the failing jobs, and the run links the script printed.
 
-Where the caller asked only to watch, stop here. Where the caller asked for a fix, invoke `fix-pr` with the same number. That skill reads the logs and names the local recipe reproducing each failure.
+Where the caller asked only to watch, stop here. Where the caller asked for a fix, invoke `fix-pr` with the same number. That skill reads the logs and names the local task reproducing each failure.
 
 A timeout isn't a failure. Say the checks were still running, give the elapsed bound, and let the caller decide whether to wait again.
 

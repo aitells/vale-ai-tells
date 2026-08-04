@@ -116,10 +116,10 @@ Hard wrap the body at the width preflight reported. Wrap trailers at the footer 
 
 ## Step 5: clear the prose gates
 
-Invoke the `fix-prose` skill before the review, passing the draft and the recipe that judges it:
+Invoke the `fix-prose` skill before the review, passing the draft and the task that judges it:
 
 ```text
-Skill(fix-prose, args: "COMMIT_AGENTMSG just lint-commit-msg")
+Skill(fix-prose, args: "COMMIT_AGENTMSG mise run lint-commit-msg")
 ```
 
 It runs the lint rounds in a subagent, so the findings and the retries stay out of this session. The commit scope is stricter than the repository-wide one, and a message copied verbatim out of the diff still fails it, so this is rarely a no-op.
@@ -139,10 +139,10 @@ Fix everything it returns. Push back only when it's demonstrably wrong about the
 ## Step 7: run the commit-msg gates
 
 ```text
-just lint-commit-msg
+mise run lint-commit-msg
 ```
 
-That recipe mirrors the commit-msg hook:
+That task mirrors the commit-msg hook:
 
 - vale under the commit scope, which catches AI tells through `ai-tells-commits`
 - cspell with the commit dictionary
@@ -153,7 +153,7 @@ Step 5 should have left this clean. Where it hasn't, send the findings back to `
 
 Edited the draft to clear the linters? Then step 6 runs again before you commit, because the gate compares bytes rather than intentions.
 
-Whatever this recipe reports, `.git/COMMIT_EDITMSG` and its commit-msg hook stay the real gate. A clean run here only predicts that hook's verdict.
+Whatever this task reports, `.git/COMMIT_EDITMSG` and its commit-msg hook stay the real gate. A clean run here only predicts that hook's verdict.
 
 ## Step 8: confirm with the operator
 
@@ -165,7 +165,18 @@ Staged: <paths, comma separated>
 <the entire COMMIT_AGENTMSG contents, verbatim>
 ```
 
-Now call `AskUserQuestion` with `question` set to `Commit this message?`, `header` set to `Commit`, `multiSelect` set to `false`, and these four options in order:
+Preflight answered this under `== pre-approval ==`. Where it reported `commit: GRANTED`, the operator answered this question for the whole session in advance, through `mise run preapprove`. Print the preceding block so the message still reaches them, name the grant this commit goes under, and move to step 9 without calling `AskUserQuestion`.
+
+The grant answers one question, commit this message, and says nothing about whether this is the right commit. Ask anyway where any of these holds:
+
+- the review returned a finding nobody acted on
+- a gate needed more than a mechanical fix
+- the grouping changed after step 2
+- the commit reaches past what the session set out to do
+
+The operator withdraws a grant with `mise run revoke-preapproval`. Say so where a run keeps arriving at one of those exceptions.
+
+Where preflight reported `commit: not granted`, call `AskUserQuestion` with `question` set to `Commit this message?`, `header` set to `Commit`, `multiSelect` set to `false`, and these four options in order:
 
 | Label | Description |
 | --- | --- |
@@ -208,7 +219,7 @@ Report the resulting commit, then the groups still waiting from step 2, if any.
 
 This skill assumes the shared tbhb toolchain:
 
-- a `just lint-commit-msg` recipe
+- a `mise run lint-commit-msg` task
 - a gitignore entry for `COMMIT_AGENTMSG`
 - the prek hooks installed, including the post-commit stage
 - the `review-commit-message` and `fix-prose` skills deployed alongside this one

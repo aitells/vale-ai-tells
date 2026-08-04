@@ -2,7 +2,7 @@
 # guard-fix — PreToolUse gate on Bash, scoped to the fix-pr skill.
 #
 # diagnose.sh reads every failing run once and prints the log tail
-# beside the local recipe that reproduces it. Going straight to gh
+# beside the local task that reproduces it. Going straight to gh
 # repeats that work a call at a time and loses the mapping, which is
 # the part that turns a log into something to run.
 #
@@ -43,7 +43,7 @@ if [[ $command =~ ${AT_START}gh[[:space:]]+run[[:space:]]+view ]] &&
   [[ $command =~ (--log-failed|--log([[:space:]]|$)) ]] &&
   ! [[ $command =~ --job ]]; then
   deny "Sweeping the failing steps is what the skill's own diagnosis does, in one
-call, with the reproducing recipe named beside each failure:
+call, with the reproducing task named beside each failure:
 
   bash .claude/skills/fix-pr/scripts/diagnose.sh <number>
 

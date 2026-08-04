@@ -129,7 +129,7 @@ Fix everything it returns. Push back only where it's demonstrably wrong about th
 ## Step 5: run the commit-msg gates
 
 ```text
-just lint-squash-msg
+mise run lint-squash-msg
 ```
 
 The same four hooks a commit answers to:
@@ -153,7 +153,15 @@ Commits: <count> collapsing into one
 <the entire SQUASH_AGENTMSG contents, verbatim>
 ```
 
-Now call `AskUserQuestion` with `question` set to `Squash merge with this message?`, `header` set to `Merge`, `multiSelect` set to `false`, and these four options in order:
+Preflight answered this under `== pre-approval ==`. Where it reported `merge: GRANTED`, the operator answered this question for the whole session in advance, through `mise run preapprove merge`. Print the preceding block so the message still reaches them, name the grant this merge goes under, and move to step 7 without calling `AskUserQuestion`.
+
+The grant answers one question, merge under this message. Ask anyway where any of these holds:
+
+- the review returned a finding nobody acted on
+- the checks aren't green
+- this pull request isn't the one the session set out to merge, which covers a dependency bump nobody here authored unless the operator named it
+
+Where preflight reported `merge: not granted`, call `AskUserQuestion` with `question` set to `Squash merge with this message?`, `header` set to `Merge`, `multiSelect` set to `false`, and these four options in order:
 
 | Label | Description |
 | --- | --- |
@@ -179,7 +187,7 @@ Report the merged commit. Where this worktree stands on the branch that merged, 
 ## Preconditions
 
 - `gh` installed and authenticated
-- a `just lint-squash-msg` recipe
+- a `mise run lint-squash-msg` task
 - a gitignore entry for `SQUASH_AGENTMSG`
 - the `review-squash-message` skill deployed alongside this one
 

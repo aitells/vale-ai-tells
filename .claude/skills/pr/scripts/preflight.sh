@@ -272,16 +272,47 @@ else
   printf 'NO TEMPLATE at %s — stop and tell the operator\n' "$template"
 fi
 
+# The operator's standing answer to step 6, granted out of band through
+# `mise run preapprove` and keyed on the Claude Code session. Absence is
+# the default and the safe one: no record, no grant, and the two
+# questions stand as written. A missing session id reads the same way,
+# so nothing here depends on the harness exporting one.
+#
+# The merge line matters here as well as in merge-pr, because step 6
+# routes on how far to take the branch, and a grant that stops short of
+# merging routes to watching and fixing rather than to the merge.
+section "pre-approval"
+preapproval=""
+if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then
+  preapproval="$(git rev-parse --absolute-git-dir)/preapprovals/$CLAUDE_CODE_SESSION_ID"
+fi
+how() {
+  case ${1##* } in
+  touchid) printf 'a Touch ID prompt stands behind it' ;;
+  *) printf 'no biometric prompt stood behind it' ;;
+  esac
+}
+if [ -n "$preapproval" ] && grant=$(grep '^pr ' "$preapproval" 2>/dev/null); then
+  printf 'pr:    GRANTED, %s — step 6 skips the confirmation once every gate and the review pass\n' "$(how "$grant")"
+else
+  printf 'pr:    not granted — step 6 confirms with the operator as written\n'
+fi
+if [ -n "$preapproval" ] && grant=$(grep '^merge ' "$preapproval" 2>/dev/null); then
+  printf 'merge: GRANTED, %s — a pre-approved run routes through to the squash merge\n' "$(how "$grant")"
+else
+  printf 'merge: not granted — a pre-approved run stops once the checks are green\n'
+fi
+
 section "preconditions"
 if git check-ignore --quiet "$DRAFT" 2>/dev/null; then
   printf '%s gitignored: yes\n' "$DRAFT"
 else
   printf '%s gitignored: NO — add it to .gitignore before drafting\n' "$DRAFT"
 fi
-if command -v just >/dev/null 2>&1 && just --summary 2>/dev/null | tr ' ' '\n' | grep -qx lint-pr-description; then
-  printf 'just lint-pr-description: present\n'
+if command -v mise >/dev/null 2>&1 && mise task info lint-pr-description >/dev/null 2>&1; then
+  printf 'mise run lint-pr-description: present\n'
 else
-  printf 'just lint-pr-description: ABSENT — stop and tell the operator\n'
+  printf 'mise run lint-pr-description: ABSENT — stop and tell the operator\n'
 fi
 for skill in pr review-pr-description; do
   if [ -f ".claude/skills/$skill/SKILL.md" ]; then
