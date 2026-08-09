@@ -62,7 +62,7 @@ golangci-lint = "2.12.2"
 # cspell ships only as an npm package. Homebrew was installing node too --
 # its formula's shebang already pointed at one. The difference is that
 # this node is pinned and locked.
-node = "24.18.1"
+node = "24.19.0"
 prek = "0.4.11"
 rumdl = "0.2.48"
 # The YAML gate, replacing yamllint and the last Python-implemented
