@@ -52,7 +52,7 @@ gitleaks = "8.30.1"
 # module root, no cmd/ suffix, so Renovate's built-in mise manager
 # resolves this pin through the go datasource without the custom
 # suffix-stripping manager.
-"go:github.com/fe3dback/go-arch-lint" = "v1.15.0"
+"go:github.com/fe3dback/go-arch-lint" = "v1.17.0"
 # Required by the go: backends above, which compile rather than
 # download. Matches the go.mod toolchain directive; go.mod stays the
 # authority for module builds, because GOTOOLCHAIN=auto fetches the

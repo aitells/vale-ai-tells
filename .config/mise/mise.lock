@@ -97,7 +97,7 @@ version = "3.9.0"
 backend = "go:github.com/editorconfig-checker/editorconfig-checker/v3/cmd/editorconfig-checker"
 
 [[tools."go:github.com/fe3dback/go-arch-lint"]]
-version = "1.15.0"
+version = "1.17.0"
 backend = "go:github.com/fe3dback/go-arch-lint"
 
 [[tools.golangci-lint]]
