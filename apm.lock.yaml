@@ -1,13 +1,13 @@
 lockfile_version: '1'
-generated_at: '2026-08-04T17:06:03.914997+00:00'
+generated_at: '2026-08-15T19:03:30.128382+00:00'
 apm_version: 0.26.0
 dependencies:
 - repo_url: tbhb/repotools
   name: repotools
   host: github.com
-  resolved_commit: 084187fbf70c30224bce9e7e20be69698f3a3cae
-  resolved_ref: v0.7.0
-  version: 0.7.0
+  resolved_commit: 9c1ec57c7ca45a9faf8054289fa07e80700fac2d
+  resolved_ref: v0.7.1
+  version: 0.7.1
   package_type: apm_package
   deployed_files:
   - .claude/rules/worktree-wip.md
@@ -190,7 +190,7 @@ dependencies:
     .claude/skills/write-prose-fix/SKILL.md: sha256:9b7f0e2c333189ff9ae76d0c084590139120f6a05963c84015eb609cad00bd0b
     .claude/skills/write-prose-fix/scripts/context.sh: sha256:a8f111896e3a438307b1c7467724f8ad43ee25c0234fae7b0939e256ae333aca
     .claude/skills/write-prose-fix/tokens.json: sha256:5e02b07de31ed9fd232c920628a87ba570cb76b7543c43505de645828b31c1dc
-  content_hash: sha256:c5851ea5518ca896e4d6a59e8c8591770993918c96b80a14feda7bec389cc01c
+  content_hash: sha256:dcbfad3e0aad74a32d86b3a6d178c0e6307f6f48fca8bb47746d05bd606867c9
   declared_license: Apache-2.0
 deployments:
 - kind: project-relative

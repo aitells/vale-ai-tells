@@ -52,7 +52,7 @@ gitleaks = "8.30.1"
 # module root, no cmd/ suffix, so Renovate's built-in mise manager
 # resolves this pin through the go datasource without the custom
 # suffix-stripping manager.
-"go:github.com/fe3dback/go-arch-lint" = "v1.15.0"
+"go:github.com/fe3dback/go-arch-lint" = "v1.17.0"
 # Required by the go: backends above, which compile rather than
 # download. Matches the go.mod toolchain directive; go.mod stays the
 # authority for module builds, because GOTOOLCHAIN=auto fetches the
@@ -62,8 +62,8 @@ golangci-lint = "2.12.2"
 # cspell ships only as an npm package. Homebrew was installing node too --
 # its formula's shebang already pointed at one. The difference is that
 # this node is pinned and locked.
-node = "24.18.1"
-prek = "0.4.11"
+node = "24.19.0"
+prek = "0.4.13"
 rumdl = "0.2.48"
 # The YAML gate, replacing yamllint and the last Python-implemented
 # linter that checks non-Python files. ryl reimplements all 23 yamllint
@@ -75,5 +75,5 @@ rumdl = "0.2.48"
 # derives the crate datasource from the backend.
 "cargo:ryl" = "0.21.0"
 shellcheck = "0.11.0"
-tombi = "1.2.5"
+tombi = "1.2.10"
 vale = "3.17.0"
