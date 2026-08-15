@@ -12,5 +12,5 @@ target:
   - claude
 dependencies:
   apm:
-    - tbhb/repotools#v0.7.0
+    - tbhb/repotools#v0.7.1
   mcp: []
