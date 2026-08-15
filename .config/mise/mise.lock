@@ -175,19 +175,19 @@ url = "https://github.com/koalaman/shellcheck/releases/download/v0.11.0/shellche
 url_api = "https://api.github.com/repos/koalaman/shellcheck/releases/assets/279056932"
 
 [[tools.tombi]]
-version = "1.2.5"
+version = "1.2.10"
 backend = "aqua:tombi-toml/tombi"
 
 [tools.tombi."platforms.linux-x64"]
-checksum = "sha256:05385bdf47d10828c1fc27190ee0ad44b777a57f56ea95c9ef568c845e3b7872"
-url = "https://github.com/tombi-toml/tombi/releases/download/v1.2.5/tombi-cli-1.2.5-x86_64-unknown-linux-musl.tar.gz"
-url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/496096100"
+checksum = "sha256:abb3bc596699020506d7dccde7ea5f884970a2baabd4afab9cc513c1b75cb774"
+url = "https://github.com/tombi-toml/tombi/releases/download/v1.2.10/tombi-cli-1.2.10-x86_64-unknown-linux-musl.tar.gz"
+url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/508637503"
 provenance = "github-attestations"
 
 [tools.tombi."platforms.macos-arm64"]
-checksum = "sha256:e4c3dd5346650b80afa516b851e0bffb4ea8a8b51ced974712fd0dd10cb893ee"
-url = "https://github.com/tombi-toml/tombi/releases/download/v1.2.5/tombi-cli-1.2.5-aarch64-apple-darwin.tar.gz"
-url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/496096095"
+checksum = "sha256:153adcddaa70c53358c08287ffa20697926c149f8413d700b9961793891561a7"
+url = "https://github.com/tombi-toml/tombi/releases/download/v1.2.10/tombi-cli-1.2.10-aarch64-apple-darwin.tar.gz"
+url_api = "https://api.github.com/repos/tombi-toml/tombi/releases/assets/508637483"
 provenance = "github-attestations"
 
 [[tools.vale]]
