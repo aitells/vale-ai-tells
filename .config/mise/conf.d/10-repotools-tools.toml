@@ -64,7 +64,7 @@ golangci-lint = "2.12.2"
 # this node is pinned and locked.
 node = "24.18.1"
 prek = "0.4.11"
-rumdl = "0.2.48"
+rumdl = "v0.2.53"
 # The YAML gate, replacing yamllint and the last Python-implemented
 # linter that checks non-Python files. ryl reimplements all 23 yamllint
 # rules in Rust and reads the same .yamllint.yaml, so the config is
