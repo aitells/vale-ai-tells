@@ -984,3 +984,19 @@ When the input is empty: return early.
 When a conversion is applied, the value narrows.
 
 Where the page size is small, memory mapping wins.
+
+## FigurativeQuantities: literal arrays, heaps, and hosts that should NOT trigger
+
+The function returns an array of strings.
+
+The parser keeps an array of tokens per line.
+
+The allocator places large objects on the heap.
+
+The host of the meetup opened the room.
+
+A sine wave crosses zero twice per period.
+
+The fix covers the seven failing tests on Windows.
+
+Join the words with a dash.
