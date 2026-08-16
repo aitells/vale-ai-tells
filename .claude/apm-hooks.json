@@ -9,7 +9,7 @@
           "timeout": 10
         }
       ],
-      "_apm_source": "repotools"
+      "_apm_source": "claude"
     }
   ]
 }

@@ -67,7 +67,7 @@ A verifier that hasn't answered yet isn't an abstention, and counting it as one 
 ## Consensus
 
 - Where all three replicate a figure, it stands.
-- Where one dissents, report the figure and name the reading that differed.
+- Where one dissents, report the figure, and name the reading that differed.
 - Where two dissent, something is wrong with the figure or ambiguous about the command. Re-derive it, or drop the claim.
 
 Check whether a verifier that agrees with everything actually ran the commands. Replication means running them again, so a verdict without a command behind it proves nothing.

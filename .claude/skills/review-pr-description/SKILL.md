@@ -83,7 +83,7 @@ The description covers the whole branch, not the commit its author happened to w
 
 Judge the branch, not the description.
 
-- Does the branch carry one change, one a reviewer can hold in their head, one that merges or reverts as a unit?
+- Does the branch carry one change that a reviewer can hold in their head and that merges or reverts as a unit?
 - Flag a branch mixing unrelated work, and name the pull requests it should split into. Reviewers miss things in a branch that changed three unrelated areas.
 - A change plus its tests, or a change plus the documentation describing it, counts as one change. Leave that alone.
 - Size alone isn't a finding. A wide mechanical rename counts as one change. A small diff touching two unrelated subsystems doesn't.

@@ -13,7 +13,7 @@ Work the steps in order. This skill ends once the retrospective exists on disk a
 
 `$ARGUMENTS` holds the absolute path to the transcript. A bare session ID also works, provided it names exactly one file under `~/.claude/projects/`.
 
-Given neither, the preflight says so and prints how to find it. Send a Haiku subagent, then run the preflight again with the path it returns. Never search the projects directory yourself. Reading transcripts to find one costs more context than the entire analysis that follows it.
+If you give neither, the preflight says so and prints how to find it. Send a Haiku subagent, then run the preflight again with the path it returns. Never search the projects directory yourself. Reading transcripts to find one costs more context than the entire analysis that follows it.
 
 ## Preflight
 
