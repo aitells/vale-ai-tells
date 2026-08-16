@@ -10,8 +10,9 @@
 # answer costs tokens to reproduce a lookup.
 #
 # The share is smaller here than in the repository this was ported from.
-# Only the Google and proselint rules carry a replacement at warning
-# level or above. The ai-tells styles describe what is wrong rather than
+# The Google and proselint rules carry a replacement at warning level
+# or above, and ai-tells.HouseStyle carries its house -> project swap.
+# The other ai-tells rules describe what is wrong rather than
 # substitute for it, on purpose. A pass over this repository's own docs
 # at the time of writing turned up 3 replaceable findings out of 12.
 # Applying them still leaves the model only the findings that need a
