@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **FigurativeSweeps** (`ai-tells`): New rule. Extends the figurative-verb family to wholesale motion: a change that "sweeps away" the old behavior, a refactor making "sweeping changes," a problem "swept under the rug," reviewers "swept up in" the excitement, a trend that "swept through" the industry, plus the totality idioms "a clean sweep," "in one sweep," and "one fell swoop." Every token is complement-gated and measured against the Go and Python standard libraries, where the verb's entire presence is the mark-and-sweep collector and a few algorithmic passes; the one match is a Go comment copying registers "in one fell swoop," the tell itself. The audit-pass noun ("a sweep over the docs") stays uncovered as established programmer usage.
+
+<!-- vale on -->
+
 ## [1.30.0] - 2026-08-16
 
 <!-- vale off -->

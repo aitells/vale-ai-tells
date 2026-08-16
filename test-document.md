@@ -1646,6 +1646,26 @@ Decide what stays in and what stays out.
 
 The old name stays in the picture.
 
+## FigurativeSweeps
+
+The rewrite sweeps away the old behavior.
+
+The objection was swept aside in review.
+
+Reviewers get swept up in the excitement.
+
+The trend swept through the industry.
+
+The refactor makes sweeping changes to the parser.
+
+The team swept the failure under the rug.
+
+The migration finished with a clean sweep of the flags.
+
+The script renames every file in one sweep.
+
+The change removed all ten call sites in one fell swoop.
+
 ## NegatedObject: stilted verb-plus-no negations that should trigger
 
 The gate allows no inline suppression.

@@ -49,6 +49,7 @@ famil
 favourable
 ferr
 frontmatter
+generalisation
 gitignorable
 gitmoji
 goroutines

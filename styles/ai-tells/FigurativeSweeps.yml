@@ -1,0 +1,55 @@
+---
+extends: existence
+message: "AI overused verb: '%s'. Name the literal action: is removed or is replaced. Disable this rule for housekeeping or weather prose."
+level: error
+nonword: true
+ignorecase: true
+# "Sweeps" is an AI fingerprint for wholesale motion: a change "sweeps away"
+# the old behavior, a refactor makes "sweeping changes," a problem gets
+# "swept under the rug," a migration finishes "in one clean sweep." The verb's
+# entire presence across the Go and Python standard libraries is the
+# mark-and-sweep collector plus a few algorithmic passes ("a backwards sweep
+# over the instructions"), and none of those ever take the figurative
+# complements below, so garbage-collector prose needs no disable. The
+# complement is the discriminator throughout, in the FigurativeSits mold, so
+# no subject gate is needed.
+#
+# The audit-pass noun ("a sweep over the docs," "run a broad sweep") stays
+# uncovered on purpose: it is established programmer usage for a scan pass,
+# this package's own comments use it, and the radar sense makes it closer to
+# literal than to figure.
+tokens:
+  # --- Displacement: the change removes something wholesale ("sweeps away
+  # the old behavior," "swept aside the objection"). Literal housekeeping
+  # ("sweep away the crumbs") fires, so cleaning prose disables the rule.
+  - "\\b(?:sweep|sweeps|sweeping|swept) (?:away|aside)\\b"
+
+  # --- Engulfment: a participant carried off by a current ("swept up in the
+  # excitement," "swept up in the migration").
+  - "\\bswept up in\\b"
+
+  # --- Pervasion: the change moves through the territory like weather ("the
+  # rewrite swept through the codebase," "a trend sweeping across the
+  # industry"). Literal storms and fires take the same shape, so weather and
+  # disaster writing disables the rule.
+  - "\\b(?:sweep|sweeps|sweeping|swept) (?:through|across)\\b"
+
+  # --- The adjective: breadth asserted instead of enumerated ("sweeping
+  # changes," "a sweeping generalization," "sweeping implications"). Gated on
+  # the rhetoric-and-revision noun because the bare word floods on the
+  # garbage-collector gerund; a scenic vista stays quiet by the same gate.
+  - "\\bsweeping (?:change|rewrite|refactor|reform|claim|generalization|generalisation|statement|overhaul|redesign|revision|simplification|assertion|conclusion|update|edit|implication|power)s?\\b"
+  - "\\bsweepingly\\b"
+
+  # --- Concealment: the problem hidden rather than fixed ("swept under the
+  # rug," "sweeping the failure under the carpet"). The optional words cover
+  # an object between the verb and the idiom.
+  - "\\b(?:sweep|sweeps|sweeping|swept) (?:[a-z]+ ){0,3}under the (?:rug|carpet)\\b"
+
+  # --- Totality idioms: everything at once, count unstated ("a clean
+  # sweep," "in one sweep," "in one fell swoop"). The one match across the
+  # Go and Python standard libraries is a Go comment copying registers "in
+  # one fell swoop," which is the tell itself.
+  - "\\bclean sweep\\b"
+  - "\\bin (?:a|one|a single) sweep\\b"
+  - "\\bone fell swoop\\b"

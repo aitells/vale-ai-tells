@@ -785,6 +785,22 @@ He stayed at the hotel near the airport.
 
 The guests stayed in the annex overnight.
 
+## FigurativeSweeps: garbage collection and literal sweeps that should NOT trigger
+
+The garbage collector sweeps unmarked spans in the background.
+
+Background sweeping runs between GC cycles.
+
+The span was swept before the next mark phase.
+
+The compiler performs a backwards sweep over the instructions.
+
+A parameter sweep covers the learning-rate grid.
+
+The radar sweep completes every four seconds.
+
+She sweeps the porch every morning.
+
 ## FigurativeIdioms: literal descent that should NOT trigger
 
 Come down to the lobby when you are ready.
