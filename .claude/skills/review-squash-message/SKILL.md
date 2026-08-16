@@ -48,7 +48,7 @@ Work these four groups. Every finding names the exact offending text and the fix
 
 This group is why the review exists. Take the commits one at a time and ask whether someone reading the message alone would know that work is in here.
 
-- Flag a commit whose reason the message drops. Not its diff, its reason, meaning the constraint or the problem its body named. That sentence goes with the commit at the merge, and nothing else records it.
+- Flag a commit whose reason the message drops. Not its diff, its reason, meaning the constraint, or the problem its body named. That sentence goes with the commit at the merge, and nothing else records it.
 - Flag a message that describes one commit as though it were the branch. The last commit and the largest commit are the ones that stand in for the rest.
 - Flag a message that covers the early commits and stops. A branch that grew after someone published its description is the common case, and the message inherits the gap.
 - Flag two commits giving different reasons where the message keeps only one. Either it covers both, or it says which one subsumes the other.
