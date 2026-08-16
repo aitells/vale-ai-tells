@@ -12,7 +12,7 @@ ignorecase: true
 # subject-plus-verb shape floods ordinary technical writing. Measured against
 # the Go and Python standard libraries, "holds" alone reports fifty times and
 # "carries" twenty-nine, all of them literal: a table holds values, a buffer
-# carries bytes. The same tokens report a handful of times across thousands
+# carries bytes. The same tokens report only a few times across thousands
 # of lines of accepted commit prose, and those reads as the tell. A commit
 # message describes what a person did to a repository, so an inanimate
 # subject performing a human action is nearly always the substitution this

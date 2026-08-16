@@ -1604,6 +1604,108 @@ The choice came down to whether the pin stays.
 
 The fixture stands in for real traffic.
 
+## FigurativeQuantities
+
+A handful of tests still fail on Windows.
+
+Only a handful remain after the purge.
+
+The handful of edge cases needs a rewrite.
+
+Handfuls of flags control the build.
+
+A fistful of retries masks the outage.
+
+An armful of patches arrived overnight.
+
+A smattering of users hit the bug.
+
+A sprinkling of comments explains the intent.
+
+A sliver of the budget covers hosting.
+
+A dash of caching hides the latency.
+
+A pinch of validation would have caught this.
+
+A dollop of logging narrows the search.
+
+A slew of warnings appears on boot.
+
+A host of options complicates the setup.
+
+A whole host of dependencies blocks the upgrade.
+
+A raft of changes waits in review.
+
+A spate of regressions followed the merge.
+
+A flurry of commits closed out the sprint.
+
+A litany of errors fills the log.
+
+A laundry list of caveats trails the release notes.
+
+A bevy of scripts guards the pipeline.
+
+A grab bag of utilities pads the module.
+
+A boatload of options comes enabled by default.
+
+Boatloads of memory go to the cache.
+
+A truckload of fixtures slows the suite.
+
+Truckloads of data cross the wire.
+
+A ton of configuration precedes the first request.
+
+Tons of allocations churn the collector.
+
+A heap of workarounds props up the parser.
+
+A pile of shims supports the legacy API.
+
+A mountain of debt blocks the redesign.
+
+A sea of red covers the dashboard.
+
+An ocean of logs hides the one line that matters.
+
+A flood of alerts pages the on-call.
+
+A wave of deprecations arrives in the next release.
+
+A deluge of requests saturates the queue.
+
+A torrent of output scrolls past.
+
+An avalanche of notifications buries the real failure.
+
+A myriad of settings governs the renderer.
+
+A plethora of frameworks solves this badly.
+
+A wealth of documentation says nothing concrete.
+
+A trove of examples pads the tutorial.
+
+A smorgasbord of formats confuses the importer.
+
+A cornucopia of plugins weighs down the editor.
+
+A medley of hacks keeps the demo alive.
+
+A patchwork of scripts deploys the site.
+
+A mosaic of microservices serves the checkout.
+
+A constellation of services backs the login page.
+
+A vast array of options greets the new user.
+
+A dizzying array of flags controls the optimizer.
+
 ## FigurativeSits and AnthropomorphicJustification, widened
 
 The rules sit in the config.
