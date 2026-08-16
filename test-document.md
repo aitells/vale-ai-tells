@@ -1730,6 +1730,12 @@ The change earns a mention.
 
 The reviewer forms an opinion of the draft before the diff loads.
 
+The benchmark settles the cost of the extra pass.
+
+That run settled the bill for the shortcut.
+
+The audit squares the ledger at release time.
+
 ## FigurativeFires
 
 The rule fires on every heading.

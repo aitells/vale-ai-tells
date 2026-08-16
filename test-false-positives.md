@@ -849,6 +849,12 @@ The endpoint accepts a cost parameter in cents.
 
 Public opinion shifted slowly after the report.
 
+## AnthropomorphicJustification: negotiation and physical settling that should NOT trigger
+
+The vendors settled on a price after two calls.
+
+The dust settled after the reorg finished.
+
 ## NegatedObject: excluded verbs and degree idioms that should NOT trigger
 
 The function takes no arguments and returns no value.
