@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **FillerIntensifier** (`ai-tells`): New rule. Reports "single" and its cousins riding a determiner that already carries the count: "a single command," "one single flag," "every single time," "no single point of failure," "any single failure," "the single source of truth," plus "a lone exception," "its sole purpose," "a mere formality," "one solitary warning," "a singular focus," and "any one of the checks," which is what "any single" turns into when a writer dodges the alert. Deleting the modifier costs those phrases nothing, which is what makes it an intensifier. The "no single" and "any single" arms are deliberately broad on the package's flag-hard stance: "no single component owns this" needs a recast rather than a deletion, and the alert is there to force that choice. Hyphenated compounds ("a single-threaded server"), grammar's "the singular form," pronoun heads ("no one," "each one," "every one"), and "the single most important," which `AbsoluteAssertions` already owns, all stay out.
+
+<!-- vale on -->
+
 ## [1.29.0] - 2026-08-03
 
 <!-- vale off -->
