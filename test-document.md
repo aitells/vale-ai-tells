@@ -1272,6 +1272,12 @@ Caching held the key to the speedup.
 
 The on-call team held the line during the incident.
 
+The cache layer is holding the line on latency.
+
+The optimization held at scale.
+
+The staff engineer held court in the design review.
+
 The trend is still holding after the rollout.
 
 The proxy works by holding network access to an approved-domain allowlist.

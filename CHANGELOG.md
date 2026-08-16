@@ -18,8 +18,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - **ExplainerHeadings** (`ai-tells`): Generalized. The rule knew the pronoun-subject forms by name ("Why It Matters," "What It Does") but missed the same heading with a real subject. A new determiner-gated token catches "Why the Pin Exists," "How the Cache Works," "What the Data Shows," and the when/where/who variants, while "How to Configure X" and "What's New" stay out for lack of a determiner.
+- **FigurativeHolds** (`ai-tells`): Widened. The idiom and promise families gain their past-tense forms ("held water," "held sway," "held the key to," "held the line," "held court," "held at scale"), the line idiom takes the full inflection group ("holding the line"), and the subject-gated survival family gains the progressive with an optional copula ("the trend is still holding"), with the copula paired to the progressive alone so passive belief ("the assumption is widely held") stays out. A new constraint family catches the verb restricting a resource to a bound ("holding network access to an approved-domain allowlist," "held costs to a minimum," "holds request rates to under 100"), gated on the determiner-plus-bound-noun complement after "to"; the gated shape has zero literal hits in the Python standard library, whose hold-to prose concerns references and pointers.
 
 <!-- vale on -->
+
 ## [1.30.0] - 2026-08-16
 
 <!-- vale off -->
