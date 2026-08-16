@@ -4,7 +4,7 @@ message: "AI hurdle metaphor: '%s'. Say the check passed. Disable this rule for 
 level: error
 nonword: true
 ignorecase: true
-# "Clears" is an AI fingerprint for passing dressed as a jump: a draft
+# "Clears" is an AI fingerprint for passing described as a jump: a draft
 # "clears the gate," a message "clears every check," a fix "clears the
 # finding." The checking noun after the verb is the discriminator, so
 # clearing a cache, a screen, or a buffer stays quiet, and every token

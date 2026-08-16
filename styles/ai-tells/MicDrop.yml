@@ -150,8 +150,8 @@ tokens:
 
   # Bare "Not X." / "No X." standalone fragment: "Not now."
   # "No singleton." AI deploys these as one-word verdicts — a tiny
-  # period-bound answer that the surrounding prose pretends to be
-  # responding to. The broader regex catches both negation forms
+  # period-bound answer to a question the surrounding prose never
+  # asked. The broader regex catches both negation forms
   # with any single-word tail. Some conversational fragments
   # ("No idea.", "No way.", "Not bad.") fire too; acceptable for
   # an error-level rule in technical-doc contexts.

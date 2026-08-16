@@ -2271,3 +2271,55 @@ The paragraph reads in the house voice.
 That figure is a house idiom by now.
 
 The doc leans on house idioms instead of plain description.
+
+## FigurativeDisguises
+
+The estimate is a guess dressed as a number.
+
+The memo dresses the mandate up as an invitation.
+
+Dressing inaction as silence hides the failure.
+
+An opinion disguised as a question still argues one side.
+
+The installer disguises telemetry as a diagnostics step.
+
+Disguising the rewrite as a cleanup shortened the review.
+
+Complexity masquerading as rigor slows every reader.
+
+A wrapper can masquerade as the original binary.
+
+The shim masquerades as the system allocator.
+
+The regression paraded as an optimization for two releases.
+
+Marketing copy parading as documentation helps nobody.
+
+The ad poses as an independent review.
+
+A sales pitch posing as a tutorial fills the first page.
+
+The change is a rewrite in disguise.
+
+The patch shipped under the guise of a formatting fix.
+
+Scope creep arrived in the guise of a refactor.
+
+The framework is vendor lock-in in sheep's clothing.
+
+The onboarding form pretends to be a conversation.
+
+Each modal pretending to be a helpful tip interrupts the flow.
+
+What passes for documentation is a stale wiki page.
+
+The fork passes itself off as the upstream project.
+
+The template was passed off as handwritten prose.
+
+The intern passed it off as original work.
+
+The spreadsheet is three macros cosplaying as a database.
+
+The monolith is five services in a trench coat.

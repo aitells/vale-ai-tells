@@ -93,7 +93,7 @@ tokens:
   - "\\b(?:Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven|Twelve) (?!(?i:of|or|to|and|in|out|more|percent|dozen|hundred|thousand|million|billion|seconds?|minutes?|hours?|days?|weeks?|months?|quarters?|years?|decades?|times)\\b)[A-Za-z][a-z]+ [A-Za-z][a-z]+"
 
   # --- Shape H: the folksy proportion ("Three of every four skills," "nine
-  # out of every ten runs"). The spelled-out ratio dresses an estimate up as
-  # data; give the measured figure instead.
+  # out of every ten runs"). The spelled-out ratio gives an estimate the
+  # look of data; give the measured figure instead.
   - "\\b(?:[Oo]ne|[Tt]wo|[Tt]hree|[Ff]our|[Ff]ive|[Ss]ix|[Ss]even|[Ee]ight|[Nn]ine) (?:of|out of|in) every (?:two|three|four|five|six|seven|eight|nine|ten|dozen|hundred|thousand|million)\\b"
   - "\\b[Nn]ine times out of ten\\b"

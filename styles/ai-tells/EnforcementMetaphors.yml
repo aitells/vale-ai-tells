@@ -4,7 +4,7 @@ message: "AI enforcement metaphor: '%s'. Say what the check refuses or allows. D
 level: error
 nonword: true
 ignorecase: true
-# A check dressed as a sentry: a guard "stands down," a gate is "armed," a
+# A check presented as a sentry: a guard "stands down," a gate is "armed," a
 # linter "keeps its teeth," a workflow "polices" the arrangement, a formatter
 # "fights" the installer. The military and watchdog registers substitute for
 # a plain statement of what the mechanism refuses or allows. Every token
