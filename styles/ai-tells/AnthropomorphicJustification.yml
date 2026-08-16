@@ -224,6 +224,17 @@ tokens:
   - put the (?:question|debate|matter|argument|issue|dispute) to (?:rest|bed)
   - lays? the (?:question|debate|matter|argument|issue|dispute) to rest
   - laid the (?:question|debate|matter|argument|issue|dispute) to rest
+  # The same gavel handed an invoice: a measurement or a check "settles"
+  # a cost the way a diner settles a bill ("the corpus run settled the
+  # cost," "the audit squares the ledger"). Every shape measured zero
+  # across the Go and Python standard libraries. The negotiation sense
+  # takes "on" ("settled on a price") and stays clear. The literal
+  # payment belongs to restaurant and accounting prose, which disables
+  # the rule.
+  - (?:settles?|settled|settling) (?:the|that|this|its) (?:[a-z]+ )?(?:costs?|prices?|bill|tab|debts?)\b
+  - (?:settles?|settled|settling) up\b
+  - (?:squares?|squared|squaring) (?:the|that|its) (?:[a-z]+ )?(?:bill|ledger|books|account|debts?)\b
+  - (?:balances?|balanced|balancing) the books\b
 
   # "Harm" family.
   # Treats inanimate subjects (a check, a config, a flag) as moral

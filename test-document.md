@@ -1604,6 +1604,20 @@ The choice came down to whether the pin stays.
 
 The fixture stands in for real traffic.
 
+The flexibility comes at a cost.
+
+That speed came at a steep price.
+
+The measured cost is one comment in the Go tree.
+
+That stub is what remains of the old pipeline.
+
+The extra alert is the same cost the present form already accepts.
+
+The double fire is a tolerated cost.
+
+The design accepts a small cost in verbosity.
+
 ## FigurativeQuantities
 
 A handful of tests still fail on Windows.
@@ -1716,6 +1730,12 @@ The change earns a mention.
 
 The reviewer forms an opinion of the draft before the diff loads.
 
+The benchmark settles the cost of the extra pass.
+
+That run settled the bill for the shortcut.
+
+The audit squares the ledger at release time.
+
 ## FigurativeFires
 
 The rule fires on every heading.
@@ -1827,6 +1847,30 @@ AI reaches for this structure constantly.
 The rule reached for a curated list first.
 
 Writers reach for the same tired metaphor.
+
+## FigurativePays
+
+The upfront work pays off in review.
+
+Each rehearsal paid off.
+
+Skip the check and pay the price later.
+
+Every shortcut pays a steep price eventually.
+
+This buys you flexibility.
+
+The cache buys us time.
+
+The shim bought some breathing room.
+
+A flaky suite is the price of admission.
+
+The maintainer foots the bill for every regression.
+
+The design puts a premium on clarity.
+
+The rewrite cashes in on the new parser.
 
 ## NegatedObject: stilted verb-plus-no negations that should trigger
 

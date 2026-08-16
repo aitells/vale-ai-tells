@@ -22,7 +22,7 @@ Paragraphs bound this, not lines. Moving the loose token down a line keeps the e
 
 The `nonword` setting does not cause this. The same experiment with a word token draws one correctly placed finding under `nonword: true` and under the default. Punctuation is what separates the two, and `ai-tells.DoubleHyphen` carries `nonword` only so its token can match at all.
 
-A commit message meets this through `DoubleHyphen`. One that names a command-line flag in a code span and also holds a loose pair of hyphens elsewhere draws a finding on the flag that no rewording of the flag clears. The parser work that made code spans mask at all is part of `repotools` v0.4.0, which this repo now pins, so this is what remains of it.
+A commit message meets this through `DoubleHyphen`. One that names a command-line flag in a code span and also holds a loose pair of hyphens elsewhere draws a finding on the flag that no rewording of the flag clears. The parser work that made code spans mask at all is part of `repotools` v0.4.0, which this repo now pins, and this misplaced finding is the one piece of that work still open.
 
 - [ ] Report it to vale upstream with the reduced case recorded here
 - [ ] Decide whether `ai-tells` can narrow the token usefully, or whether the rule waits on a vale fix
