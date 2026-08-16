@@ -1622,3 +1622,41 @@ One solitary warning survived the cleanup.
 A singular focus on latency shaped the roadmap.
 
 Any one of the checks can veto the merge.
+
+## IncompleteComparison
+
+People vaccinated for influenza had significantly lower risk of major cardiovascular events.
+
+The new parser is substantially faster.
+
+This approach yields dramatically better results.
+
+Memory usage is considerably reduced in the latest release.
+
+The refactored pipeline is markedly simpler.
+
+Vastly improved ergonomics make the tool notably easier to adopt.
+
+## StackedHedges
+
+This could potentially break existing consumers.
+
+The change may possibly affect downstream caches.
+
+Rising temperatures might conceivably shift the nesting season.
+
+It can potentially be misread as a directive.
+
+The committee could perhaps revisit the decision next year.
+
+The migration might potentially lose comment metadata.
+
+## NounString
+
+The customer feedback analysis pipeline stalled.
+
+We revised the employee laptop security policy exception process.
+
+The incident response playbook revision deadline slipped.
+
+The database connection pool size limit was reached.
