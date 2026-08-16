@@ -1,0 +1,59 @@
+---
+extends: existence
+message: "AI ownership metaphor: '%s'. Name the file that defines it or the tool that writes it. Disable this rule for concurrency or memory prose."
+level: error
+nonword: true
+ignorecase: true
+# "Owns" is an AI fingerprint for responsibility by possession: a tool
+# "owns" a directory, a rule "owns" a phrase, an installer "owns" a tree.
+# The plain statement names which file defines a thing or which tool writes
+# it. The object rides inside the span, so the exceptions can carry the one
+# register where ownership is established vocabulary: concurrency and
+# memory management, where a goroutine owns a lock and a caller owns a
+# buffer. With those objects excepted, the remaining cost across the Go and
+# Python standard libraries is four matches ("owns the result," "owns its
+# ability," "owns the annotations," and one single-letter object the
+# exceptions cannot name), all in that same systems register, so prose
+# about resource lifetimes disables the rule.
+exceptions:
+  # Resource objects from the concurrency and memory-management register.
+  - "(?i)locks?"
+  - "(?i)mutex(?:es)?"
+  - "(?i)stacks?"
+  - "(?i)memory"
+  - "(?i)threads?"
+  - "(?i)workers?"
+  - "(?i)goroutines?"
+  - "(?i)process(?:es)?"
+  - "(?i)slots?"
+  - "(?i)slices?"
+  - "(?i)maps?"
+  - "(?i)buffers?"
+  - "(?i)handles?"
+  - "(?i)pointers?"
+  - "(?i)connections?"
+  - "(?i)sockets?"
+  - "(?i)descriptors?"
+  - "(?i)\\bfds?\\b"
+  - "(?i)resources?"
+  - "(?i)pages?"
+  - "(?i)arenas?"
+  - "(?i)semaphores?"
+  - "(?i)channels?"
+  # Legal ownership is literal, not the figure.
+  - "(?i)copyrights?"
+  - "(?i)trademarks?"
+  - "(?i)patents?"
+  - "(?i)licen[cs]es?"
+  - "(?i)\\brights\\b"
+tokens:
+  # --- Possession: a determiner-led object owned by a mechanism ("vendir
+  # owns that directory," "git owns the commit," "one rule owns the
+  # phrase"). An optional modifier word sits between the determiner and the
+  # object.
+  - "\\bown(?:s|ing) (?:a|an|the|this|that|its|their|each|every) (?:[a-z]+ )?[a-z]+"
+
+  # --- The owner as a title ("the owning rule," "one owning package").
+  # "The owning goroutine" lands in the exceptions with its resource
+  # sibling nouns.
+  - "\\b(?:a|an|the|this|that|its|their|one|each|every) owning [a-z]+\\b"

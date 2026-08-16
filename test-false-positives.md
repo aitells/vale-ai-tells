@@ -1000,3 +1000,67 @@ A sine wave crosses zero twice per period.
 The fix covers the seven failing tests on Windows.
 
 Join the words with a dash.
+
+## AnthropomorphicCognition: human pupils and human wanting that should NOT trigger
+
+The user wants a report by Friday.
+
+Applications that want a proxy set the environment variable.
+
+Somebody installing a binary wants an install line.
+
+A consumer pins exactly the surface it wants.
+
+She taught the students in two schools.
+
+Teach me patience.
+
+The compiler does not know about the alias.
+
+## EnforcementMetaphors: timers and literal posture that should NOT trigger
+
+Arming the ping timer starts the countdown.
+
+The dog bared its teeth at the mail carrier.
+
+## EvasionMetaphors: literal movement that should NOT trigger
+
+We go around the loop twice per request.
+
+The parade goes around the block.
+
+The rice went uneaten.
+
+## FigurativeOwns: resource and legal ownership that should NOT trigger
+
+The goroutine owns the lock until the handoff.
+
+The caller owns the returned buffer.
+
+Tony Burns owns the copyright on every header.
+
+The owning goroutine frees the stack.
+
+## FigurativeClears: deletion senses that should NOT trigger
+
+Clear the cache before the second run.
+
+The janitor cleared the tables after lunch.
+
+## FigurativeSurfaces: marine and road senses that should NOT trigger
+
+The submarine surfaces at dawn.
+
+The road surface stays rough for a mile.
+
+## FigurativeIdioms: literal walking and fanning that should NOT trigger
+
+She walked back to the office after lunch.
+
+The fan-out factor stays at eight per node.
+
+## FigurativeFalls: literal descent that should NOT trigger
+
+The price fell sharply in the third quarter.
+
+Night fell over the harbor.

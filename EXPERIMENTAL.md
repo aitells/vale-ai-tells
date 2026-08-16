@@ -293,7 +293,7 @@ The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` cov
 
 ### PassiveVoiceAdverb
 
-The companion rule for the adverb-gap shape: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire shape. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Two or more adverbs in the gap ("was not actually used") still slip through.
+The companion rule for the adverb-gap shape: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire shape. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Neither rule matches a gap of two or more adverbs ("was not actually used").
 
 ### PassiveDensity
 

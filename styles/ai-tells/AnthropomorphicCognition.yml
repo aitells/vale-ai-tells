@@ -1,0 +1,114 @@
+---
+extends: existence
+message: "AI anthropomorphism: '%s'. State what the tool checks or produces. Disable this rule for prose about people."
+level: error
+nonword: true
+ignorecase: true
+# Cognition and volition handed to an artifact: a spec "wants" a retry, a
+# release "teaches" a skill to sweep, a dictionary "learns" a word, a parser
+# "gets confused." An earlier audit left volition uncovered because no gate
+# separated the AI usage from ordinary documentation style; the inverted
+# gate the figurative family later adopted supplies one. The subject or
+# object rides inside each span, so the exceptions can name the people who
+# legitimately think, and what remains is the machine given a mind.
+#
+# Costs by token, measured across the Go and Python standard libraries. The
+# wanting shape leaves about a dozen matches once the exceptions apply
+# ("the spec wants us to retry," "an algorithm wants the powers"), each the
+# personification itself, so they fire by design. Teaching leaves three Go
+# comments that teach the compiler or a tool, the figure again. Confusion
+# leaves about a dozen tool-confusion comments plus two reader-directed
+# warnings ("do not get confused by this"), the latter being the cost.
+# Misbehaving leaves two finite uses; the participial "misbehaving client"
+# stays uncovered as established vocabulary for an adversarial peer. Also
+# left uncovered: "doesn't know," which both corpora use over thirty times
+# ("the compiler doesn't know"), too saturated for any gate to rescue.
+# Machine-learning prose, where a model literally learns, disables the rule.
+exceptions:
+  # People and roles who legitimately want, learn, and get taught. The
+  # bare pronouns carry their own boundaries because they are short enough
+  # to hide inside ordinary words.
+  - "(?i)\\bwe\\b"
+  - "(?i)\\byou\\b"
+  - "(?i)\\bi\\b"
+  - "(?i)\\bthey\\b"
+  - "(?i)\\bhe\\b"
+  - "(?i)\\bshe\\b"
+  - "(?i)\\bme\\b"
+  - "(?i)\\bus\\b"
+  - "(?i)\\bhim\\b"
+  - "(?i)\\bher\\b"
+  - "(?i)everyone"
+  - "(?i)everybody"
+  - "(?i)anyone"
+  - "(?i)someone"
+  - "(?i)nobody"
+  - "(?i)users?"
+  - "(?i)callers?"
+  - "(?i)clients?"
+  - "(?i)readers?"
+  - "(?i)authors?"
+  - "(?i)writers?"
+  - "(?i)operators?"
+  - "(?i)maintainers?"
+  - "(?i)developers?"
+  - "(?i)programmers?"
+  - "(?i)contributors?"
+  - "(?i)reviewers?"
+  - "(?i)engineers?"
+  - "(?i)students?"
+  - "(?i)teachers?"
+  - "(?i)child(?:ren)?"
+  - "(?i)kids?"
+  - "(?i)people"
+  - "(?i)person"
+  - "(?i)teams?"
+  - "(?i)folks?"
+  - "(?i)customers?"
+  - "(?i)applications?"
+  - "(?i)schools?"
+  # A relative clause with "it" for a subject puts the wanter outside the
+  # span ("the surface it wants" names a consumer's choice), so the shape
+  # says nothing about who wants.
+  - "(?i) it want(?:s|ed)?\\b"
+tokens:
+  # --- Volition: a determiner-led artifact that wants ("the spec wants us
+  # to retry," "a dependency bump wants merging," "the RFC wants a break").
+  # An optional modifier word and an optional adverb sit inside the span.
+  # The lookbehind drops the participle inversion, where a person does the
+  # wanting ("somebody installing a binary wants an install line").
+  - "(?<!ing )\\b(?:a|an|the|this|that|these|those|each|every|its|their) (?:[a-z]+ )?[a-z]+ (?:really |only |always |never |still |also |just |often |actually )?want(?:s|ed)?\\b"
+
+  # --- Teaching: a tool as the pupil ("teach the compiler that," "taught
+  # that validator a new shape," "teach Renovate to read the markers"). The
+  # lookahead keeps the human idiom "taught in schools" out of the span,
+  # and the object word stays inside it for the exceptions.
+  - "\\bt(?:each(?:es|ing)?|aught) (?:the |a |an |its |this |that |every |each )?(?!in |at |by |about |over |during |through |for |with |from )[a-z][a-z-]*"
+  - "\\b(?:can|could|must|has to|have to|had to) be taught\\b"
+
+  # --- Learning: a tool as the student ("cspell learns the new slug"). The
+  # third-person singular is the gate; "we learned the hard way" carries a
+  # human subject the span never sees, so the past tense stays out.
+  - "\\blearns (?:a|an|the|its|this|that|these|those)\\b"
+
+  # --- Ignorance: a tool with a blind spot ("the manager knows nothing
+  # about that shape," "the hook has no idea the file moved").
+  - "\\bknows? nothing (?:about|of)\\b"
+  - "\\bha(?:s|ve|d) no idea\\b"
+
+  # --- Inquiry and trust: a script that asks and a reviewer's tool that
+  # believes ("detection asks whether any package holds it," "the reviewer
+  # trusts the inlined material"). Trust-anchor and certificate prose uses
+  # the verb literally; security writing disables the rule.
+  - "\\basks whether\\b"
+  - "\\btrusts (?:the|its|a|an|this|that|whatever|inlined)\\b"
+
+  # --- Confusion and misconduct: the tool as a flustered or naughty actor
+  # ("the parser gets confused," "if the release misbehaves").
+  - "\\b(?:gets?|got|getting) confused\\b"
+  - "\\bmisbehav(?:es|ed)\\b"
+
+  # --- Honesty: text or a tool credited with candor ("the refusal text was
+  # telling the truth about what the task wanted").
+  - "\\btell(?:s|ing)? the truth\\b"
+  - "\\btold the truth\\b"
