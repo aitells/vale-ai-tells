@@ -173,6 +173,17 @@ tokens:
   - (?:narrows?|scopes?|tunes?|optimi[sz]es?|tightens?|rewrites?|configures?|corrects?|prunes?|trims?) itself
   - sorts? itself out
   - resolves? itself
+  # Self-report: an artifact vouching for or exposing itself ("the line
+  # declares itself," "forgetting that announces itself," "the credential
+  # path proves itself"). The plural stays off "versions" because "the
+  # versions themselves" is an ordinary emphatic. Measured at zero across
+  # the Go and Python standard libraries.
+  - (?:declares?|announces?|proves?|reports?) (?:itself|themselves)
+  - versions itself
+  # Voice: a comparison or a gate that pipes up ("the check only speaks
+  # up after the push").
+  - speaks? up
+  - spoke up
   - pretend(?:s|ed|ing)? otherwise
   - pretend(?:s|ed|ing)? not to
   - cares? deeply
@@ -205,6 +216,8 @@ tokens:
   # by string ordering, and wait for the dust to settle. Measured at zero
   # across the Go and Python standard libraries.
   - (?:settles|settled) (?:it|that|this|which|what|whether)\b
+  # The plural pronouns join the same shape ("a classifier settles those").
+  - (?:settles|settled) (?:those|them)\b
   - decides? the (?:question|debate|matter|argument|issue|dispute)
   - decided the (?:question|debate|matter|argument|issue|dispute)
   - puts? the (?:question|debate|matter|argument|issue|dispute) to (?:rest|bed)

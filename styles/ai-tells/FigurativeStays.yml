@@ -22,6 +22,12 @@ tokens:
   - "\\bstay(?:s|ed|ing)? out of the (?:way|picture|diff|loop)\\b"
   - "\\bstay(?:s|ed|ing)? clear of\\b"
 
+  # --- Left waiting: work personified as the one not picked ("the test
+  # family stayed behind on an assumption"). Measured at zero across the
+  # Go and Python standard libraries; a pupil kept after class takes the
+  # disable note in the message.
+  - "\\bstay(?:s|ed|ing)? behind\\b"
+
   # --- Membership idioms: presence dressed as loyalty ("stays in the
   # picture," "stays in lockstep").
   - "\\bstay(?:s|ed|ing)? in (?:the loop|the picture|play|lockstep|force)\\b"

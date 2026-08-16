@@ -1,0 +1,28 @@
+---
+extends: existence
+message: "AI discovery metaphor: '%s'. Say what reported the problem and when. Disable this rule for marine or graphics prose."
+level: error
+nonword: true
+ignorecase: true
+# "Surfaces" is an AI fingerprint for discovery as emergence: a defect
+# "surfaces" during review, a bump "surfaced" three findings, "nothing
+# surfaced this earlier." The plain statement says what reported the
+# problem and when. The verb shapes gate on a complement or a
+# defect-family subject, so the noun ("the API surface," "the surface of
+# the sphere") never matches, and a submarine surfacing takes the marine
+# note in the message. The one match across the Go and Python standard
+# libraries is a Go comment where an error "was surfaced from a background
+# process," the figure itself, so it fires by design.
+tokens:
+  # --- Transitive and adverbial emergence: the discovery verb with its
+  # complement ("the audit surfaced a defect," "the difference surfaces
+  # only when somebody reads the object").
+  - "\\bsurfac(?:es|ed|ing) (?:a|an|the|this|that|its|their|during|only|later|first|here|then|when|as)\\b"
+
+  # --- Subject-gated emergence: a defect-family noun that rises ("drift
+  # surfaces on the change that caused it," "the failure surfaced in CI").
+  # An auxiliary or adverb may sit between subject and verb.
+  - "\\b(?:defects?|drift|findings?|failures?|differences?|mistakes?|errors?|gaps?|bugs?|tells?|regressions?|problems?|issues?|questions?) (?:[a-z]+ )?surfac(?:es|ed)\\b"
+
+  # --- The negative report ("nothing surfaced this earlier").
+  - "\\bnothing surfaced\\b"

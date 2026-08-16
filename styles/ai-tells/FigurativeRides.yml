@@ -22,6 +22,8 @@ tokens:
   # ("the fix rides along with the release," "the flag rides along in the
   # config"). Agents adore this one; carpooling prose disables the rule.
   - "\\b(?:ride|rides|riding) along\\b"
+  - "\\b(?:ride|rides|riding|rode) alongside\\b"
+  - "\\b(?:ride|rides|riding|rode) through\\b"
   - "\\b(?:ride|rides|riding) shotgun\\b"
   - "\\bhitch(?:es|ed|ing)? a ride\\b"
   - "\\balong for the ride\\b"

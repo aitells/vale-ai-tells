@@ -2009,3 +2009,185 @@ Every check passes in the pipeline.
 All checks are green after the rebase.
 
 All suites passing on main.
+
+## AnthropomorphicCognition
+
+A dependency bump wants merging without ceremony.
+
+The spec wants a retry after the first refusal.
+
+The release teaches the review skills a second pass.
+
+Issue thirty-seven taught that validator a new shape.
+
+The pattern can be taught to any scanner.
+
+cspell learns the new slug on the next sync.
+
+The manager knows nothing about vendored paths.
+
+The hook has no idea the file moved.
+
+Detection asks whether any package holds a skill of that name.
+
+The reviewer trusts the inlined material.
+
+The parser gets confused by the second heading.
+
+The workflow misbehaves under a stale token.
+
+The refusal text was telling the truth about the target.
+
+## EnforcementMetaphors
+
+The guard stands down once the workflow finishes.
+
+Preflight stands the commit guard down at the mark.
+
+The gate stays armed across the whole session.
+
+Arming a gate over every write followed from that.
+
+The lint gate keeps its teeth after the migration.
+
+A toothless check is worse than none.
+
+One workflow polices the arrangement.
+
+A formatter would fight the installer for that tree.
+
+The gates keep them honest between releases.
+
+The hooks keep the whole pipeline honest.
+
+No fingerprint stands behind that grant.
+
+One skill stood in the way of a documented command.
+
+After the fold, no consumer was left standing.
+
+A bare verb would flood on ordinary prose.
+
+## EvasionMetaphors
+
+The verbless form slipped through every gate.
+
+A flag slips past the anchored check.
+
+The old pin let it through for months.
+
+Unquoted output was let through by the earlier rule.
+
+A rule enforced in one place is a rule people route around.
+
+The dispatch went around it entirely.
+
+Nothing snuck past the typechecker this time.
+
+The helper sneaks in a second lookup.
+
+The wrapper sidesteps the guard.
+
+The gap went unnoticed for three releases.
+
+That failure goes unreported on Windows.
+
+## FigurativeOwns
+
+vendir owns that directory outright.
+
+One rule owns the explainer openers.
+
+The installer owns the deployed tree.
+
+Upstream owns their wording.
+
+The one owning rule keeps the phrase.
+
+## FigurativeClears
+
+The draft cleared every gate on the first try.
+
+A message clears the mechanical validator before review.
+
+Clearing a finding by hand costs one command.
+
+The branch clears CI after the rebase.
+
+## FigurativeSurfaces
+
+Drift surfaces on the change that caused it.
+
+The recheck surfaced a defect the fix left behind.
+
+The difference surfaces only when somebody reads the object.
+
+Nothing surfaced this earlier.
+
+## FigurativeIdioms, commit-history additions
+
+Dropping the flag closes that gap.
+
+The sub-package versions move in lockstep with the root.
+
+The comment stays in step with the code it describes.
+
+A dispatch is the point of no return.
+
+The faults reached the reviewer under their own power.
+
+The prose rule covers more ground there.
+
+That change brings the rebase guard into line with the others.
+
+No later step can walk it back.
+
+Main had moved under it by the time the branch replayed.
+
+The package eats its own cooking at every commit.
+
+This repository dogfoods the payload it publishes.
+
+The team drinks its own champagne on staging.
+
+Retiring the alias now would wake sleeping dogs.
+
+One release fanned out into five pull requests.
+
+## FigurativeFalls, past tenses
+
+Every pin had fallen behind by the audit.
+
+The first attempt fell short of the floor.
+
+The old grouping fell apart at the second consumer.
+
+The request fell through the cracks during the rename.
+
+That habit fell out of favor after the rewrite.
+
+## FigurativeStays and FigurativeRides, widened
+
+The coverage family stayed behind on an untested assumption.
+
+The correction rides alongside the bump.
+
+A config edit cannot ride through on the exemption.
+
+## AnthropomorphicJustification, self-report and voice
+
+A generated file declares itself through an attribute.
+
+Forgetting that line announces itself at collection.
+
+The credential path proves itself on the next release.
+
+The comparison only speaks up after the push.
+
+A classifier settles those without a prompt.
+
+## RedundantPrecaution, British variant
+
+The second gate is belt-and-braces.
+
+That check was belt and braces from the start.

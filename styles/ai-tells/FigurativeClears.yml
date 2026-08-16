@@ -1,0 +1,23 @@
+---
+extends: existence
+message: "AI hurdle metaphor: '%s'. Say the check passed. Disable this rule for athletics prose."
+level: error
+nonword: true
+ignorecase: true
+# "Clears" is an AI fingerprint for passing dressed as a jump: a draft
+# "clears the gate," a message "clears every check," a fix "clears the
+# finding." The checking noun after the verb is the discriminator, so
+# clearing a cache, a screen, or a buffer stays quiet, and every token
+# measured zero across the Go and Python standard libraries. The same nouns
+# carry a deletion sense in interface prose, where clearing an alert means
+# dismissing it; writing about dismissing notifications disables the rule,
+# and a high jumper clearing the bar takes the athletics note in the
+# message.
+tokens:
+  # --- The hurdle: a checking noun jumped over ("cleared every gate,"
+  # "clears the mechanical validator," "clearing a finding by hand"). An
+  # optional modifier word sits between the determiner and the noun.
+  - "\\bclear(?:s|ed|ing)? (?:a|an|the|every|each|its|that|this|those|these|all|both) (?:[a-z-]+ )?(?:gates?|checks?|checkers?|lints?|linters?|validators?|reviews?|hooks?|findings?|alerts?|hurdles?|bars?|thresholds?)\\b"
+
+  # --- The proper-noun hurdle ("the branch clears CI").
+  - "\\bclear(?:s|ed|ing)? CI\\b"
