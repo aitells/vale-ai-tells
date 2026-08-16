@@ -2191,3 +2191,17 @@ A classifier settles those without a prompt.
 The second gate is belt-and-braces.
 
 That check was belt and braces from the start.
+
+## NominalizedScopeChange
+
+A tell fixture backs each new token, so the guard can notice a regression in the inflections the widening covers.
+
+The narrowing applies to headings only.
+
+The alert count survives the tightening.
+
+After the widening, the rule reports both spellings.
+
+The loosening of the gate keeps the alert totals identical.
+
+This broadening adds three tokens.
