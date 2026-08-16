@@ -1,0 +1,25 @@
+---
+extends: existence
+message: "AI overused verb: '%s'. Name the literal movement: is sent or is copied. Disable this rule for transit or physics prose."
+level: error
+nonword: true
+ignorecase: true
+# "Travels" is an AI fingerprint for dressing transmission as a journey: a
+# request "travels through the stack," data "travels" between services, an
+# idea "travels well." Every token measured at zero across the Go and Python
+# standard libraries, whose networking prose says a packet is sent, routed,
+# or forwarded rather than that it travels. Literal travel (a person, a
+# wave, light) is the transit and physics register; writing in those domains
+# disables the rule.
+tokens:
+  # --- Subject-gated: a piece of data on a journey ("the request travels,"
+  # "state travels with the session").
+  - "\\b(?:data|request|signal|message|information|payload|token|value|packet|traffic|event|change|write|read|state)s? travels?\\b"
+
+  # --- Route complement: the journey through the architecture ("travels
+  # through the stack," "travels down the pipeline").
+  - "\\btravel(?:s|l?ed|l?ing)? (?:through|across|down|up|along) the\\b"
+
+  # --- Portability idiom: an idea graded on how it ships ("the pattern
+  # travels well").
+  - "\\btravels? (?:well|together)\\b"

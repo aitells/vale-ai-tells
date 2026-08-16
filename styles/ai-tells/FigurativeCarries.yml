@@ -8,10 +8,66 @@ ignorecase: true
 # consequence: a term "carries baggage," a change "carries risk," an approach
 # "carries a caveat." Literal carrying is everywhere (people carry bags,
 # trucks carry freight), so the complement after the verb is the
-# discriminator, in the FigurativeSits mold. "Carries its weight" stays in
-# AnthropomorphicJustification; the tokens here avoid that span so the two
-# rules never double-flag. Freight or logistics writing disables the whole
-# rule.
+# discriminator, in the FigurativeSits mold, for the verb-first tokens. The
+# last token flips the discriminator to a determiner-gated open subject with
+# the common literal carriers listed as exceptions, in the FigurativeLands
+# mold; the exceptions below apply inside that token's span. "Carries its
+# weight" stays in AnthropomorphicJustification; the tokens here avoid that
+# span so the two rules never double-flag. Freight or logistics writing
+# disables the whole rule.
+exceptions:
+  # Vehicles and conveyances
+  - "(?i)trucks?"
+  - "(?i)bus(?:es)?"
+  - "(?i)vans?"
+  - "(?i)ships?"
+  - "(?i)vessels?"
+  - "(?i)boats?"
+  - "(?i)trains?"
+  - "(?i)ferr(?:y|ies)"
+  - "(?i)planes?"
+  - "(?i)aircraft"
+  - "(?i)carts?"
+  - "(?i)conveyors?"
+  # People who carry
+  - "(?i)couriers?"
+  - "(?i)porters?"
+  - "(?i)drivers?"
+  - "(?i)soldiers?"
+  - "(?i)players?"
+  - "(?i)patients?"
+  - "(?i)mothers?"
+  - "(?i)fathers?"
+  - "(?i)wom[ae]n"
+  - "(?i)m[ae]n"
+  - "(?i)person"
+  - "(?i)people"
+  # Biology and disease vectors
+  - "(?i)virus(?:es)?"
+  - "(?i)mosquito(?:es)?"
+  - "(?i)ticks?"
+  - "(?i)genes?"
+  - "(?i)alleles?"
+  - "(?i)chromosomes?"
+  - "(?i)cells?"
+  - "(?i)blood"
+  - "(?i)proteins?"
+  - "(?i)bacteria"
+  - "(?i)carriers?"
+  # Physical media
+  - "(?i)wires?"
+  - "(?i)cables?"
+  - "(?i)currents?"
+  - "(?i)winds?"
+  - "(?i)rivers?"
+  - "(?i)water"
+  - "(?i)air"
+  - "(?i)waves?"
+  # Corpus-attested prose carriers: a cited paper, and Go's own Context
+  # API, whose documentation says a Context carries deadlines and values.
+  - "(?i)papers?"
+  - "(?i)contexts?"
+  - "(?i)objects?"
 tokens:
   # --- Freighted significance: the abstraction hauls invisible cargo
   # ("carries weight in the review," "carries implications," "the term
@@ -59,3 +115,37 @@ tokens:
   # ("carry the constraint" in a solver comment). Numeric and cryptographic
   # prose already disables this rule for the freight tokens above.
   - "\\bcarr(?:y|ies|ied|ying) (?!out\\b|over\\b)(?:no |a |an |any |the |its |their |that |this |the same |every )?(?:[a-z]+ )?(?:pattern|rule|exemption|exception|convention|constraint|requirement|policy|contract|guarantee|invariant|override|precedent|assumption|default|setting)s?\\b"
+
+  # --- Typographic cargo: the freight is a mark on the page or in a name
+  # ("carries a repotools: prefix," "none of the three carries a suffix,"
+  # "the release carries a tag"). These head nouns leaked through the
+  # policy-noun set above constantly in agent-written docs, which is what
+  # put them here. "Annotation" is deliberately absent: Python's own
+  # documentation says a function "may carry a return annotation," so that
+  # noun floods. The rest measured zero across the Go and Python standard
+  # libraries.
+  - "\\bcarr(?:y|ies|ied|ying) (?!out\\b|over\\b)(?:no |a |an |any |the |its |their |that |this |every )?(?:[a-z]+ )?(?:prefix(?:es)?|suffix(?:es)?|tags?|labels?|markers?|trailers?|templates?|stamps?)\\b"
+
+  # --- Mirrored possession: the same-shape sibling of FigurativeHolds
+  # ("carries the same caveat," "carries a similar risk"). The comparison
+  # word is the tell, so the object stays open.
+  - "\\bcarr(?:y|ies|ied|ying) (?:the same|a similar|an identical|a matching)\\b"
+
+  # --- Open-subject conveyance: any determiner-gated subject as the
+  # bearer, with the complement left open ("the manifest carries the pin,"
+  # "each zip carries its own README," "this distinction carries"). A
+  # curated subject list proved unmaintainable here: agent prose attaches
+  # this verb to an open-ended set of document and config nouns, so the
+  # determiner and the inflected verb carry the discriminator between them,
+  # in the widened-FigurativeSits mold, and the exceptions above name the
+  # common literal carriers. The bare infinitive is left out because
+  # arithmetic prose puts the carry noun in that slot ("the final carry,"
+  # "the hardware carry"), the same collision that keeps it out of
+  # CommitFigurativeVerbs; requiring a subject word between the determiner
+  # and the verb also keeps the plural noun ("the carries are summed") from
+  # matching. The lookahead excludes the phrasal "carries out" and "carried
+  # over." Rare literal carriers fire, so freight, biology, or electrical
+  # writing disables the rule; the one known prose leak left is journalism's
+  # conveyance sense ("the site carries the story"), which media writing
+  # disables too.
+  - "\\b(?:a|an|the|this|that|these|those|each|every|its|their|both|all) (?:[a-z]+ )?[a-z]+ carr(?:ies|ied|ying)(?!\\s+(?:out|over)\\b)\\b"

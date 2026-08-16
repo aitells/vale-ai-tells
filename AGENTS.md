@@ -12,15 +12,15 @@ Draft every message in a repo-root `COMMIT_AGENTMSG` file before you run `git co
 2. Run `mise run lint-commit-msg` and resolve whatever it reports.
 3. Commit the validated draft with `git commit -s -F COMMIT_AGENTMSG`.
 
-The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits shape and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run repotools:prek-install` once so the hooks fire on every commit.
+The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits shape and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run repotools:prek-install` once so the hooks run on every commit.
 
 That hook stage is the real gate. `mise run lint-commit-msg` only previews it, so a clean recipe run predicts a clean commit without replacing the hook.
 
 ## Prose lint output
 
-The toolchain defaults to the agent template: `mise run lint-prose`, `mise run lint-messages`, and the vale pre-commit hook all pass `--output=ai-tells-agent.tmpl`. Name the flag yourself only when invoking `vale` directly. The template prints one self-contained line per finding (location, severity, rule, the exact matched text, and the replacement parameter when the rule defines one) plus a totals line, so you can apply fixes without re-reading context through separate commands. Empty output means a clean run, and the exit code carries the result.
+The toolchain defaults to the agent template: `mise run lint-prose`, `mise run lint-messages`, and the vale pre-commit hook all pass `--output=ai-tells-agent.tmpl`. Name the flag yourself only when invoking `vale` directly. The template prints one self-contained line per finding (location, severity, rule, the exact matched text, and the replacement parameter when the rule defines one) plus a totals line, so you can apply fixes without re-reading context through separate commands. Empty output means a clean run, and the exit code reports the result.
 
-`ai-tells.zip` carries the template, tracked here at `styles/config/templates/ai-tells-agent.tmpl`, so a repository syncing the core style alone can name the flag. A `vale sync` puts it under `StylesPath/config/templates/`, where vale looks up an `--output` name.
+`ai-tells.zip` includes the template, tracked here at `styles/config/templates/ai-tells-agent.tmpl`, so a repository syncing the core style alone can name the flag. A `vale sync` puts it under `StylesPath/config/templates/`, where vale looks up an `--output` name.
 
 Treat the output shape as a published interface. The prose-fix skills in [`repotools`](https://github.com/tbhb/repotools) parse it: they count findings with `grep -c '^[0-9]'` and read the `replace_with=` field to apply a correction. Reshaping a line or renaming a field breaks those skills and anything else reading the format, so a change there is a breaking change for consumers rather than a local edit.
 

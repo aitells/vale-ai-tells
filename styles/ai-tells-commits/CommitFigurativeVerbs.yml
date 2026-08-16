@@ -60,6 +60,12 @@ tokens:
   - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+asks?\s+(?:for|that)\b'
   - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+(?:joins?|joined)\b'
   - '\bnever sees?\b'
+  # Residence: a config "lives in" a file rather than being defined there.
+  # The prose style's FigurativeLives carries the broad shape with literal
+  # exceptions; this determiner-gated form backstops the commit register,
+  # where the idiom is always the substitution. The preposition keeps the
+  # plural noun ("improve their daily lives") out of the verb slot.
+  - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+lives?\s+(?:in|at|on|under|within|alongside)\b'
   # "Names" as an act of designation. Ordinary Go and Python documentation
   # uses it precisely ("the path names a directory"), which is why the prose
   # style leaves it alone, but in a commit message it stands in for a plain

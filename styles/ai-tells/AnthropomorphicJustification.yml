@@ -176,6 +176,11 @@ tokens:
   - pretend(?:s|ed|ing)? otherwise
   - pretend(?:s|ed|ing)? not to
   - cares? deeply
+  # Deliberation: a reader or a tool credited with a verdict-in-progress
+  # ("the reviewer forms an opinion," "the linter formed its own opinion")
+  # where judges or decides names the act. Measured at zero across the Go
+  # and Python standard libraries.
+  - form(?:s|ed|ing)? (?:an|its own|their own) opinion
   - deliver(?:s|ed|ing)? on (?:its|that|the|every) promise
   - keeps? (?:its|that) promise
   - breaks? (?:its|that) promise
