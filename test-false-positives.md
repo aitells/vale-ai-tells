@@ -884,3 +884,45 @@ We updated the config file path yesterday.
 The unit test suite passed on the first try.
 
 New York City Hall opened at nine.
+
+## UniversalObject: operations verbs and excluded shapes that should NOT trigger
+
+The query returns all matches in insertion order.
+
+The pass removes all unused imports and deletes all stale entries.
+
+Use find to list all files under the directory.
+
+The mutex protects all fields below it.
+
+Each item passed all tests in the doctest run.
+
+The team should handle all cases before the freeze.
+
+We plan to cover all of them in the next milestone.
+
+The parser does not handle all the legacy encodings.
+
+The collapse eliminates all but the top level.
+
+The poller handles every other request in the pair.
+
+The loop clears all pending timers on shutdown.
+
+## UniversalSubject: conditionals, adjectives, and floats that should NOT trigger
+
+The reader stops when all bytes are consumed.
+
+If all checks pass, the merge proceeds without review.
+
+All three parts are optional in the pattern.
+
+All ports are valid, including zero.
+
+The reader, the writer, and the closer have all been observed in the trace.
+
+The temps were all aliased to the scratch buffer.
+
+All feedback will be addressed in the next revision.
+
+All callers must check the returned error.

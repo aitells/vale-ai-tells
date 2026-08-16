@@ -142,7 +142,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 92 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 94 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -234,6 +234,8 @@ This package contains 92 rule files covering different categories of AI tells. A
 | `StrategyBuzzwords` | Strategy-deck buzzword metaphors: "growth flywheel," "competitive moat," "north star metric," "network effects," "first-mover advantage," "land grab." Each is scoped to the figurative shape, so the engine's flywheel, a castle's moat, and the real North Star stay clean. |
 | `StructureAnnouncements` | Narrating upcoming structure: "key takeaway," "quick recap," "to recap," "quick summary," "to put it plainly," "to put this in perspective," etc. |
 | `SycophancyMarkers` | Flattering phrases: "Great question," "I'm happy to help," "You make an excellent point," etc. |
+| `UniversalObject` | The mirror of `NegatedObject`, the universal quantifier on the object: "handles all edge cases," "covers every scenario," "addresses all concerns," "eliminates all ambiguity," "meets every requirement," "passes all checks," "guarantees all deliveries." The self-grading register where a change claims a clean sweep. The verb list is curated against the same pre-LLM corpora, so the operations family stays quiet ("returns all matches," "removes all elements," "finds all occurrences" are spec facts), along with the lock-comment register ("protects all fields"), doctest report output ("passed all tests"), the exception idiom ("eliminates all but the top level"), and the alternation reading of "every other." Base verb forms stay out, so modal and infinitive aspiration ("should handle all cases," "to cover all of them") never fires. Human coverage prose on the listed verbs ("Handles all POST requests") still fires; add project exceptions where a file needs them. |
+| `UniversalSubject` | The passive sibling of `UniversalObject`, the universal quantifier promoted to subject: "All edge cases are handled," "Every concern has been addressed," "All inputs are validated," "Every effort has been made," plus the uncounted scoreboard "All tests pass," "All checks are green." Anchored to a sentence-initial capital, so the mid-sentence conditional ("when all bytes are consumed") stays quiet, as do adjective predicates ("All three parts are optional"), the resumptive floats that summarize a list just named ("X, Y, and Z are all copied," "have all been observed"), and the modal future ("All feedback will be addressed"). Unlike its siblings, the predicate slot is open (any participle) rather than corpus-curated: the docs uniformity sweep ("All tabs are expanded to spaces," "All whitespace is removed") flags on purpose, the same call as the figurative family, because the shape now floods AI prose. Add project exceptions where spec formulas are deliberate. The counted scoreboard ("All 47 tests passing") stays in `CommitTestEnumeration`. |
 | `UnpackExplore` | Explainer announcements: AI's habit of announcing what it is about to explain rather than just explaining it. Phrases beginning with "Let me" or "Let us" followed by unpack, break down, dive in, walk through, examine, explore, etc. |
 | `UrgencyInflation` | False urgency and importance assertions: "cannot be overstated," "more important than ever," "has never been more critical," "the stakes have never been higher," "at a critical juncture," "in an increasingly connected world," etc. |
 | `VagueAttributions` | Claims attributed to unnamed authorities: "experts argue," "studies show that," "research suggests," "a growing body of evidence," etc. |
@@ -471,7 +473,7 @@ Based on academic research, practitioner analysis, and community-maintained cata
 
 ## AI disclosure
 
-Claude wrote the majority of rule definitions, documentation, and test cases in this repository. ChatGPT and Gemini generated text samples for cross-model validation. A human designed the rule categories, severity assignments, quality criteria, and the research-to-rule pipeline. A human validated every AI-generated rule against test documents containing known patterns.
+Claude wrote the majority of rule definitions, documentation, and test cases in this repository. ChatGPT and Gemini generated text samples for cross-model validation. A human designed the rule categories, severity assignments, quality criteria, and the research-to-rule pipeline. A human validated each AI-generated rule against test documents containing known patterns.
 
 The CITATION.cff lists the human author. It omits AI tools, consistent with [Committee for Publication Ethics (COPE) guidance](https://publicationethics.org/guidance/cope-position/authorship-and-ai-tools) on AI and authorship.
 

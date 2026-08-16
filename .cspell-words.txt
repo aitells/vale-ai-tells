@@ -35,6 +35,7 @@ commitlint
 coreference
 dasel
 dedup
+doctest
 doesn
 dogfooding
 dunder
@@ -84,6 +85,7 @@ optimi
 orbstack
 orcid
 osxkeychain
+overclaim
 Overexplanation
 peakoss
 pipefail
@@ -125,6 +127,7 @@ tombi
 toplevel
 tricolon
 tricolons
+unbuildable
 vendir
 venv
 verbed
