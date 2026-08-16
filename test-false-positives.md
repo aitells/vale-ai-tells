@@ -1116,3 +1116,23 @@ Our in-house style guide covers commit prose.
 The house lights dim before the talk starts.
 
 A tic in the parser drops the final byte.
+
+## FigurativeDisguises: noun senses and comparisons that should NOT trigger
+
+The problem is posed as a linear program.
+
+The upgrade poses as much risk as the bug it removes.
+
+The refactor poses as many questions as it answers.
+
+The masquerade ball starts at nine.
+
+His disguise fooled nobody at the door.
+
+The parade passed as the band played.
+
+The kids dressed up for the party.
+
+The suite passes for the wrong reason.
+
+The cleanup pass kicked off as scheduled.

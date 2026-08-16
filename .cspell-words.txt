@@ -12,6 +12,7 @@ autostash
 backrefs
 backticked
 bcultivat
+bdisguis
 bdogfood
 behaviour
 behaviours
@@ -22,8 +23,10 @@ bincubat
 BLEU
 bliv
 blocklist
+bmasquerad
 bmisbehav
 bnurtur
+bparad
 bpolic
 bresonat
 bstrik
@@ -40,6 +43,8 @@ codespell
 colour
 commitlint
 coreference
+cosplay
+cosplaying
 dasel
 dedup
 doctest
@@ -144,6 +149,7 @@ tombi
 toplevel
 tricolon
 tricolons
+uintptrs
 unbuildable
 vendir
 venv

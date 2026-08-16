@@ -4,7 +4,7 @@ message: "AI overused verb: '%s'. Say uses or resorts to instead. Disable this r
 level: error
 nonword: true
 ignorecase: true
-# "Reaches for" is an AI fingerprint for selection dressed as motion: the
+# "Reaches for" is an AI fingerprint for selection described as motion: the
 # prose "reaches for" the same verb, a rule "reaches for" a curated list,
 # AI "reaches for" a structure. The literal sense needs a hand, so the
 # subject is the discriminator. The first token leaves the subject open

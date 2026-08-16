@@ -4,7 +4,7 @@ message: "AI overused verb: '%s'. Name the literal movement: is sent or is copie
 level: error
 nonword: true
 ignorecase: true
-# "Travels" is an AI fingerprint for dressing transmission as a journey: a
+# "Travels" is an AI fingerprint for turning transmission into a journey: a
 # request "travels through the stack," data "travels" between services, an
 # idea "travels well." Every token measured at zero across the Go and Python
 # standard libraries, whose networking prose says a packet is sent, routed,

@@ -4,7 +4,7 @@ message: "AI evasion metaphor: '%s'. Name what the check missed and why."
 level: error
 nonword: true
 ignorecase: true
-# A miss dressed as an escape: a defect "slips through," a filter "lets it
+# A miss framed as an escape: a defect "slips through," a filter "lets it
 # through," a rule gets "routed around," a case "goes unnoticed." The
 # escape verbs personify the artifact as a fugitive and the check as a
 # porous fence, where the plain statement names what was missed and why.

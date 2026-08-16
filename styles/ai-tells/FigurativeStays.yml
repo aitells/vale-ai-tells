@@ -28,7 +28,7 @@ tokens:
   # disable note in the message.
   - "\\bstay(?:s|ed|ing)? behind\\b"
 
-  # --- Membership idioms: presence dressed as loyalty ("stays in the
+  # --- Membership idioms: presence framed as loyalty ("stays in the
   # picture," "stays in lockstep").
   - "\\bstay(?:s|ed|ing)? in (?:the loop|the picture|play|lockstep|force)\\b"
 

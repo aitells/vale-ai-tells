@@ -40,7 +40,7 @@ tokens:
   - "\\b(?:ride|rides|riding) the momentum\\b"
   - "\\b(?:ride|rides|riding) high\\b"
 
-  # --- Vehicle exploitation: an operation dressed as a passenger on the
+  # --- Vehicle exploitation: an operation treated as a passenger on the
   # infrastructure it merely uses ("the query rides the index," "the lookup
   # rides the cache," "the scan rides the hot path"). The mechanism noun is
   # the gate and the set stays to software infrastructure that cannot be

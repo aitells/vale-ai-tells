@@ -4,7 +4,7 @@ message: "AI overused verb: '%s'. Say the one causes the other. Disable this rul
 level: error
 nonword: true
 ignorecase: true
-# "Breeds" is an AI fingerprint for causation dressed as biology: complexity
+# "Breeds" is an AI fingerprint for causation given a biological verb: complexity
 # "breeds confusion," inconsistency "breeds distrust," a loose process is "a
 # breeding ground for" bugs. The abstract offspring is the discriminator, so
 # literal breeding (dogs, livestock, mosquitoes) stays quiet; husbandry or

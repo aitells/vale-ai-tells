@@ -163,18 +163,5 @@ tokens:
   # legitimate concurrency and circuit vocabulary and stay untouched.
   - '\bfan(?:s|ned|ning)? out (?:into|across|again|over|to)\b'
 
-  # Candidate not yet implemented: the substitution frame, where one thing
-  # is named as another wearing its clothes. Recorded here rather than
-  # guessed at, because the family does not come apart evenly.
-  #
-  # "Disguised as" and "masquerading as" carry real technical use. Pointers
-  # into the stack disguised as integers is literally accurate about type
-  # punning, and commits masquerading as real ones describes a genuine
-  # forgery. Both appear in the Go standard library meaning exactly that.
-  #
-  # The "dressed as" variant measured at zero outside this project, which
-  # is the shape worth catching. Landing it means rewording this package
-  # first: the messages on FigurativeLoud and FigurativeQuiet both explain
-  # a tell in those words, and the comments on FigurativeRuns,
-  # FigurativeRides, and OrganicConsequence do the same. A token would
-  # fail the project's own message lint before it ever reached a user.
+  # The rest of the substitution frame ("disguised as," "masquerading as,"
+  # "dressed as," "in the guise of") lives in FigurativeDisguises.
