@@ -2323,3 +2323,53 @@ The intern passed it off as original work.
 The spreadsheet is three macros cosplaying as a database.
 
 The monolith is five services in a trench coat.
+
+## JourneyMetaphors
+
+The team learned a lot along the way.
+
+We supported the rollout every step of the way.
+
+Stopping the world gets us most of the way there.
+
+The new parser is halfway there.
+
+The release is well on its way to stable.
+
+Two more rules are on their way.
+
+A fix is on the way.
+
+The migration is well on the way.
+
+We shipped two rules, with more on the way.
+
+The caching layer is en route to general availability.
+
+The bug found its way into production.
+
+Each value makes its way through the queue.
+
+This groundwork paves the way for streaming.
+
+Consistent naming goes a long way toward clean diffs.
+
+The project has come a long way since the first release.
+
+The team agreed on a path forward.
+
+The refactor puts us on a path to stability.
+
+The service is on the road to recovery.
+
+The road ahead looks clear.
+
+We hit a few bumps in the road.
+
+That shortcut will bite us down the road.
+
+The hack causes maintenance problems down the line.
+
+Our journey began with a single rule.
+
+The journey from prototype to production took a year.
