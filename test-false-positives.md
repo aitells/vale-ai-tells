@@ -841,6 +841,10 @@ What remains is to choose the exponent.
 
 The parser returns the word and what remains after it.
 
+The optimizer accepts a cost function and a starting point.
+
+The endpoint accepts a cost parameter in cents.
+
 ## AnthropomorphicJustification: opinions that should NOT trigger
 
 Public opinion shifted slowly after the report.

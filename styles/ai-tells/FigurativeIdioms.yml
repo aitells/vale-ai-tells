@@ -49,6 +49,21 @@ tokens:
   # is to choose e"), and "what remains after" is the literal remainder.
   - '\bmeasured cost\b'
   - '\bwhat remains of\b'
+  # The accepted invoice, the same register's third limb: a cost framed as
+  # a bill somebody already agreed to pay ("the cost the rule already
+  # accepts," "the same cost the present form already accepts," "a
+  # tolerated cost"). Rule comments in this very style write it, which is
+  # where the commit prose picked it up. Zero matches for all three
+  # shapes across the Go and Python standard libraries.
+  # The noun-compound senses are literal (an optimizer accepts a cost
+  # function, an endpoint accepts a cost parameter), so a lookahead
+  # excludes the compound head.
+  # The lookahead accepts any whitespace, because a hard-wrapped commit
+  # buffer parses as plain text and a line break would otherwise split
+  # the exclusion off the match.
+  - '\baccept(?:s|ed|ing)? (?:a|an|the|that|this|its|their) (?:[a-z]+ )?cost\b(?!\s+(?:functions?|parameters?|arguments?|matrix|matrices|models?|columns?|fields?))'
+  - '\bcosts? (?:a|an|the|this|that|each|every) (?:[a-z]+ )?[a-z]+ (?:already |willingly |silently )?accept(?:s|ed)\b'
+  - '\btolerated cost\b'
   # The one measured false positive in either standard library is a garbage
   # collector comment where a value is literally unreachable. Runtime and
   # memory-management prose should disable the rule.

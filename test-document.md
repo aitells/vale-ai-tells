@@ -1612,6 +1612,12 @@ The measured cost is one comment in the Go tree.
 
 That stub is what remains of the old pipeline.
 
+The extra alert is the same cost the present form already accepts.
+
+The double fire is a tolerated cost.
+
+The design accepts a small cost in verbosity.
+
 ## FigurativeQuantities
 
 A handful of tests still fail on Windows.
