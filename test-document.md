@@ -1264,6 +1264,28 @@ The approach holds great promise.
 
 That argument holds little weight.
 
+That excuse never held water.
+
+The old heuristic held sway for years.
+
+Caching held the key to the speedup.
+
+The on-call team held the line during the incident.
+
+The cache layer is holding the line on latency.
+
+The optimization held at scale.
+
+The staff engineer held court in the design review.
+
+The trend is still holding after the rollout.
+
+The proxy works by holding network access to an approved-domain allowlist.
+
+We held infrastructure costs to a minimum.
+
+The gateway holds request rates to under 100 per second.
+
 ## FigurativeRuns
 
 The problem runs deep.

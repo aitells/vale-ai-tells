@@ -473,6 +473,14 @@ The court holds session on Mondays.
 
 The clamp holds the panel in place.
 
+That assumption is widely held among practitioners.
+
+He held the phone to his ear.
+
+The bracket holds the panel to the frame.
+
+The cache holds a reference to the parent object.
+
 ## AnthropomorphicJustification (adjudication): literal settling that should NOT trigger
 
 We settled on a date for the review.
