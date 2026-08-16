@@ -88,7 +88,7 @@ mise run release vX.Y.Z
 
 ## Rule conventions
 
-All rules use `error` level by default. Users can override this in their `.vale.ini`. Core rules use Vale's `existence` and `sequence` extensions, plus `occurrence` for the density rule. The experimental style adds `script` (Tengo), `metric`, `capitalization`, and `substitution` rules. Each rule needs:
+All rules use `error` level by default. Users can override this in their `.vale.ini`. Core rules use Vale's `existence` and `sequence` extensions, plus `occurrence` for the density rule and `substitution` for the house-compound swaps. The experimental style adds `script` (Tengo), `metric`, `capitalization`, and `substitution` rules. Each rule needs:
 
 - `message`: Clear explanation of why the rule flags the pattern
 - `level`: Always `error`

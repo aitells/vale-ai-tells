@@ -1104,3 +1104,15 @@ Type narrowing is done by analyzing the code flow.
 We stop narrowing when the range fits the window.
 
 The above constraints narrow the possible bit sets.
+
+## HouseStyle: literal houses that should NOT trigger
+
+The house at the end of the street needs paint.
+
+The team keeps the tooling in-house.
+
+Our in-house style guide covers commit prose.
+
+The house lights dim before the talk starts.
+
+A tic in the parser drops the final byte.

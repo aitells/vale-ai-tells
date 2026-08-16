@@ -2249,3 +2249,25 @@ After the widening, the rule reports both spellings.
 The loosening of the gate keeps the alert totals identical.
 
 This broadening adds three tokens.
+
+## HouseStyle
+
+The comment matches the house style.
+
+Both repos share a house style for error messages.
+
+Two house styles compete in this codebase.
+
+That opening is a house tic.
+
+The review flagged three house tics in the draft.
+
+The summary follows the house formula.
+
+These house formulas show up in every changelog entry.
+
+The paragraph reads in the house voice.
+
+That figure is a house idiom by now.
+
+The doc leans on house idioms instead of plain description.
