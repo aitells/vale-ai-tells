@@ -1540,3 +1540,51 @@ The rules sit in the config.
 A figurative sat in this message.
 
 The change earns a mention.
+
+## NegatedObject: stilted verb-plus-no negations that should trigger
+
+The gate allows no inline suppression.
+
+The scheduler makes no clock calls during replay.
+
+The API offers no guarantee about ordering.
+
+The install requires no configuration and needs no restart.
+
+The hook touches no files outside the worktree.
+
+The daemon spawns no subprocesses and performs no validation.
+
+The parser holds no state between calls and keeps no cache.
+
+The cleanup pass leaves no trace in the log.
+
+The benchmark showed no regression on the second run.
+
+The change adds no dependencies and introduces no breaking changes.
+
+The endpoint poses no risk to existing clients, and the tutorial assumes no prior knowledge.
+
+The build collects no telemetry, sets no cookies, and allocates no memory on the hot path.
+
+The migration breaks no existing behavior and leaks no goroutines.
+
+The reviewer wastes no time and pulls no punches.
+
+The refactor requires zero configuration and adds zero overhead.
+
+## NegatedSubject: passive absence claims that should trigger
+
+No configuration is required to get started.
+
+No manual intervention is needed during the rollout.
+
+No breaking changes are introduced in this release.
+
+No data is ever collected on the device.
+
+No animals were harmed in the making of this feature.
+
+No signup required.
+
+No credit card needed, and no extra tooling necessary.

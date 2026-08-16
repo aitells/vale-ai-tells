@@ -1,0 +1,42 @@
+---
+extends: existence
+message: "AI negated subject: '%s'. Name who does what: 'you don't need to configure anything' instead of announcing an absence."
+level: error
+nonword: true
+# The passive sibling of NegatedObject: the object of the negated claim
+# promoted to subject, either with a copula ("No configuration is required,"
+# "No data is collected," "No breaking changes are introduced") or elliptical
+# ("No signup required," "No setup needed"). The reassurance register of a
+# marketing page or a compliance notice, and a construction AI prose leans on
+# for spec claims a human would state actively.
+#
+# Case matters, so no ignorecase: the same shape in lowercase is the docs
+# conditional ("if no timeout is specified, the default applies"), which is
+# everywhere in pre-LLM prose and reads fine. The sentence-initial capital
+# "No" is the proxy for the declarative claim, the same positional gate
+# CataphoricForecasting uses for its cardinals. A mid-sentence declarative
+# ("and no configuration is required") escapes; ContrastiveNegation's
+# clause-final fragment token catches the comma-led share of those.
+#
+# The predicate list is empirical, measured against the same ~1.3M-line
+# Go+Python corpora as NegatedObject. Predicates that anchor standard docs
+# formulas even sentence-initially stay out: "returned" ("No error is
+# returned"), "raised" and "thrown" (exception contracts), "allowed" and
+# "permitted" ("No whitespace is allowed" is spec language), plus the
+# condition-frame participles "given," "specified," "set," "present,"
+# "found," "supplied," "passed," "defined," "included," "used," and "done."
+# What stays flags at ~43 corpus hits, led by the human caveat register
+# ("No other validation is performed," "No attempt is made"), which is the
+# same construction and flags on purpose.
+#
+# The first-word lookahead drops the degree and pronoun shapes ("no longer
+# needed," "no more than," "no one was harmed"). The elliptical token also
+# refuses a determiner or pronoun after its predicate, which is the active
+# past verb reading ("No law required them to file") rather than the
+# ellipsis. An optional adverb slot covers "No data is ever collected."
+tokens:
+  # --- Copula form: "No <subject> is/are/was/were <participle>."
+  - "\\bNo (?!(?:one|longer|matter|more|less|fewer|doubt)\\b)(?:[A-Za-z][-A-Za-z']* ){1,3}(?:is|are|was|were) (?:[a-z]+ly |ever )?(?:required|needed|necessary|made|performed|provided|expected|involved|introduced|added|imposed|created|spawned|executed|invoked|collected|stored|logged|recorded|tracked|retained|shared|exposed|sent|transmitted|leaked|persisted|saved|installed|allocated|consumed|produced|generated|caused|triggered|touched|modified|changed|affected|broken|harmed|lost|wasted|kept|held)\\b"
+  # --- Elliptical form: "No <subject> required." with the copula dropped,
+  # the badge-copy variant ("No signup required," "No credit card needed").
+  - "\\bNo (?!(?:one|longer|matter|more|less|fewer|doubt)\\b)(?:[A-Za-z][-A-Za-z']* ){1,2}(?:required|needed|necessary)\\b(?! (?:the|a|an|that|them|it|us|me|him|her|any)\\b)"

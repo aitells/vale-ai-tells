@@ -115,7 +115,7 @@ Detects near-identical paragraphs within a document section using Jaccard word-o
 4. Computes Jaccard index (intersection / union) for each paragraph pair
 5. Flags the later paragraph when overlap exceeds 60%
 
-**Tengo note:** Map iteration requires the two-variable form `for key, _ in map`. The single-variable `for key in map` silently produces no iterations.
+**Tengo note:** Map iteration requires the two-variable form `for key, _ in map`. The single-variable `for key in map` compiles but never iterates.
 
 ### ContractionAvoidance
 
@@ -287,7 +287,7 @@ This rule and its two companions replace `Google.Passive`, `write-good.Passive`,
 - False positives on predicate adjectives and other "ed" words: "the results were mixed," "the talk was indeed useful," "the color is red."
 - False negatives on every passive with an adverb in the gap: "was never used," "is automatically generated."
 
-The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` covers the adverb gap. `write-good.E-Prime` needs no replacement: it flags every form of "to be," including "it's" and "here's," which makes it a philosophy rather than a passive detector.
+The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` covers the adverb gap. `write-good.E-Prime` doesn't need a replacement: it flags every form of "to be," including "it's" and "here's," which makes it a philosophy rather than a passive detector.
 
 **Known limitations:** Participles that double as adjectives ("tired," "excited") tag as VBN even in predicate-adjective position, so "she was tired" fires. The rule deliberately defines no exception list. An allowlist would hide the passive sense of those same verbs ("the electron is excited by a photon"). The project's stance is that users decide what to except. The tagger also guesses VBN for some words outside its vocabulary, which produces an occasional flag on a non-participle.
 
