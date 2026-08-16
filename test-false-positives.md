@@ -1064,3 +1064,15 @@ The fan-out factor stays at eight per node.
 The price fell sharply in the third quarter.
 
 Night fell over the harbor.
+
+## NominalizedScopeChange: adjectival and verb uses that should NOT trigger
+
+The narrowing road forced the trucks to slow down.
+
+A loosening belt squeaks before it fails.
+
+Type narrowing is done by analyzing the code flow.
+
+We stop narrowing when the range fits the window.
+
+The above constraints narrow the possible bit sets.
