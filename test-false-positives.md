@@ -801,6 +801,14 @@ The radar sweep completes every four seconds.
 
 She sweeps the porch every morning.
 
+## FigurativeReaches: literal reaching that should NOT trigger
+
+The child reaches for the top shelf.
+
+The climber reached for the next hold.
+
+The robot arm reaches for the part on the belt.
+
 ## FigurativeIdioms: literal descent that should NOT trigger
 
 Come down to the lobby when you are ready.

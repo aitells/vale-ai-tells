@@ -1,0 +1,67 @@
+---
+extends: existence
+message: "AI overused verb: '%s'. Say uses or resorts to instead. Disable this rule for sports or robotics prose."
+level: error
+nonword: true
+ignorecase: true
+# "Reaches for" is an AI fingerprint for selection dressed as motion: the
+# prose "reaches for" the same verb, a rule "reaches for" a curated list,
+# AI "reaches for" a structure. The literal sense needs a hand, so the
+# subject is the discriminator. The first token leaves the subject open
+# behind a determiner, in the FigurativeLands mold, and the exceptions
+# name the beings and limbs that literally reach; the second names the
+# bare subjects agent prose starts a clause with; the third gates on a
+# writing-device complement instead, because a human writer reaching for
+# a metaphor is the same figure. Every inflected shape measured zero
+# across the Go and Python standard libraries; the corpora's one
+# figurative use ("they are what people reach for when debugging") is a
+# bare verb on a bare human subject, outside every gated shape here.
+# "Out of reach" stays in FigurativeIdioms and "reach out" stays in
+# ClosingPleasantries, so the noun and the pleasantry never double-flag.
+# Sports, robotics, and physical narrative use the verb literally with
+# subjects beyond the exception list; those files disable the rule.
+exceptions:
+  # Body parts that do the literal reaching
+  - "(?i)hands?"
+  - "(?i)arms?"
+  - "(?i)fingers?"
+  # People
+  - "(?i)people"
+  - "(?i)person"
+  - "(?i)m[ae]n"
+  - "(?i)wom[ae]n"
+  - "(?i)child(?:ren)?"
+  - "(?i)kids?"
+  - "(?i)bab(?:y|ies)"
+  - "(?i)toddlers?"
+  - "(?i)patients?"
+  - "(?i)players?"
+  - "(?i)climbers?"
+  - "(?i)swimmers?"
+  # Creatures and machines with a literal grasp
+  - "(?i)cats?"
+  - "(?i)dogs?"
+  - "(?i)monkeys?"
+  - "(?i)robots?"
+tokens:
+  # --- Determiner-gated selection: an artifact choosing by "reaches for"
+  # where "uses" would do, with an optional modifier word between the
+  # determiner and the subject ("the generated prose reaches for the same
+  # verb"). Inflected forms only, so the noun homograph ("a reach for
+  # power") and the bare-verb human idiom the corpora attest stay out.
+  - "\\b(?:a|an|the|this|that|these|those|each|every|its|their|both|all) (?:[a-z]+ )?[a-z]+ reach(?:es|ed|ing) for\\b"
+
+  # --- Determiner-less subjects at a sentence or clause start ("AI
+  # reaches for this structure," "agents reach for the passive voice").
+  # The subject set is curated because there is no determiner to gate on;
+  # every noun in it measured zero across the Go and Python standard
+  # libraries, and the bare verb form is safe behind them.
+  - "\\b(?:AI|LLMs?|models?|agents?|prose|writing|copy|documentation|docs|drafts?) reach(?:es|ed|ing)? for\\b"
+
+  # --- The writing-device complement, whatever the subject: a writer
+  # reaching for a metaphor is the same substitution figure with a human
+  # holding the pen ("writers reach for the same tired metaphor,"
+  # "reaching for a superlative"). The head nouns are language devices
+  # with no physical sense, so a hand reaching for an object never
+  # matches this shape.
+  - "\\breach(?:es|ed|ing)? for (?:(?:a|an|the|this|that|its|their|the same) )?(?:[a-z]+ )?(?:word|verb|noun|adjective|phrase|phrasing|metaphor|simile|idiom|cliché|cliche|superlative|intensifier|qualifier|hedge|euphemism|trope|formula|template|structure|construction|crutch|shorthand)s?\\b"

@@ -1692,6 +1692,18 @@ The script renames every file in one sweep.
 
 The change removed all ten call sites in one fell swoop.
 
+## FigurativeReaches
+
+The generated prose reaches for the same verb every time.
+
+Each draft reaches for a metaphor when a plain statement would do.
+
+AI reaches for this structure constantly.
+
+The rule reached for a curated list first.
+
+Writers reach for the same tired metaphor.
+
 ## NegatedObject: stilted verb-plus-no negations that should trigger
 
 The gate allows no inline suppression.

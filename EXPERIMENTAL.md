@@ -316,7 +316,7 @@ Measures the share of sentences in each section that contain a passive construct
 
 ### NegationDensity
 
-Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any use on its own. It catches the writer who reaches for one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
+Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any use on its own. It catches the writer who uses one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
 
 **How it works:**
 
