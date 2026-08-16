@@ -755,3 +755,21 @@ The compatibility shim is no longer needed.
 No one was harmed by the change.
 
 No law required them to file the report.
+
+## FillerIntensifier: precise senses that should NOT trigger
+
+A single-threaded server runs without locks.
+
+The single-variable form silently skips every iteration.
+
+Wrap the value in single quotes before passing it to the shell.
+
+The registry is a singleton behind one accessor.
+
+The singular form of the noun takes no suffix.
+
+The word merely narrows the claim.
+
+A lonely outpost appears in the story's second act.
+
+No one has read the draft yet, and each one of the reviewers is busy.

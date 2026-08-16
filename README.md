@@ -142,7 +142,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 80 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 81 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -186,6 +186,7 @@ This package contains 80 rule files covering different categories of AI tells. A
 | `FigurativeLends` | "Lends" as an overused verb for conferring an abstract quality: a structure that "lends itself to" reuse, a study that "lends credence," a detail that "lends weight." Gated on the figurative complement, so literal lending (money, a book) stays quiet; disable the rule for library or finance writing. |
 | `FigurativeDraws` | "Draws" as an overused verb for sourcing and comparison: an argument that "draws on" prior work, a section that "draws a distinction," a heading that "draws attention to" a caveat, a post that "draws to a close." Gated on the figurative complement, so literal drawing (a card, water, a weapon, blood) stays quiet; disable the rule for art or card-game writing. |
 | `FigurativeCasts` | "Casts" as an overused verb for projecting an abstraction: a finding that "casts doubt on" a result, a decision that "casts a long shadow," a rewrite that "casts a wide net." Gated on the figurative complement, so literal casting (a fishing line, metal, a vote, actors) stays quiet; disable the rule for fishing, metalwork, or theater writing. |
+| `FillerIntensifier` | "single" and its cousins riding a determiner that already carries the count: "a single command," "every single time," "no single point of failure," "any single failure," "any one of the checks," "the single source of truth," "a lone exception," "its sole purpose," "a mere formality," "one solitary warning," "a singular focus." Deliberately broad: "no single component owns this" is flagged too, and recasting it takes more than deletion. Hyphenated compounds ("a single-threaded server"), grammar's "the singular form," pronoun heads ("no one," "each one," "every one"), and `AbsoluteAssertions`' "the single most important" stay out. |
 | `FillerPhrases` | Padding and performative sincerity: "a wide range of," "in order to," "honestly," "to be perfectly honest," "the honest truth," etc. |
 | `FormalRegister` | Overly formal vocabulary: "utilize," "facilitate," "commence," etc. |
 | `FormalTransitions` | Formal transitions: "Moreover," "Furthermore," "What's more," "Case in point," etc. |
@@ -361,8 +362,8 @@ AI writing research documents these patterns, but they need analysis beyond Vale
 
 - **Sentence-length uniformity:** AI produces sentences of near-uniform length, roughly 27 words, while human writing varies widely. Requires statistical analysis across the document.
 - **Paragraph-length uniformity:** AI paragraphs tend toward uniform size, typically 3-5 sentences and 60-100 words each. Requires document-level measurement.
-- **Dead metaphor repetition:** AI latches onto a single metaphor and repeats it 5-10 times throughout a piece. Requires tracking metaphor usage across the document.
-- **One-point dilution:** A single argument restated 10 ways across thousands of words — circular repetition disguised as comprehensiveness. Requires semantic analysis.
+- **Dead metaphor repetition:** AI latches onto one metaphor and repeats it 5-10 times throughout a piece. Requires tracking metaphor usage across the document.
+- **One-point dilution:** One argument restated 10 ways across thousands of words — circular repetition disguised as comprehensiveness. Requires semantic analysis.
 - **Elegant variation:** AI's repetition-penalty pushes it to substitute synonyms unnaturally, cycling through "protagonist," "key player," "eponymous character" instead of reusing a name. Requires NLP-level analysis.
 - **Content duplication:** Repeating entire sections or paragraphs verbatim within the same piece. Requires document-level diff analysis.
 - **Unnecessary inline definitions:** AI habitually inserts appositive definitions like "X, a [definition], does Y" even when the audience already knows the term. Too many false positives for token matching.

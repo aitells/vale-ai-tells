@@ -1,6 +1,6 @@
 ---
 extends: existence
-message: "AI anaphora: '%s'. Vary the sentence openings or combine into a single statement."
+message: "AI anaphora: '%s'. Vary the sentence openings or combine into one statement."
 level: error
 nonword: true
 tokens:

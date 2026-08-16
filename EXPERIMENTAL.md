@@ -82,7 +82,7 @@ Measures the CV of paragraph word counts within each section. Flags sections whe
 
 ### SentenceStartRepetition
 
-Counts the first word of each sentence within a section and flags when any single starting word appears in more than 30% of sentences (at least 3 occurrences, at least 6 sentences in section).
+Counts the first word of each sentence within a section and flags when one starting word appears in more than 30% of sentences (at least 3 occurrences, at least 6 sentences in section).
 
 **Research basis:**
 
@@ -179,7 +179,7 @@ A capitalization rule that flags markdown headings using Title Case instead of s
 
 **How it works:** Uses Vale's built-in `capitalization` extension. The relevant settings are `match: $sentence` and `scope: heading`. Acronyms like API and SQL, alongside proper nouns like GitHub, Docker, and PostgreSQL, live in a built-in exceptions list that the rule consults before flagging anything.
 
-**Ordinal prefixes:** The rule's `prefix` setting strips a leading ordinal label before checking the case, with or without a colon. Headings such as `Section 1: Data collection methods`, `Appendix A`, `Chapter IV: The long road home`, and `1.1 Results` stay clean. The rule still checks the rest of the heading, so `Section 1: Data Tables Are Here` still trips it, and the first word after the prefix still needs a capital letter. Recognized labels: Appendix, Chapter, Example, Figure, Part, Phase, Section, Stage, Step, and Table, each followed by a number, a single letter, or a roman numeral. Bare numeric ordinals like `1.1` or `2.` also count.
+**Ordinal prefixes:** The rule's `prefix` setting strips a leading ordinal label before checking the case, with or without a colon. Headings such as `Section 1: Data collection methods`, `Appendix A`, `Chapter IV: The long road home`, and `1.1 Results` stay clean. The rule still checks the rest of the heading, so `Section 1: Data Tables Are Here` still trips it, and the first word after the prefix still needs a capital letter. Recognized labels: Appendix, Chapter, Example, Figure, Part, Phase, Section, Stage, Step, and Table, each followed by a number, one letter, or a roman numeral. Bare numeric ordinals like `1.1` or `2.` also count.
 
 **Adding project-specific exceptions:** Users can add their own exceptions (product names, domain terms) without modifying the rule. Drop the relevant entries into your project's `accept.txt` vocabulary file:
 
@@ -231,13 +231,13 @@ Detects when the same formal transition phrase appears 3+ times within a documen
 <!-- vale off -->
 3. Counts occurrences of 20 common formal transitions (case-insensitive): "Moreover," "Furthermore," "Additionally," "Consequently," "Hence," "Thus," etc.
 <!-- vale on -->
-4. Flags when any single transition appears 3+ times in the same section
+4. Flags when one transition appears 3+ times in the same section
 
 ### SentenceStartEntropy
 
 Measures Shannon entropy of sentence-starting words within document sections. A more nuanced version of SentenceStartRepetition that captures broad diversity rather than just the most repeated opener.
 
-**Research basis:** A section could have no single dominant opener yet still sound monotonous (alternating between just "The" and "This"). Shannon entropy captures this broader pattern.
+**Research basis:** A section could have no dominant opener yet still sound monotonous (alternating between just "The" and "This"). Shannon entropy captures this broader pattern.
 
 **How it works:**
 
@@ -316,7 +316,7 @@ Measures the share of sentences in each section that contain a passive construct
 
 ### NegationDensity
 
-Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any single use. It catches the writer who reaches for one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
+Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any use on its own. It catches the writer who reaches for one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
 
 **How it works:**
 
@@ -353,7 +353,7 @@ Known limitations:
 These patterns need capabilities Tengo can't provide. They'd require a separate tool or a Vale plugin with access to NLP libraries:
 
 - **Elegant variation** — AI's repetition penalty causes unnatural synonym cycling ("the protagonist," "the key player," "the eponymous character" instead of reusing a name). Needs entity resolution and coreference tracking.
-- **One-point dilution** — A single argument restated 10 ways across thousands of words. Needs semantic similarity (sentence embeddings) to detect that paragraphs say the same thing differently.
+- **One-point dilution** — One argument restated 10 ways across thousands of words. Needs semantic similarity (sentence embeddings) to detect that paragraphs say the same thing differently.
 - **Unnecessary inline definitions** — AI inserts appositive definitions ("X, a [definition], does Y") even for audiences that know the term. Needs syntactic parsing to identify appositive structures.
 - **Awkward analogies** — AI generates metaphors that seem superficially plausible but lack cultural specificity. Needs semantic analysis to judge metaphor quality.
 

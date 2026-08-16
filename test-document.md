@@ -1588,3 +1588,37 @@ No animals were harmed in the making of this feature.
 No signup required.
 
 No credit card needed, and no extra tooling necessary.
+
+## Filler intensifiers
+
+The whole pipeline compiles down to a single binary.
+
+One single flag controls the entire rollout.
+
+You have to re-run the bootstrap every single time.
+
+This single abstraction shaped the whole design.
+
+That single decision constrained the architecture for years.
+
+The single source of truth for the pins lives in the manifest.
+
+A single misplaced comma broke the build.
+
+No single component owns the whole pipeline.
+
+Any single failure takes down the whole pipeline.
+
+The fix touched a lone test file.
+
+Its sole purpose is to guard the rebase.
+
+The migration is a mere formality.
+
+The mere presence of the flag changes the behavior.
+
+One solitary warning survived the cleanup.
+
+A singular focus on latency shaped the roadmap.
+
+Any one of the checks can veto the merge.
