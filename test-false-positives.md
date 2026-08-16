@@ -942,3 +942,29 @@ The temps were all aliased to the scratch buffer.
 All feedback will be addressed in the next revision.
 
 All callers must check the returned error.
+
+## ExplainerHeadings: conventional doc headings that should NOT trigger
+
+### How to Configure Vale
+
+### What's New in the Release
+
+### Frequently Asked Questions
+
+### Installation and Setup
+
+## ExplainerLeads: embedded clauses that should NOT trigger
+
+The recipe depends on how the shell resolves the binary.
+
+The comment explains why the test fails on Linux.
+
+The parser knows where the file is stored on disk.
+
+The question of why the test fails is still open.
+
+When the input is empty: return early.
+
+When a conversion is applied, the value narrows.
+
+Where the page size is small, memory mapping wins.

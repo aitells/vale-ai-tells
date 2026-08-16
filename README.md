@@ -142,7 +142,7 @@ ai-tells.ClosingPleasantries = NO
 
 ## Rules included
 
-This package contains 95 rule files covering different categories of AI tells. All rules default to `error` level.
+This package contains 96 rule files covering different categories of AI tells. All rules default to `error` level.
 
 <!-- vale off -->
 
@@ -168,7 +168,8 @@ This package contains 95 rule files covering different categories of AI tells. A
 | `EmphaticCopula` | Italicized copula verbs, determiners, and intensifiers for manufactured profundity |
 | `EmptyPadding` | Empty modifiers before a noun the noun does not need: "named stakeholders," "various stakeholders," "respective roles," "given task," "particular concerns," etc. Sequence-based (modifier plus noun), so it casts a wide net and flags literal uses too ("named pipe," "various reasons," "a certain amount"). Deliberately broad; suppress per-section or disable where the literal sense is common. |
 | `EmptyPaddingStacked` | The same empty modifiers with an adjective ahead of the noun: "named operational support," "certain strategic concerns," "various regional teams," etc. A three-token companion to `EmptyPadding` for the modifier-adjective-noun shape, since Vale sequences cannot make the adjective slot optional. Same breadth and the same suppression advice. |
-| `ExplainerHeadings` | Tutorial-blog heading clichés: "Deep Dive," "Under the Hood," "Demystifying X," "Why It Matters," "A Closer Look," etc. |
+| `ExplainerHeadings` | Tutorial-blog heading clichés: "Deep Dive," "Under the Hood," "Demystifying X," "Why It Matters," "A Closer Look," etc. Also the general free-relative heading, a wh-word plus a determiner-gated subject and verb: "Why the Pin Exists," "How the Cache Works," "What the Data Shows." Conventional doc headings ("How to Configure X," "What's New") stay out. |
+| `ExplainerLeads` | The same free relative used as a framing device in prose: the cleft lead-in ("Here's what the change does," "This is why the pin matters"), the label before a colon ("What the hook does: it refuses the write"), and the sentence-initial pseudo-cleft ("What the hook does is refuse the write"). Embedded clauses doing real work mid-sentence ("depends on how the shell resolves it") stay out. |
 | `FalseBalance` | Evasive "both sides" language: "both sides present valid points," "nuanced approach," etc. |
 | `FalseExclusivity` | False insider drama: "nobody talks about," "what most people miss," "the dirty secret," "the elephant in the room," etc. |
 | `FigurativeFalls` | "Falls" as an overused verb for shortcoming, membership, and neglect: a result that "falls short," a design that "falls apart," a case that "falls under" a category or "falls within scope," a task that "falls by the wayside" or "through the cracks," a request that "falls on deaf ears," responsibility that "falls to" a team. Gated on the figurative complement, so literal falling (prices, temperature, night, rain) stays quiet; disable the rule for gravity or weather writing. The past-tense "things fell into place" stays in `NarrativePivots`, and "falls into three categories" stays in `CataphoricForecasting`. |

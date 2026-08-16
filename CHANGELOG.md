@@ -12,9 +12,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - **FigurativeSweeps** (`ai-tells`): New rule. Extends the figurative-verb family to wholesale motion: a change that "sweeps away" the old behavior, a refactor making "sweeping changes," a problem "swept under the rug," reviewers "swept up in" the excitement, a trend that "swept through" the industry, plus the totality idioms "a clean sweep," "in one sweep," and "one fell swoop." Every token is complement-gated and measured against the Go and Python standard libraries, where the verb's entire presence is the mark-and-sweep collector and a few algorithmic passes; the one match is a Go comment copying registers "in one fell swoop," the tell itself. The audit-pass noun ("a sweep over the docs") stays uncovered as established programmer usage.
+- **ExplainerLeads** (`ai-tells`): New rule. Reports the free relative ("what/why/how the \<subject\> \<verb\>") used as a framing device in prose: the cleft lead-in ("Here's what the change does," "This is why the pin matters," "That's how the pieces fit"), the label before a colon ("What the hook does: it refuses the write," bold markers included), and the sentence-initial pseudo-cleft ("What the hook does is refuse the write," "What this means is"). Every shape gates the subject behind a determiner, so the embedded clause doing real work mid-sentence ("depends on how the shell resolves it") stays out. When and where stay out of the label and pseudo-cleft shapes because a capitalized "When the input is 6:" opens an ordinary conditional clause, which the Go and Python standard libraries confirm is common human prose; measured corpus cost across 1.3M lines is fourteen hits, each one the construction itself rather than a lookalike.
+
+### Changed
+
+- **ExplainerHeadings** (`ai-tells`): Generalized. The rule knew the pronoun-subject forms by name ("Why It Matters," "What It Does") but missed the same heading with a real subject. A new determiner-gated token catches "Why the Pin Exists," "How the Cache Works," "What the Data Shows," and the when/where/who variants, while "How to Configure X" and "What's New" stay out for lack of a determiner.
 
 <!-- vale on -->
-
 ## [1.30.0] - 2026-08-16
 
 <!-- vale off -->

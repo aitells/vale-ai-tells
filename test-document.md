@@ -894,6 +894,32 @@ The honest answer is that we don't know yet.
 
 ### The Inner Workings
 
+### Why the Pin Exists
+
+### How the Fixture Guard Works
+
+### What the Data Shows
+
+### When the Hook Runs
+
+### Understanding Where the Time Goes
+
+## ExplainerLeads
+
+Here's what the change does under load.
+
+This is why the pin matters for reproducibility.
+
+That's how the pieces fit together.
+
+What the hook does: it refuses the write.
+
+**What the hook does**: it refuses the write.
+
+Why the pin exists is worth explaining.
+
+What this means is that the pin moved.
+
 ## MarketingHeadings
 
 ### The Ultimate Guide to Vale
