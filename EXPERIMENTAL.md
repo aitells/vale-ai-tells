@@ -179,7 +179,7 @@ A capitalization rule that flags markdown headings using Title Case instead of s
 
 **How it works:** Uses Vale's built-in `capitalization` extension. The relevant settings are `match: $sentence` and `scope: heading`. Acronyms like API and SQL, alongside proper nouns like GitHub, Docker, and PostgreSQL, live in a built-in exceptions list that the rule consults before flagging anything.
 
-**Ordinal prefixes:** The rule's `prefix` setting strips a leading ordinal label before checking the case, with or without a colon. Headings such as `Section 1: Data collection methods`, `Appendix A`, `Chapter IV: The long road home`, and `1.1 Results` stay clean. The rule still checks the rest of the heading, so `Section 1: Data Tables Are Here` still trips it, and the first word after the prefix still needs a capital letter. Recognized labels: Appendix, Chapter, Example, Figure, Part, Phase, Section, Stage, Step, and Table, each followed by a number, one letter, or a roman numeral. Bare numeric ordinals like `1.1` or `2.` also count.
+**Ordinal prefixes:** The rule's `prefix` setting strips a leading ordinal label before checking the case, with or without a colon. Headings such as `Section 1: Data collection methods`, `Appendix A`, `Chapter IV: The long road home`, and `1.1 Results` pass. The rule still checks the rest of the heading, so it still flags `Section 1: Data Tables Are Here`, and the first word after the prefix still needs a capital letter. Recognized labels: Appendix, Chapter, Example, Figure, Part, Phase, Section, Stage, Step, and Table, each followed by a number, one letter, or a roman numeral. Bare numeric ordinals like `1.1` or `2.` also count.
 
 **Adding project-specific exceptions:** Users can add their own exceptions (product names, domain terms) without modifying the rule. Drop the relevant entries into your project's `accept.txt` vocabulary file:
 
@@ -304,7 +304,7 @@ Measures the share of sentences in each section that contain a passive construct
 1. Splits the document into sections by markdown headings
 2. Within each section, strips code blocks, HTML comments, list items, and table rows
 3. Splits remaining prose into sentences by terminal punctuation
-4. Counts sentences containing an auxiliary, an optional adverb in the gap ("not," "never," or words like "automatically"), and a participle. This is a regex approximation of the tagged rules: it captures the participle and rejects "indeed," and requires regular "ed" forms to run four letters or longer (so "red" and "bed" stay clean). Individual misses and over-counts average out at section scale.
+4. Counts sentences containing an auxiliary, an optional adverb in the gap ("not," "never," or words like "automatically"), and a participle. This is a regex approximation of the tagged rules: it captures the participle and rejects "indeed," and requires regular "ed" forms to run four letters or longer (so "red" and "bed" do not count). Individual misses and over-counts average out at section scale.
 5. Requires at least 6 sentences in the section
 6. Flags when at least 3 sentences and more than 35% of them contain a passive construction
 
@@ -369,7 +369,7 @@ These patterns need capabilities Tengo can't provide. They'd require a separate 
 If you test these rules against real-world documents and find the thresholds need tuning, open an issue with:
 
 1. The document type (blog post, API docs, whitepaper, etc.)
-2. Whether the rule fired or didn't when it should have
+2. Whether the rule matched or didn't when it should have
 3. The approximate document length (word count)
 
 This data informs threshold calibration for promotion to the main `ai-tells` style.

@@ -17,9 +17,11 @@ Beutler
 bgestat
 bincubat
 BLEU
+bliv
 bnurtur
 bresonat
 bstrik
+buildbots
 burstiness
 capitalisation
 cataphoric
@@ -42,7 +44,9 @@ endeavours
 engo
 errexit
 etacommentary
+famil
 favourable
+ferr
 frontmatter
 gitignorable
 gitmoji
@@ -64,7 +68,9 @@ listicle
 lockfiles
 Metacommentary
 mktemp
+GOAWAY
 ning
+neighbou
 nofilter
 nominalizations
 nonword
@@ -96,6 +102,7 @@ repotools
 rhysd
 RLHF
 rstrip
+rigou
 rumdl
 rvben
 ryl
@@ -124,6 +131,7 @@ verbed
 verbing
 Vercel
 WCAG
+wordlist
 worktree
 worktreeinclude
 worktrees

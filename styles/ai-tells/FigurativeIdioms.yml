@@ -54,6 +54,30 @@ tokens:
   - '\bmov(?:e|es|ed|ing) the goalposts?\b'
   - '\bblast radius\b'
 
+  # --- Reduction: a question collapsed to one factor rather than the
+  # factor being named ("it comes down to trust," "this boils down to a
+  # race"). "Comes down to" measured zero across the Go and Python
+  # standard libraries; "boils down to" measured once in each, both in
+  # comments making exactly this substitution, the same tolerated cost as
+  # "out of reach" above. The bare "come down to" and most of "came down
+  # to" stay uncovered: both carry the literal descent sense ("come down
+  # to the lobby," "came down to breakfast"), so the past tense is gated
+  # on a reduction complement.
+  - '\bcomes down to\b'
+  - '\bcame down to (?:whether|what|how|one|a single|the same)\b'
+  - '\bboil(?:s|ed|ing)? down to\b'
+
+  # --- Substitution: one thing presented as another's understudy ("the
+  # fixture stands in for real traffic"). The verb form measured three
+  # times across the two standard libraries, every one the precise
+  # placeholder sense, so this is a flag-hard token by the maintainer's
+  # call; API prose built on placeholders disables the rule. The noun
+  # ("a stand-in for the network") stays uncovered: it measured six times
+  # as the ordinary word for a placeholder, and no gate separates that
+  # register from the tell.
+  - '\bstand(?:s|ing)? in for\b'
+  - '\bstood in for\b'
+
   # Candidate not yet implemented: the substitution frame, where one thing
   # is named as another wearing its clothes. Recorded here rather than
   # guessed at, because the family does not come apart evenly.

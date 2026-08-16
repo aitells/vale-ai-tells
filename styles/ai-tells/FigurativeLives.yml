@@ -1,0 +1,75 @@
+---
+extends: existence
+message: "AI overused verb: '%s'. Say where the item is defined or stored. Disable this rule for biography or housing prose."
+level: error
+nonword: true
+ignorecase: true
+# "Lives" is an AI fingerprint for location by residence: the config "lives
+# in" a file, the logic "lives" upstream, the truth "lives in one place."
+# The subject slot is open on purpose: a curated subject list proved
+# unmaintainable against the open-ended set of nouns agent prose houses
+# somewhere, so the determiner, a required subject word, and the preposition
+# carry the discriminator between them, in the widened-FigurativeSits mold,
+# and the exceptions name the beings that literally reside. Requiring a
+# subject word between the determiner and the verb keeps out "this lives
+# in," which the Go standard library uses fourteen times for code layout.
+# The measured cost that remains is the same idiom with a named subject
+# ("this module lives in," "the package lives in"), eight matches across
+# the Go and Python standard libraries. Those fire anyway: established
+# programmer idiom is still the substitution this rule names, and the
+# maintainer asked for the residence figure flagged over the corpus bar
+# here. Biography or housing writing disables the rule.
+exceptions:
+  # People and households
+  - "(?i)famil(?:y|ies)"
+  - "(?i)couples?"
+  - "(?i)people"
+  - "(?i)person"
+  - "(?i)m[ae]n"
+  - "(?i)wom[ae]n"
+  - "(?i)child(?:ren)?"
+  - "(?i)kids?"
+  - "(?i)boys?"
+  - "(?i)girls?"
+  - "(?i)parents?"
+  - "(?i)neighbou?rs?"
+  - "(?i)residents?"
+  - "(?i)populations?"
+  - "(?i)tribes?"
+  - "(?i)authors?"
+  - "(?i)developers?"
+  - "(?i)users?"
+  - "(?i)maintainers?"
+  # Creatures
+  - "(?i)species"
+  - "(?i)animals?"
+  - "(?i)birds?"
+  - "(?i)fish(?:es)?"
+  - "(?i)insects?"
+  - "(?i)bears?"
+  - "(?i)wol(?:f|ves)"
+  - "(?i)cats?"
+  - "(?i)dogs?"
+  - "(?i)bacteria"
+  - "(?i)organisms?"
+tokens:
+  # --- Determiner-gated residence: an artifact placed by "lives" where
+  # "is defined" or "is stored" would do, with an optional modifier word
+  # between the determiner and the subject ("the vendored payload lives in
+  # two directories").
+  - "\\b(?:a|an|the|this|that|these|those|each|every|its|their|our|your|my|his|her) (?:[a-z]+ )?[a-z]+ liv(?:es|ed|ing) (?:in|at|on|under|inside|within|here|there|upstream|downstream|elsewhere|alongside)\\b"
+
+  # --- Determiner-less subjects at a sentence or clause start ("config
+  # lives in mise.toml"). The subject set here is curated because the open
+  # shape has no determiner to gate on; every noun in it measured zero
+  # across the Go and Python standard libraries.
+  - "\\b(?:config|configuration|logic|definition|schema|manifest|template|truth|answer|documentation|copy|draft|spec|detail|setting|option|flag|rule|pin|payload|recipe|task|skill|convention|policy|contract|guidance|knowledge)s? liv(?:es|ed|ing) (?:in|at|on|under|inside|within|here|there|upstream|downstream|elsewhere|alongside)\\b"
+
+  # --- The address question ("where the config lives," "where each rule
+  # lives"). Same open subject, same exceptions.
+  - "\\bwhere (?:a|an|the|this|that|each|every|its|their) (?:[a-z]+ )?[a-z]+ lives\\b"
+
+  # --- Mortality idioms: an artifact with a lifespan ("the pattern lives
+  # and dies with the cache," "the legacy lives on").
+  - "\\bliv(?:es|ed|ing) (?:and|or) di(?:es|ed)\\b"
+  - "\\b(?:legacy|spirit|idea|pattern|convention|name|assumption) lives on\\b"

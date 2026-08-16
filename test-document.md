@@ -10,14 +10,7 @@ In conclusion, it is clear that a wide range of factors contribute to this pheno
 
 ## Contrastive formulas
 
-It's not just a tool; it's a paradigm shift.
-This isn't merely about efficiency; it's about transformation.
-The question isn't whether to adopt these practices; it's how to implement them effectively.
-It's less about the technology and more about the mindset.
-What matters isn't the destination; it's the journey itself.
-The real challenge isn't technical; it's cultural.
-The new lint pass is a refinement, not a rivalry.
-It reads as a guardrail, not a gate.
+It's not just a tool; it's a paradigm shift. This isn't merely about efficiency; it's about transformation. The question isn't whether to adopt these practices; it's how to implement them effectively. It's less about the technology and more about the mindset. What matters isn't the destination; it's the journey itself. The real challenge isn't technical; it's cultural. The new lint pass is a refinement, not a rivalry. It reads as a guardrail, not a gate.
 
 ### A refinement, not a rivalry
 
@@ -969,6 +962,18 @@ Until the fix lands, use the workaround.
 
 As soon as the release lands, update the docs.
 
+The fix has finally landed.
+
+Support for scoped styles landed upstream.
+
+The rewrite lands as a single commit.
+
+Landing it means rewording the package first.
+
+The team landed a fix for the regression.
+
+Once merged, the fix lands.
+
 ## FigurativeSits
 
 That work sits at the intersection of design and research.
@@ -1114,6 +1119,20 @@ The config carries the exemption for generated files.
 That section carries the rule about trailing commas.
 
 The schema carries every constraint the parser enforces.
+
+Each shared task carries a repotools prefix.
+
+None of the three drafts carries a suffix.
+
+The release carries a tag for each style.
+
+The fix carries the same caveat as the last one.
+
+The manifest carries its own vendored payload.
+
+Every zip carries a README of its own.
+
+This distinction carries more weight than it should.
 
 ## FigurativeFalls
 
@@ -1325,11 +1344,7 @@ The server is rarely restarted.
 
 ## PassiveDensity: sustained passive voice that should trigger
 
-The proposal was reviewed by the committee. Several concerns were raised
-during the meeting. The budget is considered adequate for the first phase.
-A decision has been made to proceed. The vendor was selected after a long
-evaluation. Implementation details will be finalized next quarter. The team
-felt good about the outcome.
+The proposal was reviewed by the committee. Several concerns were raised during the meeting. The budget is considered adequate for the first phase. A decision has been made to proceed. The vendor was selected after a long evaluation. Implementation details will be finalized next quarter. The team felt good about the outcome.
 
 ## ColonUsage: capitals after colons that should trigger
 
@@ -1533,6 +1548,14 @@ Nothing catches where this bites, and the change sails through every gate.
 
 The team keeps moving the goalposts, so the blast radius grows.
 
+It comes down to trust.
+
+The whole debate boils down to a race condition.
+
+The choice came down to whether the pin stays.
+
+The fixture stands in for real traffic.
+
 ## FigurativeSits and AnthropomorphicJustification, widened
 
 The rules sit in the config.
@@ -1540,6 +1563,88 @@ The rules sit in the config.
 A figurative sat in this message.
 
 The change earns a mention.
+
+The reviewer forms an opinion of the draft before the diff loads.
+
+## FigurativeFires
+
+The rule fires on every heading.
+
+The hooks fire on every commit.
+
+That check never fires in CI.
+
+The alert fired twice last night.
+
+## FigurativeTrips
+
+The new paragraph trips the rule again.
+
+A backticked flag still trips the linter.
+
+Writing about the rule still trips it.
+
+The draft tripped every gate in the suite.
+
+## FigurativeSees
+
+The library sees heavy use in production.
+
+The endpoint saw a spike in errors.
+
+The quarter saw record adoption.
+
+The project has seen its fair share of rewrites.
+
+## FigurativeTravels
+
+The request travels through the stack.
+
+State travels with the session.
+
+The pattern travels well between repos.
+
+Each change travels down the pipeline.
+
+## FigurativeBreeds
+
+Inconsistency breeds distrust.
+
+That flexibility breeds complexity.
+
+Shared mutable state is a breeding ground for bugs.
+
+## FigurativeDemands
+
+The migration demands care.
+
+This edge case demands attention.
+
+The interface demands a closer look.
+
+## FigurativeLives
+
+The config lives in the repo root.
+
+The real logic lives upstream.
+
+Truth lives in one place.
+
+That is where the exemption lives.
+
+The pattern lives and dies with the cache.
+
+## FigurativeStays
+
+The guard stays green all week.
+
+The helper stays out of the way.
+
+The fix stays clear of the hot path.
+
+Decide what stays in and what stays out.
+
+The old name stays in the picture.
 
 ## NegatedObject: stilted verb-plus-no negations that should trigger
 

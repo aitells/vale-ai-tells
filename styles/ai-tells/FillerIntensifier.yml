@@ -1,6 +1,6 @@
 ---
 extends: existence
-message: "AI intensifier: '%s'. Delete the intensifier. The determiner already carries the count."
+message: "AI intensifier: '%s'. Delete the intensifier. The determiner already states the count."
 level: error
 ignorecase: true
 tokens:

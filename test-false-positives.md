@@ -164,11 +164,7 @@ The gate reads the file. Once it clears, the hook exits, the branch moves on.
      writing to disable it rather than curating a subject list that would
      miss "the rules sit in the config". Suppress per-section if legit. -->
 <!-- vale ai-tells.FigurativeSits = NO -->
-The cat sits on the mat by the window.
-She sits at her desk every morning.
-A cabin sits on the ridge above the lake.
-Our server rack sits behind the second door.
-The painting sits above the fireplace in the den.
+The cat sits on the mat by the window. She sits at her desk every morning. A cabin sits on the ridge above the lake. Our server rack sits behind the second door. The painting sits above the fireplace in the den.
 <!-- vale ai-tells.FigurativeSits = YES -->
 
 Books sit on the top shelf.
@@ -196,8 +192,7 @@ A bold move from the new CEO.
 <!-- Known limitation: chess analysis like "Nf3 is the move" or "White is the move"
      will trigger. Suppress per-section in chess writing. -->
 <!-- vale ai-tells.ColloquialAssessments = NO -->
-White is the move in this chess position.
-Nf3 is the move after the Ruy Lopez.
+White is the move in this chess position. Nf3 is the move after the Ruy Lopez.
 <!-- vale ai-tells.ColloquialAssessments = YES -->
 
 ## ColloquialAssessments ("matters"): bare uses that should NOT trigger
@@ -561,8 +556,7 @@ The library is named after its original author.
      reasons." This breadth was a deliberate choice; suppress
      per-section where the literal sense is common. -->
 <!-- vale ai-tells.EmptyPadding = NO -->
-A developer named Alex joined the team.
-She was certain Maria would arrive on time.
+A developer named Alex joined the team. She was certain Maria would arrive on time.
 <!-- vale ai-tells.EmptyPadding = YES -->
 
 ## PassiveVoice: predicate adjectives that should NOT trigger
@@ -583,17 +577,16 @@ The committee reviewed the proposal and wrote the report.
      the genuine passive sense ("the electron is excited by a photon")
      must stay flagged. Users decide what to except. -->
 <!-- vale ai-tells-experimental.PassiveVoice = NO -->
-She was tired after the long meeting.
-The team is excited about the launch.
+She was tired after the long meeting. The team is excited about the launch.
 <!-- vale ai-tells-experimental.PassiveVoice = YES -->
 
 ## ColonUsage: colons that should NOT trigger
 
 ### Appendix A: Glossary
 
-Heading text is exempt, so the capitalized title half above stays clean.
+Heading text is exempt, so the capitalized title half above is not flagged.
 
-Check the output: it stays clean when lowercase follows.
+Check the output: it reports nothing when lowercase follows.
 
 Run it again: I checked twice.
 
@@ -717,6 +710,90 @@ The job ran with elevated privileges on the host.
 Vale has no narrower setting for that format. The option in this section has no effect either.
 
 The file is no longer present and no one has read it, no matter when it was written.
+
+## FigurativeFires: literal firing that should NOT trigger
+
+The GOAWAY close timer fired before the worker stopped.
+
+The click event fires twice in older browsers.
+
+## FigurativeTrips: literal tripping and round trips that should NOT trigger
+
+Round-tripping a string through the encoder preserves it.
+
+Return the number of threads required to trip the barrier.
+
+He tripped over a cable in the server room.
+
+## FigurativeCarries: literal carriers that should NOT trigger
+
+The truck carries freight across three states.
+
+A courier carries the package uptown.
+
+The mosquito carries the parasite between hosts.
+
+The paper carries a formal proof in the appendix.
+
+The final carry propagates to the next column.
+
+The carries are summed in the last step.
+
+## FigurativeLands: achievements and aircraft that should NOT trigger
+
+The plane has already landed.
+
+The pilot landed the plane safely.
+
+She finally landed a job at the lab.
+
+## FigurativeSees: literal seeing that should NOT trigger
+
+The compiler sees the annotated source, not the original.
+
+I saw the demo last week and took notes.
+
+## FigurativeTravels: literal travel that should NOT trigger
+
+Sound travels faster in water than in air.
+
+They travel light on the way to the summit.
+
+## FigurativeBreeds: literal breeding that should NOT trigger
+
+The kennel breeds retrievers for field work.
+
+Mosquitoes breed in standing water.
+
+## FigurativeDemands: literal demands that should NOT trigger
+
+The union demanded higher wages.
+
+Supply follows demand in tight markets.
+
+## FigurativeLives: literal residence that should NOT trigger
+
+My family lives in a small town.
+
+The species lives in brackish water.
+
+This lives in the runtime package.
+
+## FigurativeStays: literal staying that should NOT trigger
+
+He stayed at the hotel near the airport.
+
+The guests stayed in the annex overnight.
+
+## FigurativeIdioms: literal descent that should NOT trigger
+
+Come down to the lobby when you are ready.
+
+She came down to breakfast after eight.
+
+## AnthropomorphicJustification: opinions that should NOT trigger
+
+Public opinion shifted slowly after the report.
 
 ## NegatedObject: excluded verbs and degree idioms that should NOT trigger
 

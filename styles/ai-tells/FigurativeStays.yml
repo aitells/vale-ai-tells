@@ -1,0 +1,31 @@
+---
+extends: existence
+message: "AI overused verb: '%s'. Say the item is unchanged, or name what it avoids. Disable this rule for lodging or travel prose."
+level: error
+nonword: true
+ignorecase: true
+# "Stays" is an AI fingerprint for personified restraint: a check "stays
+# green," a helper "stays out of the way," a section decides "what stays in
+# and what stays out." The complement is the discriminator, so a guest
+# staying at a hotel stays quiet; lodging or travel writing disables the
+# rule. The one measured hit across the Go and Python standard libraries is
+# a Python README asking buildbots "to stay green," which is the figurative
+# usage itself. "Stays quiet" and "stays silent" stay in FigurativeQuiet,
+# so the two rules never double-flag.
+tokens:
+  # --- State complement: an artifact holding a personified pose ("stays
+  # green," "stays honest," "stays dormant").
+  - "\\bstay(?:s|ed|ing)? (?:clean|green|red|dark|dormant|hidden|honest|frozen)\\b"
+
+  # --- Avoidance complement: the artifact keeping a polite distance
+  # ("stays out of the way," "stays clear of the hot path").
+  - "\\bstay(?:s|ed|ing)? out of the (?:way|picture|diff|loop)\\b"
+  - "\\bstay(?:s|ed|ing)? clear of\\b"
+
+  # --- Membership idioms: presence dressed as loyalty ("stays in the
+  # picture," "stays in lockstep").
+  - "\\bstay(?:s|ed|ing)? in (?:the loop|the picture|play|lockstep|force)\\b"
+
+  # --- Scoping triage: content sorted by residence ("what stays in, what
+  # stays out," "what stays and what goes").
+  - "\\bwhat stays (?:in|out|and)\\b"
