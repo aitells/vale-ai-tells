@@ -1136,3 +1136,19 @@ The kids dressed up for the party.
 The suite passes for the wrong reason.
 
 The cleanup pass kicked off as scheduled.
+
+## JourneyMetaphors: manner, traversal, and literal uses that should NOT trigger
+
+The result depends on the way the shell splits arguments.
+
+The descriptor is closed on the way out.
+
+We work our way down the tree, one level at a time.
+
+The search visits every node on the path to the root.
+
+A map of the user journey documents the checkout flow.
+
+The crew paved the driveway in one afternoon.
+
+She was on her way to the airport when the phone rang.
