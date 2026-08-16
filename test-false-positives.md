@@ -773,3 +773,37 @@ The word merely narrows the claim.
 A lonely outpost appears in the story's second act.
 
 No one has read the draft yet, and each one of the reviewers is busy.
+
+## IncompleteComparison: completed comparisons that should NOT trigger
+
+The new parser is substantially faster than the old one.
+
+Latency is considerably lower compared with the previous release.
+
+The v2 design is markedly simpler versus its predecessor.
+
+Costs were dramatically reduced relative to last quarter.
+
+Compared with the old parser, the new one is substantially faster.
+
+Relative to last quarter, overhead is considerably lower.
+
+## StackedHedges: single hedges that should NOT trigger
+
+This could break existing consumers.
+
+The change possibly affects downstream caches.
+
+She ran as fast as she possibly could.
+
+Fasting typically involves abstaining from calories.
+
+The results are roughly comparable across sites.
+
+## NounString: short technical compounds that should NOT trigger
+
+We updated the config file path yesterday.
+
+The unit test suite passed on the first try.
+
+New York City Hall opened at nine.
