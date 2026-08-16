@@ -1,0 +1,65 @@
+---
+extends: existence
+message: "AI money metaphor: '%s'. Name the plain benefit or cost. Disable this rule for finance or commerce prose."
+level: error
+nonword: true
+ignorecase: true
+# The transaction figure: effort framed as spending, benefit as a purchase,
+# consequence as a bill. AI prose reaches for it whenever a tradeoff needs
+# stating, and the figure lets the sentence skip the number or the name the
+# reader wanted ("the discipline pays off," "you pay the price later," "this
+# buys you flexibility").
+#
+# The discriminator throughout is the unnamed transaction. Pre-LLM technical
+# prose uses the same vocabulary precisely, and always names what is traded:
+# "at the cost of performance," "at the expense of updates" (nine matches
+# across the Go standard library), "we don't pay the price of building the
+# map," "that will come at a cost of extra complexity." Every one carries an
+# "of" complement, so the priced tokens below exclude "of" with a lookahead
+# and the named-tradeoff idiom stays entirely uncovered. What the rule flags
+# is the transaction asserted with the goods left blank.
+#
+# Ownership splits with the neighbors: "pays for itself," "pays dividends,"
+# and "pays its rent" stay in AnthropomorphicJustification; the sentence-final
+# mic drops "It pays off." and "The habit pays off." stay in MicDrop, and the
+# determiner-gated token here fires on that last shape too, which is by
+# design, the same both-alerts call FillerPhrases documents; "comes at a
+# cost" stays in FigurativeIdioms with the other fixed idioms; "cheap wins"
+# stays in FigurativeWins; and "costs little" stays in FigurativeIdioms.
+#
+# Every token below measured zero across the Go and Python standard
+# libraries except "buy us," which appears once ("Perhaps that doesn't buy
+# us much"), the established programmer idiom this rule flags on purpose.
+# The literal senses (a loan paid off, a fair price paid, coffee bought for
+# a friend) belong to finance and commerce writing, which disables the rule.
+tokens:
+  # --- The determiner-gated payoff: an artifact's worth asserted as a
+  # return on investment, with an optional modifier word between the
+  # determiner and the subject ("the upfront work pays off," "each
+  # rehearsal paid off").
+  - '\b(?:a|an|the|this|that|these|those|its|their|our|your|each|every) (?:[a-z]+ )?[a-z]+ (?:pays?|paid|paying) off\b'
+
+  # --- The unnamed price: consequence as a bill with no line items
+  # ("you pay the price later," "skip the check and pay a steep price").
+  # The "of" complement is the named tradeoff pre-LLM prose writes, so
+  # the lookahead leaves it alone.
+  - '\bpay(?:s|ing)? the price\b(?! of)'
+  - '\bpaid the price\b(?! of)'
+  - '\bpay(?:s|ing)? a (?:[a-z]+ )?price\b(?! of)'
+  - '\bpaid a (?:[a-z]+ )?price\b(?! of)'
+
+  # --- The purchase: a change "buys" a beneficiary something, or buys an
+  # abstract good no register sells ("this buys you flexibility," "the
+  # cache buys us time," "the shim bought breathing room").
+  - '\b(?:buys?|bought|buying) (?:you|us|them)\b'
+  - '\b(?:buys?|bought|buying) (?:a little |some |extra |more )?(?:time|breathing room|headroom|goodwill|leeway|flexibility|slack)\b'
+
+  # --- Fixed money idioms, all measured at zero across both standard
+  # libraries: entry framed as a ticket, obligation as an invoice,
+  # opportunism as a withdrawal, importance as a market signal.
+  - '\bprice of admission\b'
+  - '\bfoots? the bill\b'
+  - '\bfooting the bill\b'
+  - '\bputs? a premium on\b'
+  - '\bputting a premium on\b'
+  - '\bcash(?:es|ed|ing)? in on\b'

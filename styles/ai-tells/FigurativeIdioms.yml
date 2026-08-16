@@ -28,6 +28,27 @@ tokens:
   # "fares no better" both dodge the number the sentence wanted.
   - '\bcosts? little\b'
   - '\bfares? no better\b'
+  # A consequence priced but never itemized ("this comes at a cost,"
+  # "flexibility came at a steep price"). The "of" complement is the named
+  # tradeoff pre-LLM prose writes ("that will come at a cost of extra
+  # complexity," once in the Go standard library), so the lookahead leaves
+  # it alone, along with the definite "at the cost of performance" shape,
+  # which measured nine literal uses in the same corpus and is not covered.
+  # The transaction verbs ("pays off," "buys you") live in FigurativePays.
+  - '\bcom(?:e|es|ing) at a (?:[a-z]+ )?(?:cost|price)\b(?! of)'
+  - '\bcame at a (?:[a-z]+ )?(?:cost|price)\b(?! of)'
+  # The audit formula: a cost presented as already weighed ("the measured
+  # cost is one comment," "the measured cost of what remains"), and the
+  # residue presented as an estate ("this is what remains of it"). Both
+  # started as this project's own methodology vocabulary and spread into
+  # commit messages as boilerplate, which is the substitution this style
+  # exists to catch coming from anyone, its own maintainers included.
+  # Zero matches across the Go and Python standard libraries for both.
+  # The other complements stay uncovered on the same corpus: "what
+  # remains is" opens ordinary mathematical prose there ("What remains
+  # is to choose e"), and "what remains after" is the literal remainder.
+  - '\bmeasured cost\b'
+  - '\bwhat remains of\b'
   # The one measured false positive in either standard library is a garbage
   # collector comment where a value is literally unreachable. Runtime and
   # memory-management prose should disable the rule.

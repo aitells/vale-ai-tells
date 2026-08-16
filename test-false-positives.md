@@ -823,6 +823,24 @@ Come down to the lobby when you are ready.
 
 She came down to breakfast after eight.
 
+## FigurativeIdioms and FigurativePays: tradeoffs that name the cost and should NOT trigger
+
+The change speeds parsing at the cost of memory.
+
+The layout favors lookups at the expense of updates.
+
+That will come at a cost of extra complexity.
+
+The map is built lazily so we never pay the price of building it twice.
+
+She paid off the mortgage in ten years.
+
+## FigurativeIdioms: remainders that should NOT trigger
+
+What remains is to choose the exponent.
+
+The parser returns the word and what remains after it.
+
 ## AnthropomorphicJustification: opinions that should NOT trigger
 
 Public opinion shifted slowly after the report.
