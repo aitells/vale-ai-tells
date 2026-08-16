@@ -11,6 +11,7 @@ asyndetic
 autostash
 backrefs
 backticked
+bbalanc
 bcultivat
 bdisguis
 bdogfood
@@ -30,6 +31,8 @@ bparad
 bpav
 bpolic
 bresonat
+bsettl
+bsquar
 bstrik
 bsurfac
 buildbots
@@ -132,6 +135,7 @@ rvben
 ryl
 SARIF
 setext
+settl
 shellcheck
 shopt
 softprops

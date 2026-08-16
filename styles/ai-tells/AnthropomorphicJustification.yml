@@ -201,40 +201,21 @@ tokens:
   - hinged (?:on|upon) (?:a single|(?:this |that )?one|whether)
 
   # "Adjudication" family.
-  # A fact or metric handed the gavel: "availability settles the
-  # question," "the benchmark decides the debate," "latency puts the
-  # matter to rest." State the conclusion and the evidence instead of
-  # letting the noun rule on it.
-  - settles? the (?:question|debate|matter|argument|issue|dispute)
-  - settled the (?:question|debate|matter|argument|issue|dispute)
-  # The same gavel with a pronoun or a bare interrogative for an object
-  # ("the histogram settles what kind of session ran", "the reconfirmation
-  # settles it"). The curated objects above miss this shape entirely, and
-  # it is the commoner one, since the writer rarely names the question
-  # being closed. The literal senses take different complements and stay
-  # clear: settle on a heuristic, settle for a simpler form, settle ties
-  # by string ordering, and wait for the dust to settle. Measured at zero
-  # across the Go and Python standard libraries.
-  - (?:settles|settled) (?:it|that|this|which|what|whether)\b
-  # The plural pronouns join the same shape ("a classifier settles those").
-  - (?:settles|settled) (?:those|them)\b
+  # A fact or metric handed the gavel: "the benchmark decides the
+  # debate," "latency puts the matter to rest." State the conclusion
+  # and the evidence instead of letting the noun rule on it. The same
+  # gavel wielded through "settles" ("availability settles the
+  # question," "the reconfirmation settles it") lives in
+  # FigurativeSettles with the rest of that verb's figures, and the
+  # invoice shapes ("settled the cost," "settles up," "squares the
+  # ledger," "balances the books") live in FigurativePays with the
+  # other money figures.
   - decides? the (?:question|debate|matter|argument|issue|dispute)
   - decided the (?:question|debate|matter|argument|issue|dispute)
   - puts? the (?:question|debate|matter|argument|issue|dispute) to (?:rest|bed)
   - put the (?:question|debate|matter|argument|issue|dispute) to (?:rest|bed)
   - lays? the (?:question|debate|matter|argument|issue|dispute) to rest
   - laid the (?:question|debate|matter|argument|issue|dispute) to rest
-  # The same gavel handed an invoice: a measurement or a check "settles"
-  # a cost the way a diner settles a bill ("the corpus run settled the
-  # cost," "the audit squares the ledger"). Every shape measured zero
-  # across the Go and Python standard libraries. The negotiation sense
-  # takes "on" ("settled on a price") and stays clear. The literal
-  # payment belongs to restaurant and accounting prose, which disables
-  # the rule.
-  - (?:settles?|settled|settling) (?:the|that|this|its) (?:[a-z]+ )?(?:costs?|prices?|bill|tab|debts?)\b
-  - (?:settles?|settled|settling) up\b
-  - (?:squares?|squared|squaring) (?:the|that|its) (?:[a-z]+ )?(?:bill|ledger|books|account|debts?)\b
-  - (?:balances?|balanced|balancing) the books\b
 
   # "Harm" family.
   # Treats inanimate subjects (a check, a config, a flag) as moral

@@ -63,3 +63,20 @@ tokens:
   - '\bputs? a premium on\b'
   - '\bputting a premium on\b'
   - '\bcash(?:es|ed|ing)? in on\b'
+
+  # --- The settled invoice, here with the other money figures now that
+  # FigurativeSettles owns the rest of the verb: a measurement or a
+  # check "settles" a cost the way a diner settles a bill ("the corpus
+  # run settled the cost," "the libraries settled each token's cost,"
+  # "the audit squares the ledger"). The determiner set matches the
+  # payoff token above and the optional middle word takes a possessive,
+  # the two openings that let "settled each token's cost" through the
+  # narrower shape this family had in AnthropomorphicJustification.
+  # Every shape measured zero across the Go and Python standard
+  # libraries. The negotiation sense takes "on" ("settled on a price")
+  # and stays clear; the literal payment belongs to restaurant and
+  # accounting prose, which disables the rule.
+  - '\bsettl(?:es?|ed|ing) (?:a|an|the|this|that|these|those|its|their|our|your|each|every) (?:[a-z]+(?:''s)? )?(?:costs?|prices?|bill|tab|debts?)\b'
+  - '\bsettl(?:es?|ed|ing) up\b'
+  - '\bsquar(?:es?|ed|ing) (?:the|that|this|its|each|every) (?:[a-z]+(?:''s)? )?(?:bill|ledger|books|account|debts?)\b'
+  - '\bbalanc(?:es?|ed|ing) the books\b'
