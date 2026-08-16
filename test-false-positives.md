@@ -59,7 +59,7 @@ No, I do not think that is correct.
 
 There is no way to know for certain.
 
-No additional configuration is required for basic usage.
+No such file exists at that path.
 
 ## MicDrop: legitimate short sentences that should NOT trigger
 
@@ -717,3 +717,41 @@ The job ran with elevated privileges on the host.
 Vale has no narrower setting for that format. The option in this section has no effect either.
 
 The file is no longer present and no one has read it, no matter when it was written.
+
+## NegatedObject: excluded verbs and degree idioms that should NOT trigger
+
+The function takes no arguments and returns no value.
+
+The string contains no padding bytes.
+
+The job starts no earlier than midnight and uses no more memory than before.
+
+Given no arguments, the command prints usage.
+
+The rewrite runs no faster than the old code.
+
+The issues no one filed stay invisible.
+
+The parser allows zero or more spaces between tokens.
+
+Add zero to the counter to keep the total unchanged.
+
+The constructor makes zero values useful from the start.
+
+A clean exit means no findings exist.
+
+Assume no aliasing between the two buffers.
+
+## NegatedSubject: docs conditionals and excluded predicates that should NOT trigger
+
+If no timeout is specified, the parser uses the default.
+
+No error is returned when the file is missing.
+
+No whitespace is allowed inside the token.
+
+The compatibility shim is no longer needed.
+
+No one was harmed by the change.
+
+No law required them to file the report.

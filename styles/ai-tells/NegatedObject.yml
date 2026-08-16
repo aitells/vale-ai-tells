@@ -1,0 +1,70 @@
+---
+extends: existence
+message: "AI stilted negation: '%s'. Negate the verb with 'doesn't' instead of shifting 'no' onto the object."
+level: error
+nonword: true
+ignorecase: true
+# The spec-sheet negation: a transitive verb with "no" moved onto its object
+# ("allows no inline suppression," "makes no clock calls," "offers no
+# guarantee") where idiomatic prose negates the verb ("doesn't allow inline
+# suppression"). The construction is grammatical English, but AI prose reaches
+# for it constantly because it sounds like a spec clause; humans write
+# "doesn't make network calls." The "zero" spelling is the same move with a
+# count for emphasis ("requires zero configuration," "adds zero overhead")
+# and shares each token.
+#
+# The verb list is empirical. Each candidate ran against ~1.3M lines of
+# pre-LLM human technical prose (Go stdlib doc comments plus Python stdlib
+# source). Verbs where the corpora show the construction is ordinary docs
+# English stay out: "has/have no" (807 hits), "contains no" (79), "takes no
+# arguments" (50), "returns no value" (18), and "sees no" (4, mostly the
+# first-person "I see no reason"). "Carries no" stays in FigurativeCarries,
+# whose content-possession tokens already cover it, and "earns no" in
+# AnthropomorphicJustification. The verbs kept below total ~155 corpus
+# hits, dominated by "makes no sense" (12) and low-rate docs formulas
+# ("requires no locking," "performs no validation," "executes no code"),
+# which are the same construction and flag on purpose; add project
+# exceptions where a file needs them.
+#
+# The lookahead after "no" excludes constructions that only share the
+# surface: comparatives and quantifier idioms ("no more than," "no better,"
+# "fares no better," "starts no earlier than") negate a degree rather than
+# an object, and "no one" is a pronoun ("the issues no one filed" is a
+# relative clause, not a spec claim). The lookahead after "zero" excludes
+# the literal count instead: "zero or more," Go's "zero value," and
+# arithmetic ("add zero to the counter"); "adds zero bits" is the one
+# surviving corpus hit. A bare relative clause with a listed verb-noun
+# still slips through ("a report no manager read"); the corpora show none,
+# so the pronoun carve-out is the only gate.
+#
+# Verbs that take a clausal complement stay out entirely: "means no run
+# happened" and "implies no ordering is guaranteed" negate the elided
+# clause, not an object, so "mean," "imply," "suggest," and "indicate"
+# never enter the list. Participles and imperatives that read as
+# conditions rather than claims stay out of the form lists: "given no
+# arguments," "expected no exception," "shown no data," and "assume no
+# aliasing" are docs and test language, so "give" keeps only its present
+# forms, "expect" and "show" drop their participles, and "assume" keeps
+# only "assumes" and "assuming."
+tokens:
+  # --- Interface grants and claims: what the artifact permits, exposes,
+  # demands, or professes ("allows no inline suppression," "requires no
+  # configuration," "offers no guarantee," "poses no risk," "assumes no
+  # prior knowledge," "declares no level").
+  - "\\b(?:allow|allows|allowed|allowing|permit|permits|permitted|permitting|accept|accepts|accepted|accepting|grant|grants|granted|granting|offer|offers|offered|offering|provide|provides|provided|providing|impose|imposes|imposed|imposing|expose|exposes|exposed|exposing|require|requires|required|requiring|need|needs|needed|needing|expect|expects|expecting|serve|serves|served|serving|show|shows|showed|showing|give|gives|giving|assumes|assuming|pose|poses|posed|posing|claim|claims|claimed|claiming|demand|demands|demanded|demanding|admit|admits|admitted|admitting|bear|bears|bore|bearing|support|supports|supported|supporting|declare|declares|declared|declaring|name|names|named|naming|ask|asks|asked|asking) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
+  # --- Make and do, minus the spans other rules own: "make no mistake"
+  # stays in AbsoluteAssertions and "do no harm" in
+  # AnthropomorphicJustification, so neither double-flags here.
+  - "\\b(?:make|makes|made|making|do|does|did|doing) (?:no (?!(?:mistake|mistakes|harm|one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
+  # --- Operations: what the code performs, emits, or touches at runtime
+  # ("makes no clock calls" lives in the token above; here "performs no
+  # validation," "spawns no processes," "touches no files," "allocates no
+  # memory," "leaks no goroutines," "collects no telemetry," "sets no
+  # cookies," "adds no dependencies").
+  - "\\b(?:perform|performs|performed|performing|run|runs|ran|running|use|uses|used|using|emit|emits|emitted|emitting|issue|issues|issued|issuing|print|prints|printed|printing|log|logs|logged|logging|write|writes|wrote|writing|read|reads|reading|send|sends|sent|sending|receive|receives|received|receiving|store|stores|stored|storing|load|loads|loaded|loading|open|opens|opened|opening|create|creates|created|creating|spawn|spawns|spawned|spawning|launch|launches|launched|launching|start|starts|started|starting|touch|touches|touched|touching|modify|modifies|modified|modifying|change|changes|changed|changing|consume|consumes|consumed|consuming|produce|produces|produced|producing|cause|causes|caused|causing|raise|raises|raised|raising|throw|throws|threw|throwing|add|adds|added|adding|introduce|introduces|introduced|introducing|incur|incurs|incurred|incurring|involve|involves|involved|involving|entail|entails|entailed|entailing|ship|ships|shipped|shipping|leak|leaks|leaked|leaking|collect|collects|collected|collecting|allocate|allocates|allocated|allocating|call|calls|called|calling|invoke|invokes|invoked|invoking|import|imports|imported|importing|execute|executes|executed|executing|generate|generates|generated|generating|yield|yields|yielded|yielding|trigger|triggers|triggered|triggering|record|records|recorded|recording|track|tracks|tracked|tracking|retain|retains|retained|retaining|mutate|mutates|mutated|mutating|share|shares|shared|sharing|break|breaks|broke|breaking|block|blocks|blocked|blocking|drop|drops|dropped|dropping|skip|skips|skipped|skipping|delete|deletes|deleted|deleting|remove|removes|removed|removing|save|saves|saved|saving|install|installs|installed|installing|register|registers|registered|registering|fetch|fetches|fetched|fetching|download|downloads|downloaded|downloading|upload|uploads|uploaded|uploading|poll|polls|polled|polling|monitor|monitors|monitored|monitoring|bind|binds|binding|set|sets|setting|put|puts|putting|place|places|placed|placing|affect|affects|affected|affecting|form|forms|formed|forming|get|gets|got|getting) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
+  # --- Possession and its clichés: state the artifact lacks ("holds no
+  # lock," "keeps no state," "tracks no history") and the idioms the same
+  # shape produces ("leaves no trace," "knows no bounds," "wastes no
+  # time," "pulls no punches," "sheds no light," "casts no shadow"), which
+  # read as tells here.
+  - "\\b(?:hold|holds|held|holding|keep|keeps|kept|keeping|leave|leaves|left|leaving|know|knows|knew|knowing|waste|wastes|wasted|wasting|spare|spares|spared|sparing|pull|pulls|pulled|pulling|miss|misses|missed|missing|lose|loses|lost|losing|gain|gains|gained|gaining|shed|sheds|shedding|cast|casts|casting) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
