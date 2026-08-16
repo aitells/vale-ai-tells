@@ -481,7 +481,7 @@ The bracket holds the panel to the frame.
 
 The cache holds a reference to the parent object.
 
-## AnthropomorphicJustification (adjudication): literal settling that should NOT trigger
+## FigurativeSettles: literal settling that should NOT trigger
 
 We settled on a date for the review.
 
@@ -849,11 +849,13 @@ The endpoint accepts a cost parameter in cents.
 
 Public opinion shifted slowly after the report.
 
-## AnthropomorphicJustification: negotiation and physical settling that should NOT trigger
+## FigurativeSettles and FigurativePays: negotiation and physical settling that should NOT trigger
 
 The vendors settled on a price after two calls.
 
-The dust settled after the reorg finished.
+The dust settled on the workbench overnight.
+
+The pacer settles into a steady state after a few cycles.
 
 ## NegatedObject: excluded verbs and degree idioms that should NOT trigger
 

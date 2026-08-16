@@ -724,14 +724,6 @@ The README delivers on its promise.
 
 The whole design hangs on a single assumption.
 
-Availability settles the question.
-
-The reconfirmation settles it at four.
-
-The histogram settles what kind of session ran.
-
-That benchmark settled whether the cache helps.
-
 The benchmark decided the debate.
 
 Latency puts the matter to rest.
@@ -1730,12 +1722,6 @@ The change earns a mention.
 
 The reviewer forms an opinion of the draft before the diff loads.
 
-The benchmark settles the cost of the extra pass.
-
-That run settled the bill for the shortcut.
-
-The audit squares the ledger at release time.
-
 ## FigurativeFires
 
 The rule fires on every heading.
@@ -1871,6 +1857,52 @@ The maintainer foots the bill for every regression.
 The design puts a premium on clarity.
 
 The rewrite cashes in on the new parser.
+
+The benchmark settles the cost of the extra pass.
+
+That run settled the bill for the shortcut.
+
+The Go and Python standard libraries settled each token's cost.
+
+The audit squares the ledger at release time.
+
+The reviewer settles up at the end of the sprint.
+
+## FigurativeSettles
+
+Availability settles the question.
+
+The reconfirmation settles it at four.
+
+The histogram settles what kind of session ran.
+
+That benchmark settled whether the cache helps.
+
+A classifier settles those without a prompt.
+
+Once the dust settles, we can revisit the split.
+
+The dust settled after the reorg finished.
+
+The dust has finally settled on the migration.
+
+Wait for the dust to settle before renaming anything.
+
+The API settled into its final shape last quarter.
+
+The standup settled into a rhythm by week two.
+
+The pieces settled into place after the second pass.
+
+The debate is settled.
+
+That question was settled long ago, so consider it settled.
+
+Whether the flag helps is far from settled.
+
+The ordering is settled law in this codebase.
+
+That release settles an old score with the flaky suite.
 
 ## NegatedObject: stilted verb-plus-no negations that should trigger
 
@@ -2227,8 +2259,6 @@ Forgetting that line announces itself at collection.
 The credential path proves itself on the next release.
 
 The comparison only speaks up after the push.
-
-A classifier settles those without a prompt.
 
 ## RedundantPrecaution, British variant
 
