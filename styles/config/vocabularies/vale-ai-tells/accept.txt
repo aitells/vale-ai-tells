@@ -33,6 +33,7 @@ lowercased
 [Mm]etacommentary
 [Nn]ominalizations
 proselint
+repotools
 rumdl
 cspell
 ryl
