@@ -25,7 +25,7 @@
   // trailing comment is the only human-readable version at this site,
   // and `mise run repotools:check-pins` reads it.
   extends: [
-    "github>tbhb/repotools//.github/renovate-config.json5#7afd9b223004dca83b415e7871ad63f2a9e1917f", // v0.8.0
+    "github>tbhb/repotools//.github/renovate-config.json5#cf79409736ca25234b224d4580ed13cd82be0b75", // v0.9.0
   ],
 
   // Single-repo scope. Differs per repo.

@@ -19,7 +19,7 @@ Nobody can replicate a figure whose row has no command, so leave it out of the r
 
 ## The template
 
-Spawn all three in a single message, each with this same prompt:
+Spawn all three in one message, each with this same prompt:
 
 ```text
 Agent({

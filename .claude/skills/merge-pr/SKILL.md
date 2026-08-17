@@ -30,9 +30,9 @@ Left alone, GitHub writes the squash message by concatenating every commit on th
 
 !`bash ${CLAUDE_SKILL_DIR}/scripts/preflight.sh ${ARGUMENTS}`
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these with `TaskCreate`, then move each through `in_progress` and `completed`.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written.
 
 1. Confirm the pull request is mergeable
 2. Settle the published description
@@ -56,19 +56,19 @@ Where the repository requires a review decision, respect it. `CHANGES_REQUESTED`
 
 ## Step 2: settle the description first
 
-The description lives on GitHub at this point, and often nothing sits on disk. Fetch it back before revising it:
+The description is on GitHub at this point, and often nothing sits on disk. Fetch it back before revising it:
 
 ```text
 bash .claude/skills/merge-pr/scripts/populate-description.sh <number>
 ```
 
-That rebuilds `PR_AGENTDESC.md` from what the pull request currently says, reassembling the frontmatter from the properties it carries. It refuses to overwrite an existing draft without `--force`, because a `pr` workflow further up the stack may have one in flight.
+That rebuilds `PR_AGENTDESC.md` from what the pull request currently says, reassembling the frontmatter from the properties set on the pull request. It refuses to overwrite an existing draft without `--force`, because a `pr` workflow further up the stack may have one in flight.
 
-Merging is the last moment the description can change, and the squash message gets written from it, so a description carrying something wrong propagates that into history.
+Merging is the last moment the description can change, and the squash message gets written from it, so a wrong description propagates that error into history.
 
 Read what preflight printed under `== description as published ==` against the commits it collapses. Where it no longer describes the branch, invoke `write-pr-description` with the repository root and a note on what drifted, then `review-pr-description`, then republish with `bash .claude/skills/pr/scripts/create-pr.sh`.
 
-Most merges skip this. A description that still fits needs no pass, and a pull request nobody here authored has none of this machinery behind it, so take its description as it stands.
+Most merges skip this. A description that still fits doesn't need a pass, and a pull request nobody here authored has none of this machinery behind it, so take its description as it stands.
 
 ## Step 3: write the squash message
 
@@ -76,7 +76,7 @@ Most merges skip this. A description that still fits needs no pass, and a pull r
 bash .claude/skills/merge-pr/scripts/squash-message.sh <number>
 ```
 
-That prints a briefing and writes a skeleton. Nothing in it converts the description into a message, because no rewriting rule produces one. What merges here is the single commit a whole branch leaves behind, so writing it means reading everything that landed and deciding what a reader years from now still needs.
+That prints a briefing and writes a skeleton. Nothing in it converts the description into a message, because no rewriting rule produces one. The commit that merges here is the one a whole branch leaves behind, so writing it means reading everything that landed and deciding what a reader years from now still needs.
 
 Your briefing carries the description as published, every commit message the squash collapses in full, the diffstat, and the trailers those commits carry. Read it before writing a word. Commit bodies matter most. Each one already argued for itself once, and this is the last place that argument survives. Run the command on its own and read the whole thing. Piping it through `head` or `tail` keeps the trailing skeleton and drops those bodies, which nothing else in this workflow prints, and the script caps nothing on purpose, so a cap you add is one nobody downstream can see you added.
 
@@ -100,7 +100,7 @@ Leave behind:
 - Verification, entirely. It reported what a reviewer needed at the time, and the moment the suite changes it describes a run nobody can repeat.
 - Risk that only says the change could be wrong.
 
-Then read the result back against the commits. The commits outrank it. Descriptions get published early while branches keep growing, so the commits record what landed rather than what someone expected to land. Where a commit body gives a reason the description never carried, that reason belongs in the message. Otherwise it goes at the merge, with the commit that held it.
+Then read the result back against the commits. The commits outrank it. Descriptions get published early while branches keep growing, so the commits record what landed rather than what someone expected to land. Where a commit body gives a reason the description never stated, that reason belongs in the message. Otherwise it goes at the merge, with the commit that held it.
 
 Avoid:
 

@@ -30,13 +30,13 @@ This skill ends when the pull request is open. From there `watch-pr`, `fix-pr`, 
 
 !`bash ${CLAUDE_SKILL_DIR}/scripts/preflight.sh`
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these with `TaskCreate`, then move each through `in_progress` and `completed`.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written.
 
 1. Confirm the branch is ready
 2. Draft the description in PR_AGENTDESC.md
-3. Clear the prose gates with fix-prose
+3. Pass the prose gates with fix-prose
 4. Review the draft with review-pr-description
 5. Run the validator and the prose gates
 6. Ask the operator how far to take it
@@ -55,17 +55,17 @@ Preflight answered each of these, so read rather than re-run:
 - A pull request may already exist. Where one is open, publishing updates it rather than opening a second.
 - The branch has a current base. Where preflight reports it behind the default branch, run the `rebase` skill before opening, so the reviewer reads the branch against the base it actually merges into.
 
-Preflight also settled the draft on disk. It removed a stale `PR_AGENTDESC.md` where no open pull request stood behind it, then scaffolded a fresh one from the template. That scaffold has the frontmatter keys, a placeholder title, and every section the template declares, so nothing downstream reproduces the template's shape from memory. It fails the validator until something fills it, which is the point.
+Preflight also settled the draft on disk. It removed a stale `PR_AGENTDESC.md` where no open pull request matched it, then scaffolded a fresh one from the template. That scaffold has the frontmatter keys, a placeholder title, and every section the template declares, so nothing downstream reproduces the template's shape from memory. It fails the validator until something fills it, which is the point.
 
 ## Step 2: draft the description
 
 Invoke the `write-pr-description` skill, passing the repository root from preflight as its argument.
 
-It runs forked, which keeps the branch diff in its context rather than this one, and it clears the mechanical validator before returning. It comes back with `DRAFT: WRITTEN` plus what it changed, or with `DRAFT: BLOCKED` plus what stopped it. Where it reports a block, say what it found and hand back, because this workflow has nothing left to publish.
+It runs forked, which keeps the branch diff in its context rather than this one, and it runs the mechanical validator until it reports nothing before returning. It comes back with `DRAFT: WRITTEN` plus what it changed, or with `DRAFT: BLOCKED` plus what stopped it. Where it reports a block, say what it found and hand back, because this workflow has nothing left to publish.
 
 Don't write `PR_AGENTDESC.md` yourself. A guard hook refuses it, because editing the draft here means reading the diff here, which spends the whole point of forking the writer.
 
-## Step 3: clear the prose gates
+## Step 3: pass the prose gates
 
 Invoke the `fix-prose` skill, passing the draft and the task that judges it:
 
@@ -86,7 +86,7 @@ Its verdict drives a loop:
 - `VERDICT: PASS` ends the loop. Go on to step 5.
 - `VERDICT: CHANGES REQUIRED` sends the findings back to `write-pr-description`, verbatim, in its arguments. Then review again.
 
-Bound it at three rounds, counting only the rounds a finding caused. A round the branch caused doesn't count against the bound. A remediation commit or a rebase changes what the description has to describe, and the reviewer then reads a branch it has never seen. Say which kind each round was as you go, so the count stays honest.
+Bound it at three rounds, counting only the rounds a finding caused. A round the branch caused doesn't count against the bound. A remediation commit or a rebase changes what the description has to describe, and the reviewer then reads a branch it has never seen. Say which kind each round was as you go, so the count is accurate.
 
 Past three, stop rather than opening a fourth. Report the count out loud along with the findings that keep coming back, and let the operator decide whether to go on.
 

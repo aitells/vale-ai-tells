@@ -278,7 +278,7 @@ fi
 section "recent commits"
 printf 'subjects:\n'
 gitr log --oneline -10 2>/dev/null || printf '(no history)\n'
-printf '\nlast two messages in full, for house style:\n'
+printf '\nlast two messages in full, for project style:\n'
 gitr log -2 --pretty=format:'--- %h%n%B' 2>/dev/null || true
 
 section "message rules"

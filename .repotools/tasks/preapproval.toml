@@ -9,8 +9,8 @@
 # only thing left that costs a turn. These tasks let the operator answer
 # it once, in advance, for the rest of the session.
 #
-# The grant is per Claude Code session, keyed on CLAUDE_CODE_SESSION_ID,
-# and the record lives in the git directory beside the other
+# The grant is per agent session, keyed on CLAUDE_CODE_SESSION_ID for
+# Claude Code or CODEX_THREAD_ID for Codex, and the record lives in the git directory beside the other
 # session-scoped marks the skills write (commit-workflow.head,
 # pr-agentdesc.reviewed). That location is deliberate: it needs no
 # gitignore entry in any consumer, it is per-worktree, and it leaves
@@ -56,10 +56,16 @@ run = '''
 #!/usr/bin/env bash
 set -euo pipefail
 
-session=${CLAUDE_CODE_SESSION_ID:-}
+if [ -n "${CLAUDE_CODE_SESSION_ID:-}" ]; then
+  session=$CLAUDE_CODE_SESSION_ID
+  session_label="Claude Code session"
+else
+  session=${CODEX_THREAD_ID:-}
+  session_label="Codex thread"
+fi
 if [ -z "$session" ]; then
-  echo "CLAUDE_CODE_SESSION_ID is unset, so there is no session to grant against" >&2
-  echo "         run this from inside a Claude Code session, through the inline ! prefix" >&2
+  echo "CLAUDE_CODE_SESSION_ID and CODEX_THREAD_ID are unset, so there is no session to grant against" >&2
+  echo "         run this from inside a Claude Code session or Codex thread" >&2
   exit 1
 fi
 
@@ -163,7 +169,7 @@ SWIFT
   status=0
   scopes=$(printf '%s' "${requested# }" | sed 's/ /, /g')
   "$cache/touchid-confirm" \
-    "pre-approve $scopes for Claude Code session ${session%%-*}" || status=$?
+    "pre-approve $scopes for $session_label ${session%%-*}" || status=$?
   case $status in
   0) method=touchid ;;
   2)
@@ -181,7 +187,7 @@ fi
 stamp=$(date -u +%Y-%m-%dT%H:%M:%SZ)
 if [ ! -f "$file" ]; then
   {
-    printf '# Pre-approval record for Claude Code session %s.\n' "$session"
+    printf '# Pre-approval record for %s %s.\n' "$session_label" "$session"
     printf '# Repository: %s\n' "$(git rev-parse --show-toplevel)"
     printf '# Written by `mise run preapprove`. Withdraw it with\n'
     printf '# `mise run revoke-preapproval`, or by deleting this file.\n'
@@ -208,9 +214,9 @@ run = '''
 #!/usr/bin/env bash
 set -euo pipefail
 
-session=${CLAUDE_CODE_SESSION_ID:-}
+session=${CLAUDE_CODE_SESSION_ID:-${CODEX_THREAD_ID:-}}
 if [ -z "$session" ]; then
-  echo "CLAUDE_CODE_SESSION_ID is unset, so there is no session to revoke against" >&2
+  echo "CLAUDE_CODE_SESSION_ID and CODEX_THREAD_ID are unset, so there is no session to revoke against" >&2
   exit 1
 fi
 

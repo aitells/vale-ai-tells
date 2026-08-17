@@ -7,7 +7,7 @@ description: >-
 
 # Analyze a session
 
-Work the steps in order. This skill ends once the retrospective exists on disk and the operator has its path. Acting on what it recommends is separate work, and the `commit` skill owns whatever lands as a change.
+Work the steps in order. This skill ends once the retrospective exists on disk and the operator has its path. Acting on what it recommends is separate work. Use the `commit` skill for any change that comes out of it.
 
 ## Which session
 
@@ -19,11 +19,11 @@ If you give neither, the preflight says so and prints how to find it. Send a Hai
 
 !`bash ${CLAUDE_SKILL_DIR}/scripts/preflight.sh ${ARGUMENTS}`
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these tasks with `TaskCreate`, then move each to `in_progress` and `completed` as you go. They're the checklist the rest of this document expands.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written. They're the checklist the rest of this document expands.
 
-1. Read what the line numbers identify
+1. Read the lines the preflight listed
 2. Test the session's own conclusions
 3. Verify every figure with three agents
 4. Recommend fixes across the five areas
@@ -35,7 +35,7 @@ The preflight already resolved the transcript and summarized the session. It cre
 
 `.claude/skills/analyze-session/references/SESSION_CLI.md` documents every subcommand, for when a report needs more detail than the preflight printed.
 
-## Step 1: read what the line numbers identify
+## Step 1: read the lines the preflight listed
 
 The preflight listed the failing lines and the line ranges of each repeated sequence. Open those, and nothing else:
 
@@ -68,7 +68,7 @@ Step 3 runs identical prompts, because replication gains nothing from a division
 
 Follow `.claude/skills/analyze-session/references/FIX_SURFACES.md`. It names the five areas, the shared prompt, and the block each agent receives.
 
-Synthesize the results yourself. Each agent sees one area, while this session has the verified figures and the full set of findings no single agent had.
+Synthesize the results yourself. Each agent sees one area, while this session has the verified figures and the full set of findings that no agent had alone.
 
 ## Step 5: write the retrospective
 

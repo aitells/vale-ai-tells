@@ -2,15 +2,15 @@
 name: write-prose-fix
 license: Apache-2.0
 description: >-
-  Rewords a document to clear its lint findings. The fix-prose skill invokes this by name.
+  Rewords a document so its lint checks pass. The fix-prose skill invokes this by name.
 context: fork
 agent: general-purpose
 background: false
 ---
 
-# Clear the prose findings, and change nothing else
+# Reword until the prose lint passes, and change nothing else
 
-Clear the lint findings on one file by rewording it. Someone has already decided what the document says, and that part stays fixed. Change how it reads, and only as far as the findings require.
+Reword one file until its linters report nothing. Someone has already decided what the document says, and that part stays fixed. Change how it reads, and only as far as the findings require.
 
 ## Context
 
@@ -36,7 +36,7 @@ The context below already ran the command and printed the document, so the findi
 2. Fix the whole list in one editing pass, cheapest findings first, editing only the target.
 3. Run the lint command again. Compare the count.
 
-Never re-run after a single edit. Each round costs the same whether it clears one finding or twelve, and the session behind this skill spent half its Bash calls on linters it re-ran a fix at a time.
+Never re-run after one edit. Each round costs the same whether it clears one finding or twelve, and the session behind this skill spent half its Bash calls on linters it re-ran a fix at a time.
 
 Stop at any of these:
 
@@ -51,18 +51,18 @@ The session this skill exists for spent thirty-one rounds on one commit message.
 
 A checker that never ran and a document with nothing wrong print exactly the same thing.
 
-Vale matches a path against the sections in `.vale.ini`, and the match is exact. A path no section names loads no styles at all, so vale reads the file and applies nothing to it. Silence and a zero exit code follow. Measured against this repository, one paragraph of deliberately bad prose draws 13 findings as `probe.md` and draws zero as `probe.txt`, zero under a different filename, and zero at the same filename one directory down.
+Vale matches a path against the sections in `.vale.ini`, and the match is exact. A path that no section names doesn't load any styles, so vale reads the file and applies nothing to it. Vale then prints nothing and exits zero. Measured against this repository, one paragraph of deliberately bad prose draws 13 findings as `probe.md` and draws zero as `probe.txt`, zero under a different filename, and zero at the same filename one directory down.
 
 The preceding context answered this before you started. It pushed known-bad text through vale under this document's own path and reported whether the rules are live, so read that line rather than reasoning about it. Where it says `UNSCOPED`, report `BLOCKED` and stop. For a run where it went missing, your first lint run is what answers the question:
 
 - The first run reports findings. The command demonstrably fires, so a later silence is real, and clearing the list gives you `CLEAN`.
 - The first run is silent. You've learned nothing yet. Report `BLOCKED` and say the document may already be clean or the command may not cover this path. Never report `CLEAN` off a silence you haven't seen the command break.
 
-A commit draft is the common case. The section covering one names the file at the repository root, so a draft anywhere else, or under any other name, passes every gate unchecked.
+A commit draft is the common case. The section covering one names the file at the repository root, so vale doesn't check a draft anywhere else, or one under any other name.
 
-## What the linter can't see
+## Figurative phrases the linter misses
 
-The rule set names a few figurative verbs and misses the category around them. `ai-tells.FigurativeLands` catches `text lands in`. Nothing catches `where this bites`, `sails through every gate`, `moving the goalposts`, or `its blast radius`, and every one of those phrases cleared every gate in this repository while somebody was writing the file you are reading now.
+The rule set names many figurative verbs and still misses the category around them. `where this bites`, `sails through every gate`, `moving the goalposts`, and `its blast radius` each passed every gate in this repository while somebody was writing the file you are reading now, and each became a rule only after a person noticed it there. Assume the phrase you are about to write sits in that same gap.
 
 Rewording is the whole task here, which makes this run the most likely place for a phrase the gates were never going to question to enter the document.
 
@@ -114,7 +114,7 @@ Fix them structurally, never by changing content:
 - Change the word a sentence opens with.
 - Let one paragraph run short among longer ones.
 
-Give any one of these two attempts. Report it after that.
+Attempt any of these twice at most. Report the finding after that.
 
 ## Rules nothing can clear
 
@@ -140,8 +140,8 @@ The other half is a token cspell doesn't know but the document is right to use, 
 ## Never
 
 - Edit any file except the target. You may not edit the linter configuration, which covers `.vale.ini`, the `.vale/` styles, `.cspell.jsonc`, `.cspell-words.txt`, `mise.toml`, and the hook configuration.
-- Add an inline vale exception, or turn a rule off anywhere. Clearing a finding by silencing its rule is the one thing that must never happen here.
-- Change the target's wrapping convention. Markdown in this repository puts each paragraph on a single line and a hook enforces it. A commit message wraps its body at 72 columns and its trailers at 100.
+- Add an inline vale exception, or turn a rule off anywhere. Silencing a rule so its finding goes away is the one thing that must never happen here.
+- Change the target's wrapping convention. Markdown in this repository puts each paragraph on one line and a hook enforces it. A commit message wraps its body at 72 columns and its trailers at 100.
 - Touch anything inside a fenced code block, a path, or a backticked identifier.
 - Edit the target through `sed`, `awk`, or a shell redirect. Use the file editing tools. This machine runs a hybrid toolchain: `sed` is GNU, `cat` is BSD, and `timeout` is absent. The session behind this skill spent four round trips on commands whose variant it guessed wrong.
 

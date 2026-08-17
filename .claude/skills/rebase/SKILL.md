@@ -21,9 +21,9 @@ A guard hook runs alongside. It refuses a rebase started by hand and a continue 
 
 !`bash ${CLAUDE_SKILL_DIR}/scripts/preflight.sh`
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these with `TaskCreate`, then move each through `in_progress` and `completed`.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written.
 
 1. Choose the base
 2. Settle the working tree
@@ -91,7 +91,7 @@ bash .claude/skills/rebase/scripts/continue-rebase.sh
 
 That reads the staged blobs for conflict markers before it advances. git checks only that no path remains unmerged, so a file you staged with `<<<<<<<` still in it continues straight into a commit.
 
-Repeat from `rebase-status.sh` at each further stop. Where git calls a commit empty because the base already carries the change, `continue-rebase.sh --skip-empty` drops it after proving the index matches `HEAD`.
+Repeat from `rebase-status.sh` at each further stop. Where git calls a commit empty because the change is already in the base, `continue-rebase.sh --skip-empty` drops it after proving the index matches `HEAD`.
 
 Giving up stays available, and it costs nothing:
 
@@ -119,7 +119,7 @@ Run the gate the script names:
 mise run check
 ```
 
-Or `mise run lint` where the repository has no `check`. Either way, run it against the tree as it now stands rather than against any one commit, because the tree is the thing nothing has tested yet.
+Or `mise run lint` where the repository has no `check`. Either way, run it against the tree as it now stands rather than against any commit in isolation, because the tree is the thing nothing has tested yet.
 
 A failure here is an ordinary fix rather than a rebase problem. Correct it, and commit through the `commit` skill. Where the fix belongs inside a commit the rebase just replayed, say so and let the operator choose between a follow-up commit and an amend.
 

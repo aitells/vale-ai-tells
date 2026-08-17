@@ -2,7 +2,7 @@
 name: write-pr-description
 license: Apache-2.0
 description: >-
-  Write or revise the pull request description in PR_AGENTDESC.md, as a forked agent that reads the branch itself. Fills the frontmatter properties, a Conventional Commits title, and every section the repository's template declares, then clears the mechanical validator before returning. The pr skill calls this to draft, fix-pr calls it after remediation commits arrive, and merge-pr calls it for a final pass. Every call pairs with review-pr-description afterwards.
+  Write or revise the pull request description in PR_AGENTDESC.md, as a forked agent that reads the branch itself. Fills the frontmatter properties, a Conventional Commits title, and every section the repository's template declares, then runs the mechanical validator until it reports nothing before returning. The pr skill calls this to draft, fix-pr calls it after remediation commits arrive, and merge-pr calls it for a final pass. Every call pairs with review-pr-description afterwards.
 context: fork
 agent: general-purpose
 background: false
@@ -14,7 +14,7 @@ Write `PR_AGENTDESC.md` at the repository root, then return. You run forked, so 
 
 ## Arguments
 
-`$ARGUMENTS` carries the repository root, and after it whatever the caller wants addressed. A first draft arrives with nothing extra. A revision arrives carrying the findings `review-pr-description` returned, or a note that remediation added commits the description hasn't caught up with.
+`$ARGUMENTS` carries the repository root, and after it whatever the caller wants addressed. A first draft arrives with nothing extra. A revision includes the findings `review-pr-description` returned, or a note that remediation added commits the description hasn't caught up with.
 
 Treat any findings in the arguments as the work. Resolve each one and say so.
 
@@ -49,7 +49,7 @@ The title is a level 1 heading in the Conventional Commits shape. A squash merge
 
 Then every section the template declares, in the template's order, filled with prose. Replace each instructional comment rather than leaving it in place.
 
-## What each section owes the reader
+## One question per section
 
 The sections answer different questions, so don't let them repeat each other. Summary says what changes. Why says what problem made it necessary. Verification names the commands you actually ran, in backticks. Risk says what breaks if this is wrong and how to back it out. Related points at issues, or says `None`.
 
@@ -76,11 +76,11 @@ The validator covers what a script can check. What follows is what the reviewer 
 
 **Closed enumerations.** A sentence naming the kinds of change on the branch claims to name every one, and a reviewer reads it that way. Walk the changed-file listing against every sentence of that shape, and confirm the sentence covers each path or that you left the path out on purpose. Where you can't confirm it, write the sentence open, so it claims only what you checked.
 
-**Scope words.** `only`, `every`, `never`, and `the one place` each make a claim about the files you didn't quote. Open the file and establish the scope before writing one. A setting described as mattering on a single CI slot is a claim about every other slot, and the workflow in the diff either bears that out or doesn't.
+**Scope words.** `only`, `every`, `never`, and `the one place` each make a claim about the files you didn't quote. Open the file and establish the scope before writing one. A setting described as mattering on one CI slot is a claim about every other slot, and the workflow in the diff either bears that out or doesn't.
 
 **The Avoid list earlier in this document.** Read the finished draft against it once. Following a rule while writing and satisfying it in the finished text are different things.
 
-## Clear the validator before returning
+## Run the validator before returning
 
 ```text
 bash .claude/skills/pr/scripts/validate-description.sh

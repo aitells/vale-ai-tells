@@ -20,21 +20,21 @@ hooks:
 
 Work the steps in order. A guard hook runs alongside them and refuses whole-tree staging along with any `git commit` you write out yourself. Step 8 names the one script that commits, and that script refuses an inline `-m` message, a `--no-verify`, and a draft the reviewer hasn't seen in its current form.
 
-Those hooks stay registered for the rest of the session so they carry a scope. Preflight arms the guard at the commit `HEAD` sits on now. Step 8 moves `HEAD` past that mark and stands the guard down. Work later in the session is none of the guard's business. A second commit means invoking this skill again rather than carrying on from here.
+Those hooks stay registered for the rest of the session so they carry a scope. Preflight records the commit `HEAD` sits on now, and the guard refuses while `HEAD` is still there. Step 8 moves `HEAD` past that mark, and the guard refuses nothing after that. Work later in the session is none of the guard's business. A second commit means invoking this skill again rather than carrying on from here.
 
 ## Preflight
 
 !`bash ${CLAUDE_SKILL_DIR}/scripts/preflight.sh`
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these tasks with `TaskCreate`, then move each to `in_progress` and `completed` as you go. They're the checklist the rest of this document expands.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written. They're the checklist the rest of this document expands.
 
 1. Choose the rebase base
 2. Group the changes into atomic commits
 3. Stage the paths for this commit
 4. Draft the message in COMMIT_AGENTMSG
-5. Clear the prose gates with fix-prose
+5. Pass the prose gates with fix-prose
 6. Review the draft with review-commit-message
 7. Run the commit-msg gates
 8. Confirm the message with the operator
@@ -49,7 +49,7 @@ Preflight computed this under `== rebase base ==`. Take its recommendation:
 - Local default branch carries everything the remote has, so rebase onto the local branch.
 - Local default branch sits behind the remote, so rebase onto `origin/<default>` and skip the stale local copy.
 
-Record the base now. Step 9 rebases onto it without asking again. Worktrees under `.claude/worktrees` are the usual layout here, and each one carries its own checkout of the branch.
+Record the base now. Step 9 rebases onto it without asking again. Worktrees under `.claude/worktrees` are the usual layout here, and each one has its own checkout of the branch.
 
 ## Step 2: group the changes into atomic commits
 
@@ -114,7 +114,7 @@ Hard wrap the body at the width preflight reported. Wrap trailers at the footer 
 
 `Assisted-by` before `Signed-off-by`, matching the format and the sign-off identity preflight printed. Never credit a model through `Co-authored-by`.
 
-## Step 5: clear the prose gates
+## Step 5: pass the prose gates
 
 Invoke the `fix-prose` skill before the review, passing the draft and the task that judges it:
 
@@ -124,7 +124,7 @@ Skill(fix-prose, args: "COMMIT_AGENTMSG mise run lint-commit-msg")
 
 It runs the lint rounds in a subagent, so the findings and the retries stay out of this session. The commit scope is stricter than the repository-wide one, and a message copied verbatim out of the diff still fails it, so this is rarely a no-op.
 
-Order matters here. The review in the next step signs the exact bytes it cleared, and a lint fix landing afterwards voids that signature and costs another review round over a comma. Clearing the gates first is what keeps the loop to one pass.
+Order matters here. The review in the next step signs the exact bytes it read, and a later lint fix voids that signature and costs another review round over a comma. Running fix-prose first holds the loop to one round.
 
 Where it returns `PROSE: PARTIAL`, a finding needs a decision rather than another round. Read the short list, settle it, and send the answer back in the arguments.
 
@@ -151,7 +151,7 @@ That task mirrors the commit-msg hook:
 
 Step 5 should have left this clean. Where it hasn't, send the findings back to `fix-prose` rather than editing the draft here, because a hand-edit spends the context that skill exists to save.
 
-Edited the draft to clear the linters? Then step 6 runs again before you commit, because the gate compares bytes rather than intentions.
+Edited the draft to make the linters pass? Then step 6 runs again before you commit, because the gate compares bytes rather than intentions.
 
 Whatever this task reports, `.git/COMMIT_EDITMSG` and its commit-msg hook stay the real gate. A clean run here only predicts that hook's verdict.
 
@@ -211,7 +211,7 @@ Same reasoning, two more knobs. `rebase.updateRefs` quietly moves other local br
 
 `--autostash` scopes the save to the rebase itself. Never a bare `git stash pop`: worktrees share one stash stack, so a bare pop can take another session's entry.
 
-Where that rebase stops on a conflict, hand it to the `rebase` skill rather than resolving it here. That skill owns the classification, the resolution, and the check on what the replay did to each commit.
+Where that rebase stops on a conflict, hand it to the `rebase` skill rather than resolving it here. That skill classifies each conflicted path before resolving it, then checks what the replay did to each commit.
 
 Report the resulting commit, then the groups still waiting from step 2, if any.
 
@@ -226,4 +226,4 @@ This skill assumes the shared tbhb toolchain:
 
 Preflight checks each. When one is missing, tell the operator rather than improvising a substitute.
 
-The workflow commits the repository holding the session. `review-commit-message` reads its draft and its diff from that root, and step 8's script reads the draft and the signature from whichever repository it runs in. A sibling checkout carries no signature of its own, so the script stops there rather than committing on a review that read another tree. To commit a different repository, open a session there.
+The workflow commits the repository holding the session. `review-commit-message` reads its draft and its diff from that root, and step 8's script reads the draft and the signature from whichever repository it runs in. A sibling checkout has no signature of its own, so the script stops there rather than committing on a review that read another tree. To commit a different repository, open a session there.

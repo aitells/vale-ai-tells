@@ -16,7 +16,7 @@ hooks:
           command: "${CLAUDE_PROJECT_DIR}/.claude/skills/fix-prose/scripts/arm-guard.sh"
 ---
 
-# Clear the prose findings on a settled draft
+# Reword a settled draft until its prose lint passes
 
 Run two forked skills against each other until the document holds up. Findings, retries, and rejected wordings stay in their context rather than this one. That's the whole reason the skill exists. A twenty-line commit message can cost four rounds of vale output, none of it worth the context it occupies here.
 
@@ -44,7 +44,7 @@ The command comes from the caller because nobody else knows which gate applies. 
 
 Prefer a task that runs every checker at once. `mise run lint-prose` runs vale alone, so a document clearing it can still fail spelling and structure, and a verdict from that task is narrower than it sounds.
 
-Where the arguments name no file, ask which one. That first word is the path the guard protects. A run starting without it leaves the draft unprotected.
+Where the arguments don't name a file, ask which one. That first word is the path the guard protects. A run starting without it leaves the draft unprotected.
 
 ## Step 1: fix
 
