@@ -706,14 +706,6 @@ The flag does no harm to existing callers.
 
 This migration causes harm if run twice.
 
-The helper earns a caveat.
-
-Nothing about the word earns a capital.
-
-The file earns that exemption from the formatter.
-
-The term earns italics on first use.
-
 That commit crowns the release.
 
 The parser claims the top spot in the benchmark.
@@ -1718,9 +1710,35 @@ The rules sit in the config.
 
 A figurative sat in this message.
 
+The reviewer forms an opinion of the draft before the diff loads.
+
+## FigurativeEarns
+
+The helper earns a caveat.
+
+Nothing about the word earns a capital.
+
+The file earns that exemption from the formatter.
+
+The term earns italics on first use.
+
 The change earns a mention.
 
-The reviewer forms an opinion of the draft before the diff loads.
+Every shell earns full branch coverage on its own.
+
+Each helper earns a spot in the shared module.
+
+Rules earn their place in core through corpus evidence.
+
+The parser earned its stripes in the fuzzing run.
+
+The rule keeps earning its keep in CI.
+
+Trust is earned, never granted.
+
+The graduation is a well-earned promotion to core.
+
+She earns a salary at the firm.
 
 ## FigurativeFires
 

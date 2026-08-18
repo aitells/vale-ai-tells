@@ -78,8 +78,8 @@ tokens:
 
   # --- Attached fine print: the change ships with a warning label
   # ("carries a caveat," "carries a cost," "carries a penalty"). The
-  # sibling of the bare grant in AnthropomorphicJustification, which flags
-  # what the artifact earns rather than what it lugs around.
+  # sibling of the earning figure in FigurativeEarns, which flags what
+  # the artifact earns rather than what it lugs around.
   - "\\bcarr(?:y|ies|ied|ying) (?:a|an|the) (?:caveat|warning|cost|price|price tag|penalty|footnote|asterisk|catch|downside|tradeoff|trade-off)\\b"
 
   # --- Heroics: one component drags the rest across the finish line

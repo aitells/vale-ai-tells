@@ -229,7 +229,9 @@ The team does the work of reviewing every PR.
 
 ## AnthropomorphicJustification (agency verbs): literal uses that should NOT trigger
 
-She earns a salary at the firm.
+The quarterly earnings summary lists revenue by region.
+
+An earnest apology arrived the next morning.
 
 The paper claims a new lower bound.
 
@@ -273,7 +275,7 @@ Our relationship and their partnership deepened over the years.
 
 Good leadership outlasts any membership fee.
 
-She earned a scholarship and an internship.
+She received a scholarship and an internship.
 
 The flagship product and the spaceship are just props.
 

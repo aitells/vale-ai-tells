@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **FigurativeEarns** (`ai-tells`): New rule. Every form of "earn," banned outright: a rule that "earns its keep," a helper that "earns a caveat," a shell that "earns full branch coverage," trust that "is earned," a "well-earned" promotion. The earning shapes lived in `AnthropomorphicJustification` as curated possessive idioms, grant-object lists, and a determiner-gated subject shape, and each gate let another inflection through ("Every shell earns full branch coverage" slipped the determiner list), so the maintainer banned the verb instead: one bare token flags every form, the literal person-subject uses included. The Go standard library uses no form of the verb at all, and the Python standard library's only occurrences are one repeated spam-email test fixture, so technical prose loses nothing. The nominal vocabulary stays quiet ("earnings," "earner," "earnest"); payroll, tax, and finance prose disables the rule, and a dedicated rule means doing so costs none of `AnthropomorphicJustification`'s remaining coverage.
+
+### Changed
+
+- **AnthropomorphicJustification** (`ai-tells`): The earning family moved out to `FigurativeEarns`, described above. The handing shape stays, and its subject gate now accepts "every" and "each" ("every guard hands the merge a clean start").
+
+<!-- vale on -->
+
 ## [1.31.0] - 2026-08-16
 
 <!-- vale off -->

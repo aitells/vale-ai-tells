@@ -20,8 +20,9 @@ ignorecase: true
 #
 # Tokens whose false positive rate in general prose measured at zero live in
 # the prose style instead, where they cover more ground: placement by "sits"
-# belongs to FigurativeSits, the earning and handing shapes to
-# AnthropomorphicJustification, and the fixed idioms to FigurativeIdioms.
+# belongs to FigurativeSits, the earning shapes to FigurativeEarns, the
+# handing shape to AnthropomorphicJustification, and the fixed idioms to
+# FigurativeIdioms.
 #
 # "Carry out" is a phrasal verb rather than a metaphor, so the conveyance
 # token excludes it. Without that lookahead the rule fires on "the
