@@ -883,6 +883,18 @@ A clean exit means no findings exist.
 
 Assume no aliasing between the two buffers.
 
+The function takes no `flags` argument beyond these.
+
+Ensure no goroutines leak after the test completes.
+
+The glob matches no files in an empty directory.
+
+The search found no match in the corpus.
+
+If you pass no arguments, the command reads standard input.
+
+At present no workaround exists for the older parser.
+
 ## NegatedSubject: docs conditionals and excluded predicates that should NOT trigger
 
 If no timeout is specified, the parser uses the default.

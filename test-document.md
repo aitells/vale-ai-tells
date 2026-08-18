@@ -1954,6 +1954,28 @@ The reviewer wastes no time and pulls no punches.
 
 The refactor requires zero configuration and adds zero overhead.
 
+The audit found the fixture list, which listed no 'every' anywhere.
+
+The wordlist listed no "every" in its entries.
+
+The wordlist listed no `every` in its entries.
+
+The exporter transmits no telemetry and persists no state on disk.
+
+The test run reported no failures and flagged no regressions.
+
+The proxy contacts no external servers and caches no responses.
+
+The build embeds no credentials and bundles no dependencies.
+
+The fast path copies no data and acquires no locks.
+
+The refactor sacrifices no performance and tolerates no drift.
+
+The reviewer paid no attention to the tests and brooked no argument.
+
+The maintainer suffers no fools and spends no time on formatting debates.
+
 ## NegatedSubject: passive absence claims that should trigger
 
 No configuration is required to get started.
