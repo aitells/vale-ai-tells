@@ -31,7 +31,7 @@ Run these before judging anything:
 - `cat "$REPO/COMMIT_AGENTMSG"` for the draft
 - `git -C "$REPO" diff --cached --name-status` for the staged paths
 - `git -C "$REPO" diff --cached` for the staged diff
-- `git -C "$REPO" log -5 --pretty=format:'%h %s'` for house style
+- `git -C "$REPO" log -5 --pretty=format:'%h %s'` for project style
 
 Where the caller passed `--amend`, swap the two staged-diff commands for these:
 
@@ -56,7 +56,7 @@ The message describes this diff and no other.
 
 ### Substance
 
-The body answers why the change exists. The diff already carries what changed.
+The body answers why the change exists. The diff already says what changed.
 
 - Flag body text that restates the diff. `Adds a helper to foo.go and calls it from bar.go` describes a diff the reader can already read.
 - Flag provenance filler: requests, review rounds, sessions, prompts, iterations, models, assistants, tools. Attribution belongs in the `Assisted-by` trailer and nowhere else.

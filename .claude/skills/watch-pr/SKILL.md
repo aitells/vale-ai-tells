@@ -2,7 +2,7 @@
 name: watch-pr
 license: Apache-2.0
 description: >-
-  Wait for a pull request's checks to settle, then report what passed and what failed. Blocks in a single call rather than polling, so a wait costs one turn instead of one per look. Use this whenever the user asks to watch a pull request or wait on CI, and whenever a workflow needs that answer before it can go on.
+  Wait for a pull request's checks to settle, then report what passed and what failed. Blocks in one call rather than polling, so a wait costs one turn instead of one per look. Use this whenever the user asks to watch a pull request or wait on CI, and whenever a workflow needs that answer before it can go on.
 hooks:
   PreToolUse:
     - matcher: Bash
@@ -46,7 +46,7 @@ The lines to expect:
 - `PASS <job>`, `SKIP <job>`, or `FAIL <job> <run link>`, one per check as it settles
 - `ALL GREEN #<number>`, `FAILED #<number> with N failing check(s)`, or `TIMEOUT #<number>` to close
 
-Running the same command through `Bash` also works and blocks until the same ending, with the exit code carrying the outcome: `0` all passed, `1` something failed, `2` the wait ran out. Prefer `Monitor`. Reach for the blocking form only where the next step can't start until the answer arrives.
+Running the same command through `Bash` also works and blocks until the same ending, with the exit code reporting the outcome: `0` all passed, `1` something failed, `2` the wait ran out. Prefer `Monitor`. Reach for the blocking form only where the next step can't start until the answer arrives.
 
 Override the bounds through the environment when a run is unusually slow. `PR_CHECKS_TIMEOUT` sets the whole wait and `PR_CHECKS_INTERVAL` the poll spacing, both in seconds. Keep `timeout_ms` past `PR_CHECKS_TIMEOUT` so the script reports its own timeout rather than dying at the tool's.
 

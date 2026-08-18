@@ -37,7 +37,7 @@ A missing or empty draft, or a branch with nothing to land, is itself a finding.
 
 ## What's already settled
 
-The writer clears a mechanical validator before handing you anything, and the caller runs it again afterwards, so leave its rules alone. It has already settled:
+The writer runs a mechanical validator until it reports nothing before handing you anything, and the caller runs it again afterwards, so leave its rules alone. It has already settled:
 
 - the frontmatter shape, and the title's length and Conventional Commits form
 - section presence, section order, and sections left empty
@@ -74,7 +74,7 @@ Each section answers its own question, and the template says which.
 
 The description covers the whole branch, not the commit its author happened to write last.
 
-- Flag a title describing one commit when the branch carries more than one. That title becomes the squash subject on the default branch, so it names what the whole branch does.
+- Flag a title describing one commit when the branch has more than one. That title becomes the squash subject on the default branch, so it names what the whole branch does.
 - Flag a Summary that covers some commits and drops others.
 - Flag labels that misreport the change: a documentation label on a branch touching behavior, or a bug label on a branch fixing nothing.
 - Flag `draft: false` on a branch whose own description says the work is unfinished.
@@ -90,7 +90,7 @@ Judge the branch, not the description.
 
 ## Sweep before you write the verdict
 
-A fault you found once is rarely alone. Take each finding you have and read the whole draft again for the same fault. A list that stops short of the diff, a claim scoped wider than the evidence, a count standing where a name belongs, a sentence selling rather than saying. Where the draft holds one, look for the second. Where instances share a fix, report them as a single finding naming each.
+A fault you found once is rarely alone. Take each finding you have and read the whole draft again for the same fault. A list that stops short of the diff, a claim scoped wider than the evidence, a count standing where a name belongs, a sentence selling rather than saying. Where the draft holds one, look for the second. Where instances share a fix, report them as one finding naming each.
 
 Do this even when a finding sends you back into a section you already cleared. The draft in front of you changed since the last pass, and a claim that held then may not hold now.
 

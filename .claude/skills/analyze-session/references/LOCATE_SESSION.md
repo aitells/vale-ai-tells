@@ -2,7 +2,7 @@
 
 Use this when the operator named a session without giving a usable path. Searching the projects directory in the calling session costs more context than the analysis that follows, so a cheap agent does it and returns one line.
 
-Haiku is enough. Matching a file by its contents needs no judgment, and the answer is a single path.
+Haiku is enough. Matching a file by its contents doesn't need judgment, and the answer is one path.
 
 ## The template
 

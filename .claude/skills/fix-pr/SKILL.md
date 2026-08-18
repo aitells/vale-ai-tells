@@ -17,7 +17,7 @@ hooks:
 
 # Fix a failing pull request
 
-Take a red pull request and make the checks pass. This skill ends when the branch carries a fix and the push has gone out. Confirming the result belongs to `watch-pr`, and merging belongs to `merge-pr`.
+Take a red pull request and make the checks pass. This skill ends after you commit a fix to the branch and push it. Confirming the result belongs to `watch-pr`, and merging belongs to `merge-pr`.
 
 A guard hook runs alongside. It refuses a log sweep that goes around the diagnosis below, while leaving one job's full log open to read, because that's the real next step once the printed tail runs short.
 
@@ -25,9 +25,9 @@ A guard hook runs alongside. It refuses a log sweep that goes around the diagnos
 
 `$ARGUMENTS` names the pull request number when the caller knows it. An empty value means whatever is open for the current branch.
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these with `TaskCreate`, then move each through `in_progress` and `completed`.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written.
 
 1. Diagnose the failures
 2. Reproduce each one locally
@@ -42,7 +42,7 @@ Create these with `TaskCreate`, then move each through `in_progress` and `comple
 bash .claude/skills/fix-pr/scripts/diagnose.sh <number>
 ```
 
-One call gets the failing jobs, the tail of each failing step's log, and the local task covering the same ground. Read that output before running anything else. Going straight to `gh run view` repeats work the script already did.
+One call gets the failing jobs, the tail of each failing step's log, and the local task the script maps each job to. Read that output before running anything else. Going straight to `gh run view` repeats work the script already did.
 
 The script also compares the local checkout against the commit CI tested. Stop when it reports a mismatch. The logs then describe code this worktree no longer carries, so a fix aimed at them reaches the wrong revision. Check out the branch the pull request names, or pull it forward, and diagnose again.
 
@@ -73,24 +73,24 @@ Re-run the reproducer until it passes.
 
 ## Step 4: commit
 
-How the fix lands is the caller's choice. `$ARGUMENTS` carries it when `pr` routed here, and where it doesn't, ask before committing with `AskUserQuestion`: `question` set to `How should this fix land?`, `header` set to `Fixes`, `multiSelect` set to `false`, and these options:
+The caller decides how the fix reaches the branch. `$ARGUMENTS` holds that answer when `pr` routed here, and where it doesn't, ask before committing with `AskUserQuestion`: `question` set to `How should this fix land?`, `header` set to `Fixes`, `multiSelect` set to `false`, and these options:
 
 | Label | Description |
 | --- | --- |
 | `Separate commit` | `The fix lands as its own commit. History keeps the record of what broke.` |
 | `Amend and force-push` | `The fix folds into the commit that caused it, pushed with --force-with-lease.` |
 
-Either way, the `commit` skill takes it from there, and it owns the message and the review and the gates exactly as it always does. One thing changes for an amend: pass `--amend` after the repository root when invoking `review-commit-message`, so it reads `git diff --cached HEAD~1` rather than the staged delta. Skip that and the reviewer judges a whole message against a partial diff, returning findings that look certain and are wrong. Where the fix splits into unrelated groups the commit skill says so and takes them one at a time, which suits a separate commit better than an amend.
+Either way, the `commit` skill takes it from there, and it writes the message and runs the review and the gates exactly as it always does. One thing changes for an amend: pass `--amend` after the repository root when invoking `review-commit-message`, so it reads `git diff --cached HEAD~1` rather than the staged delta. Skip that and the reviewer judges a whole message against a partial diff, returning findings that look certain and are wrong. Where the fix splits into unrelated groups the commit skill says so and takes them one at a time, which suits a separate commit better than an amend.
 
 ## Step 5: bring the description forward
 
-The description lives on GitHub at this point, and often nothing sits on disk. Fetch it back before revising it:
+The description is on GitHub at this point, and often nothing sits on disk. Fetch it back before revising it:
 
 ```text
 bash .claude/skills/fix-pr/scripts/populate-description.sh <number>
 ```
 
-That rebuilds `PR_AGENTDESC.md` from what the pull request currently says, reassembling the frontmatter from the properties it carries. It refuses to overwrite an existing draft without `--force`, because a `pr` workflow further up the stack may have one in flight.
+That rebuilds `PR_AGENTDESC.md` from what the pull request currently says, reassembling the frontmatter from the properties set on the pull request. It refuses to overwrite an existing draft without `--force`, because a `pr` workflow further up the stack may have one in flight.
 
 A fix changes what the branch does, so the published description now describes a branch that has moved. Where the change is worth a reader's attention, invoke `write-pr-description` with the repository root and a note saying which commits arrived since the last publish.
 

@@ -15,7 +15,7 @@ hooks:
 
 Settle every conflicted path and stage it, so the rebase can advance. This skill ends there. Continuing the replay and verifying the result belong to the `rebase` skill.
 
-A guard hook runs alongside. It refuses `--ours` and `--theirs`, which mean the opposite of what they read during a rebase, and it refuses staging a file that still carries markers.
+A guard hook runs alongside. It refuses `--ours` and `--theirs`, which mean the opposite of what they read during a rebase, and it refuses staging a file with markers still in it.
 
 ## The inversion, once
 
@@ -30,7 +30,7 @@ The scripts read the index stages rather than the marker labels, so the naming h
 
 ## Marker shape
 
-With `merge.conflictStyle` set to `diff3` or `zdiff3`, a conflict carries three sections rather than two:
+With `merge.conflictStyle` set to `diff3` or `zdiff3`, a conflict has three sections rather than two:
 
 ```text
 <<<<<<< HEAD
@@ -46,9 +46,9 @@ That `|||||||` section is the common ancestor, and it's the most useful part of 
 
 A bare `=======` line isn't a marker on its own. It underlines a setext heading in ordinary Markdown, so the scripts here match only `<<<<<<<`, `|||||||`, and `>>>>>>>`.
 
-## Step 0: open the task list
+## Step 0: the checklist
 
-Create these with `TaskCreate`, then move each through `in_progress` and `completed`.
+Track these steps with the session's task-list tools where it carries them. Newer harnesses leave those tools out by default, and a session without them works the list in order as written.
 
 1. Classify every conflicted path
 2. Resolve the mechanical ones
@@ -56,7 +56,7 @@ Create these with `TaskCreate`, then move each through `in_progress` and `comple
 4. Read the rest, and stage what you resolved
 5. Hand back
 
-Where a class turns out empty, close its task and say so rather than deleting it. Which classes the stop produced is part of the report at the end.
+Where a class turns out empty, mark its step done and say so rather than dropping it. Which classes the stop produced is part of the report at the end.
 
 The scripts stop with a plain message when no rebase is in progress. Say that and hand back, because nothing here applies outside one.
 
@@ -66,7 +66,7 @@ The scripts stop with a plain message when no rebase is in progress. Say that an
 bash .claude/skills/resolve-rebase-conflicts/scripts/classify-conflicts.sh
 ```
 
-One call reads every unmerged path and says what shape its conflict has, with the evidence for the claim printed beside it. Read that output before opening a single file.
+One call reads every unmerged path and says what shape its conflict has, with the evidence for the claim printed beside it. Read that output before opening any file.
 
 The classes:
 
@@ -123,7 +123,7 @@ Stage what you resolved, by name:
 git add -- path/one path/two
 ```
 
-Never `git add -A` or `git add .`. During a rebase those sweep in whatever an earlier commit in the replay left behind. The guard refuses both, along with any file that still carries markers.
+Never `git add -A` or `git add .`. During a rebase those sweep in whatever an earlier commit in the replay left behind. The guard refuses both, along with any file with markers still in it.
 
 ## Step 5: hand back
 

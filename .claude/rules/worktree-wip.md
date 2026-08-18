@@ -15,7 +15,7 @@ Repos following these rules run more than one agent worktree session at a time, 
 
 ## Work-in-progress commits
 
-Prefer a throwaway work-in-progress commit over a stash for any state that needs to survive a rebase or a branch switch. A commit lives on the branch, so it stays clear of the shared stash stack entirely.
+Prefer a throwaway work-in-progress commit over a stash for any state that needs to survive a rebase or a branch switch. A commit goes on the branch, so it never touches the shared stash stack.
 
 ```bash
 git commit -am wip --no-verify   # park work in progress
@@ -23,4 +23,4 @@ git commit -am wip --no-verify   # park work in progress
 git reset --soft HEAD~1          # unwind, restoring the staged changes
 ```
 
-The `--no-verify` flag belongs here because the pre-commit hooks reject an intentionally incomplete snapshot over formatting, lint, copyright headers, and the rest. This throwaway commit marks the one sanctioned exception to the project-wide no-`--no-verify` rule, and `git reset --soft` removes it before anything reaches history. A real commit that reaches the branch never carries `--no-verify`. It runs through the full hook suite.
+The `--no-verify` flag belongs here because the pre-commit hooks reject an intentionally incomplete snapshot over formatting, lint, copyright headers, and the rest. This throwaway commit marks the one sanctioned exception to the project-wide no-`--no-verify` rule, and `git reset --soft` removes it before anything reaches history. A real commit that reaches the branch never uses `--no-verify`. It runs through the full hook suite.
