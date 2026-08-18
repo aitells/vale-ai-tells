@@ -20,7 +20,7 @@ ignorecase: true
 # arguments" (50), "returns no value" (18), and "sees no" (4, mostly the
 # first-person "I see no reason"). "Carries no" stays in FigurativeCarries,
 # whose content-possession tokens already cover it, and "earns no" in
-# AnthropomorphicJustification. The verbs kept below total ~155 corpus
+# FigurativeEarns. The verbs kept below total ~155 corpus
 # hits, dominated by "makes no sense" (12) and low-rate docs formulas
 # ("requires no locking," "performs no validation," "executes no code"),
 # which are the same construction and flag on purpose; add project

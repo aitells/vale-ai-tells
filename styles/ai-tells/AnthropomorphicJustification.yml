@@ -4,52 +4,20 @@ message: "AI cliché: '%s'. Say what you mean directly."
 level: error
 ignorecase: true
 tokens:
-  # "Earning" family
-  - earns? its keep
-  - earns? its place
-  - earns? its spot
-  - earned its keep
-  - earned its place
-  - earned its spot
-  - more than earns?
-  # Bare grant: the artifact earns a reward beyond its keep ("earns a
-  # caveat," "earned the name"). The determiner plus a curated object
-  # keeps literal wages out.
-  - earn(?:s|ed)? (?:a|an|the) (?:caveat|mention|footnote|call-?out|closer look|second look|spot|place|slot|pass|nod|name|title|label|badge|crown|shout-?out|asterisk|gold star)
-  # Typographic and structural grant: the same bare-grant shape, but the
-  # reward is a mark on the page or a place in a file rather than notice
-  # or rank ("nothing about the word earns a capital," "the file earns
-  # that exemption"). Style and documentation writing reaches for this
-  # constantly; say who capitalizes it, or that the convention does not
-  # apply. The demonstrative and possessive determiners appear here
-  # because the shape resists "a" ("earns that exemption," not "earns an
-  # exemption"). "Capital" stays gated on a determiner so that the
-  # financial sense ("the fund earns capital gains") never reaches the
-  # rule; no one earns a hyphen for a day's work, so literal wages stay
-  # out on their own.
-  - earn(?:s|ed)? (?:a|an|the|that|this|its|no) (?:capital|hyphen|entry|exemption|exception|override|line|section|treatment|designation|distinction|upgrade|promotion)
-  # The same grant with a mass noun for a reward, which takes no article
-  # ("the term earns italics," "that identifier earns backticks"). None of
-  # these has a literal sense a person could be paid in, so the
-  # determiner is optional here rather than required.
-  - earn(?:s|ed)? (?:no |the |its )?(?:capitalization|capitalisation|italics|boldface|small caps|backticks|quotes|quotation marks)
-  # The bare shape with no curated object at all, gated on a determiner and
-  # a subject instead ("the change earns a mention", "that rename earns
-  # nothing"). Drafted from rejected commit messages and measured at zero
-  # matches across the Go and Python standard libraries, which is what lets
-  # the object stay open here.
-  - (?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+earns?\b
   # Handing: an inanimate subject passes something to another as though
-  # across a counter ("the guard hands the merge a clean start"). Same
-  # provenance and the same zero measurement.
-  - (?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+hands?\s+(?:the|a|it|them)\b
+  # across a counter ("the guard hands the merge a clean start"). Drafted
+  # from rejected commit messages and measured at zero matches across the
+  # Go and Python standard libraries.
+  - (?:a|an|the|this|that|these|those|its|their|both|all|every|each)\s+\w+\s+hands?\s+(?:the|a|it|them)\b
 
   # Candidate not yet implemented: the occupational metaphor with no
-  # possessive anchor. Every idiom in the earning and paying families gates
-  # itself on "its" ("earns its keep", "pays its rent"), which is what keeps
-  # a person out of the subject slot. "Negates for a living" carries no such
-  # anchor, so a bare token would flag "she writes for a living" too, and
-  # that is ordinary English about a person with a job.
+  # possessive anchor. Every idiom in the paying family gates itself on
+  # "its" or "itself" ("pays its rent", "pays for itself"), which is what
+  # keeps a person out of the subject slot; FigurativeEarns gave up that
+  # protection deliberately, on a corpus that never uses its verb.
+  # "Negates for a living" carries no such anchor and no such corpus
+  # silence, so a bare token would flag "she writes for a living" too,
+  # and that is ordinary English about a person with a job.
   #
   # Measured at zero across the Go and Python standard libraries, the
   # markdown in the Go source tree, and this project's accepted commit
