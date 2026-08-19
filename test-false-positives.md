@@ -749,6 +749,10 @@ The final carry propagates to the next column.
 
 The carries are summed in the last step.
 
+The truck carries no more than three pallets.
+
+Each bus carries zero or more passengers.
+
 ## FigurativeLands: achievements and aircraft that should NOT trigger
 
 The plane has already landed.

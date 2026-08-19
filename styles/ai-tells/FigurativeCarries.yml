@@ -126,6 +126,18 @@ tokens:
   # libraries.
   - "\\bcarr(?:y|ies|ied|ying) (?!out\\b|over\\b)(?:no |a |an |any |the |its |their |that |this |every )?(?:[a-z]+ )?(?:prefix(?:es)?|suffix(?:es)?|tags?|labels?|markers?|trailers?|templates?|stamps?)\\b"
 
+  # --- Negated cargo: the spec-sheet negation with the object left open
+  # ("it carries no counts and no dates," "carries zero overhead").
+  # NegatedObject leaves "carries no" to this rule, but the tokens above
+  # gate on head-noun lists or on a determiner-fronted subject, so a
+  # pronoun subject with an unlisted noun slipped past both. The corpora
+  # show the open shape once ("carry no data," which the content token
+  # above flags on its own), so the object stays open, with
+  # NegatedObject's own lookahead gates keeping degree idioms ("carries
+  # no more than three") and literal counts ("carries zero or more")
+  # quiet.
+  - "\\bcarr(?:y|ies|ied|ying) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
+
   # --- Mirrored possession: the same-shape sibling of FigurativeHolds
   # ("carries the same caveat," "carries a similar risk"). The comparison
   # word is the tell, so the object stays open.

@@ -1114,6 +1114,10 @@ One integration test carries the suite.
 
 The daemon carries no pipeline logic yet.
 
+The file is rebuilt on each run, so it carries no counts and no dates.
+
+It carries zero overhead at runtime.
+
 The module carries the validation logic.
 
 The packet carries the payload across the link.
