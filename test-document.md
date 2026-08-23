@@ -1740,6 +1740,28 @@ The graduation is a well-earned promotion to core.
 
 She earns a salary at the firm.
 
+## FigurativeExercises
+
+The quickstart exercises the runtime services and database construction.
+
+The test should exercise the recovery path before merging the parser change.
+
+The integration test exercised every component in the pipeline.
+
+The test is exercising both adapters to expose the timeout difference.
+
+The reviewer exercised due caution before approving the change.
+
+Maintainers should exercise judgment when an exception is ambiguous.
+
+The parent process exercises full control over the worker pool.
+
+One vendor exercises significant influence over the format.
+
+The caller may exercise its right to cancel the request.
+
+The chair exercised her veto before the vote closed.
+
 ## FigurativeFires
 
 The rule fires on every heading.
