@@ -42,7 +42,7 @@ lockfile = true
 # baseline deliberately omits it: bootstrap syncs before it installs, and
 # a payload bump moves the very pins that sync writes. The pin lives
 # here, ahead of the payload.
-vendir = "0.46.0"
+vendir = "0.46.1"
 
 # The platform list this repository's two lockfiles cover. The shared
 # repotools:check-toolchain task reads it for its failure hint.
