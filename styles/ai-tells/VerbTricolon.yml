@@ -6,10 +6,12 @@ model: known-verb-mistags
 tokens:
   - tag: "VB|VBD|VBG|VBN|VBP|VBZ"
   - tag: ","
-    skip: 8
-  - tag: "VB|VBD|VBG|VBN|VBP|VBZ"
     skip: 2
+  - tag: "VB|VBD|VBG|VBN|VBP|VBZ"
+    skip: 1
   - tag: ","
-    skip: 8
-  - tag: "VB|VBD|VBG|VBN|VBP|VBZ"
     skip: 2
+  - tag: "CC"
+    skip: 0
+  - tag: "VB|VBD|VBG|VBN|VBP|VBZ"
+    skip: 1
