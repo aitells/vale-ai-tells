@@ -1,0 +1,70 @@
+# Lexicon overrides for VerbTricolon.yml's `model: known-verb-mistags`.
+#
+# This is a SEED list, not a complete or principled vocabulary category.
+# prose's statistical tagger (github.com/jdkato/prose/v3, the exact version
+# Vale's go.mod pins) mistags each word below as a noun or adjective in at
+# least one tested context where it's actually being used as a verb. Every
+# entry here was found by testing specific candidate words, not by deriving
+# a general rule for which words need this -- there is almost certainly
+# real-world technical-writing vocabulary that has the same problem and
+# isn't listed here yet. If you hit a tricolon that VerbTricolon still
+# misses, check whether the missed verb mistags with the standalone-probe
+# method below before assuming the rule itself is broken, and add it here
+# if so.
+#
+# The mistagging is position/context-dependent within a sentence (the same
+# word can tag correctly as the first item in a tricolon and incorrectly as
+# the second or third, since the tagger conditions on the preceding one or
+# two tags), so a lexicon override -- which forces the tag unconditionally
+# rather than per-context -- is the reliable fix; testing a word in
+# isolation alone understates the real failure rate.
+#
+# Method: tag real sentences with the exact pinned tagger version via a
+# standalone Go probe (tokenize + tag, not just consult a dictionary of
+# English ambiguous words), using both an isolated correct-agreement
+# sentence and a three-item adverb+verb tricolon mirroring this rule's own
+# target shape. Base and inflected forms are both included once either form
+# of a word is confirmed mistagging, since the cost of an unnecessary
+# override is near zero and the tagger's context-sensitivity means an
+# untested form of a confirmed-bad word isn't safely assumed correct either.
+#
+# Known tradeoff: a forced override is unconditional, so a listed word used
+# as an ordinary noun immediately before a genuine tricolon (e.g. "The
+# service validates X, transforms Y, and writes Z") can produce a second,
+# boundary-extended duplicate alert alongside the correct one. Confirmed
+# this does NOT produce a false positive on prose that isn't already a real
+# tricolon -- tested each word below as a plain noun subject in ordinary,
+# non-tricolon sentences with zero alerts. The cost is redundant noise on
+# an already-real finding, not a new false finding.
+processes	VBZ
+process	VBZ
+generates	VBZ
+generate	VBZ
+results	VBZ
+result	VBZ
+returns	VBZ
+return	VBZ
+targets	VBZ
+target	VBZ
+sources	VBZ
+source	VBZ
+gates	VBZ
+gate	VBZ
+services	VBZ
+service	VBZ
+records	VBZ
+record	VBZ
+tests	VBZ
+test	VBZ
+flags	VBZ
+flag	VBZ
+links	VBZ
+link	VBZ
+branches	VBZ
+branch	VBZ
+routes	VBZ
+route	VBZ
+checks	VBZ
+check	VBZ
+caches	VBZ
+cache	VBZ
