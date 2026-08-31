@@ -61,9 +61,11 @@ exceptions:
 tokens:
   # --- Possession: a determiner-led object owned by a mechanism ("vendir
   # owns that directory," "git owns the commit," "one rule owns the
-  # phrase"). An optional modifier word sits between the determiner and the
-  # object.
-  - "\\bown(?:s|ing) (?:a|an|the|this|that|its|their|each|every) (?:[a-z]+ )?[a-z]+"
+  # phrase"). Up to three modifier words sit between the determiner and the
+  # object, and the character class covers hyphenated compounds ("the
+  # per-head Dependency Registry") so the match reaches the true head noun
+  # instead of truncating at the hyphen or after one word.
+  - "\\bown(?:s|ing) (?:a|an|the|this|that|its|their|each|every) (?:[a-z][\\w-]* ){0,3}[a-z][\\w-]*"
 
   # --- The object fronted: a relative clause with the owner after its
   # table ("the table it owns," "the columns each stage owns," "the
