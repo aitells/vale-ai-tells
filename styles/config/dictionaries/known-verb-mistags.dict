@@ -115,8 +115,11 @@ proxies	VBZ
 proxy	VBZ
 queries	VBZ
 query	VBZ
-queues	VBZ
-queue	VBZ
+# queue/queues deliberately excluded: confirmed a real false positive in
+# production content ("queue degradation" as a noun-compound modifier,
+# where the unconditional override broke a case the tagger already got
+# right on its own). No corresponding real-corpus miss was ever found
+# to justify keeping it.
 renders	VBZ
 render	VBZ
 seeds	VBZ
