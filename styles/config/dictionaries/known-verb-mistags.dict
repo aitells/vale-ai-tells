@@ -23,10 +23,19 @@
 # standalone Go probe (tokenize + tag, not just consult a dictionary of
 # English ambiguous words), using both an isolated correct-agreement
 # sentence and a three-item adverb+verb tricolon mirroring this rule's own
-# target shape. Base and inflected forms are both included once either form
-# of a word is confirmed mistagging, since the cost of an unnecessary
-# override is near zero and the tagger's context-sensitivity means an
-# untested form of a confirmed-bad word isn't safely assumed correct either.
+# target shape (bare object, no determiner, since that is the AI-cliché
+# register this rule targets and the shape that most reliably surfaces the
+# mistagging). Every candidate that mistagged in the first tricolon sentence
+# was then cross-checked against a second, independently phrased bare-object
+# tricolon in a different domain and word order. About a third of the first
+# round's candidates (build, commit, dispatch, host, merge, parse, and
+# others) did not reproduce on the second sentence and were left out; a
+# single sentence's phrasing is not itself evidence, agreement across two
+# independent ones is. Base and inflected forms are both included once
+# either form of a word is confirmed mistagging, since the cost of an
+# unnecessary override is near zero and the tagger's context-sensitivity
+# means an untested form of a confirmed-bad word isn't safely assumed
+# correct either.
 #
 # Known tradeoff: a forced override is unconditional, so a listed word used
 # as an ordinary noun immediately before a genuine tricolon (e.g. "The
@@ -68,3 +77,63 @@ checks	VBZ
 check	VBZ
 caches	VBZ
 cache	VBZ
+backups	VBZ
+backup	VBZ
+balances	VBZ
+balance	VBZ
+batches	VBZ
+batch	VBZ
+buffers	VBZ
+buffer	VBZ
+exports	VBZ
+export	VBZ
+filters	VBZ
+filter	VBZ
+forwards	VBZ
+forward	VBZ
+imports	VBZ
+import	VBZ
+indexes	VBZ
+index	VBZ
+logs	VBZ
+log	VBZ
+mirrors	VBZ
+mirror	VBZ
+mocks	VBZ
+mock	VBZ
+mounts	VBZ
+mount	VBZ
+patches	VBZ
+patch	VBZ
+pings	VBZ
+ping	VBZ
+polls	VBZ
+poll	VBZ
+probes	VBZ
+probe	VBZ
+proxies	VBZ
+proxy	VBZ
+queries	VBZ
+query	VBZ
+queues	VBZ
+queue	VBZ
+renders	VBZ
+render	VBZ
+seeds	VBZ
+seed	VBZ
+ships	VBZ
+ship	VBZ
+streams	VBZ
+stream	VBZ
+stubs	VBZ
+stub	VBZ
+syncs	VBZ
+sync	VBZ
+tags	VBZ
+tag	VBZ
+triggers	VBZ
+trigger	VBZ
+verifies	VBZ
+verify	VBZ
+wraps	VBZ
+wrap	VBZ
