@@ -1368,7 +1368,7 @@ Their pricing forms a moat around the business nobody can cross.
 
 We consulted various stakeholders before the launch.
 
-A named stakeholder raised the issue.
+A certain stakeholder raised the issue.
 
 Their respective roles were never spelled out.
 
@@ -1376,7 +1376,7 @@ Each given task carries certain constraints.
 
 We flagged particular concerns in the review.
 
-We added named operational support to the tier.
+We added certain operational support to the tier.
 
 ## PassiveVoice: passive constructions that should trigger
 
@@ -2885,3 +2885,35 @@ It doesn't need credentials, nor does it call the network.
 Neither the database nor the network is required.
 
 No setup, no config, no fuss.
+
+## BareNames
+
+The manifest names the tag it resolved to.
+
+The field names the target table.
+
+The plain sentence names the step that handles the record.
+
+A recipe names a gate.
+
+It names a kind of file.
+
+The audit named the construction reviewers reject.
+
+An identifier naming an object is enough.
+
+Both recipes name the same gate.
+
+The flag must name a directory.
+
+vendir.yml names the tag.
+
+## NamedAdjective
+
+Open the named file and read the named directory.
+
+Each named rule ships with its fixtures.
+
+The workflow runs the named recipe.
+
+Its named target is a table.

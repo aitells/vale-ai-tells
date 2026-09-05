@@ -1248,3 +1248,27 @@ The rate is one, so no adjustment is needed.
 Bisect starts by running the target with no changes enabled.
 
 There is essentially no demand for this.
+
+## BareNames: literal naming that should NOT trigger
+
+The committee names the release after a constellation.
+
+The complaint names the contractor as a defendant.
+
+The type names that appear in the output are sorted.
+
+The parents named the child after her grandmother.
+
+A variable named the same as its type is legal.
+
+## NamedAdjective: terms of art that should NOT trigger
+
+The named pipe blocks until the reader opens it.
+
+A named tuple exposes its fields by attribute.
+
+The named group in the regex is optional.
+
+The file named foo is read first.
+
+The named storm made landfall on Tuesday.
