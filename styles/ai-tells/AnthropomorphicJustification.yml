@@ -203,20 +203,23 @@ tokens:
   - causing harm
   - without causing harm
 
-  # "Naming" and "wanting" families, deliberately left uncovered in prose.
-  # Both verbs take inanimate subjects the way the families above do, and
-  # both were rejected on corpus evidence rather than by omission. Recorded
-  # here so a later audit does not reopen either without new data.
+  # "Naming" and "wanting" families, both left out of this rule. Both
+  # verbs take inanimate subjects the way the families above do, and both
+  # were rejected here on corpus evidence rather than by omission. "Wants"
+  # stays uncovered; "names" was reopened on the maintainer's ask.
   #
   # "Names" as an act of designation reads like a tell ("it names a kind of
   # file", "the field names the target"), but it is ordinary Go and Python
   # documentation style: "IsDir reports whether the path names a directory",
   # "charset names the character set to use", "it names an importable
   # package". Every instance found in the two standard libraries is the
-  # precise verb for what an identifier denotes. A commit message is the one
-  # place the same phrasing reads as a substitution rather than a definition,
-  # so ai-tells-commits does flag it through CommitFigurativeVerbs. The split
-  # is deliberate: uncovered here, covered there.
+  # precise verb for what an identifier denotes, which kept it out of this
+  # rule and left it to CommitFigurativeVerbs, where a commit message is
+  # the text. The maintainer then met the verb in every document that
+  # passed under the package, so BareNames (2026-09) flags it in prose at
+  # its own corpus cost, the way BareHolds and BareReaches carry theirs,
+  # and NamedAdjective takes "the named file." Nothing here changed; the
+  # family has a rule of its own.
   #
   # "Wants" with an inanimate subject is more entrenched still: "gcc wants
   # to 8-align int64s", "the package wants to make the data available", "the
