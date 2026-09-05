@@ -166,3 +166,19 @@ tokens:
   # conveyance sense ("the site carries the story"), which media writing
   # disables too.
   - "\\b(?:a|an|the|this|that|these|those|each|every|its|their|both|all) (?:[a-z]+ )?[a-z]+ carr(?:ies|ied|ying)(?!\\s+(?:out|over)\\b)\\b"
+
+  # --- The bare "carry" the token above leaves out, admitted where a
+  # plural subject or a relative pronoun proves it is the verb ("the
+  # machine formats carry the score columns," "the blobs that carry no
+  # state rows," "the tier other stages carry"). A documentation-corpus
+  # audit (2026-09) found the plural-subject shape escaping every token
+  # here, the verb being the one writers reach for once a reviewer has
+  # taken "holds" away. The determiner-gated plural measures one corpus
+  # hit ("These embedded types carry methods with them"), the
+  # relative-pronoun shape two, both the arithmetic verb ("which will
+  # carry if src != 0"), which the trailing lookahead now refuses along
+  # with the phrasal forms. The bare plural with no determiner stays out:
+  # the arithmetic noun sits in that slot sixteen times ("returns the
+  # carry," "output 0 is carry/borrow").
+  - "\\b(?:a|an|the|this|that|these|those|each|every|its|their|both|all|most|some|many|two|three|several|other) (?:[a-z]+ )?[a-z]+s carry\\b(?! (?:out|over|on|if|when|bits?|flags?|chains?|in|save|propagation|lookahead|select)\\b)"
+  - "\\b(?:that|which|who) (?:[a-z]+ )?carry\\b(?! (?:out|over|on|if|when|bits?|flags?|chains?|in|save|propagation|lookahead|select)\\b|[.,;:)/])"

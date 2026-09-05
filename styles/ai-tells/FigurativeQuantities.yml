@@ -85,3 +85,9 @@ tokens:
   # --- "Array" only when an adjective inflates it. The bare noun is
   # literal everywhere in technical prose, so it stays uncovered.
   - an? (?:vast|wide|broad|whole|dizzying|impressive|endless|bewildering) array of
+
+  # --- Distance standing in for a count ("how far one label reaches,"
+  # "how far the item copied across the corpus," "how far these numbers
+  # travel"). Added after a documentation-corpus audit (2026-09); the
+  # shape measures zero across the Go and Python standard libraries.
+  - how far (?:a|an|the|this|that|these|those|each|every|its|their|one|any|some) (?:[a-z'-]+ )?[a-z]+ (?:reach(?:es|ed)?|travel(?:s|l?ed)?|copied|copies|spread|spreads|propagat(?:es|ed)|carr(?:ies|ied|y)|go(?:es)?|went|extends?|extended)

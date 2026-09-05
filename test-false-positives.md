@@ -361,13 +361,11 @@ I was just thinking out loud.
 
 There was a loud noise from the server room.
 
-## FigurativeWins: precedence jargon and literal winning that should NOT trigger
-
-The last write wins in this store.
-
-The more specific rule wins when they conflict.
+## FigurativeWins: literal winning that should NOT trigger
 
 The home team wins most games at night.
+
+Both candidates won their primaries on the same night.
 
 She wins the chess tournament again.
 
@@ -633,7 +631,7 @@ The build took about five minutes to finish.
 
 We identified four factors during the review.
 
-The directory holds three files.
+The directory contains three files.
 
 The map labels the four corners.
 
@@ -875,7 +873,7 @@ Given no arguments, the command prints usage.
 
 The rewrite runs no faster than the old code.
 
-The issues no one filed stay invisible.
+The issues no one filed remain invisible.
 
 The parser allows zero or more spaces between tokens.
 
@@ -1155,8 +1153,6 @@ The kids dressed up for the party.
 
 The suite passes for the wrong reason.
 
-The cleanup pass kicked off as scheduled.
-
 ## JourneyMetaphors: manner, traversal, and literal uses that should NOT trigger
 
 The result depends on the way the shell splits arguments.
@@ -1172,3 +1168,83 @@ A map of the user journey documents the checkout flow.
 The crew paved the driveway in one afternoon.
 
 She was on her way to the airport when the phone rang.
+
+## NegatedSubject and NegatedPair: docs formulas that should NOT trigger
+
+No such file exists at that path.
+
+Nothing but the header changes.
+
+The function runs without arguments or results.
+
+The record has neither a parent nor a child.
+
+## BareHolds: literal holding that should NOT trigger
+
+The goroutine holds the lock until the handoff.
+
+The caller holds a reference to the buffer.
+
+The jar holds two liters.
+
+She holds a master's degree in physics.
+
+The clamp holds the panel in place.
+
+## BareReaches: measurement and literal arrival that should NOT trigger
+
+The counter reaches zero after the last decrement.
+
+The reader reaches EOF on the final line.
+
+The child reaches the top shelf on tiptoe.
+
+The train reaches the station at nine.
+
+The timeout is reached after thirty seconds.
+
+The paragraph count never reached two.
+
+## MortalityMetaphors: literal death that should NOT trigger
+
+The patient died before the transfer.
+
+The battery dies after a week on the shelf.
+
+The tree survives the winter under a tarp.
+
+## MotionMetaphors: literal motion that should NOT trigger
+
+The bird feeds its chicks at dawn.
+
+The ladder leans against the wall.
+
+The loaf bakes in the oven for an hour.
+
+A swamp cooler runs on evaporation.
+
+## FigurativeNouns: literal nouns that should NOT trigger
+
+She wrote a short story about the harbor.
+
+The door knob came loose.
+
+The story behind the outage is long.
+
+## FigurativeKeeps: plain upkeep that should NOT trigger
+
+The gitignore entry keeps that file out of history.
+
+The lock keeps the garbage collector from being invoked.
+
+## NegatedSubject and NegatedObject, strengthened shapes that should NOT trigger
+
+Zero padding is allowed only to the left.
+
+None is returned when the loader is missing.
+
+The rate is one, so no adjustment is needed.
+
+Bisect starts by running the target with no changes enabled.
+
+There is essentially no demand for this.

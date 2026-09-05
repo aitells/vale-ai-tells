@@ -81,9 +81,6 @@ tokens:
   - '\b(?:dodges?|dodging|dodged)\s+(?:the|a|that|this)\b'
   - '\bput\s+\w+\s+in front of\b'
 
-  # --- Endurance: a file "survives untouched" rather than being unchanged.
-  - '\bsurvives?\s+(?:the|a|that|this)\s+\w+\s+untouched\b'
-
   # --- Consequence and evasion metaphors that cleared every gate in the
   # repository whose own documentation recorded them. A check does not bite,
   # a document does not sail, and a change has no blast radius.
@@ -158,10 +155,51 @@ tokens:
   - '\bsleeping dogs?\b'
 
   # --- Scatter: work spreading as a folding fan ("one release fanned out
-  # into separate pull requests"). Only the verb with its destination
-  # matches; the compound nouns "fan-out," "fanout," and "fan-in" are
-  # legitimate concurrency and circuit vocabulary and stay untouched.
-  - '\bfan(?:s|ned|ning)? out (?:into|across|again|over|to)\b'
+  # into separate pull requests," "the query fans out"). The verb matches
+  # with or without its destination; the compound nouns "fan-out,"
+  # "fanout," and "fan-in" are legitimate concurrency and circuit
+  # vocabulary and stay untouched. The bare form costs one corpus hit
+  # ("it fans out nBackendWorkers"), the figure itself.
+  - '\bfan(?:s|ned|ning)? out\b'
+
+  # --- Phrases from a documentation-corpus audit (2026-09), which found
+  # each of these clearing every idiom rule. Costs across the Go and
+  # Python standard libraries follow each group, and every hit is the
+  # figure itself.
+  #
+  # Agreement and duplication as physical arrangement: "lines up with"
+  # (eleven, "lines up with reality"), "doubles as" (one), "double duty"
+  # (zero).
+  - '\blin(?:es?|ed|ing) up with\b'
+  - '\bdoubl(?:es?|ed|ing) as\b'
+  - '\bdouble duty\b'
+  # The trick, the extra step, and the bar: "the whole trick" (zero), "a
+  # step further" (one), "meets that bar" (zero; "clears the bar" stays in
+  # FigurativeClears).
+  - '\bthe whole trick\b'
+  - '\b(?:a|one) step further\b'
+  - '\b(?:meets?|met|meeting|passes|passed|hits?) (?:the|that|this|a|its|our) (?:[a-z]+ )?bar\b'
+  # Availability and departure: "on hand" (zero), "went missing" and
+  # "went away" (five, "the error went away"), "for good" (three, with the
+  # "for good measure" and "for good reason" phrases refused), "left for
+  # good." "Goes away" stays out at sixty-one hits: "this will go away
+  # once" is how both corpora schedule a removal.
+  - '\bon hand\b'
+  - '\bwent (?:missing|away)\b'
+  - '\bfor good\b(?! (?:measure|reason|reasons|style|cause|luck|or|and|behavior|behaviour|practice|hygiene|performance|values?)\b)'
+  # Decisions and delays: "made that call" (one; "made the call" stays
+  # out because both corpora use it for a function call), "judgment
+  # call" (zero), "takes a while" (two), "gets it backwards" (zero),
+  # "picks up on" (three), "from two angles" (zero), "stands up a
+  # service" (one).
+  - '\bma(?:de|kes?|king) that call\b'
+  - '\b(?:judgment|judgement) call\b'
+  - '\btakes? a while\b'
+  - '\bgets? (?:it|this|that|them) backwards?\b'
+  - '\bpick(?:s|ed|ing)? up on\b'
+  - '\bfrom (?:two|three|several|multiple|different|both) angles\b'
+  - '\bstands? up (?:a|an|the|its|this|that|new|another|fresh|every|each)\b'
+  - '\bstood up (?:a|an|the|its|this|that|new|another|fresh|every|each)\b'
 
   # The rest of the substitution frame ("disguised as," "masquerading as,"
   # "dressed as," "in the guise of") lives in FigurativeDisguises.

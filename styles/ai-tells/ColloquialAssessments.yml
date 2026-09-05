@@ -45,3 +45,14 @@ tokens:
   - "\\bwhat matters most\\b"
   - "\\ball that (?:really |truly |actually )?matters\\b"
   - "\\bthe only thing that (?:really |truly |actually )?matters\\b"
+
+  # ==========================================================================
+  # "Handy" — the folksy usefulness grade ("Handy for auditing which items
+  # never made it through," "comes in handy"). Added after a
+  # documentation-corpus audit (2026-09) found it in the densest line of
+  # its corpus. Six hits across the Go and Python standard libraries
+  # ("Handy for external data analysis"), each the figure itself.
+  # ==========================================================================
+  - "\\bhandy (?:for|when|if|to have|in|as)\\b"
+  - "\\bcomes? in handy\\b"
+  - "\\bcame in handy\\b"

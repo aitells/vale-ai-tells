@@ -37,6 +37,13 @@ ignorecase: true
 # hole open through the participle ("should have covered all program
 # counters" laments a gap and still fires); the corpora show one hit.
 #
+# One base form is a claim: the plural subject in the present tense
+# ("content rules cover every input under the policy"), which a
+# documentation-corpus audit (2026-09) found escaping through the same
+# hole. The last token admits it behind a determiner-fronted plural
+# subject directly ahead of the verb, where a modal or "to" cannot sit;
+# the shape measures zero across both standard libraries.
+#
 # The lookahead after "all" excludes the exception idiom: "eliminates all
 # but the top level" claims an exception, not a sweep. The lookahead
 # after "every" excludes the alternation reading of "every other." One
@@ -64,3 +71,8 @@ tokens:
   # restarts," "validates all input," "sanitizes every field,"
   # "anticipates all failure modes").
   - "\\b(?:solves|solved|solving|resolves|resolved|resolving|fixes|fixed|fixing|preserves|preserved|preserving|maintains|maintained|maintaining|guarantees|guaranteed|guaranteeing|survives|survived|surviving|validates|validated|validating|sanitizes|sanitized|sanitizing|anticipates|anticipated|anticipating) (?:all (?!but\\b)|every (?!other\\b))[a-z][-a-z]*\\b"
+  # --- The plural present: a determiner-fronted plural subject with the
+  # base verb it takes ("content rules cover every input," "the wrappers
+  # handle all edge cases"). The subject sits directly ahead of the verb,
+  # so the modal and infinitive shapes never match here.
+  - "\\b(?:(?:a|an|the|this|that|these|those|each|every|its|their|both|all|most|some|many|two|three|four|several|any) )?(?:[a-z'-]+ )?[a-z]+s (?:handle|cover|address|support|consider|capture|eliminate|prevent|catch|avoid|satisfy|meet|pass|respect|honor|fulfill|solve|resolve|fix|preserve|maintain|guarantee|survive|validate|sanitize|anticipate) (?:all (?!but\\b)|every (?!other\\b))[a-z][-a-z]*\\b"

@@ -1,6 +1,6 @@
 ---
 extends: existence
-message: "AI commit tell: '%s'. Cut this filler. It adds nothing."
+message: "AI commit tell: '%s'. Cut this filler. The message reads the same without it."
 level: error
 ignorecase: true
 tokens:

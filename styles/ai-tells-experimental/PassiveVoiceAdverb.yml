@@ -10,7 +10,7 @@ extends: sequence
 message: "AI passive voice: '%[1]s %[2]s %[3]s'. Name the actor and use an active verb."
 level: warning
 tokens:
-  - pattern: \b(?:am|is|are|was|were|be|been|being)\b
+  - pattern: \b(?:am|is|are|was|were|be|been|being|get|gets|got|gotten|getting)\b
     tag: VBZ|VBP|VBD|VB|VBN|VBG
   - tag: RB
   - tag: VBN

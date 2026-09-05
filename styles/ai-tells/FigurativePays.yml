@@ -48,6 +48,23 @@ tokens:
   - '\bpay(?:s|ing)? a (?:[a-z]+ )?price\b(?! of)'
   - '\bpaid a (?:[a-z]+ )?price\b(?! of)'
 
+  # --- The same invoice spelled with "cost," and the free lunch: "never
+  # pays that cost," "at no cost," "costs nothing," "would pay to
+  # compare," "spends work." A documentation-corpus audit (2026-09) found
+  # the cost spellings escaping alongside the price ones; every shape
+  # measures zero across the Go and Python standard libraries except
+  # "costs nothing" at one ("this if and the condition cost nothing").
+  # Bare "cheap" stays out at fifty-two hits: "cheap to copy" is how both
+  # corpora describe a cost they measured, and no complement separates it
+  # from the AI grade. The negated-object spelling "costs nothing" is
+  # NegatedObject's; this rule takes the prepositional and modal shapes.
+  - '\bpay(?:s|ing)? (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
+  - '\bpaid (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
+  - '\bat no (?:cost|charge|expense)\b'
+  - '\b(?:would|could|might|may) pay to\b'
+  - '\bspend(?:s|ing)? (?:work|effort|a budget|budget|attention|cycles|compute|tokens|a round-?trip|round-?trips)\b'
+  - '\bspent (?:work|effort|a budget|budget|attention|cycles|compute|tokens|a round-?trip|round-?trips)\b'
+
   # --- The purchase: a change "buys" a beneficiary something, or buys an
   # abstract good no register sells ("this buys you flexibility," "the
   # cache buys us time," "the shim bought breathing room").
