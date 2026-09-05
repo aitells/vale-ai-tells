@@ -20,8 +20,8 @@ ignorecase: true
 # arguments" (50), "returns no value" (18), "finds/found no" (10), "matches
 # no" (7), "sees no" (4, mostly the first-person "I see no reason"), and
 # "inherits no" (2, the OO docs register: "inherits no __init__"). "Carries no" stays in FigurativeCarries,
-# whose content-possession tokens already cover it, and "earns no" in
-# FigurativeEarns. The verbs kept below total ~165 corpus
+# whose negated-cargo token covers it with the same lookahead gates, and
+# "earns no" in FigurativeEarns. The verbs kept below total ~165 corpus
 # hits, dominated by "makes no sense" (12) and low-rate docs formulas
 # ("requires no locking," "performs no validation," "reports no such
 # host," "observe no idle Ps," "copied no bytes"), which are the same
