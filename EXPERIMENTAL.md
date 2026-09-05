@@ -26,6 +26,8 @@ Research sources identified these patterns, but they appeared under "Known patte
 
 <!-- vale Google.Headings = NO -->
 
+The density and variance rules below run as Tengo scripts over the raw document, because a sentence-level scope cannot see a section. Each script strips fenced code, HTML comments, list items, and table rows before measuring, and, since the MDX fix, the markup an MDX or HTML document puts between paragraphs: JSX and HTML tags with their attributes, MDX expression lines and comments, `import` and `export` statements, and a frontmatter block. Left in place, a component tag read as the first word of the sentence after it, so a page built from repeated `<Callout>` blocks tripped `SentenceStartRepetition` on the tag rather than the prose, and a self-closing `<Image />` line on its own entered the paragraph-split scripts as a paragraph. The `test-mdx.md` fixture holds that page and the test gate raises every raw-scope rule to error over it. The fixture keeps a `.md` extension because Vale parses `.mdx` through the external `mdx2vast` tool, which the pinned toolchain lacks. The scripts read the raw text whatever the extension. To lint your own MDX, install `mdx2vast` where Vale can find it and bind the style with `[*.{md,mdx}]` rather than `[*.md]`.
+
 ### SentenceLengthVariance
 
 Measures the coefficient of variation (CV) of sentence word counts within each section (between markdown headings). Flags sections where CV falls below 0.30, indicating suspiciously uniform sentence lengths.

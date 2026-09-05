@@ -321,12 +321,15 @@ rm -rf "$dir"
 exit "$fail"
 '''
 
+# The MDX fixture takes its own config. .vale-test-mdx.ini raises the
+# raw-scope density rules to error, and vale applies a rule-level override
+# globally, so those lines in .vale-test.ini would reach the other fixture.
 [tasks.test-clean]
-description = "Assert test-false-positives.md produces zero Vale errors"
+description = "Assert test-false-positives.md and test-mdx.md produce zero Vale errors"
 quiet = true
 run = '''
 echo "Checking for false positives..."
-vale --config=.vale-test.ini test-false-positives.md && echo "Clean -- no false positives."
+vale --config=.vale-test.ini test-false-positives.md && vale --config=.vale-test-mdx.ini test-mdx.md && echo "Clean -- no false positives."
 '''
 
 # --- Package ---

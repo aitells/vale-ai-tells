@@ -15,6 +15,17 @@ for section in sections {
     // Strip code blocks and HTML comments (use separate variable to preserve section for position lookup).
     clean := text.re_replace("(?s)```.*?```", section, "")
     clean = text.re_replace("<!--.*?-->", clean, "")
+    // Strip the markup an MDX or HTML document puts between paragraphs:
+    // MDX comments and expression lines, import and export statements, a
+    // frontmatter block, and JSX or HTML tags with their attributes. Left
+    // in place, a component tag reads as the first word of the sentence
+    // after it, so every <Callout> starts the same sentence, and a
+    // self-closing <Image /> line on its own stands as a paragraph.
+    clean = text.re_replace(`(?s)\{/\*.*?\*/\}`, clean, "")
+    clean = text.re_replace(`(?m)^[ \t]*(?:import|export)\b[^\n]*$`, clean, "")
+    clean = text.re_replace(`(?s)\A---\n.*?\n---(?:\n|\z)`, clean, "")
+    clean = text.re_replace(`(?s)</?[A-Za-z][A-Za-z0-9.:-]*(?:\s[^<>]*?)?/?>`, clean, "")
+    clean = text.re_replace(`(?m)^[ \t]*\{[^\n]*\}[ \t]*$`, clean, "")
 
     // Filter out list items, table rows, and other non-prose lines.
     lines := text.split(clean, "\n")
