@@ -135,8 +135,13 @@ tokens:
   # above flags on its own), so the object stays open, with
   # NegatedObject's own lookahead gates keeping degree idioms ("carries
   # no more than three") and literal counts ("carries zero or more")
-  # quiet.
-  - "\\bcarr(?:y|ies|ied|ying) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))[a-z][-a-z]*\\b"
+  # quiet. The object slot matches NegatedObject's exactly, quoted and
+  # backticked objects included: one quote mark may open the object, and
+  # in markdown a backticked object becomes the asterisk run Vale's
+  # parser masks the code span to, which is what the alternation matches
+  # ("carries no `counts`"). Both shapes measure zero in the corpora,
+  # like the bare one.
+  - "\\bcarr(?:y|ies|ied|ying) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))(?:['\"‘“`]?[a-z][-a-z]*\\b|\\*+)"
 
   # --- Mirrored possession: the same-shape sibling of FigurativeHolds
   # ("carries the same caveat," "carries a similar risk"). The comparison
