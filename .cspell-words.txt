@@ -1,4 +1,5 @@
 adoc
+Amit
 AGENTDESC
 agentic
 AGENTMSG
@@ -24,6 +25,7 @@ bincubat
 BLEU
 bliv
 blocklist
+Parekh
 bmasquerad
 bmisbehav
 bnurtur

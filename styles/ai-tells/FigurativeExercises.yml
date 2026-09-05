@@ -1,0 +1,20 @@
+---
+extends: sequence
+message: "AI overused verb: '%s'. Name what the subject tests, uses, controls, or chooses. Disable this rule for legal or fitness prose."
+level: error
+ignorecase: true
+# "Exercise" inflates several plain actions into physical exertion: a
+# quickstart "exercises" services, a test "exercises" a code path, a reviewer
+# "exercises" caution, or a party "exercises" its right. The technical testing
+# sense belongs here too: it names coverage without saying whether the test
+# starts, calls, checks, or verifies the component. Go and Python standard
+# library tests use that sense often; the rule accepts those alerts by design.
+#
+# Unlike FigurativeEarns, this rule cannot use an existence token for every
+# inflection because "exercise" and "exercises" are also ordinary nouns. The
+# part-of-speech gate catches only verb forms, leaving workouts and textbook
+# exercises quiet. Fitness and legal prose should disable the rule when the
+# verb is intentional.
+tokens:
+  - pattern: exercise|exercises|exercised|exercising
+    tag: VB|VBZ|VBG|VBP|VBD|VBN

@@ -1113,6 +1113,16 @@ The price fell sharply in the third quarter.
 
 Night fell over the harbor.
 
+## FigurativeExercises: noun forms that should NOT trigger
+
+Daily exercise improves cardiovascular health.
+
+Complete the exercises at the end of the chapter.
+
+The exercise bike folds for storage.
+
+This exercise in the workbook covers recursion.
+
 ## NominalizedScopeChange: adjectival and verb uses that should NOT trigger
 
 The narrowing road forced the trucks to slow down.
