@@ -62,3 +62,4 @@ repo
 
 # File names
 Justfile
+frontmatter
