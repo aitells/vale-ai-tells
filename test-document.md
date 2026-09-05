@@ -764,6 +764,24 @@ That refactor is an easy win.
 
 It is a winning combination of speed and clarity.
 
+The last write wins in this store.
+
+The more specific rule wins when they conflict.
+
+One item per group wins as primary.
+
+The ledger records which source won.
+
+Losers then split on the second axis.
+
+The picker runs without picking a winner.
+
+The exact match outranks the fuzzy one.
+
+It beats an explicit flag.
+
+The cleanup pass kicked off as scheduled.
+
 ## NarrativePivots (game / playbook / script)
 
 This release changed the game for our customers.
@@ -2451,3 +2469,419 @@ The hack causes maintenance problems down the line.
 Our journey began with a single rule.
 
 The journey from prototype to production took a year.
+
+## NegatedSubject, documentation-corpus audit additions
+
+No row ever gets deleted here.
+
+No freeze is anonymous.
+
+No field is optional in the manifest.
+
+No operational driver appears in the code.
+
+No schema migration or manual backfill comes with it.
+
+Nothing upstream feeds the stage.
+
+Nothing downloads.
+
+Nothing on the chunk marks it to skip.
+
+None of these writes a table.
+
+Neither subcommand writes back.
+
+It deletes a row whose key no root reaches.
+
+It drops every derived row no live record references.
+
+It flags a file that no manifest names.
+
+## NegatedObject, the nothing spelling
+
+The pass writes nothing of its own.
+
+Everything else costs nothing at all.
+
+Most text embeds nothing.
+
+It deletes nothing and touches nothing upstream.
+
+The store holds nothing but derived data.
+
+## NegatedPair
+
+It runs with no database and no network.
+
+It needs neither the database nor a round-trip.
+
+So it runs without a database or a round-trip.
+
+It doesn't need credentials and doesn't call the network.
+
+It runs with no grading path, and no gate objects.
+
+## FigurativeCarries, the bare plural
+
+The machine formats carry the score columns.
+
+The change splits only the blobs that carry no state rows.
+
+The staleness tier other stages carry stays empty here.
+
+## FigurativeSurfaces, FigurativeClears, FigurativeQuiet, and FigurativeFires additions
+
+Surfaces skills whose definition matches a canonical version.
+
+It fires once agreement clears the target.
+
+It keeps the blobs that cleared the run.
+
+The finding clears on the next run.
+
+The update re-renders the body and stays silent.
+
+The log goes silent after the handoff.
+
+It keeps the console quiet.
+
+They fire nothing and never reach the next stage.
+
+The rule is placed where they misfire.
+
+## EvasionMetaphors and FigurativeTravels additions
+
+Lowering recall lets violations into production.
+
+The old pin lets a stale row past the sweep.
+
+The precomputed digests travel into that bundle.
+
+That identifier travels into the export and the ledger.
+
+## FigurativeSweeps, FigurativeSits, FigurativeOwns, FigurativeLives, and FigurativeStays additions
+
+Sweep the failures before the next run.
+
+It sweeps every stranded row.
+
+These sit ahead of the subcommand name.
+
+Over each column sits an index.
+
+Beside it sit flat columns.
+
+An orphan row sits on a record.
+
+It counts what sits outside every fence.
+
+A value sits quoted and escaped in the raw bytes.
+
+It owns three tables.
+
+The stage writes the table it owns.
+
+The pass owns one table.
+
+The columns each stage owns are listed.
+
+The docs that own the decision cut are short.
+
+A shared record has no owning component.
+
+The grading pass owns where the signal applies.
+
+Free-block bloat lives in the file layout.
+
+Only two fields live there.
+
+That split lives as reviewed data.
+
+Operator mechanics live elsewhere.
+
+The value stays complete across runs.
+
+The field stays optional in the schema.
+
+The index stayed small after the rewrite.
+
+## FigurativeFalls, membership additions
+
+Every rule falls into one of three dispositions.
+
+The value falls within the window.
+
+The score fell under the floor.
+
+## AnthropomorphicCognition, documentation-corpus audit additions
+
+A record's bytes decide which extractor runs.
+
+The library decides for itself.
+
+Prose answers questions an exact match can't.
+
+Every failure names the profile and tells you to refresh it.
+
+It picks the projections a query asks for often.
+
+A file the loader could mistake for a complete capture is skipped.
+
+One scan can't prove a record left for good.
+
+It removes the item rather than pretending the item never existed.
+
+Determinism forbids a model on the decision path.
+
+The band the ensemble arbitrates is narrow.
+
+It is a precision-first signal that cedes recall.
+
+The secret scanner hunts secrets.
+
+The create arm adopts an open issue the ledger lost.
+
+It drops the characters that only confuse tokenization.
+
+A codebook that drifted would teach a reviewer the wrong contract.
+
+It teaches the reviewer a contract.
+
+The parser guesses the encoding from the first line.
+
+## UniversalObject and UniversalSubject, active additions
+
+Content rules cover every input under the policy.
+
+Every predicate reads a live root.
+
+All rows carry a timestamp.
+
+## BareHolds
+
+The table holds every stage's tables.
+
+Two records hold identical bytes.
+
+The column holds the serialized object.
+
+A directory holding one is enough.
+
+Code held as a config value is rare.
+
+The counts the aux tables already hold are stale.
+
+It reads whatever the store holds at that moment.
+
+The package holds every input the review needs.
+
+## BareReaches
+
+One flag reaches INFO and two reaches DEBUG.
+
+It ranks the items a query reaches.
+
+It runs even when the index reaches it.
+
+Only referenced records reach the store.
+
+An orphan never reaches an extractor.
+
+The stage hasn't reached that record yet.
+
+Confirm the catalog reached the store.
+
+A fragment reaches nothing there.
+
+## MortalityMetaphors
+
+A run that dies part way through leaves a partial file.
+
+Say it dies during the third stage.
+
+The process can die mid-write.
+
+Every row survives unchanged.
+
+A primary key survives the rewrite.
+
+The blobs that repo references survive too.
+
+The file survives the rebase untouched.
+
+The cache entry outlives the request.
+
+The row is kept for its whole life.
+
+## MotionMetaphors
+
+The pipeline feeds the stage.
+
+The output feeds into the ranker.
+
+Nothing strands there.
+
+The extra rows swamp the index.
+
+The big table dwarfs the rest.
+
+The stage crowds out the rest.
+
+The planner leans on the index.
+
+The step mints a new identifier.
+
+The default is baked in.
+
+The config drives the build.
+
+The pass shapes the output.
+
+The stage cracks open the record.
+
+The pass sheds the derived columns.
+
+## FigurativeNouns
+
+Its primary reach is the whole-token index.
+
+The per-rule reach is narrow.
+
+It picks between two reaches.
+
+One wrinkle remains.
+
+The migration story is weak.
+
+A similar story applies to the export.
+
+The scan exposes one more knob.
+
+## FigurativeKeeps
+
+It keeps a re-run cheap.
+
+It keeps search fast.
+
+It keeps the index small.
+
+It keeps a reader from mistaking one for the other.
+
+It keeps an orphan away from every extractor.
+
+It keeps the rest clear of it.
+
+## FigurativeIdioms, ColloquialAssessments, and JourneyMetaphors additions
+
+Handy for auditing which items never made it through the first stage before a later run kicks off.
+
+The helper comes in handy during audits.
+
+The count lines up with the manifest.
+
+The manifest doubles as a lockfile.
+
+The shortcut does double duty.
+
+That is the whole trick.
+
+The rewrite goes a step further.
+
+The check meets that bar.
+
+The build keeps a spare on hand.
+
+The row left for good.
+
+The error went away after the retry.
+
+The reviewer made that call.
+
+The rebuild takes a while.
+
+The parser gets it backwards.
+
+The scanner picks up on the marker.
+
+The report shows the count from two angles.
+
+The stage stands up a service for the run.
+
+The query fans out.
+
+The script walks the workflow one step at a time.
+
+## FigurativePays, EnforcementMetaphors, and FigurativeQuantities additions
+
+The check runs at no cost.
+
+It never pays that cost.
+
+It would pay to compare the two.
+
+The retry spends work on a stale row.
+
+So the report keeps an honest count.
+
+It keeps a before-and-after comparison honest.
+
+The honest decode is the only correct projection.
+
+Each group tests against the root that gates it.
+
+The live roots gate every swept table.
+
+It is certain enough to gate a security control.
+
+A copy count states how far one label reaches.
+
+It records how far these numbers travel.
+
+## NegatedSubject, NegatedObject, and NegatedPair, strengthened past the audit
+
+No data will be collected on the device.
+
+No changes have been made to the schema.
+
+No lock needs to be held during the read.
+
+No warning should occur on a clean tree.
+
+Nothing is collected on the device.
+
+Nothing else is required to get started.
+
+Zero configuration is required.
+
+Zero dependencies are added by the install.
+
+Zero setup required.
+
+Not a single line is wasted.
+
+Not one test was touched.
+
+The order is preserved, and no data is lost.
+
+The value is nil, but no relocation is created.
+
+The install requires absolutely no configuration.
+
+The change adds virtually no overhead and introduces almost no risk.
+
+Absolutely no data leaves the device.
+
+The binary ships with no dependencies.
+
+The service runs with zero configuration.
+
+The tool works with no setup and installs without any changes.
+
+The package comes with no vendor lock-in.
+
+It doesn't need credentials, nor does it call the network.
+
+Neither the database nor the network is required.
+
+No setup, no config, no fuss.

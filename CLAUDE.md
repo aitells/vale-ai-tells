@@ -53,7 +53,7 @@ mise run test    # the fixture guard: tells fire, subjects smoke-test, no false 
 
 **Running the gates:**
 
-Gates the vendored payload defines carry a `repotools:` prefix. The rest belong to this repository.
+Gates from the vendored payload use a `repotools:` prefix. The rest belong to this repository.
 
 ```bash
 mise run lint                        # every linter below, in one pass

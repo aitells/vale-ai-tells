@@ -56,6 +56,18 @@ tokens:
   - "\\b(?:finds?|found|finding|makes?|made|making|works?|worked|working|winds?|wound|winding|weaves?|wove|weaving) (?:its|their) way\\b"
   - "\\bpav(?:es?|ed) the way\\b"
 
+  # --- Making it: the record as a traveler who arrives ("items that
+  # never made it through the first stage," "the value makes it into the
+  # index," "made it to production"). Added after a documentation-corpus
+  # audit (2026-09); eleven hits across the Go and Python standard
+  # libraries ("won't make it into the final mantissa"), each the figure.
+  - "\\bma(?:de|kes?|king) it (?:through|past|to|into|out|in|over|across)\\b"
+
+  # --- Walking the workflow: a reader or a tool taken along a path
+  # ("walks the workflow," "walk the pipeline"). "Walks the tree" stays
+  # out as the traversal term of art.
+  - "\\bwalk(?:s|ed|ing)? the (?:workflow|pipeline|stages|steps|process|procedure)\\b"
+
   # --- Distance as progress ("goes a long way toward clean diffs,"
   # "has come a long way," "a long way to go").
   - "\\ba long way\\b"

@@ -222,7 +222,7 @@ Example matches: "anchored in our values," "anchor the strategy," "an emotional 
 
 ### TransitionRepetition
 
-Detects when the same formal transition phrase appears 3+ times within a document section. The existing `FormalTransitions` rule flags individual uses. This catches the density pattern where AI leans on the same connector repeatedly.
+Detects when the same formal transition phrase appears 3+ times within a document section. The existing `FormalTransitions` rule flags individual uses. This catches the density pattern where AI repeats the same connector.
 
 **How it works:**
 
@@ -280,7 +280,7 @@ Detects when an unusually high proportion of enumerated lists in a document use 
 
 ### PassiveVoice
 
-Flags passive constructions where the participle directly follows the auxiliary ("was eaten," "is called," "has been made"). A sequence-based rule (part-of-speech tags, no script): the participle slot requires a VBN tag from Vale's tagger.
+Flags passive constructions where the participle directly follows the auxiliary ("was eaten," "is called," "has been made," "gets created," "got deleted"). A sequence-based rule (part-of-speech tags, no script): the participle slot requires a VBN tag from Vale's tagger. The "get" passive joined the auxiliary list in all three passive rules after a documentation-corpus audit found every one of those escaping.
 
 This rule and its two companions replace `Google.Passive`, `write-good.Passive`, and `write-good.E-Prime` for projects that ran those styles alongside `ai-tells`. The regex rules match a form of "to be" followed by any word ending in "ed" (or an irregular participle), with only whitespace allowed between them. That design fails in both directions:
 
@@ -289,11 +289,11 @@ This rule and its two companions replace `Google.Passive`, `write-good.Passive`,
 
 The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` covers the adverb gap. `write-good.E-Prime` doesn't need a replacement: it flags every form of "to be," including "it's" and "here's," which makes it a philosophy rather than a passive detector.
 
-**Known limitations:** Participles that double as adjectives ("tired," "excited") tag as VBN even in predicate-adjective position, so "she was tired" fires. The rule deliberately defines no exception list. An allowlist would hide the passive sense of those same verbs ("the electron is excited by a photon"). The project's stance is that users decide what to except. The tagger also guesses VBN for some words outside its vocabulary, which produces an occasional flag on a non-participle.
+**Known limitations:** Participles that are also adjectives ("tired," "excited") tag as VBN even in predicate-adjective position, so "she was tired" fires. The rule deliberately defines no exception list. An allowlist would hide the passive sense of those same verbs ("the electron is excited by a photon"). The project's stance is that users decide what to except. The tagger also assigns VBN to some words outside its vocabulary, which produces an occasional flag on a non-participle.
 
 ### PassiveVoiceAdverb
 
-The companion rule for the adverb-gap shape: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire shape. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Neither rule matches a gap of two or more adverbs ("was not actually used").
+The companion rule for the adverb-gap shape: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire shape. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Both rules miss a gap of two or more adverbs ("was not actually used").
 
 ### PassiveDensity
 
@@ -316,7 +316,7 @@ Measures the share of sentences in each section that contain a passive construct
 
 ### NegationDensity
 
-Counts the determiner "no" heading a noun phrase and flags paragraphs holding more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any use on its own. It catches the writer who uses one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
+Counts the determiner "no" heading a noun phrase and flags paragraphs with more than two. The construction is correct English and each instance reads fine, so the rule measures rate rather than judging any use on its own. It catches the writer who uses one negation and never varies it, in the way `TricolonDensityDocument` catches a structure no per-instance rule can see.
 
 **How it works:**
 

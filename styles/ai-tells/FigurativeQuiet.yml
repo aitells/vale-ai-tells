@@ -16,11 +16,19 @@ tokens:
   # check stays quiet," "the log goes quiet," "the alarm falls quiet"). A
   # person or a room can literally do this, so disable the rule for prose
   # about sound.
-  - "\\b(?:stays?|staying|stayed|remains?|remaining|remained) quiet\\b"
-  - "\\b(?:goes?|going|went|gone) quiet\\b"
-  - "\\b(?:falls?|falling|fell|fallen) quiet\\b"
+  # "Silent" and "mute" are the synonyms a writer reaches for once "quiet"
+  # is flagged, so they share the tokens; the pair measures zero across
+  # the Go and Python standard libraries.
+  - "\\b(?:stays?|staying|stayed|remains?|remaining|remained) (?:quiet|silent|mute)\\b"
+  - "\\b(?:goes?|going|went|gone) (?:quiet|silent|mute)\\b"
+  - "\\b(?:falls?|falling|fell|fallen) (?:quiet|silent)\\b"
   - "\\bquiet(?:s|ing|ed)? down\\b"
   - "\\bkeeps? quiet about\\b"
+
+  # --- Silence imposed: the artifact keeps another one from speaking
+  # ("keeps the console quiet," "kept the log silent"). Measured at zero
+  # across both standard libraries.
+  - "\\bke(?:eps?|eping|pt) (?:a|an|the|this|that|these|those|its|their|each|every|all|both) (?:[a-z'-]+ ){1,3}(?:quiet|silent)\\b"
 
   # --- Understatement adverb: the artifact acts "quietly," the padding that
   # frames a change as modest ("quietly drops the error," "quietly ships,"

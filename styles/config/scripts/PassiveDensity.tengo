@@ -8,7 +8,7 @@ matches := []
 // rejected; everything else counts. This is a regex approximation of
 // the POS-tagged PassiveVoice rules: individual misses and over-counts
 // average out at section scale.
-passive := `(?i)\b(?:am|is|are|was|were|be|been|being)(?:\s+(?:not|never|[a-z]+ly))?\s+([a-z][a-z]+ed|done|made|given|taken|seen|known|shown|found|held|kept|left|lost|meant|put|read|run|said|sent|set|told|thought|understood|written|built|brought|bought|caught|chosen|drawn|driven|eaten|fallen|felt|gotten|gone|grown|heard|hidden|hit|led|paid|proven|sold|spent|spoken|spread|stolen|taught|thrown|won|broken|begun|cut)\b`
+passive := `(?i)\b(?:am|is|are|was|were|be|been|being|get|gets|got|gotten|getting)(?:\s+(?:not|never|[a-z]+ly))?\s+([a-z][a-z]+ed|done|made|given|taken|seen|known|shown|found|held|kept|left|lost|meant|put|read|run|said|sent|set|told|thought|understood|written|built|brought|bought|caught|chosen|drawn|driven|eaten|fallen|felt|gotten|gone|grown|heard|hidden|hit|led|paid|proven|sold|spent|spoken|spread|stolen|taught|thrown|won|broken|begun|cut)\b`
 
 // Split document into sections by markdown headings.
 // Measure passive density within each section independently.
