@@ -1486,3 +1486,13 @@ The proposal separates the surface syntax from the semantics.
 The lander touched the surface of the moon at dawn.
 
 Sand the top surface before you paint it.
+
+## EmphaticCopula: bold markup that should NOT trigger
+
+This design **is** intentional.
+
+The fix **actually** works as expected.
+
+We **never** skip the validation step.
+
+The report **always** posts on Fridays.

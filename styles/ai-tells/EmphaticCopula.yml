@@ -5,28 +5,40 @@ level: error
 nonword: true
 scope: raw
 tokens:
+  # Every asterisk token is wrapped (?<!\*)\*(?!\*) ... (?<!\*)\*(?!\*) rather
+  # than a bare \*word\*. A bare pattern matches its middle two asterisks
+  # inside **word** (bold), because "**word**" contains the literal substring
+  # "*word*" once the outer asterisks are counted in. The lookaround requires
+  # each delimiting asterisk to be a single, unpaired one: not preceded or
+  # followed by another asterisk. That excludes **bold** (both delimiters are
+  # doubled) and ***bold+italic*** (tripled) along with plain **word**,
+  # leaving genuine single-asterisk _italic_-only emphasis as the only match.
+  # Underscore tokens don't need the same guard: __word__ (bold) never
+  # contains the literal substring " _word_" the space-prefixed pattern
+  # requires, because the run of underscores is unbroken.
+  #
   # Markdown italicized copula verbs - the "manufactured profundity" pattern
   # Note: underscore patterns require space prefix to avoid matching __dunder__ methods
-  - "\\*is\\*"
+  - "(?<!\\*)\\*(?!\\*)is(?<!\\*)\\*(?!\\*)"
   - " _is_"
-  - "\\*are\\*"
+  - "(?<!\\*)\\*(?!\\*)are(?<!\\*)\\*(?!\\*)"
   - " _are_"
-  - "\\*was\\*"
+  - "(?<!\\*)\\*(?!\\*)was(?<!\\*)\\*(?!\\*)"
   - " _was_"
-  - "\\*were\\*"
+  - "(?<!\\*)\\*(?!\\*)were(?<!\\*)\\*(?!\\*)"
   - " _were_"
 
   # Italicized "the" for false emphasis
-  - "\\*the\\*"
+  - "(?<!\\*)\\*(?!\\*)the(?<!\\*)\\*(?!\\*)"
   - " _the_"
 
   # Italicized single conjunctions/prepositions for false drama
   # Note: underscore patterns require space prefix to avoid matching __dunder__ methods
-  - "\\*and\\*"
+  - "(?<!\\*)\\*(?!\\*)and(?<!\\*)\\*(?!\\*)"
   - " _and_"
-  - "\\*not\\*"
+  - "(?<!\\*)\\*(?!\\*)not(?<!\\*)\\*(?!\\*)"
   - " _not_"
-  - "\\*or\\*"
+  - "(?<!\\*)\\*(?!\\*)or(?<!\\*)\\*(?!\\*)"
   - " _or_"
 
   # Italicized intensifiers, where the italics do the work the sentence should
@@ -34,15 +46,15 @@ tokens:
   # these without markup patterns, but it hard-fails on older Vale, so this
   # rule stays on `raw` until the inline-scope package lands.
   # Note: underscore patterns require space prefix to avoid matching __dunder__ methods
-  - "\\*actually\\*"
+  - "(?<!\\*)\\*(?!\\*)actually(?<!\\*)\\*(?!\\*)"
   - " _actually_"
-  - "\\*really\\*"
+  - "(?<!\\*)\\*(?!\\*)really(?<!\\*)\\*(?!\\*)"
   - " _really_"
-  - "\\*never\\*"
+  - "(?<!\\*)\\*(?!\\*)never(?<!\\*)\\*(?!\\*)"
   - " _never_"
-  - "\\*always\\*"
+  - "(?<!\\*)\\*(?!\\*)always(?<!\\*)\\*(?!\\*)"
   - " _always_"
-  - "\\*truly\\*"
+  - "(?<!\\*)\\*(?!\\*)truly(?<!\\*)\\*(?!\\*)"
   - " _truly_"
-  - "\\*literally\\*"
+  - "(?<!\\*)\\*(?!\\*)literally(?<!\\*)\\*(?!\\*)"
   - " _literally_"

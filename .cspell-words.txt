@@ -54,6 +54,7 @@ cli
 cocogitto
 codebook
 codespell
+Coffman
 colour
 commitlint
 concatstring
