@@ -11,7 +11,7 @@ ignorecase: true
 # demanding a refund and the economics noun ("supply and demand") stay
 # quiet; labor or economics writing disables the rule. Every token measured
 # at zero across the Go and Python standard libraries. The bare
-# determiner-gated shape ("the gate demands a clean run") floods general
+# determiner-gated construction ("the gate demands a clean run") floods general
 # prose, so it stays in the commit style's CommitFigurativeVerbs.
 tokens:
   # --- Virtue complement: the abstraction requisitions a human quality

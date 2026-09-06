@@ -10,7 +10,7 @@ ignorecase: true
 # discriminator and no subject gate is needed.
 #
 # That difference is why they belong in the prose style rather than the
-# commit style. A subject-plus-verb shape floods ordinary technical writing,
+# commit style. A subject-plus-verb token floods ordinary technical writing,
 # because a table really does hold values. A fixed idiom carries no such
 # literal reading, and every token below measured at two or fewer matches
 # across the Go and Python standard libraries and the Markdown shipped in
@@ -32,7 +32,7 @@ tokens:
   # "flexibility came at a steep price"). The "of" complement is the named
   # tradeoff pre-LLM prose writes ("that will come at a cost of extra
   # complexity," once in the Go standard library), so the lookahead leaves
-  # it alone, along with the definite "at the cost of performance" shape,
+  # it alone, along with the definite "at the cost of performance" spelling,
   # which measured nine literal uses in the same corpus and is not covered.
   # The transaction verbs ("pays off," "buys you") live in FigurativePays.
   - '\bcom(?:e|es|ing) at a (?:[a-z]+ )?(?:cost|price)\b(?! of)'
@@ -54,7 +54,7 @@ tokens:
   # accepts," "the same cost the present form already accepts," "a
   # tolerated cost"). Rule comments in this very style write it, which is
   # where the commit prose picked it up. Zero matches for all three
-  # shapes across the Go and Python standard libraries.
+  # tokens across the Go and Python standard libraries.
   # The noun-compound senses are literal (an optimizer accepts a cost
   # function, an endpoint accepts a cost parameter), so a lookahead
   # excludes the compound head.
@@ -130,7 +130,7 @@ tokens:
   # --- Retraction: an action taken back by walking ("no later step can
   # walk it back"). The three Go matches on the loose verb are AST walkers
   # moving backward, so the tokens require a pronoun or retraction object,
-  # and the modal shape excludes a walking destination so a stroll back to
+  # and the modal token excludes a walking destination so a stroll back to
   # the hotel stays quiet.
   - '\bwalk(?:s|ed|ing)? (?:it|that|this|the (?:decision|claim|change|commit|release|statement|promise)) back\b'
   - '\bwalk back (?:the|a|an|that|this|what)\b'

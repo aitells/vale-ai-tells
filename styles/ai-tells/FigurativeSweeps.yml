@@ -36,7 +36,7 @@ tokens:
 
   # --- Pervasion: the change moves through the territory like weather ("the
   # rewrite swept through the codebase," "a trend sweeping across the
-  # industry"). Literal storms and fires take the same shape, so weather and
+  # industry"). Literal storms and fires take the same phrase, so weather and
   # disaster writing disables the rule.
   - "\\b(?:sweep|sweeps|sweeping|swept) (?:through|across)\\b"
 

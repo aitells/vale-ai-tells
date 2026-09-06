@@ -10,7 +10,7 @@ nonword: true
 # marketing page or a compliance notice, and a construction AI prose leans on
 # for spec claims a human would state actively.
 #
-# Case matters, so no ignorecase: the same shape in lowercase is the docs
+# Case matters, so no ignorecase: the same pattern in lowercase is the docs
 # conditional ("if no timeout is specified, the default applies"), which is
 # everywhere in pre-LLM prose and reads fine. The sentence-initial capital
 # "No" is the proxy for the declarative claim, the same positional gate
@@ -29,7 +29,7 @@ nonword: true
 # ("No other validation is performed," "No attempt is made"), which is the
 # same construction and flags on purpose.
 #
-# The first-word lookahead drops the degree and pronoun shapes ("no longer
+# The first-word lookahead drops the degree and pronoun phrases ("no longer
 # needed," "no more than," "no one was harmed"). The elliptical token also
 # refuses a determiner or pronoun after its predicate, which is the active
 # past verb reading ("No law required them to file") rather than the
@@ -37,7 +37,7 @@ nonword: true
 # a coordinated subject slot covers "No schema migration or manual backfill
 # comes with it."
 #
-# A documentation-corpus audit (2026-09) found three sibling shapes the
+# A documentation-corpus audit (2026-09) found three sibling constructions the
 # copula token never saw, each the same declarative absence-claim:
 #
 # - The "gets" auxiliary ("No row ever gets deleted here"), which measures
@@ -45,7 +45,7 @@ nonword: true
 # - An adjective predicate ("No freeze is anonymous," "No field is
 #   optional") and an intransitive verb ("No operational driver appears in
 #   the code," "Nothing downloads"). Both take a curated list, because the
-#   open shapes flood on ordinary sentence-initial prose ("No go files
+#   open tokens flood on ordinary sentence-initial prose ("No go files
 #   found," "No loop was generated"); the kept adjectives cost five corpus
 #   hits ("No modifier key is invalid," "No other expressions are valid
 #   statements") and the kept verbs five ("No lock needs to be held," "No
@@ -61,7 +61,7 @@ nonword: true
 #   determiner fronts ("Nothing in these tables") so the verb slot means
 #   what it says.
 #
-# The same audit turned up the relative-clause negated subject, a shape
+# The same audit turned up the relative-clause negated subject, a construction
 # the corpora never showed ("a row whose key no root reaches," "every
 # derived row no live record references," "a file that no manifest
 # names"). It is lowercase by nature, so the token spells the lowercase
@@ -78,14 +78,14 @@ nonword: true
 # progressive auxiliaries ("No data will be collected," "No changes have
 # been made," "No lock needs to be held"; seven corpus hits), the
 # intransitive verb takes a modal ("No warning should occur," "No writer
-# should block"; five), "Nothing" takes the copula shape with the same
+# should block"; five), "Nothing" takes the copula construction with the same
 # curated predicates ("Nothing is collected," "Nothing else is required";
 # five), the "Zero" spelling joins with the curated predicates so "Zero
 # padding is allowed" stays quiet (zero), the intensified subject "Not a
 # single" and "Not one" join (zero), and the mid-sentence declarative
 # after "and," "but," and "because" joins in lowercase ("and no data is
 # lost," "and no allocation is made"; nine). "So no adjustment is needed"
-# stays out: with "so" the shape is the consequence idiom ten times over
+# stays out: with "so" the construction is the consequence idiom ten times over
 # in the corpora. "None is returned" stays out too, because in Python
 # prose "None" is the literal.
 tokens:
@@ -125,7 +125,7 @@ tokens:
   # subcommand writes back"). The verb slot is a word ending in "s" or
   # "ed" that no determiner fronts, so a plural noun in the subject
   # ("Nothing in these tables") is not mistaken for the verb. The
-  # lookahead after "Nothing" drops the degree and comparison shapes
+  # lookahead after "Nothing" drops the degree and comparison phrases
   # ("nothing more than," "nothing but," "nothing short of").
   - "\\bNothing (?!(?:but|more|less|short|like|that|which|to|new|special|wrong|good|bad|worse|better|about|of)\\b)(?:[a-z-]+ ){0,3}(?<!\\b(?:the|a|an|this|that|these|those|its|their|our|your|my|his|her|all|both|two|three|four|five|of|any|some|many|several|no|each|every|other|such) )[a-z]{3,}(?:s|ed)\\b"
   - "\\bNothing (?:else |more |further |extra |additional |new |special )?(?:is|are|was|were|gets|got|will be|has been|needs to be|has to be) (?:[a-z]+ly |ever )?(?:required|needed|necessary|made|performed|provided|expected|involved|introduced|added|imposed|created|spawned|executed|invoked|collected|stored|logged|recorded|tracked|retained|shared|exposed|sent|transmitted|leaked|persisted|saved|installed|allocated|consumed|produced|generated|caused|triggered|touched|modified|changed|affected|broken|harmed|lost|wasted|kept|held|deleted|removed|dropped|skipped|written|copied|moved|rebuilt|rewritten|overwritten|replaced|reused|freed|hidden|hard-coded|hardcoded|assumed|inferred|guessed)\\b"
@@ -135,6 +135,6 @@ tokens:
   # no <noun> <verb>s" ("a row whose key no root reaches," "every derived
   # row no live record references," "a file that no manifest names").
   # The word before "no" may not be a possession or clausal verb, a
-  # preposition, or a conjunction, which keeps NegatedObject's shapes and
+  # preposition, or a conjunction, which keeps NegatedObject's tokens and
   # the docs conditional out; the clause has to end in an inflected verb.
   - "\\b(?:[Aa]|[Aa]n|[Tt]he|[Ee]very|[Ee]ach|[Aa]ny) (?:[a-z-]+ )?(?!(?:with|has|have|had|having|contains|containing|contain|takes|taking|take|returns|returning|return|requires|require|needs|need|keeps|keep|kept|holds|hold|held|leaves|leave|left|and|or|but|if|when|of|for|in|on|at|to|by|is|are|was|were|be|been|being|almost|as|than|from|about|got|gets|get|gives|given|gave|give|show|shows|showed|there|indicates|indicate|means|mean|ensures|ensure|reports|report|says|say|said|assumes|assume|asserts|assert|checks|check|verifies|verify|so|notes|noting|implies|imply|suggests|suggest|guarantees|guarantee|expects|expect|expected|believes|believe|knows|know|proves|prove|where|because|since|while|although|though|whether|unless|until|that|which|whose|it|they|we|you|i|he|she|found|finds|find|see|sees|saw|seen|allow|allows|allowed|allowing|accept|accepts|accepted|use|uses|used|using|offer|offers|provide|provides|provided|produce|produces|produced|yield|yields|make|makes|made|do|does|did|done|match|matches|matched)\\b)[a-z]+ (?:that |which |whose [a-z]+ )?no (?!(?:one|longer|matter|more|less|fewer|doubt|such)\\b)(?:[a-z-]+ ){0,2}[a-z]+ (?!(?:is|was|has|does|exists|are|were|can|will|would|could|should|may|might|must|less|more|and|or)\\b)[a-z]{3,}(?:s|es|ed)\\b"

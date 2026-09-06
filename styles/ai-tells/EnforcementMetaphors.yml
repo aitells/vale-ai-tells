@@ -10,7 +10,7 @@ ignorecase: true
 # a plain statement of what the mechanism refuses or allows. Every token
 # measured zero across the Go and Python standard libraries except two:
 # "keeps us honest" appears once in a Go comment making exactly this figure,
-# and the arming shape avoids the real timer-arming jargon ("arming the ping
+# and the arming token avoids the real timer-arming jargon ("arming the ping
 # timer") by gating on enforcement nouns, so timers and alarms stay
 # untouched. Writing about actual guards, weapons, or policing disables the
 # rule.
@@ -50,7 +50,7 @@ tokens:
   # "an honest denominator," "the honest decode"). The same audit found
   # the adjective applied to inanimate things four times over; the head
   # nouns are the ones a measurement takes, so an honest person stays
-  # out, and the shape measures zero across both standard libraries.
+  # out, and the token measures zero across both standard libraries.
   - "\\b(?:an|the|its|their|this|that|each|every|one|no) (?:[a-z]+ )?honest (?:count|denominator|number|numbers|decode|measure|measurement|comparison|baseline|signal|total|answer|accounting|picture|read|reading|estimate|figure|figures|metric|metrics|result|results|score|scores|view|tally|report|summary|ledger|record|log|value|values|ratio|rate|rates|percentage|sample|test|check|run|diff|delta|copy|version|encoding|projection)\\b"
 
   # --- Gating as a verb: the check as a turnstile ("the root that gates

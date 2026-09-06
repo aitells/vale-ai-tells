@@ -58,7 +58,7 @@ mise run corpus-build                          # once per machine, into ~/.cache
 mise run corpus-grep 'rather than [a-z]+ing'   # count a PCRE pattern per corpus, with sample paragraphs
 ```
 
-A token is counted against human technical prose written before the models before it is added to a rule, and the count goes in the rule comment with an example hit or two. The Go and Python standard library corpora are reference prose, and the PEPs, Go proposals, Go blog, Rust RFCs, and Pro Git are explanation and argument, so quote the argumentative ones for a clause-level shape. A count in the tens that is the construction itself stays and gets documented, while one in the hundreds is ordinary English and measures out. Confirm the settled count through Vale over the corpus files, since Vale uses a different regex engine than the grep task. The header of `tools/corpus-build.sh` lists the sources and pins.
+A token is counted against human technical prose written before the models before it is added to a rule, and the count goes in the rule comment with an example hit or two. The Go and Python standard library corpora are reference prose, and the PEPs, Go proposals, Go blog, Rust RFCs, and Pro Git are explanation and argument, so quote the argumentative ones for a clause-level construction. A count in the tens that is the construction itself stays and gets documented, while one in the hundreds is ordinary English and measures out. Confirm the settled count through Vale over the corpus files, since Vale uses a different regex engine than the grep task. The header of `tools/corpus-build.sh` lists the sources and pins.
 
 **Running the gates:**
 

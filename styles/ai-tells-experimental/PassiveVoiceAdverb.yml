@@ -3,7 +3,7 @@
 # participle: "was never used," "is automatically generated," "was not
 # merged." The regex rules in Google and write-good only match
 # whitespace between the auxiliary and the participle, so they miss
-# this entire shape. A separate rule because Vale sequences cannot make
+# this entire construction. A separate rule because Vale sequences cannot make
 # the adverb slot optional; companion to PassiveVoice, same design and
 # the same no-exceptions stance.
 extends: sequence

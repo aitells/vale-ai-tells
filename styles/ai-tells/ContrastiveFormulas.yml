@@ -113,7 +113,7 @@ tokens:
 
   # "a Y, not a Z" bare appositive: the categorical assertion with
   # preemptive correction, verb optional ("a refinement, not a rivalry").
-  # Verbless, so it also fires in headings, where the clause-shaped tokens
+  # Verbless, so it also fires in headings, where the clause-level tokens
   # above never match. Subsumes the older single-word-subject
   # "X is a Y, not a Z" token.
   - "\\b[Aa]n? [^,.;:!?\\n]{2,}, [Nn]ot [Aa]n? [^.!?;:,\\n]+"

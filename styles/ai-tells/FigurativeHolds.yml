@@ -13,7 +13,7 @@ ignorecase: true
 # here avoid that span so the two rules never double-flag.
 tokens:
   # --- Mirrored possession: an artifact possessing a property another one
-  # has ("holds the same wide spread," "holds a similar shape"). A person
+  # has ("holds the same wide spread," "holds a similar layout"). A person
   # holding the same title fires too; state who has what instead.
   - "\\bhold(?:s|ing)? (?:the same|an? (?:similar|identical|comparable|matching)) \\w+"
   - "\\bheld (?:the same|an? (?:similar|identical|comparable|matching)) \\w+"

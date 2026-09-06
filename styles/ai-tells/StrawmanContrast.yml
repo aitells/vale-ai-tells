@@ -21,11 +21,11 @@ ignorecase: true
 # "Rather than" and "instead of" are ordinary English, so the bare phrases
 # stay out: across the Go and Python standard libraries "instead of"
 # measures about 1,200 and "rather than" about 540. The comma alone is
-# not enough either, at 71 and 79. The gates are the comma and the shape
+# not enough either, at 71 and 79. The gates are the comma and the construction
 # after it, held to the end of the sentence: a gerund ("rather than
 # walking," "instead of re-reading") or a determiner and its noun phrase
 # ("rather than a scan," "instead of the whole tree"). The corpus lines
-# are broken mid-sentence, so both shapes undercount there: the gerund
+# are broken mid-sentence, so both tokens undercount there: the gerund
 # tail measures about twenty ("rather than being anonymous," "instead of
 # using tables," "rather than querying the kernel") and the determiner
 # tail about fifteen ("rather than a global lock," "instead of the

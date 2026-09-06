@@ -131,7 +131,7 @@ tokens:
   # NegatedObject leaves "carries no" to this rule, but the tokens above
   # gate on head-noun lists or on a determiner-fronted subject, so a
   # pronoun subject with an unlisted noun slipped past both. The corpora
-  # show the open shape once ("carry no data," which the content token
+  # show the open token once ("carry no data," which the content token
   # above flags on its own), so the object stays open, with
   # NegatedObject's own lookahead gates keeping degree idioms ("carries
   # no more than three") and literal counts ("carries zero or more")
@@ -139,11 +139,11 @@ tokens:
   # backticked objects included: one quote mark may open the object, and
   # in markdown a backticked object becomes the asterisk run Vale's
   # parser masks the code span to, which is what the alternation matches
-  # ("carries no `counts`"). Both shapes measure zero in the corpora,
+  # ("carries no `counts`"). Both spellings measure zero in the corpora,
   # like the bare one.
   - "\\bcarr(?:y|ies|ied|ying) (?:no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier)\\b)|zero (?!(?:or|value|values|to)\\b))(?:['\"‘“`]?[a-z][-a-z]*\\b|\\*+)"
 
-  # --- Mirrored possession: the same-shape sibling of FigurativeHolds
+  # --- Mirrored possession: the same-construction sibling of FigurativeHolds
   # ("carries the same caveat," "carries a similar risk"). The comparison
   # word is the tell, so the object stays open.
   - "\\bcarr(?:y|ies|ied|ying) (?:the same|a similar|an identical|a matching)\\b"
@@ -171,11 +171,11 @@ tokens:
   # plural subject or a relative pronoun proves it is the verb ("the
   # machine formats carry the score columns," "the blobs that carry no
   # state rows," "the tier other stages carry"). A documentation-corpus
-  # audit (2026-09) found the plural-subject shape escaping every token
+  # audit (2026-09) found the plural-subject construction escaping every token
   # here, the verb being the one writers reach for once a reviewer has
   # taken "holds" away. The determiner-gated plural measures one corpus
   # hit ("These embedded types carry methods with them"), the
-  # relative-pronoun shape two, both the arithmetic verb ("which will
+  # relative-pronoun token two, both the arithmetic verb ("which will
   # carry if src != 0"), which the trailing lookahead now refuses along
   # with the phrasal forms. The bare plural with no determiner stays out:
   # the arithmetic noun sits in that slot sixteen times ("returns the

@@ -10,7 +10,7 @@ ignorecase: true
 # literal senses are common and a regex can't always separate them: the HTML
 # anchor tag and links, a news anchor, a ship's anchor, an anchor tenant, the
 # anchoring bias. The exemptions cover the physical objects something literally
-# anchors to (a wall, the seabed); the rest leans on the figurative shape, and a
+# anchors to (a wall, the seabed); the rest is the figurative sense, and a
 # writer in a maritime, broadcast, or HTML context disables the rule.
 exceptions:
   - "(?i)walls?"
@@ -38,7 +38,7 @@ exceptions:
   - "(?i)pilings?"
   - "(?i)anchorage"
 tokens:
-  # "anchored in/to [abstraction]" — the core figurative shape. Literal anchoring
+  # "anchored in/to [abstraction]" — the core figurative token. Literal anchoring
   # objects (a wall, the seabed) land in the captured window and are exempted.
   - "\\banchored (?:in|to)(?: \\w+){1,4}"
   # "anchor the [abstract object]"

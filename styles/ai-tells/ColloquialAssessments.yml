@@ -22,7 +22,7 @@ tokens:
 
   # ==========================================================================
   # "X is the move" — anchored verdict. Bare "the move" is too broad (chess,
-  # dance, real-estate), so we only catch the assessment shape.
+  # dance, real-estate), so we only catch the assessment construction.
   # ==========================================================================
   - "\\bis the move\\b"
   - "\\bwas the move\\b"

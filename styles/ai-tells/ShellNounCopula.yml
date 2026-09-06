@@ -14,7 +14,7 @@ ignorecase: true
 # colon spelling of LabelAndExplain ("The catch: the daemon keeps the
 # lock") with the colon written out as a copula, and the rule joined the
 # padding family when a documentation-corpus audit (2026-09) found the
-# shape on nearly every page that had already lost its colons.
+# construction on nearly every page that had already lost its colons.
 #
 # The plain form drops the shell: "The index goes stale after a rename."
 # Where the noun carries a real distinction, keep it and make it the
@@ -27,10 +27,10 @@ ignorecase: true
 # sentence's content in human docs, and the Go and Python standard
 # libraries use "the rule is that" ten times and "the invariant is that"
 # five. The ordinal enumeration ("The first is that ... The second is
-# that") is its own shape and stays out too.
+# that") is its own construction and stays out too.
 #
 # Costs across the Go and Python standard libraries, one broken line per
-# sentence so multi-word shapes count low: the bare determiner, noun,
+# sentence so multi-word tokens count low: the bare determiner, noun,
 # and copula measures fifty-two ("The problem is that the toplevel
 # target call," "The idea is that functions can 'delegate'
 # checks to inner functions," "The difference is that t.ctime() produces

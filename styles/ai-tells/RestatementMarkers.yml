@@ -24,7 +24,7 @@ ignorecase: true
 # The framing openers gate on the capital and the comma, since
 # mid-sentence "in practice" and "in effect" are ordinary English (a
 # hundred and twenty hits across the Go and Python standard libraries).
-# Costs of the kept shapes across those corpora: the parallel
+# Costs of the kept tokens across those corpora: the parallel
 # restatement ten ("The same is true for channel operations," "the same
 # goes for concatstring{3,4,5}"), "In practice," twenty-nine ("In
 # practice, this means that we make the fast path run through"), "In

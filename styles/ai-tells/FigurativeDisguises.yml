@@ -37,7 +37,7 @@ ignorecase: true
 # pretend, should disable the rule. "What passes for," "passes itself off
 # as," "cosplaying as," and the stacked-impostor "in a trench coat" all
 # measured zero. "Passes for" is gated on the free relative, because a
-# test literally "passes for the wrong reason," and the pass-off shape is
+# test literally "passes for the wrong reason," and the pass-off token is
 # gated on a pronoun object, because "the cleanup pass kicked off as
 # scheduled" is ordinary scheduling prose. "Impersonate" never matches:
 # its corpus presence is the Windows security API, where impersonation is
@@ -51,7 +51,7 @@ tokens:
   - '\bmasquerad(?:e|es|ed|ing) (?:\w+ ){0,2}as\b'
   - '\bparad(?:es|ed|ing) (?:\w+ ){0,2}as\b'
 
-  # --- "Poses as," minus the comparison shape ("poses as much risk as,"
+  # --- "Poses as," minus the comparison construction ("poses as much risk as,"
   # "poses as many questions as it answers"), which is ordinary prose. No
   # object slot here: "posing the question as" is the literal phrasing
   # sense, and the slot would sweep it in.

@@ -22,7 +22,7 @@ ignorecase: true
 # Ownership splits with the neighbors: "pays for itself," "pays dividends,"
 # and "pays its rent" stay in AnthropomorphicJustification; the sentence-final
 # mic drops "It pays off." and "The habit pays off." stay in MicDrop, and the
-# determiner-gated token here fires on that last shape too, which is by
+# determiner-gated token here fires on that last one too, which is by
 # design, the same both-alerts call FillerPhrases documents; "comes at a
 # cost" stays in FigurativeIdioms with the other fixed idioms; "cheap wins"
 # stays in FigurativeWins; and "costs little" stays in FigurativeIdioms.
@@ -51,13 +51,13 @@ tokens:
   # --- The same invoice spelled with "cost," and the free lunch: "never
   # pays that cost," "at no cost," "costs nothing," "would pay to
   # compare," "spends work." A documentation-corpus audit (2026-09) found
-  # the cost spellings escaping alongside the price ones; every shape
+  # the cost spellings escaping alongside the price ones; every token
   # measures zero across the Go and Python standard libraries except
   # "costs nothing" at one ("this if and the condition cost nothing").
   # Bare "cheap" stays out at fifty-two hits: "cheap to copy" is how both
   # corpora describe a cost they measured, and no complement separates it
   # from the AI grade. The negated-object spelling "costs nothing" is
-  # NegatedObject's; this rule takes the prepositional and modal shapes.
+  # NegatedObject's; this rule takes the prepositional and modal forms.
   - '\bpay(?:s|ing)? (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
   - '\bpaid (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
   - '\bat no (?:cost|charge|expense)\b'
@@ -88,8 +88,8 @@ tokens:
   # "the audit squares the ledger"). The determiner set matches the
   # payoff token above and the optional middle word takes a possessive,
   # the two openings that let "settled each token's cost" through the
-  # narrower shape this family had in AnthropomorphicJustification.
-  # Every shape measured zero across the Go and Python standard
+  # narrower token this family had in AnthropomorphicJustification.
+  # Every token measured zero across the Go and Python standard
   # libraries. The negotiation sense takes "on" ("settled on a price")
   # and stays clear; the literal payment belongs to restaurant and
   # accounting prose, which disables the rule.

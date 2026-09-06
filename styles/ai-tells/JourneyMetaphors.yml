@@ -16,7 +16,7 @@ ignorecase: true
 # narration ("creates missing directories along the way"), flagged by
 # the maintainer's call because the same phrase in documentation and
 # commit prose waves at unnamed side work instead of naming it. The
-# finding-a-way shape measures three, "a long way," "down the road,"
+# finding-a-way token measures three, "a long way," "down the road,"
 # "down the line," and "most of the way there" one each, and the
 # journey determiners two, one of them Go's scheduler narrating a
 # goroutine's "own journey"; each is the figure itself and fires by
@@ -26,7 +26,7 @@ ignorecase: true
 # sense ("depends on the way that...") and the entry-and-exit idiom
 # ("closed on the way out"); "on the path to," whose every corpus hit
 # is a literal pointer or tree path; and the first-person possessives
-# of the finding-a-way shape, the corpora's traversal narration ("work
+# of the finding-a-way token, the corpora's traversal narration ("work
 # our way down the tree"). The sibling tokens stay with their owners:
 # "paving the way" in AICompoundPhrases, "Embark on a journey" in
 # OpeningCliches, "Enjoy the journey" in ClosingPleasantries, and

@@ -123,7 +123,7 @@ tokens:
 
   # --- Inverted word order, the preposition first and the subject after
   # the verb ("over each column sits an index," "beside it sit flat
-  # columns"). Nothing subject-anchored can see this shape; anchoring on
+  # columns"). Nothing subject-anchored can see this construction; anchoring on
   # the verb and a following determiner does. Measured at zero across both
   # standard libraries.
   - "\\b(?:over|beside|below|above|beneath|under|behind|alongside|inside|atop|before|after|ahead of|next to|between|around|across|outside|within|upon|on|in|at) (?:it|them|each|every|the|a|an|this|that|these|those|its|their)(?: [a-z]+){0,2} sits? (?:a|an|the|its|their|one|two|three|no|every|each|another|flat|[a-z]+s)\\b"

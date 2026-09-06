@@ -8,7 +8,7 @@ ignorecase: true
 # every stage's tables," "two records hold identical bytes," "the column
 # holds the serialized object," "whatever the store holds at that moment").
 # FigurativeHolds gates on the idiom complement ("holds true," "holds
-# water," "holds the same shape") and leaves the plain container sense
+# water," "holds the same layout") and leaves the plain container sense
 # alone, which is where a documentation-corpus audit (2026-09) found the
 # single highest-frequency violation of its standard: 133 occurrences of
 # "hold" with an inanimate subject, every one of them "contains," "stores,"
@@ -29,7 +29,7 @@ ignorecase: true
 # names and each one the maintainer asked to see. This is the loudest rule
 # in the package on ordinary technical writing; a project that keeps the
 # container sense disables it per file rather than per sentence, and
-# CommitFigurativeVerbs in the commit style covers the same shape where a
+# CommitFigurativeVerbs in the commit style covers this construction where a
 # commit message is the text. The gerund with a determiner object
 # ("holding the lock," "holding the data being relocated") stays out at
 # ninety hits, all the lock and buffer register; only the counted gerund

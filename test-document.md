@@ -3185,3 +3185,21 @@ The canonical surface of the package is the rule list.
 A reader-facing surface gets the same lint as a document.
 
 The whole surface is three files.
+
+## FigurativeShape
+
+Ruff's own rule fires on the shape rather than the provenance.
+
+Those two numbers pick the review shape.
+
+The rules that shape an analysis live in one file.
+
+It clusters repeated calls of the same shape.
+
+The payload arrived in the wrong shape.
+
+The overall shape of the message stays fixed.
+
+A code-shaped line slipped past the extractor.
+
+The shapes agent prose builds without a determiner are the plural.

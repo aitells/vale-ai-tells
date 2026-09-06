@@ -19,7 +19,7 @@ tokens:
   # fires," "the rule never fired").
   - "\\b(?:rule|hook|check|checker|linter|lint|gate|guard|trigger|alert|alarm|warning|notification|webhook|workflow|action|validation|exemption|assertion)s? (?:never |still |always |only |then |also |actually |reliably |rarely |sometimes )?fir(?:es?|ed|ing)\\b"
 
-  # --- The per-occasion shape with the subject left open ("so the hooks
+  # --- The per-occasion token with the subject left open ("so the hooks
   # fire on every commit," "the alert fires on every push"). The complement
   # is the tell here, so no subject gate is needed. Measured at zero across
   # the Go and Python standard libraries.
@@ -32,7 +32,7 @@ tokens:
   # keeps the literal senses out (a gun fired at, an employee fired, a
   # rocket fired into orbit); the two corpus hits are timers ("to prove it
   # fires exactly once"), the register the subject gate excludes and this
-  # shape cannot see, so timer prose disables the rule.
+  # token cannot see, so timer prose disables the rule.
   - "\\b(?:it|they|these|those|each|one|both|all|none|neither|which|that) (?:never |still |always |only |then |also |actually |reliably |rarely |sometimes |may |can |will |would |could |should |might |must |to )?fir(?:es?|ed|ing)\\b(?! (?:up|off|at|a|an|the|him|her|them|me|us|you|people|employees|staff|workers|shots?|bullets?|rounds?|guns?|missiles?|rockets?|arrows?|torpedoes|weapons?|back|away|into|upon|on all)\\b)"
   - "\\bfir(?:es?|ed|ing) nothing\\b"
 

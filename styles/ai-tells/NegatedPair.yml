@@ -12,13 +12,13 @@ ignorecase: true
 # happens twice in one clause, and the prepositional spellings have no verb
 # for NegatedObject to gate on, so the construction escaped every negation
 # rule until a documentation-corpus audit (2026-09) counted twelve of them
-# and named it the shape reviewers push back on most.
+# and named it the construction reviewers push back on most.
 #
 # The plain form negates the verb once and then states what the thing does:
 # "It doesn't need credentials. It reads a file off disk."
 #
 # Costs across the Go and Python standard libraries: the "with no X and no
-# Y" shape measures eight ("with no arguments and no results," "with no
+# Y" token measures eight ("with no arguments and no results," "with no
 # modifiers and no detail"), the determiner-gated "without a X or a Y" two,
 # the verb-gated "neither" two ("supports neither TLS 1.3 nor"), and the
 # doubled "doesn't" three. Every one is the construction itself and fires

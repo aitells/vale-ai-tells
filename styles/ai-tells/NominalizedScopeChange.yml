@@ -21,7 +21,7 @@ ignorecase: true
 # never matched. The verb list means an unlisted predicate escapes; the
 # punctuation and preposition continuations carry most of the real uses.
 #
-# Determiner-plus-gerund shapes for all five words measured zero across the
+# Determiner-plus-gerund forms for all five words measured zero across the
 # Go standard library comments. The Python standard library holds one:
 # "applying the narrowing to a block of code," in the typing docs, which the
 # "to" continuation admits. That is the one measured hit, the usual

@@ -11,12 +11,12 @@ nonword: true
 # sweep of AI documentation ("All errors are logged," "All data is
 # encrypted").
 #
-# The shape is ordinary in pre-LLM documentation too: the same ~1.3M-line
+# The pattern is ordinary in pre-LLM documentation too: the same ~1.3M-line
 # Go+Python corpora as NegatedObject show 86 hits, led by the docs
 # uniformity sweep ("All tabs are expanded to spaces," "All whitespace is
 # removed," "All platforms are guaranteed to fault"). This rule flags that
 # register anyway, the same call as the figurative family: the corpus bar
-# informs the count but does not veto the rule once the shape floods AI
+# informs the count but does not veto the rule once the construction floods AI
 # prose, and a file whose spec formulas are deliberate adds its own
 # exceptions.
 #
@@ -29,12 +29,12 @@ nonword: true
 # The predicate slot takes any -ed form plus the irregular participles,
 # rather than a curated list: the adjective predicates that make the
 # curated approach necessary elsewhere ("All three parts are optional,"
-# "All ports are valid") fail the participle shape on their own. An
+# "All ports are valid") fail the participle token on their own. An
 # optional adverb slot covers "are properly handled" and "is now covered,"
 # and the "being" alternates cover the status-report progressive ("All
 # concerns are being addressed").
 #
-# The quantifier-float shapes stay out on structure, not cost: "X, Y, and
+# The quantifier-float patterns stay out on structure, not cost: "X, Y, and
 # Z are all copied" (36 corpus hits) and "the temps were all aliased"
 # with "have all been observed" (4) resume a list the subject just named, an
 # enumerate-then-summarize move over known members rather than a sweep
@@ -59,11 +59,11 @@ tokens:
   # --- Active form: the quantified subject doing something to one
   # object ("Every predicate reads a live root," "every membership row
   # counts as a live root," "All rows carry a timestamp"). Added after a
-  # documentation-corpus audit (2026-09) found the shape escaping both
+  # documentation-corpus audit (2026-09) found the construction escaping both
   # totality rules. The verb list is curated and the object slot needs a
   # determiner or a count, so "Every type satisfies the empty interface"
   # fires with the spec-truth register the copula token already accepts;
-  # the singular shape costs nine corpus hits and the plural fifteen, led
+  # the singular token costs nine corpus hits and the plural fifteen, led
   # by "All Go functions use the internal ABI." A modal in the subject
   # slot ("All arguments must have") is refused.
   - "\\bEvery (?!(?:[A-Za-z'-]+ ){0,2}(?:must|should|can|could|may|might|will|would|shall) )(?:[A-Za-z][-A-Za-z']* ){1,3}(?:reads|writes|counts|checks|reaches|produces|yields|returns|holds|names|handles|covers|matches|takes|gets|needs|requires|carries|keeps|owns|runs|passes|survives|fires|touches|creates|emits|stores|loads|opens|uses|has|includes|contains|defines|declares|exposes|sets|records|tracks|maps|points|resolves|ends|starts|begins|feeds|lands|lives|sits|stays|wins) (?:a|an|the|its|one|all|every|no|zero|exactly|only|at least|at most|as|to|with|in|on|from|into|there|here)\\b"

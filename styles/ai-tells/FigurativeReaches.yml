@@ -12,10 +12,10 @@ ignorecase: true
 # name the beings and limbs that literally reach; the second names the
 # bare subjects agent prose starts a clause with; the third gates on a
 # writing-device complement instead, because a human writer reaching for
-# a metaphor is the same figure. Every inflected shape measured zero
+# a metaphor is the same figure. Every inflected form measured zero
 # across the Go and Python standard libraries; the corpora's one
 # figurative use ("they are what people reach for when debugging") is a
-# bare verb on a bare human subject, outside every gated shape here.
+# bare verb on a bare human subject, outside every gated token here.
 # "Out of reach" stays in FigurativeIdioms and "reach out" stays in
 # ClosingPleasantries, so the noun and the pleasantry never double-flag.
 # Sports, robotics, and physical narrative use the verb literally with
@@ -76,7 +76,7 @@ tokens:
   # holding the pen ("writers reach for the same tired metaphor,"
   # "reaching for a superlative"). The head nouns are language devices
   # with no physical sense, so a hand reaching for an object never
-  # matches this shape.
+  # matches this token.
   - "\\breach(?:es|ed|ing)? for (?:(?:a|an|the|this|that|its|their|the same) )?(?:[a-z]+ )?(?:word|verb|noun|adjective|phrase|phrasing|metaphor|simile|idiom|cliché|cliche|superlative|intensifier|qualifier|hedge|euphemism|trope|formula|template|structure|construction|crutch|shorthand)s?\\b"
 
   # --- The imperative: "use" as an instruction to grab ("Reach for it in

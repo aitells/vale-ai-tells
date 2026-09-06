@@ -17,10 +17,10 @@ ignorecase: true
 # documentation-corpus audit (2026-09) found leaking on ninety-two
 # occurrences of every other adjective ("stays complete," "stays
 # optional," "stays empty," "stays deterministic," "stays put"). No closed
-# list covers that, so the determiner-gated subject shape takes any
+# list covers that, so the determiner-gated subject token takes any
 # complement that is not a place, a time, or a person's condition, in the
-# FigurativeLives mold, and the bare-verb shape keeps a list grown to the
-# adjectives the audit saw. The open shape costs eleven corpus hits
+# FigurativeLives mold, and the bare-verb token keeps a list grown to the
+# adjectives the audit saw. The open token costs eleven corpus hits
 # ("stays robust," "stay aggregated," "stays blocked," "the map stays
 # small") and the list fifteen ("stay unchanged," "stays idle," "assists
 # stay flat"), each the figure with "remains" or "is" as the plain word.

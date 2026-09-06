@@ -12,7 +12,7 @@ Draft every message in a repo-root `COMMIT_AGENTMSG` file before you run `git co
 2. Run `mise run lint-commit-msg` and resolve whatever it reports.
 3. Commit the validated draft with `git commit -s -F COMMIT_AGENTMSG`.
 
-The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits shape and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run repotools:prek-install` once so the hooks run on every commit.
+The `commit-msg` stage runs four hooks from the shared [`repotools`](https://github.com/tbhb/repotools) repository: `commitlint` (the Conventional Commits format and length bounds), `commit-trailers` (the trailer format and order), `vale-commit-msg` (prose, under this repo's own `ai-tells` and `ai-tells-commits` styles), and `cspell-commit-msg` (spelling). Run `mise run repotools:prek-install` once so the hooks run on every commit.
 
 That hook stage is the real gate. `mise run lint-commit-msg` only previews it, so a clean recipe run predicts a clean commit without replacing the hook.
 
@@ -22,7 +22,7 @@ The toolchain defaults to the agent template: `mise run lint-prose`, `mise run l
 
 `ai-tells.zip` includes the template, tracked here at `styles/config/templates/ai-tells-agent.tmpl`, so a repository syncing the core style alone can pass the flag. A `vale sync` puts it under `StylesPath/config/templates/`, where vale looks up an `--output` name.
 
-Treat the output shape as a published interface. The prose-fix skills in [`repotools`](https://github.com/tbhb/repotools) parse it: they count findings with `grep -c '^[0-9]'` and read the `replace_with=` field to apply a correction. Reshaping a line or renaming a field breaks those skills and anything else reading the format, so a change there is a breaking change for consumers rather than a local edit.
+Treat the output format as a published interface. The prose-fix skills in [`repotools`](https://github.com/tbhb/repotools) parse it: they count findings with `grep -c '^[0-9]'` and read the `replace_with=` field to apply a correction. Reshaping a line or renaming a field breaks those skills and anything else reading the format, so a change there is a breaking change for consumers rather than a local edit.
 
 ## Drafting a document
 

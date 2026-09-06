@@ -9,7 +9,7 @@ ignorecase: true
 # and the phrases below are what they quoted.
 #
 # These live in the commit style rather than the prose style because the
-# subject-plus-verb shape floods ordinary technical writing. Measured against
+# subject-plus-verb token floods ordinary technical writing. Measured against
 # the Go and Python standard libraries, "holds" alone reports fifty times and
 # "carries" twenty-nine, all of them literal: a table holds values, a buffer
 # carries bytes. The same tokens report only a few times across thousands
@@ -20,8 +20,8 @@ ignorecase: true
 #
 # Tokens whose false positive rate in general prose measured at zero live in
 # the prose style instead, where they cover more ground: placement by "sits"
-# belongs to FigurativeSits, the earning shapes to FigurativeEarns, the
-# handing shape to AnthropomorphicJustification, and the fixed idioms to
+# belongs to FigurativeSits, the earning tokens to FigurativeEarns, the
+# handing token to AnthropomorphicJustification, and the fixed idioms to
 # FigurativeIdioms.
 #
 # "Carry out" is a phrasal verb rather than a metaphor, so the conveyance
@@ -62,14 +62,14 @@ tokens:
   - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+(?:joins?|joined)\b'
   - '\bnever sees?\b'
   # Residence: a config "lives in" a file rather than being defined there.
-  # The prose style's FigurativeLives carries the broad shape with literal
+  # The prose style's FigurativeLives carries the broad token with literal
   # exceptions; this determiner-gated form backstops the commit register,
   # where the idiom is always the substitution. The preposition keeps the
   # plural noun ("improve their daily lives") out of the verb slot.
   - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+lives?\s+(?:in|at|on|under|within|alongside)\b'
   # "Names" as an act of designation, standing in for a plain verb like
   # references or selects. The prose style's BareNames now carries the
-  # broad shape with its own exceptions; this determiner-gated form
+  # broad token with its own exceptions; this determiner-gated form
   # backstops the commit register the way the residence token does.
   - '\b(?:a|an|the|this|that|these|those|its|their|both|all)\s+\w+\s+names?\s+(?:the|a|its)\b'
 
