@@ -18,7 +18,7 @@ Vale masks a Markdown code span before matching, replacing what it holds with as
 - That same pair split across two paragraphs: one finding, correctly placed.
 - Outside only: one finding, correctly placed.
 
-Paragraphs bound this, not lines. Moving the loose token down a line keeps the extra finding, and only a blank line clears it.
+Paragraphs bound this, not lines. Moving the loose token down a line keeps the extra finding. A blank line clears it.
 
 The `nonword` setting does not cause this. The same experiment with a word token draws one correctly placed finding under `nonword: true` and under the default. Punctuation is what separates the two, and `ai-tells.DoubleHyphen` carries `nonword` only so its token can match at all.
 

@@ -21,6 +21,7 @@ bcultivat
 bdisguis
 bdogfood
 bdoubl
+behaviou
 behaviour
 behaviours
 Beutler
@@ -55,6 +56,7 @@ codebook
 codespell
 colour
 commitlint
+concatstring
 coreference
 cosplay
 cosplaying
@@ -82,6 +84,8 @@ gitignorable
 gitmoji
 GOAWAY
 GOEXPERIMENT
+GOFIPS
+gofmt
 goroutines
 Gorrie
 Hana
@@ -149,6 +153,7 @@ rumdl
 rvben
 ryl
 SARIF
+Scanln
 setext
 settl
 shel
@@ -156,6 +161,7 @@ shellcheck
 shopt
 softprops
 stdlib
+strawman
 stylometric
 subordinator
 Supabase
@@ -175,6 +181,7 @@ tricolon
 tricolons
 uintptrs
 unbuildable
+undercount
 vendir
 venv
 verbed

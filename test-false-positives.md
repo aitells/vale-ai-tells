@@ -841,7 +841,7 @@ She paid off the mortgage in ten years.
 
 ## FigurativeIdioms: remainders that should NOT trigger
 
-What remains is to choose the exponent.
+It remains to choose the exponent.
 
 The parser returns the word and what remains after it.
 
@@ -1272,3 +1272,203 @@ The named group in the regex is optional.
 The file named foo is read first.
 
 The named storm made landfall on Tuesday.
+
+## CoordinatedReveal: plain coordination that should NOT trigger
+
+The direction reverses at all times, and it doesn't matter at all.
+
+The list is sorted, and the leading entry is the oldest.
+
+It is passed explicitly to the function that needs it.
+
+The value is dead, and only when the register frees.
+
+The bits are twos-complement and the leading bit always indicates sign.
+
+## ConsequenceParticiple: participles in an ordinary sense that should NOT trigger
+
+The cache stays cold after the sweeper drops the row.
+
+When the buffer is empty, the reader leaves early.
+
+The parser checks the header first, making sure the length field is present.
+
+Leaving aside the cold path, the reader takes one lock per page.
+
+After three retries the client gives up.
+
+The meaning of the flag depends on the platform.
+
+The tool prints the file, making a best effort to preserve existing contents.
+
+Hiding the socket behind the wrapper makes it possible to swap the transport, making it possible to test offline too.
+
+Both callers share one row, and the second one waits.
+
+Making the buffer larger did not help.
+
+Once the count reaches zero the loop ends, and the reader returns.
+
+Because the comparison ignores case, the sort is stable.
+
+## ShellNounCopula: the noun with a plain complement or a relative clause that should NOT trigger
+
+The reason is the cache, and the fix is to clear it.
+
+The result is a list of paths sorted by name.
+
+The difference is small enough to ignore.
+
+The question is answered in the next section.
+
+The problem that the parser reports includes the line and column.
+
+The idea that names are stable comes from the spec.
+
+That problem is on the list for the next release.
+
+The key is stored in the keychain.
+
+The point of the flag is to skip the probe.
+
+The reason that the build failed was a missing pin.
+
+The rule is that a name resolves in the package that declares it.
+
+The first is that the socket closes early.
+
+## SummativeAppositive: lists, ordinary appositives, and plain afterthoughts that should NOT trigger
+
+Every read costs a lookup, a decode, and a copy.
+
+The change adds a cost, a benefit, and a risk to the design.
+
+Alice, a friend from the platform team, reviewed the patch.
+
+Pass a regular expression, a pattern that matches the filenames you want.
+
+The renderer calls the formatter, a tool that rewrites files in place.
+
+The plan has a cost. It shows up in the benchmarks.
+
+The old path never drew that distinction.
+
+The curve bends at one marked point, which is the point where the cursor stops.
+
+The tool reads a manifest, a lock file, and a schema.
+
+The retry count is three, which is what the upstream limiter requires.
+
+## AbstractionSubject: literal measurements and passive mechanisms that should NOT trigger
+
+That gap between the two values is 4 bytes.
+
+That constraint is enforced by the database.
+
+This gap is about 4 bytes wide.
+
+If that invariant is true, the loop ends.
+
+These constraints are checked by the compiler at link time.
+
+The reverse lookup costs one read.
+
+The test asserts that ordering is preserved across restarts.
+
+This loop runs in quadratic time.
+
+This distinction is documented in the package comment.
+
+The parser handles this ambiguity by reading one more token.
+
+This restriction is imposed by the compiler.
+
+## StrawmanContrast: ordinary alternatives and open-ended contrasts that should NOT trigger
+
+Rather than walking the whole tree, the reader walks the index.
+
+Use the index instead of the whole tree.
+
+Pass the `--instead-of-default` flag to change the fallback.
+
+The table maps names to ids and vice versa.
+
+A module can import its dependencies but not the reverse.
+
+The rule prefers the shorter form, rather than the longer one, when both parse.
+
+The value is stored as text, rather than parsed.
+
+Iterate over the selected modules, not all modules.
+
+The run took ten minutes, instead of the usual two, because the cache was cold.
+
+The default returns an empty list, rather than nothing.
+
+## ScopePartition: literal sides, "at a time," and trailing adverbials that should NOT trigger
+
+The type on the right-hand side of the declaration is the alias target.
+
+On the plus side, the link ends here.
+
+The client side of the handshake sends the first message.
+
+The server filters entries on the client side before returning them.
+
+Only one worker runs the loop at a time, so the counter is safe.
+
+At any time, the caller may cancel the request.
+
+The link step applies the offsets at link time, before the loader runs.
+
+The server-side handler checks the token on every request.
+
+A search reverses that join.
+
+The type at compile time may differ from the value at run time.
+
+## StackedAnaphora: discourse-marker and determiner "For" openers that should NOT trigger
+
+For now, the lookup is one hop. For details, see the schema section.
+
+For each key, the loader reads one file. For the rest, it reads a directory.
+
+## RestatementMarkers: literal "same," "practice," "effect," and "meaning" that should NOT trigger
+
+The reader gets the same value on each call.
+
+Both suites pass in practice tests and in staging.
+
+The call returns a list of offsets.
+
+Each flag changed meaning in the last release.
+
+The change took effect in practice and the join reversed.
+
+One buffer serves both functions, in effect.
+
+Both readers take the same lock.
+
+Each flag entry lists the meaning and the default.
+
+Position decides the meaning of each byte.
+
+## PseudoCleft: questions and embedded clauses that should NOT trigger
+
+What is the offset?
+
+What value is the default for the timeout?
+
+The function documents what the join returns.
+
+What remains is unclear until the sweep finishes.
+
+What happens if the file is the same as the source?
+
+Where the input is a list, the reader takes the first element.
+
+The only difference is the direction.
+
+All the rows are the same width.
+
+We check what the value is before the write.

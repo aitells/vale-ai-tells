@@ -181,3 +181,16 @@ tokens:
 
   # Two consecutive "Whether X." sentences — same shape, paired.
   - "\\bWhether [^.]+\\. Whether [^.]+\\."
+
+  # === Paired "For X, ... For Y," scope openers ===
+  # Two consecutive sentences each fronted by a "For <scope>," label:
+  # "For search, that join reverses. For writes, the table takes one
+  # append." The single fronted "For X," is ordinary English several
+  # hundred times over in the Go and Python standard libraries, so only
+  # the pair fires, and the discourse markers ("For example," "For now,"
+  # "For simplicity,") are excluded at either position. The pair costs
+  # one corpus hit with those out, the fmt docs ("For Scanln, it stops at
+  # newlines. For Scan,"), which is the construction itself and fires by
+  # design. ScopePartition owns the "On the X side," and "At X time,"
+  # spellings of the same move.
+  - "\\bFor (?!(?:example|instance|now|details|more|this|that|these|those|some|historical|backward|backwards|simplicity|performance|efficiency|convenience|consistency|compatibility|clarity|debugging|testing|security|reference|completeness|context|comparison|brevity|safety|starters|any|all|each|every|the|a|an|one|its|our|your|my|their|no|most|many|what|whatever)\\b)[A-Za-z][a-z-]*(?: [a-z-]+)?, [^.]+\\. For (?!(?:example|instance|now|details|more|this|that|these|those|some|historical|backward|backwards|simplicity|performance|efficiency|convenience|consistency|compatibility|clarity|debugging|testing|security|reference|completeness|context|comparison|brevity|safety|starters|any|all|each|every|the|a|an|one|its|our|your|my|their|no|most|many|what|whatever)\\b)[A-Za-z][a-z-]*(?: [a-z-]+)?,"
