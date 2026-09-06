@@ -14,10 +14,12 @@ ignorecase: true
 # Every token gates on the verb plus a determined object or a
 # destination, so the noun senses ("a fold," "the collapse," "tight
 # coupling") stay out. Across the seven pre-LLM corpora the family
-# measures eight: one "folding it directly into" in the Rust RFCs, two
-# "collapsed into" in the Go sources, and five "absorbs the" in Go
-# prose that mostly means it ("absorbing the extra second," "absorbs
-# the carry"). Each is the figure, flagged by design; prose about
+# measures nine: one "folding it directly into" in the Rust RFCs,
+# three collapses in the Go proposals and the Python sources ("the
+# time will collapse to wall time," "collapsed into a single"), and
+# five "absorbs the" in Go prose that mostly means it ("absorbing the
+# extra second," "absorbs the carry"). Each is the figure, flagged by
+# design; prose about
 # physics or chemistry, where things absorb and fuse literally,
 # disables the rule.
 tokens:
