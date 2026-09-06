@@ -418,6 +418,30 @@ echo "  Grand total: $((total + commits_total))"
 
 # --- Aggregators ---
 
+# --- Corpus ---
+
+# The pre-LLM prose corpora a candidate token is counted against before
+# it lands. tools/corpus-build.sh explains the sources and the pins. The
+# output lives in the cache, outside the repository.
+
+[tasks.corpus-build]
+description = "Build the pre-LLM prose corpora a new rule is measured against"
+usage = 'flag "--force" help="Rebuild every corpus file even if it exists"'
+run = "bash tools/corpus-build.sh ${usage_force:+--force}"
+
+[tasks.corpus-grep]
+description = "Count a PCRE pattern across every corpus, case-insensitive, with sample paragraphs"
+usage = 'arg "<pattern>"'
+run = '''
+#!/usr/bin/env bash
+set -euo pipefail
+dir="${VALE_AI_TELLS_CORPUS_DIR:-$HOME/.cache/vale-ai-tells/corpus}"
+for f in "$dir"/*.txt; do
+  printf '%-16s %s\n' "$(basename "$f" .txt)" "$(rg -icP -- "$usage_pattern" "$f" || echo 0)"
+done
+rg --no-filename -iP -- "$usage_pattern" "$dir"/*.txt | cut -c1-200 | head -n 8
+'''
+
 [tasks.check]
 description = "Fast quality bar: lint then test"
 run = ["mise run lint", "mise run test"]
