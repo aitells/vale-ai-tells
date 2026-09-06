@@ -1510,3 +1510,19 @@ A diamond-shaped embedding appears twice in the graph.
 The shape type records the size and alignment of the instantiation.
 
 The shapes of the letters hint at the eyes of the gopher.
+
+## FusionMetaphors and DepletionMetaphors: literal senses that should NOT trigger
+
+She folded the map in half.
+
+The bridge collapsed in the storm.
+
+Tight coupling between the modules made the refactor slow.
+
+The engine stalled at the light.
+
+The starvation of low-priority threads is a known scheduler problem.
+
+## MotionMetaphors, EnforcementMetaphors, and FigurativeIdioms: literal senses that should NOT trigger
+
+The dog trailed the scent across the field.

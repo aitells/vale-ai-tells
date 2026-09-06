@@ -46,7 +46,7 @@ tokens:
   # the gate and the set stays to software infrastructure that cannot be
   # literally ridden, so a literal "rides the bus" or "rides the elevator"
   # never enters the rule.
-  - "\\b(?:ride|rides|riding) the (?:index|cache|(?:hot|fast|slow|happy|read|write|critical) path|pipeline|queue|wire|backbone|mainline|gradient|event loop|fast lane)\\b"
+  - "\\b(?:ride|rides|riding) the (?:index|cache|(?:hot|fast|slow|happy|read|write|critical) path|pipeline|queue|wire|backbone|mainline|gradient|event loop|fast lane|chain)\\b"
 
   # --- Supervision and gambling idioms ("riding herd on the linters,"
   # "let it ride until the next release").
