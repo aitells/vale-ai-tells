@@ -1878,6 +1878,16 @@ The rule reached for a curated list first.
 
 Writers reach for the same tired metaphor.
 
+Reach for it in a script.
+
+Reach for a slice when the skip doesn't cover the gap.
+
+You might reach for a git dependency here.
+
+Users reach for the path form first.
+
+One reaches for the same helper every time.
+
 ## FigurativePays
 
 The upfront work pays off in review.
