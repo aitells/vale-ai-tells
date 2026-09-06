@@ -50,7 +50,7 @@ tokens:
 
   # --- The bare verb behind a modal, an infinitive marker, or a negation
   # ("tooling to surface changes," "will surface reports," "can surface
-  # bugs," "doesn't surface the failure," "never surfaces in CI"). The
+  # bugs," "doesn't surface the failure," "never surface in CI"). The
   # lookahead refuses only the compounds, since nothing else after "to"
   # or "will" is the noun.
   - "\\b(?:to|will|would|may|might|can|could|should|must|shall|also|never|not|doesn't|don't|didn't|won't|can't|cannot) surface (?!(?:area|areas|api|apis|syntax|syntaxes|rust|roughness|finish|tension|treatment|mount|mounts|layer|layers|water|temperature|temperatures|level|levels|texture|textures|normal|normals|type|types)\\b)[a-z][a-z-]+\\b"
