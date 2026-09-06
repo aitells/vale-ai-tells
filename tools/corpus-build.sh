@@ -134,13 +134,19 @@ END { flush() }
 
 # --- Sources.
 
+# The archive extracts into a partial directory that becomes the cached
+# tree only once the whole pipeline succeeds. A failed download therefore
+# leaves nothing a later run could mistake for a cache hit, and the build
+# stops here rather than writing an empty corpus.
 fetch() {  # name repo sha
   local name="$1" repo="$2" sha="$3"
   local tree="$SRC_DIR/$name-$sha"
   if [ -d "$tree" ]; then echo "  $name: cached $sha"; return; fi
   echo "  $name: fetching $repo@$sha"
-  mkdir -p "$tree"
-  curl -sSL "https://github.com/$repo/archive/$sha.tar.gz" | tar -xz -C "$tree" --strip-components=1
+  rm -rf "$tree.partial"
+  mkdir -p "$tree.partial"
+  curl -fsSL "https://github.com/$repo/archive/$sha.tar.gz" | tar -xz -C "$tree.partial" --strip-components=1
+  mv "$tree.partial" "$tree"
 }
 
 build() {  # name filter find-args...
