@@ -21,6 +21,18 @@ ignorecase: true
 # admit the plural noun ("the API surfaces are," "surfaces exposed by")
 # and the physical compounds ("surface tension," "surface temperature");
 # the open shape measures zero across both standard libraries.
+#
+# A documentation-corpus census (2026-09) then found the uninflected verb
+# escaping behind a modal or an infinitive marker ("tooling to surface
+# changes," "will surface reports," "can surface bugs"), because every
+# token here read an inflected form. The bare shape gates on the word
+# before the verb, since after "to" or "will" the word is the verb and
+# only the compounds need refusing. Thirteen hits across the seven
+# pre-LLM corpora, each the figure ("static analysis tooling to surface
+# only the vulnerabilities," "we have to surface this requirement,"
+# "panic during development to surface any imperfections"), flagged by
+# design. The noun figure ("the prose surface," "its canonical surface")
+# is FigurativeNouns' to read.
 tokens:
   # --- Transitive and adverbial emergence: the discovery verb with its
   # object or adverb ("the audit surfaced a defect," "surfaces skills
@@ -35,3 +47,10 @@ tokens:
 
   # --- The negative report ("nothing surfaced this earlier").
   - "\\bnothing surfaced\\b"
+
+  # --- The bare verb behind a modal, an infinitive marker, or a negation
+  # ("tooling to surface changes," "will surface reports," "can surface
+  # bugs," "doesn't surface the failure," "never surfaces in CI"). The
+  # lookahead refuses only the compounds, since nothing else after "to"
+  # or "will" is the noun.
+  - "\\b(?:to|will|would|may|might|can|could|should|must|shall|also|never|not|doesn't|don't|didn't|won't|can't|cannot) surface (?!(?:area|areas|api|apis|syntax|syntaxes|rust|roughness|finish|tension|treatment|mount|mounts|layer|layers|water|temperature|temperatures|level|levels|texture|textures|normal|normals|type|types)\\b)[a-z][a-z-]+\\b"

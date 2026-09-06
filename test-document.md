@@ -3155,3 +3155,23 @@ Where this pays off is the read path.
 Run it against the fixture, and all it does is call the hook.
 
 Under load, the only guarantee we have is that the write completes.
+
+## FigurativeSurfaces: the bare verb
+
+The tooling exists to surface changes made in a dependency.
+
+A dry run will surface reports before the merge.
+
+That step can surface bugs the unit tests never reach.
+
+The audit doesn't surface the failure until the second pass.
+
+## FigurativeNouns: surface as what a reader sees
+
+Every rule reads the prose surface and nothing else.
+
+The canonical surface of the package is the rule list.
+
+A reader-facing surface gets the same lint as a document.
+
+The whole surface is three files.
