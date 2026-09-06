@@ -3194,6 +3194,10 @@ Those two numbers pick the review shape.
 
 The rules that shape an analysis live in one file.
 
+Shaping the direction of the API took a year.
+
+What shapes the output is the template.
+
 It clusters repeated calls of the same shape.
 
 The payload arrived in the wrong shape.

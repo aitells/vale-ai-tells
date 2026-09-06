@@ -164,6 +164,7 @@ SARIF
 Scanln
 setext
 settl
+shap
 shel
 shellcheck
 shopt

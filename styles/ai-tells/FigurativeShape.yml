@@ -22,10 +22,15 @@ ignorecase: true
 # "turtle shape," and the trailing check refuses the generics
 # vocabulary the Go proposals attach to the word ("shape type," "shape
 # instantiation") and the geometric heads ("the shape of the curve").
-# The bare "shape of," the verb with a determined object ("the rules
-# that shape an analysis"), the hyphenated compound ("code-shaped,"
-# "review-shaped") past the literal geometry prefixes, and the gated
-# plural round it out.
+# The bare "shape of," the verb in its gerund and relative forms
+# ("shaping the direction of the API," "what shapes the output"), the
+# hyphenated compound ("code-shaped," "review-shaped") past the
+# literal geometry prefixes, and the gated plural round it out. The
+# sculptor with a determined subject ("the pass shapes the output")
+# stays with MotionMetaphors, which reads it already, and the bare
+# verb behind a relative pronoun ("the rules that shape an analysis")
+# reads through the noun token, since "that" sits in its determiner
+# list.
 #
 # The cost is real and flagged on the maintainer's call: about
 # sixty-five hits across the seven pre-LLM corpora, most of them the
@@ -47,9 +52,11 @@ tokens:
   # of the API," "shape of the parse trees"), same geometric refusals.
   - "\\bshape of (?:the|a|an|its|their|this|that|each|every) (?!(?:curve|curves|distribution|distributions|graph|glyph|glyphs|font|character|characters|window|screen|region|rect|rectangle|cursor|icon|image|figure|earth|world|surface|object|body|polygon|path|outline|border|shadow|beam|pulse|waveform|signal|lens|cell|cells|nucleus|letter|letters|symbol|blob|bezier|arc|spline|mesh|solid|cube|sphere|circle|ellipse|box|array|arrays|tensor|tensors|matrix|matrices)\\b)"
 
-  # --- The verb with a determined object ("the rules that shape an
-  # analysis," "what shapes the output").
-  - "\\bshap(?:es|ed|ing) (?:the|a|an|its|their|this|that|each|every|how|what|which|our|your|my)\\b"
+  # --- The verb without a determined subject: the gerund and the
+  # relative forms ("shaping the direction of the API," "what shapes
+  # the output"). The sculptor with a determined subject ("the pass
+  # shapes the output") stays with MotionMetaphors.
+  - "\\b(?:shaping|(?:what|which|whatever) shap(?:es|ed)) (?:the|a|an|its|their|this|that|each|every|how|our|your|my)\\b"
 
   # --- The hyphenated compound ("code-shaped," "review-shaped,"
   # "identically-shaped"), past the geometry and body prefixes that name
