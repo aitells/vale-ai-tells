@@ -25,6 +25,21 @@ ignorecase: true
 # term), "waterfall" (a process model), "gap" (too ordinary), and "the
 # poles" (too rare to gate). Prose about anatomy, textiles, radio, or
 # fiction disables the rule.
+#
+# A documentation-corpus census (2026-09) added "surface" as the set of
+# things a reader or a caller sees ("the prose surface," "its canonical
+# surface," "a reader-facing surface," "the whole surface"), sixty-odd
+# occurrences with the verb's rule reading none of them, since
+# FigurativeSurfaces gates on an inflected verb. The modifier slot
+# refuses the software term for a set of exported names ("the API
+# surface," "the attack surface," "its public surface") and the lookahead
+# the physical and linguistic compounds ("surface area," "surface
+# syntax," "the surface language," "the surface of the moon"). Across
+# the seven pre-LLM corpora it fires seven times, all in the Rust RFCs
+# and PEPs: five making the same figure ("the surface of `foo` includes
+# Input and Output," "decreasing the surface of change") and two on "on
+# the surface," whose hedging frame DefensiveHedges reads and whose bare
+# idiom lands here. Geometry and graphics prose disables the rule.
 tokens:
   # --- Reach as a retrieval path ("its primary reach," "per-rule reach,"
   # "the whole reach of the index," "picks between two reaches").
@@ -43,3 +58,12 @@ tokens:
   # --- Knob as an option ("a tuning knob," "one more knob," "exposes
   # several knobs").
   - "\\b(?:a|an|the|its|their|this|that|one|each|every|no|another|single|extra|new|tuning|exposed|available|many|several|few|more|two|three|four|five|[a-z]+ing) knobs?\\b"
+
+  # --- Surface as what a reader sees ("the prose surface," "its canonical
+  # surface," "the whole surface," "a reader-facing surface"). The
+  # determiner-gated token refuses the exported-names term in the modifier
+  # slot and the physical compounds after the noun, and takes the singular
+  # only, since "the submarine surfaces" is the verb; the second token
+  # takes the compounds agent prose builds without a determiner.
+  - "\\b(?:the|a|an|its|their|this|that|each|every|one|same|whole|entire|full|new|old|current|final) (?!(?:api|public|attack|testable|exposed|exported|external|internal|control|planar|flat|curved|solid|hard|smooth|rough|top|bottom|upper|lower|outer|inner|back|front|work|working|table|desk|road|sea|water|ocean|earth|moon|lunar|planetary|land|ground|metal|glass|rust) )(?:[a-z-]+ )?surface\\b(?! (?:area|areas|api|apis|syntax|syntaxes|language|languages|grammar|form|forms|complexity|representation|rust|roughness|finish|tension|treatment|mount|mounts|layer|layers|water|temperature|temperatures|level|levels|texture|textures|normal|normals|type|types|of (?:the|a|an|its) (?:sphere|earth|moon|planet|sun|disk|disc|window|screen|image|glyph|water|sea|ocean|lake|lens|cell|body|object|solid|cube|polygon|mesh|skin|table|board|plate|wafer|chip|die|metal|liquid|material))\\b)"
+  - "\\b(?:prose|canonical|[a-z]+-facing|documented|visible|readable|printed|rendered) surfaces?\\b(?! (?:area|areas|api|apis|syntax|syntaxes|tension|treatment|level|levels|type|types)\\b)"

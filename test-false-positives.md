@@ -1055,7 +1055,7 @@ Applications that want a proxy set the environment variable.
 
 Somebody installing a binary wants an install line.
 
-A consumer pins exactly the surface it wants.
+A consumer pins exactly the API surface it wants.
 
 She taught the students in two schools.
 
@@ -1472,3 +1472,17 @@ The only difference is the direction.
 All the rows are the same width.
 
 We check what the value is before the write.
+
+## FigurativeNouns and FigurativeSurfaces: exported-names and physical surfaces that should NOT trigger
+
+The API surface is small on purpose.
+
+Each release reduces the attack surface.
+
+The surface area of the cube is six times the square of its edge.
+
+The proposal separates the surface syntax from the semantics.
+
+The lander touched the surface of the moon at dawn.
+
+Sand the top surface before you paint it.
