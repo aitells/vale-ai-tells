@@ -9,6 +9,7 @@ owner = "aitells"
 authors = [
   { username = "aitellsbot", signature = "AI Tells Bot" },
   { username = "tbhb", signature = "Tony Burns" },
+  { username = "theredspoon", signature = "Nim G" },
 ]
 
 [commit_types]
