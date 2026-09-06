@@ -2917,3 +2917,241 @@ Each named rule ships with its fixtures.
 The workflow runs the named recipe.
 
 Its named target is a table.
+
+## CoordinatedReveal
+
+For search that join reverses, and a chunk that ranks well maps back to every blob that contains it.
+
+The table is content-addressed and append-only, and a blob's bytes never change once captured.
+
+The index is rebuilt on every write, and the reader is always one step behind.
+
+On the read side the lookup flips, and all of the callers see the same row.
+
+The sweeper calls it, and only the sweeper.
+
+The accelerator has it, and nothing else has it.
+
+Each caller that reads them gets the same view.
+
+## ConsequenceParticiple
+
+The sweeper drops the row before the reader sees it, leaving the cache cold.
+
+Every write rebuilds the index, making every read a miss.
+
+The join reverses, giving the caller one row per blob.
+
+The write lands after the read, meaning the index is stale.
+
+The table fits in one page, letting the reader skip the scan.
+
+The lookup runs inside the lock, keeping the reader on one page.
+
+The parser rejects the header, forcing a second pass.
+
+The client batches the writes, saving a round-trip.
+
+The check runs on every call, costing one extra read.
+
+The sort runs before the filter, turning every lookup into a scan.
+
+The reader holds the lock across the call, resulting in a deadlock.
+
+The pool reuses the buffer across requests, leading to a stale read.
+
+The retry loop never clears the flag, ending up with an empty map.
+
+The backend caches the response, meaning that each report can be a match.
+
+The check runs before the write, ensuring no row goes missing.
+
+The pin fixes the object at one address, preventing it from moving.
+
+## ShellNounCopula
+
+The problem is that the index goes stale after a rename.
+
+The difference was that the second build read the cache.
+
+One catch is that the daemon keeps the lock across restarts.
+
+Another difference is that the parser reads one batch ahead.
+
+The question is whether a restart clears the cache.
+
+Its downside is that every lookup reads the disk.
+
+The only reason is that the flag defaults to off.
+
+The real issue here is that the socket closes early.
+
+The upshot is that a rename costs two writes.
+
+Their assumption was that the file already existed.
+
+The reason is simply that the pin moved.
+
+## SummativeAppositive
+
+Every read rebuilds the index, a cost that shows up in the benchmarks.
+
+The caller sees one row, a distinction the old path never made.
+
+The sweeper deletes orphans in the same pass, a choice that shrinks the index.
+
+It drops the header, something no caller expects.
+
+Both writers share one lock, a fact we rely on throughout the module.
+
+The join runs once per blob, a property that makes the lookup cheap.
+
+The manifest lives beside the binary, a detail worth noting before you deploy.
+
+The scheduler runs the sweeper last, which is exactly the point.
+
+The parser stops at the first blank line, an assumption every caller makes.
+
+A restart drops the cache, a trade-off that favors simplicity over memory.
+
+Retries back off exponentially, which is precisely what the upstream limiter requires.
+
+## AbstractionSubject
+
+That asymmetry is the point.
+
+This inversion buys the reverse lookup.
+
+That gap is where the second read happens.
+
+This tension forces the second table.
+
+That mismatch explains the retry.
+
+This indirection costs one read.
+
+That split lets the writer skip the index.
+
+This separation is deliberate.
+
+That symmetry is not an accident.
+
+This coupling is the price.
+
+These asymmetries are the whole reason the cache exists.
+
+The writer never sees the index, and this indirection costs one read.
+
+That asymmetry means one extra read on the search path.
+
+This constraint matters only for the writer.
+
+## StrawmanContrast
+
+The reader walks the index, rather than walking the whole tree.
+
+It reads the offsets directly, instead of re-reading each file.
+
+The search join runs from chunk to blob for a query against the index, not the other way around.
+
+The lookup is one read, rather than a scan.
+
+The cache keeps one copy of the blob for the whole process, not one per caller.
+
+The parser resolves the alias at load time, instead of the first lookup.
+
+The cache is keyed by digest, not the reverse.
+
+The scheduler drains the queue in order, rather than picking at random.
+
+The client sends the token once, not once per request.
+
+The sweeper reads the manifest, not the whole store.
+
+## ScopePartition
+
+On the read side, the lookup is one hop.
+
+On the write side, every blob is hashed before it is stored.
+
+The cache is warm on the search side, and on the indexing side, each document is tokenized once.
+
+Read-side, the join is one hop.
+
+Write-side, the table takes one append per blob.
+
+At index time, the tokenizer runs once per document.
+
+At query time, the same tokenizer runs over the input.
+
+The schema is fixed at build time, and at run time, the loader checks it against the file.
+
+On the client side, the token is stored in memory only.
+
+Server-side, the token is checked on every request.
+
+## StackedAnaphora: paired "For X, ... For Y," openers
+
+For search, that join reverses. For writes, the table takes one append.
+
+For client requests, the body may be nil. For server requests, the body is always set.
+
+## RestatementMarkers, the parallel restatement and the framing openers
+
+The same holds for writes.
+
+Reads take the lock and the same is true of the index.
+
+The same applies to the reader.
+
+The same goes for every caller.
+
+In practice, the index is one file.
+
+In effect, the join reverses.
+
+In the end, one read.
+
+Put another way, the offsets come from the blob.
+
+The cache is empty, which is to say the first read is slow.
+
+Meaning, the cache is cold.
+
+Meaning the cache is cold.
+
+Meaning that one read suffices.
+
+## PseudoCleft
+
+What changed is the direction of the lookup.
+
+What you get is one row per blob.
+
+What matters here is the offset.
+
+What remains is the offset into the blob.
+
+What follows is the reverse lookup.
+
+What makes this work is the hash.
+
+What we need is the offset and nothing else.
+
+What it takes is a second pass over the index.
+
+All that changes is the direction.
+
+All you need is the offset.
+
+All that's required is a token.
+
+The only thing that changes is the direction.
+
+The only file you edit is the manifest.
+
+Where this pays off is the read path.
+
+Run it against the fixture, and all it does is call the hook.
+
+Under load, the only guarantee we have is that the write completes.
