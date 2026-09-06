@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Changed
+
+- **Installation**: The README snippet now installs `ai-tells` by name. Vale's package catalog lists the style, so `Packages = ai-tells` reaches the latest release without a version in the line. A release URL still pins a version, and `ai-tells-commits` keeps one because the catalog does not list it; Vale syncs a list that mixes the two forms.
+
+<!-- vale on -->
+
 ## [1.33.0] - 2026-09-06
 
 <!-- vale off -->

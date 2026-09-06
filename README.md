@@ -19,7 +19,7 @@ Add the package to your `.vale.ini`:
 StylesPath = styles
 MinAlertLevel = suggestion
 
-Packages = https://github.com/tbhb/vale-ai-tells/releases/download/v1.33.0/ai-tells.zip, \
+Packages = ai-tells, \
   https://github.com/tbhb/vale-ai-tells/releases/download/v1.33.0/ai-tells-commits.zip
 
 [*.md]
@@ -31,6 +31,8 @@ Then run:
 ```bash
 vale sync
 ```
+
+The bare `ai-tells` name works because [Vale's package catalog](https://vale.sh/explorer) lists the style and points that name at the latest release. Name a release URL instead to pin a version. The `ai-tells-commits` style is not in the catalog, so it installs by URL either way.
 
 The `ai-tells-experimental` structural rules install as a separate opt-in package with their own steps, described in [EXPERIMENTAL.md](EXPERIMENTAL.md). The `.vale.ini` at the root of this repository is a development setup that turns on every style at once, so build your own configuration from the install snippet rather than from that file.
 
