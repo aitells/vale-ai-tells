@@ -3267,3 +3267,19 @@ That branch is a dead end.
 The census has a blind spot for adjectives.
 
 The injection seam is between the parser and the writer.
+
+## AnthropomorphicAdjectives
+
+A benign default hides the regression.
+
+The brittle test breaks on every refactor.
+
+A generous timeout masks the slow path.
+
+The heap target is noisy under load.
+
+The parser is brittle.
+
+That claim is honest about its limits.
+
+The cache stays healthy for a week.
