@@ -32,7 +32,7 @@ ignorecase: true
 # handle all cases," "to cover all of them," "doesn't handle all the
 # non-Latin letters," and "TODO: handle all kinds" never match. That
 # register is aspiration, the opposite of the claim, and it dominates the
-# corpus hits on bare forms. The cost is the first-person present ("we
+# corpus hits on bare forms. The gap is the first-person present ("we
 # handle all edge cases"), which escapes. Perfect tenses keep the modal
 # hole open through the participle ("should have covered all program
 # counters" laments a gap and still fires); the corpora show one hit.

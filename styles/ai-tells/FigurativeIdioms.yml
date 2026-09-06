@@ -158,12 +158,12 @@ tokens:
   # into separate pull requests," "the query fans out"). The verb matches
   # with or without its destination; the compound nouns "fan-out,"
   # "fanout," and "fan-in" are legitimate concurrency and circuit
-  # vocabulary and stay untouched. The bare form costs one corpus hit
+  # vocabulary and stay untouched. The bare form matches once in the corpora
   # ("it fans out nBackendWorkers"), the figure itself.
   - '\bfan(?:s|ned|ning)? out\b'
 
   # --- Phrases from a documentation-corpus audit (2026-09), which found
-  # each of these clearing every idiom rule. Costs across the Go and
+  # each of these clearing every idiom rule. Counts across the Go and
   # Python standard libraries follow each group, and every hit is the
   # figure itself.
   #
@@ -182,7 +182,7 @@ tokens:
   # Availability and departure: "on hand" (zero), "went missing" and
   # "went away" (five, "the error went away"), "for good" (three, with the
   # "for good measure" and "for good reason" phrases refused), "left for
-  # good." "Goes away" stays out at sixty-one hits: "this will go away
+  # good." "Goes away" stays out with sixty-one hits: "this will go away
   # once" is how both corpora schedule a removal.
   - '\bon hand\b'
   - '\bwent (?:missing|away)\b'

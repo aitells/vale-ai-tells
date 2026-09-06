@@ -31,7 +31,7 @@ ignorecase: true
 # who literally give or publish a name (a team names a release, a
 # complaint names a defendant).
 #
-# The cost is small for a bare-verb rule: about fifteen matches across
+# The count is small for a bare-verb rule: about fifteen matches across
 # the Go and Python standard libraries ("if a pattern names a
 # directory," "an import path can also name a package," "a tuple naming
 # the attributes assigned directly"), every one the designation sense

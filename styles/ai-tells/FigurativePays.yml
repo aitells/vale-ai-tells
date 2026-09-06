@@ -54,13 +54,26 @@ tokens:
   # the cost spellings escaping alongside the price ones; every token
   # measures zero across the Go and Python standard libraries except
   # "costs nothing" at one ("this if and the condition cost nothing").
-  # Bare "cheap" stays out at fifty-two hits: "cheap to copy" is how both
-  # corpora describe a cost they measured, and no complement separates it
-  # from the AI grade. The negated-object spelling "costs nothing" is
+  # Bare "cheap" stays out, matching fifty-two times: "cheap to copy" is how
+  # both corpora describe a cost they measured, and no complement separates
+  # it from the AI grade. The negated-object spelling "costs nothing" is
   # NegatedObject's; this rule takes the prepositional and modal forms.
   - '\bpay(?:s|ing)? (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
   - '\bpaid (?:the|that|this|its|their|an?) (?:[a-z]+ )?cost\b(?! of)'
   - '\bat no (?:cost|charge|expense)\b'
+
+  # --- The count as an invoice: a false-positive tally, a line count,
+  # or a match count presented as a price ("costs thirteen corpus
+  # hits," "the cost is five hits," "at zero corpus hits," "the cost is
+  # real"). This package's own rule comments and README rows wrote the
+  # formula for years, and the maintainer flagged it as the "measured
+  # cost" family's third limb (2026-09): a number framed as a bill
+  # rather than reported. Every spelling measures zero across the seven
+  # pre-LLM corpora, which report a count as a count. The plain
+  # sentence says what matched and how often.
+  - '\bcosts? (?:about |roughly |around |at most |at least |under |over |only |just |another |a further )?(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|a hundred|hundreds|dozens?|a few|several|no|nothing|zero) (?:[a-z-]+ ){0,2}(?:hits?|matches|alerts?|findings?|false positives|lines|sentences|paragraphs)\b'
+  - '\bthe cost (?:is|was|comes to|stays|remains) (?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|about|roughly|around|under|over|a few|several|real|small|large|high|higher|low|lower|greater|minor|major|modest|steep|nonzero|zero|the|that|this)\b'
+  - '\bat (?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|sixteen|seventeen|eighteen|nineteen|(?:twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety)(?:-(?:one|two|three|four|five|six|seven|eight|nine))?|a hundred|hundreds|zero|about \w+|roughly \w+|around \w+) (?:[a-z-]+ )?(?:corpus )?hits?\b'
   - '\b(?:would|could|might|may) pay to\b'
   - '\bspend(?:s|ing)? (?:work|effort|a budget|budget|attention|cycles|compute|tokens|a round-?trip|round-?trips)\b'
   - '\bspent (?:work|effort|a budget|budget|attention|cycles|compute|tokens|a round-?trip|round-?trips)\b'

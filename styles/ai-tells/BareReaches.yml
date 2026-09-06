@@ -26,7 +26,7 @@ ignorecase: true
 # refuses the copulas and prepositions that would make the noun "reach"
 # match ("its primary reach is"), which FigurativeNouns reads instead.
 #
-# The cost is the transport idiom of runtime prose, about fifty matches
+# What matches is the transport idiom of runtime prose, about fifty times
 # across the Go and Python standard libraries ("so that it reaches the
 # dist process," "the only backslashes that reach here," "if the forked
 # child reaches its exec call"), each the figure and each flagged on the

@@ -46,12 +46,12 @@ nonword: true
 #   optional") and an intransitive verb ("No operational driver appears in
 #   the code," "Nothing downloads"). Both take a curated list, because the
 #   open tokens flood on ordinary sentence-initial prose ("No go files
-#   found," "No loop was generated"); the kept adjectives cost five corpus
+#   found," "No loop was generated"); the kept adjectives show five corpus
 #   hits ("No modifier key is invalid," "No other expressions are valid
 #   statements") and the kept verbs five ("No lock needs to be held," "No
 #   chaining happens"), each the figure itself.
 # - The pronoun subjects "Nothing," "None of," and "Neither," which the
-#   capital-"No" gate never reached. They cost about forty corpus hits
+#   capital-"No" gate never reached. They show about forty corpus hits
 #   between them ("Nothing changed," "None of the error codes make sense,"
 #   "Neither resolver was explicitly requested"), the same human caveat
 #   register the copula token already accepts. A plural pronoun subject

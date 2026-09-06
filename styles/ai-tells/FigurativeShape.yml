@@ -32,7 +32,7 @@ ignorecase: true
 # reads through the noun token, since "that" sits in its determiner
 # list.
 #
-# The cost is real and flagged on the maintainer's call: about
+# The count is high and flagged on the maintainer's call: about
 # sixty-five hits across the seven pre-LLM corpora, most of them the
 # figure itself in argument prose ("the particular shape of the parse
 # trees," "the overall shape of the exception group," "the shape of the

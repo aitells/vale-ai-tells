@@ -15,11 +15,11 @@ ignorecase: true
 #
 # The frame is ordinary English with most adjectives ("keep the buffer
 # small," "keeps the connection open"), so the adjective list is the
-# gate: the ones the audit saw and agent prose reaches for, measured at
-# seven hits across the Go and Python standard libraries ("keep the sort
+# gate: the ones the audit saw and agent prose reaches for, matching
+# seven times across the Go and Python standard libraries ("keep the sort
 # result deterministic," "keeping the heap reasonably small," "keep the
 # tar command happy"), each the figure. The causative "keeps X from
-# being" stays out at twelve hits ("keeps the garbage collector from
+# being" stays out with twelve hits ("keeps the garbage collector from
 # being invoked"), because that is how both corpora say "prevents"; only
 # the cognition complement fires, since a reader kept from mistaking is
 # the artifact deciding what the reader knows. "Keeps X honest" is

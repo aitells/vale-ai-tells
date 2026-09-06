@@ -3283,3 +3283,13 @@ The parser is brittle.
 That claim is honest about its limits.
 
 The cache stays healthy for a week.
+
+## FigurativePays: the count as an invoice
+
+The token costs thirteen corpus hits.
+
+The cost is five hits in the Rust RFCs.
+
+Bare cheap stays out at fifty-two pre-LLM corpus hits.
+
+The cost is real and flagged on the maintainer's call.

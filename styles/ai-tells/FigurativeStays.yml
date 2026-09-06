@@ -20,11 +20,11 @@ ignorecase: true
 # list covers that, so the determiner-gated subject token takes any
 # complement that is not a place, a time, or a person's condition, in the
 # FigurativeLives mold, and the bare-verb token keeps a list grown to the
-# adjectives the audit saw. The open token costs eleven corpus hits
+# adjectives the audit saw. The open token shows eleven corpus hits
 # ("stays robust," "stay aggregated," "stays blocked," "the map stays
 # small") and the list fifteen ("stay unchanged," "stays idle," "assists
 # stay flat"), each the figure with "remains" or "is" as the plain word.
-# "Stays in sync" and "stay consistent" stay out on purpose: at ten hits
+# "Stays in sync" and "stay consistent" stay out on purpose: with ten hits
 # they are the corpora's own idiom for a maintained invariant. The same
 # corpus showed "remains" in the sibling file of every "stays" sentence,
 # so the fix is one the writers already know.
