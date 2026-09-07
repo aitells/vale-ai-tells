@@ -17,7 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
-- **EmphaticCopula** (`ai-tells`): Bold markup no longer fires the rule. Every asterisk token was a bare regular expression, and a doubled-asterisk span contains the same four-character shape a single-asterisk one does, so a sentence carrying bold and no italics at all raised an alert whose message asked for italics to be removed. Each asterisk token now requires an unpaired asterisk on either side, which leaves single-asterisk emphasis as the only match and drops the bold-italic triple along with bold. The underscore tokens are unchanged, because a doubled-underscore run never contains the space-prefixed shape they require. A bold-markup case in `test-false-positives.md` covers the regression.
+- **EmphaticCopula** (`ai-tells`): Bold markup no longer fires the rule. Every asterisk token was a bare regular expression, and a doubled-asterisk span contains the same shape a single-asterisk one does once the outer pair is counted in, so a sentence carrying bold and no italics at all raised an alert whose message asked for italics to be removed. Each asterisk token now requires an unpaired asterisk on either side, which leaves single-asterisk emphasis as the only match and drops the bold-italic triple along with bold. The underscore tokens are unchanged, because a doubled-underscore run never contains the space-prefixed shape they require. A bold-markup case in `test-false-positives.md` covers the regression.
 
 <!-- vale on -->
 
