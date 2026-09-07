@@ -33,7 +33,7 @@ ignorecase: true
 # registers that use the adjective as a term ("the named party," "the
 # named insured," "the named storm") sit in the exceptions.
 #
-# The cost is the API idiom itself, and it is large: about 230 matches
+# What matches is the API idiom itself, and it is large: about 230 times
 # across the Go and Python standard libraries, most of them "the named
 # file," "the named directory," "the named package," and "the named
 # module," each the designation this rule flags and each flagged on the

@@ -22,7 +22,7 @@ ignorecase: true
 # modifiers and no detail"), the determiner-gated "without a X or a Y" two,
 # the verb-gated "neither" two ("supports neither TLS 1.3 nor"), and the
 # doubled "doesn't" three. Every one is the construction itself and fires
-# by design. The bare "without X or Y" stays out: at eighty hits ("without
+# by design. The bare "without X or Y" stays out: with eighty hits ("without
 # prefix or suffix," "without arguments or results," the license boilerplate
 # "WITHOUT WARRANTIES OR CONDITIONS") it is ordinary docs English, and the
 # determiner is what separates the AI spelling from it. "Has neither" and

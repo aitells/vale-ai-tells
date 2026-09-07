@@ -109,7 +109,7 @@ tokens:
   # documentation-corpus audit (2026-09) found "an orphan row sits on a
   # record" escaping on the modifier alone, so the subject slot now admits
   # one, and the preposition set covers the placements agent prose uses
-  # ("sits ahead of," "sits outside every fence"); the extra reach costs
+  # ("sits ahead of," "sits outside every fence"); the extra reach adds
   # three corpus hits, one of them a sail. The curated token stays because
   # it admits a modifier between the subject and the verb as well.
   - "\\b(?:a|an|the|this|that|these|those|its|their|both|all)\\s+\\w+\\s+(?:\\w+\\s+)?(?:sits?|sat)\\s+(?:in|on|at|with|beside|under|behind|ahead of|outside|inside|beyond|among|across|atop|over|above|below|beneath|near|alongside|next to)\\b"

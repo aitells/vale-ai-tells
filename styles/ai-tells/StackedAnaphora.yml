@@ -188,7 +188,7 @@ tokens:
   # append." The single fronted "For X," is ordinary English several
   # hundred times over in the Go and Python standard libraries, so only
   # the pair fires, and the discourse markers ("For example," "For now,"
-  # "For simplicity,") are excluded at either position. The pair costs
+  # "For simplicity,") are excluded at either position. The pair matches
   # one corpus hit with those out, the fmt docs ("For Scanln, it stops at
   # newlines. For Scan,"), which is the construction itself and fires by
   # design. ScopePartition owns the "On the X side," and "At X time,"

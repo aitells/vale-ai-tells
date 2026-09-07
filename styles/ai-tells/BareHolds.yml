@@ -22,7 +22,7 @@ ignorecase: true
 # memory-management vocabulary (a goroutine holds the lock, a caller holds
 # a reference) and the physical world (a hand, a jar, a clamp).
 #
-# The cost is the container idiom of pre-LLM programming prose, and it is
+# What matches is the container idiom of pre-LLM programming prose, and it is
 # large: about 160 matches across the Go and Python standard libraries ("a
 # directory that holds the output," "each line holds a single directive,"
 # "big enough to hold all ABIs"), each one the substitution this rule
@@ -31,8 +31,9 @@ ignorecase: true
 # container sense disables it per file rather than per sentence, and
 # CommitFigurativeVerbs in the commit style covers this construction where a
 # commit message is the text. The gerund with a determiner object
-# ("holding the lock," "holding the data being relocated") stays out at
-# ninety hits, all the lock and buffer register; only the counted gerund
+# ("holding the lock," "holding the data being relocated") stays out,
+# matching ninety times, all the lock and buffer register; only the
+# counted gerund
 # ("a directory holding one") fires.
 exceptions:
   # Body parts and people that literally hold

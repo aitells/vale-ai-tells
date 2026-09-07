@@ -1546,3 +1546,11 @@ A healthy person recovers in a week.
 She left a generous tip.
 
 The noisy room made the call hard to hear.
+
+## FigurativePays: literal prices and named tradeoffs that should NOT trigger
+
+The upgrade cost 40 dollars.
+
+The cost of the license is 200 dollars a year.
+
+Those hits cost the team a week of work.

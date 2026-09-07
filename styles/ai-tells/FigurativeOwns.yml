@@ -22,7 +22,7 @@ ignorecase: true
 # columns each stage owns," "the pass owns one table," "the docs that own
 # the decision cut"). The possession token wants a determiner after the
 # verb, and every one of those puts the object before it, counts it, or
-# drops the "s." Three more tokens cover those frames. They cost eleven
+# drops the "s." Three more tokens cover those frames. They add eleven
 # corpus hits, every one the runtime register the exceptions already name
 # ("the M that owns this P," "the P that owns this mcache," "an mspan which
 # owns npages"), whose objects are too short or too Go-specific to list;

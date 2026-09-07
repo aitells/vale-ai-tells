@@ -34,7 +34,7 @@ nonword: true
 # so the copula token looks past a following participle and a number
 # ("That gap is 4 bytes") and keeps the one that grades the noun ("This
 # distinction is rarely important"). Three hits in all under Vale. "Loop"
-# and "pattern" stay out of the noun list at twelve hits, every one a
+# and "pattern" stay out of the noun list, twelve matches and every one a
 # code reference ("This loop is faster than using copy"); "restriction"
 # and "assumption" stay out as docs English ("These restrictions are not
 # part of the specification"). "Holds" after "invariant" is the literal

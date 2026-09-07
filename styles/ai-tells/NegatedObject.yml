@@ -44,9 +44,9 @@ ignorecase: true
 # its own," "deletes nothing," "touches nothing upstream"), found by a
 # documentation-corpus audit (2026-09) at ninety-six occurrences with no
 # rule reading it. It takes its own token below, over the operations and
-# possession verbs, at about thirty corpus hits ("print nothing," "adds
+# possession verbs, with about thirty corpus hits ("print nothing," "adds
 # nothing," "writing nothing," "match nothing"), the same construction
-# the verb lists already accept. "Does nothing" stays out at 134 hits:
+# the verb lists already accept. "Does nothing" stays out with 134 hits:
 # "this method does nothing" is how both standard libraries document a
 # no-op, so that spelling is docs English rather than the tell.
 #
@@ -55,7 +55,7 @@ ignorecase: true
 # "no" ("requires absolutely no configuration," "adds virtually no
 # overhead," "introduces almost no risk"), which measures zero after the
 # listed verbs, and the bare intensified absence ("absolutely no data,"
-# "literally zero dependencies") takes a token of its own at two hits.
+# "literally zero dependencies") takes a token of its own, matching twice.
 # The prepositional spelling joins behind the verbs that make a
 # reassurance of it ("ships with no dependencies," "runs with zero
 # configuration," "comes with no support"): sixteen corpus hits, twelve
@@ -80,8 +80,8 @@ ignorecase: true
 # Verbs that take a clausal complement stay out entirely: "means no run
 # happened" and "implies no ordering is guaranteed" negate the elided
 # clause, not an object, so "mean," "imply," "suggest," and "indicate"
-# never enter the list. The corpora put "ensure no" at 16 hits, "check
-# no" at 6, "guarantee no" at 3, and "verify no" at 2 in the same
+# never enter the list. The corpora count "ensure no" 16 times, "check
+# no" 6, "guarantee no" 3, and "verify no" 2 in the same
 # reading ("ensure no goroutines leak"), so "ensure," "check," "verify,"
 # "guarantee," "assert," "confirm," and "promise" stay out with them.
 # The caller-side condition frames "pass no arguments" (6) and "specify

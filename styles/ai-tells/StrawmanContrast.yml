@@ -40,7 +40,7 @@ ignorecase: true
 # vice versa") measure zero behind a comma; the human spelling is "but
 # not the reverse" (two hits) and stays out. "Not once per call" is the
 # one corpus hit for the per-unit tail. The totality tail ("not the whole
-# tree," "not the entire path") costs five, each the construction. The
+# tree," "not the entire path") matches five, each the construction. The
 # sentence-adverb ", not all X are" (twelve, "Usually, not all arguments
 # are present") is a different construction and stays out, and the bare
 # appositive "a Y, not a Z" stays in ContrastiveFormulas.
