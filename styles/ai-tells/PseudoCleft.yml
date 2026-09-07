@@ -38,7 +38,7 @@ nonword: true
 # spelling three ("all it does is call fn"), the "the only"
 # frame seven ("The only thing that needs evaluating is the index"), and
 # "Where" zero. Every hit is the construction itself and fires by design.
-# The corpus lines break mid-sentence, so the longer shapes undercount.
+# The corpus lines break mid-sentence, so the longer tokens undercount.
 tokens:
   # --- The pronoun subject ("What you get is one row per blob," "What we
   # need is the offset," "What it comes down to is a lookup"). "What I mean

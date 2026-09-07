@@ -13,7 +13,7 @@ ignorecase: true
 # the value is still referenced.
 #
 # The subject slot is open behind a determiner, in the FigurativeLives
-# mold, with a relative-pronoun companion for the shape the audit saw most
+# mold, with a relative-pronoun companion for the phrasing the audit saw most
 # ("a run that dies"), and the exceptions name what literally lives and
 # dies: people, animals, plants, cells, and the batteries and bulbs whose
 # dying is ordinary English. Threads and processes are not excepted, since
@@ -30,7 +30,7 @@ ignorecase: true
 # fourteen times over, and "dead code" everyone's.
 #
 # "Survives the rebase untouched" moved here from FigurativeIdioms, and
-# "lives and dies with" stays in FigurativeLives. The totality shape
+# "lives and dies with" stays in FigurativeLives. The totality construction
 # ("survives all restarts") is UniversalObject's; the object lookahead
 # leaves it there.
 exceptions:

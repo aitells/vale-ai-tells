@@ -8,7 +8,7 @@ ignorecase: true
 # ("handles all edge cases," "addresses all concerns," "eliminates all
 # ambiguity," "covers every scenario"). Where the shifted "no" claims a
 # clean absence, "all" claims a clean sweep, and AI prose grades its own
-# work with it constantly. The general shape is unbuildable: humans write
+# work with it constantly. The general token is unbuildable: humans write
 # "returns all matches," "removes all elements," and "finds all
 # occurrences" hundreds of times per million lines, because operating on
 # every element of a collection is a spec fact. Only the overclaim
@@ -42,7 +42,7 @@ ignorecase: true
 # documentation-corpus audit (2026-09) found escaping through the same
 # hole. The last token admits it behind a determiner-fronted plural
 # subject directly ahead of the verb, where a modal or "to" cannot sit;
-# the shape measures zero across both standard libraries.
+# the token measures zero across both standard libraries.
 #
 # The lookahead after "all" excludes the exception idiom: "eliminates all
 # but the top level" claims an exception, not a sweep. The lookahead
@@ -74,5 +74,5 @@ tokens:
   # --- The plural present: a determiner-fronted plural subject with the
   # base verb it takes ("content rules cover every input," "the wrappers
   # handle all edge cases"). The subject sits directly ahead of the verb,
-  # so the modal and infinitive shapes never match here.
+  # so the modal and infinitive forms never match here.
   - "\\b(?:(?:a|an|the|this|that|these|those|each|every|its|their|both|all|most|some|many|two|three|four|several|any) )?(?:[a-z'-]+ )?[a-z]+s (?:handle|cover|address|support|consider|capture|eliminate|prevent|catch|avoid|satisfy|meet|pass|respect|honor|fulfill|solve|resolve|fix|preserve|maintain|guarantee|survive|validate|sanitize|anticipate) (?:all (?!but\\b)|every (?!other\\b))[a-z][-a-z]*\\b"

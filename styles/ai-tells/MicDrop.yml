@@ -104,7 +104,7 @@ tokens:
   # "Stronger isolation, more lifecycle machinery."
   # "Faster delivery, fewer surprises."
   # Comparative adjective + 1-2 word noun, paired with another
-  # comparative + noun. The balanced tradeoff aphorism shape.
+  # comparative + noun. The balanced tradeoff aphorism pattern.
   - "\\b(?:Stronger|Weaker|Faster|Slower|Better|Worse|Cleaner|Simpler|Smaller|Larger|Bigger|Higher|Lower|Tighter|Looser|Smoother|Newer|Older|Richer|Leaner|Safer|Saner|More|Less|Fewer) [\\w-]+(?: [\\w-]+)?, (?:stronger|weaker|faster|slower|better|worse|cleaner|simpler|smaller|larger|bigger|higher|lower|tighter|looser|smoother|newer|older|richer|leaner|safer|saner|more|less|fewer) [\\w-]+(?: [\\w-]+)?\\."
 
   # "Just/Pure/Clean + noun" standalone fragments: "Pure orchestration." "Just data."
@@ -170,7 +170,7 @@ tokens:
   # Verb-led contrastive with non-linking verbs + noun objects:
   # "They share a contract, not code."
   # "Custom signals belong in stderr text, not in the exit number."
-  # Different shape from the linking-verb family above — the object
+  # Different construction from the linking-verb family above — the object
   # is a noun phrase rather than an adjective.
   - "\\b[A-Z][a-z]+(?: \\w+){0,2} (?:shares?|keeps?|holds?|lives?|belongs?|sits?|points?|goes|go|gives?|takes?) (?:(?:in|on|to|at|with|for) )?[\\w-]+(?: [\\w-]+){0,3}, not (?:(?:in|on|to|at|with|for) )?[\\w-]+(?: [\\w-]+){0,3}[.:]"
 

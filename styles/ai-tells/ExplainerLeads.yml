@@ -9,13 +9,13 @@ tokens:
   # ==========================================================================
   # The free relative ("what/why/how the <subject> <verb>") used as a framing
   # device in prose rather than as a heading, where ExplainerHeadings covers
-  # it. All three shapes gate the subject behind a determiner, so the
+  # it. All three tokens gate the subject behind a determiner, so the
   # ordinary embedded clause stays clean ("depends on how the shell resolves
   # it," "explains why the test fails") only when it is doing real work
   # mid-sentence rather than announcing what follows.
   # ==========================================================================
 
-  # --- Shape A: the cleft lead-in — a demonstrative copula pointing at the
+  # --- Pattern A: the cleft lead-in — a demonstrative copula pointing at the
   # free relative ("Here's what the change does," "This is why the pin
   # matters," "That's how the pieces fit"). The announcement adds nothing the
   # clause it introduces would not say on its own. Corpus cost on 1.3M lines
@@ -24,7 +24,7 @@ tokens:
   # rather than a lookalike.
   - "\\b(?:[Hh]ere's|[Hh]ere is|[Tt]his is|[Tt]hat's|[Tt]hat is) (?:exactly |precisely )?(?:what|why|how|when|where) (?:the|this|that|these|those|a|an|each|every|your|our|its) [-'\\w]+ [-'\\w]+"
 
-  # --- Shape B: the free relative as a label before a colon ("What the hook
+  # --- Pattern B: the free relative as a label before a colon ("What the hook
   # does: it refuses the write."). The capitalized wh-word anchors the label
   # position, so a lowercase embedded clause that happens to precede a colon
   # stays out. Only what/why/how here: a capitalized "When" or "Where" opens
@@ -36,7 +36,7 @@ tokens:
   # silently drops the alert.
   - "\\b(?:What|Why|How) (?:the|this|that|these|those|a|an|each|every|your|our|its) [^.!?:\\n]{1,50}(?=:)"
 
-  # --- Shape C: the sentence-initial pseudo-cleft — the free relative as
+  # --- Pattern C: the sentence-initial pseudo-cleft — the free relative as
   # subject, resolved by a copula ("What the hook does is refuse the write,"
   # "Why the pin exists is worth explaining"). The capitalized wh-word plus
   # the trailing copula holds this to the cleft; the plain embedded clause

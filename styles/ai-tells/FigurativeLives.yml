@@ -26,7 +26,7 @@ ignorecase: true
 # the "as" complement ("that split lives as reviewed data"). The bare-noun
 # token below takes the first, refusing the pronouns and demonstratives
 # whose residence the tokens above already decline to read, and "as" joins
-# every preposition list. The bare shape adds five corpus hits to the
+# every preposition list. The bare token adds five corpus hits to the
 # eight above ("code lives in cmd/link," "data lives on the heap"), the
 # same programmer idiom.
 exceptions:
@@ -78,7 +78,7 @@ tokens:
 
   # --- The bare plural with the base verb ("only two fields live
   # there," "operator mechanics live elsewhere"). The complement set is
-  # the adverbial one only: with "in" and "at" the shape is the
+  # the adverbial one only: with "in" and "at" the construction is the
   # compiler's liveness vocabulary twenty-six times over ("variables live
   # at block entry," "integer types live in the low portion of
   # registers"), so those stay with the determiner-gated token.

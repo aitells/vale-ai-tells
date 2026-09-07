@@ -68,7 +68,7 @@ tokens:
 
   # Candidate not yet implemented: the inverted attribution, where the claim
   # rests on unnamed people failing to act rather than on unnamed people
-  # asserting something. The shape is a noun trailed by a dismissive relative
+  # asserting something. The pattern is a noun trailed by a dismissive relative
   # clause, as in a warning nobody reads, a version pin nobody maintains,
   # results nobody verified, or an adoption nobody noticed. It does the same
   # argumentative work as the tokens above while resting on nothing anyone

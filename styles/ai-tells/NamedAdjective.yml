@@ -20,7 +20,7 @@ ignorecase: true
 # type" with a message that said to delete the word, and the README
 # listed that as a known cost. The token moved here so the gate and the
 # message fit the word; an optional adjective slot keeps the stacked
-# shape ("the named operational support") covered.
+# construction ("the named operational support") covered.
 #
 # The gate is the definite determiner. "A named type," "named pipes,"
 # and "a named tuple" mean a type or a pipe that has a name, as opposed

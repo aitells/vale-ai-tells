@@ -41,6 +41,7 @@ bpav
 bpolic
 bresonat
 bsettl
+bshap
 bsquar
 bstrik
 bsurfac
@@ -163,6 +164,7 @@ SARIF
 Scanln
 setext
 settl
+shap
 shel
 shellcheck
 shopt

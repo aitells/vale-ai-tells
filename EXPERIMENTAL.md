@@ -213,7 +213,7 @@ An existence rule that flags "anchor" used figuratively to ground or center an a
 
 Example matches: "anchored in our values," "anchor the strategy," "an emotional anchor," "serves as an anchor."
 
-**Why experimental:** anchor is heavily homographic, and no regular expression cleanly separates the figurative sense from the literal HTML anchor tag, a news anchor, an anchor tenant, or the anchoring bias. The rule stays at warning for that reason. Its exemptions cover the physical objects a thing literally anchors to, such as a wall or the seabed. The rest leans on the figurative shape. Turn the rule off in maritime, broadcast, or HTML writing.
+**Why experimental:** anchor is heavily homographic, and no regular expression cleanly separates the figurative sense from the literal HTML anchor tag, a news anchor, an anchor tenant, or the anchoring bias. The rule stays at warning for that reason. Its exemptions cover the physical objects a thing literally anchors to, such as a wall or the seabed. The rest leans on the figurative sense. Turn the rule off in maritime, broadcast, or HTML writing.
 
 <!-- vale on -->
 
@@ -295,7 +295,7 @@ The VBN tag requirement clears the false positives, and `PassiveVoiceAdverb` cov
 
 ### PassiveVoiceAdverb
 
-The companion rule for the adverb-gap shape: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire shape. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Both rules miss a gap of two or more adverbs ("was not actually used").
+The companion rule for the adverb-gap construction: it matches one adverb (RB) between the auxiliary and the participle ("was never used," "is automatically generated," "was not merged," "is rarely restarted"). The regex rules miss this entire construction. A separate rule because Vale sequences cannot mark a token slot optional, the same relationship `EmptyPaddingStacked` has to `EmptyPadding`. Both rules miss a gap of two or more adverbs ("was not actually used").
 
 ### PassiveDensity
 

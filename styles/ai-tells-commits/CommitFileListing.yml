@@ -11,7 +11,7 @@ level: error
 # rule never fired on its own test case. [^\S\n] is
 # whitespace-except-newline, so a repetition can never swallow the next
 # line's anchor. Paths may be wrapped in backticks or bold markers and
-# may carry a trailing annotation ("src/app.ts: add handler"), the shapes
+# may carry a trailing annotation ("src/app.ts: add handler"), the spellings
 # agents actually emit.
 scope: raw
 raw:

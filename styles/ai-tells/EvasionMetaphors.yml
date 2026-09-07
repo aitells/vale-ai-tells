@@ -11,10 +11,10 @@ ignorecase: true
 # The sibling tokens "dodges the" and "sails through" stay in
 # FigurativeIdioms, which owned them first.
 #
-# Costs across the Go and Python standard libraries: the slipping shapes
+# Costs across the Go and Python standard libraries: the slipping phrases
 # measure four ("flags slip in," "lowercase slips through"), letting
 # through measures five, sneaking two, sidestepping one, and the
-# going-unnoticed shape five ("can go unanswered," "went unused"). Every
+# going-unnoticed token five ("can go unanswered," "went unused"). Every
 # one is the figure itself rather than a literal sense, so they fire by
 # design. Clothing and mechanics prose, where things literally slip, and
 # networking prose, where traffic is literally routed around damage,
@@ -29,7 +29,7 @@ tokens:
   # production," "lets a stale row past the sweep"). The preposition set
   # grew from "through" alone after a documentation-corpus audit
   # (2026-09) found "lets violations into production" escaping on the
-  # preposition; the added shapes cost three corpus hits, one of them a
+  # preposition; the added prepositions cost three corpus hits, one of them a
   # test fixture asking who let lolcatz into the suite. Bare "in" is
   # admitted only at a clause end, because "let errors in ParseForm fall
   # through" is an object with a prepositional phrase, not the fence.

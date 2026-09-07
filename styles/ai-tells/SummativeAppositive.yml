@@ -52,7 +52,7 @@ tokens:
   - ", an? (?:cost|fact|pattern(?! (?:that|which) match(?:es|ed|ing)?\\b)|distinction|property|guarantee|constraint|trade-off|tradeoff|detail|choice|design|shape|move|gap|decision|consequence|side effect|limitation|feature|behaviou?r|assumption|risk|win|signal|tell|habit|caveat|subtlety|nuance|quirk|tension|asymmetry|invariant|reminder|lesson|problem|promise|compromise|convenience|trap|hazard|symptom|requirement|mismatch|difference|restriction|contract|boundary|price|penalty|benefit) (?:that|which|worth|the|no|every|each|this|these|its|their|our|your|my|most|few|some|many|any|nobody|no one|none|nothing|someone|everyone|i|we|you|they|it|he|she|one)\\b"
 
   # --- The pronoun spelling, the label left blank ("something no
-  # caller expects," "something that shapes the whole design,"
+  # caller expects," "something that determines the whole design,"
   # "something worth knowing").
   - ", something (?:that|which|worth|the|no|every|each|this|these|its|their|our|your|my|most|few|nobody|no one|none|i|we|you|they|it|he|she|one)\\b"
 

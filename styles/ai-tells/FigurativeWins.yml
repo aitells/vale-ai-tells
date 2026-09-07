@@ -16,7 +16,7 @@ ignorecase: true
 # contest frame with an inanimate subject ("one item per group wins as
 # primary," "a lower index wins," "records which source won," "losers
 # then split on the second axis") and asked for it, so the
-# determiner-gated subject shape now fires on the maintainer's call, at
+# determiner-gated subject token now fires on the maintainer's call, at
 # twenty-four corpus hits ("the last one wins," "the other query always
 # wins"), the precedence idiom itself; state the rule that picks instead.
 # "Beats" as precedence ("it beats an explicit flag"), "outranks," the
@@ -26,7 +26,7 @@ ignorecase: true
 # "dominates" stay out: at twenty-eight and twenty hits they are the data
 # race and the dominator tree, terms of art with no contest in them. The
 # exceptions name the beings who literally win, so "the home team wins"
-# stays quiet inside the subject shape.
+# stays quiet inside the subject token.
 exceptions:
   - "(?i)teams?"
   - "(?i)players?"

@@ -100,7 +100,7 @@ exceptions:
 tokens:
   # <subject> lands on/in/at: the figurative arrival with an explicit
   # destination ("the PR lands in main," "the request lands on the node").
-  # The adverb alternatives extend the same shape to the destinations agent
+  # The adverb alternatives extend the same token to the destinations agent
   # prose actually names ("the change lands upstream," "the fix lands as a
   # separate commit," "both halves land together"). The one match across
   # the Go and Python standard libraries is a Go comment promising that
@@ -138,6 +138,6 @@ tokens:
   # gerund noun read ("the landing the pilot made"); aviation writing
   # already disables the rule.
   - "\\bland(?:s|ed|ing) (?:a|an|the|this|that|these|those|its|their|every|each|one|any|some) (?:[a-z]+ )?\\w+"
-  # The same transitive shape with a pronoun object ("landing it means
+  # The same transitive construction with a pronoun object ("landing it means
   # rewording this package first," "lands them separately").
   - "\\bland(?:s|ed|ing) (?:it|them|everything|both)\\b"

@@ -963,7 +963,7 @@ The unit test suite passed on the first try.
 
 New York City Hall opened at nine.
 
-## UniversalObject: operations verbs and excluded shapes that should NOT trigger
+## UniversalObject: operations verbs and excluded forms that should NOT trigger
 
 The query returns all matches in insertion order.
 
@@ -1237,7 +1237,7 @@ The gitignore entry keeps that file out of history.
 
 The lock keeps the garbage collector from being invoked.
 
-## NegatedSubject and NegatedObject, strengthened shapes that should NOT trigger
+## NegatedSubject and NegatedObject, strengthened forms that should NOT trigger
 
 Zero padding is allowed only to the left.
 
@@ -1496,3 +1496,17 @@ The fix **actually** works as expected.
 We **never** skip the validation step.
 
 The report **always** posts on Fridays.
+
+## FigurativeShape: geometry, graphics, and compiler senses that should NOT trigger
+
+The shape of the curve flattens after the third sample.
+
+Each GC shape gets its own stenciled copy of the function.
+
+The turtle shape defaults to a classic arrow.
+
+A diamond-shaped embedding appears twice in the graph.
+
+The shape type records the size and alignment of the instantiation.
+
+The shapes of the letters hint at the eyes of the gopher.

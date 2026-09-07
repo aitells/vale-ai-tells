@@ -13,7 +13,7 @@ ignorecase: true
 # legitimately think, and what remains is the machine given a mind.
 #
 # Costs by token, measured across the Go and Python standard libraries. The
-# wanting shape leaves about a dozen matches once the exceptions apply
+# wanting token leaves about a dozen matches once the exceptions apply
 # ("the spec wants us to retry," "an algorithm wants the powers"), each the
 # personification itself, so they fire by design. Teaching leaves three Go
 # comments that teach the compiler or a tool, the figure again. Confusion
@@ -97,7 +97,7 @@ exceptions:
   - "(?i)applications?"
   - "(?i)schools?"
   # A relative clause with "it" for a subject puts the wanter outside the
-  # span ("the surface it wants" names a consumer's choice), so the shape
+  # span ("the surface it wants" names a consumer's choice), so the token
   # says nothing about who wants.
   - "(?i) it want(?:s|ed)?\\b"
 tokens:
@@ -116,7 +116,7 @@ tokens:
   - "\\bt(?:each(?:es|ing)?|aught)(?= (?:the|a|an|its|this|that|every|each) (?:[a-z]+ )?[a-z]+ (?:a|an|the|its|this|that|which|what|how|to|about|nothing|something|everything|one)\\b)"
 
   # --- Teaching: a tool as the pupil ("teach the compiler that," "taught
-  # that validator a new shape," "teach Renovate to read the markers"). The
+  # that validator a new format," "teach Renovate to read the markers"). The
   # lookahead keeps the human idiom "taught in schools" out of the span,
   # and the object word stays inside it for the exceptions.
   - "\\bt(?:each(?:es|ing)?|aught) (?:the |a |an |its |this |that |every |each )?(?!in |at |by |about |over |during |through |for |with |from )[a-z][a-z-]*"
@@ -128,7 +128,7 @@ tokens:
   - "\\blearns (?:a|an|the|its|this|that|these|those)\\b"
 
   # --- Ignorance: a tool with a blind spot ("the manager knows nothing
-  # about that shape," "the hook has no idea the file moved").
+  # about that format," "the hook has no idea the file moved").
   - "\\bknows? nothing (?:about|of)\\b"
   - "\\bha(?:s|ve|d) no idea\\b"
 

@@ -16,7 +16,7 @@ ignorecase: true
 # own.
 #
 # The subject slot is open behind a determiner, with a bare plural, the
-# perfect-tense shapes, and the clause-final relative clause ("the items a
+# perfect-tense tokens, and the clause-final relative clause ("the items a
 # query reaches") as companions, and the exceptions name what literally
 # arrives: beings and limbs, vehicles, and the physics register where
 # light, sound, and a river reach somewhere. The object lookahead refuses
@@ -93,7 +93,7 @@ tokens:
   # store," "orphans reach nothing").
   - "\\b[a-z]+s (?:never |ever |still |also |only |already |eventually |finally |actually )?reach (?!(?:for|out|zero|0|EOF|its end|the end|an end|end|capacity|its limit|a limit|the limit|steady|a fixed|its maximum|the maximum|its minimum|the minimum|a size|a length|a value|a certain|a threshold|the threshold|a point|the point|a state|a level|the level|a depth|the depth|a count|a total|the total|the top|the bottom|the root|the same|a leaf|the leaf|a node|the node|a null|nil|null|the target|its target|a target|a maximum|a minimum|is|are|was|were|has|have|had|be|been|by|from|of|in|on|at|to|with|and|or|but|as|than|into|onto|via|through|over|under|after|before|when|if|unless|until|while|because|so|that|which|who|not|only|also|then|there|here|out|up|down|off|for|about|across|along|around|beyond|inside|outside|within|without|toward|towards|against|between|among|during|per|like|its|itself|two|three|four|five|six|seven|eight|nine|ten|twenty|thirty|fifty|hundred|thousand|million|several|many|more|fewer|less|enough|too|\\d+)\\b)(?:it|them|that|this|nothing|a|an|the|its|their|every|each|any|no|one|[a-z][a-z_]+)\\b"
 
-  # --- The perfect and adverbial shapes with the subject out of view
+  # --- The perfect and adverbial tokens with the subject out of view
   # ("has reached the store," "never reached it," "already reached that
   # record").
   - "\\b(?:has|have|hasn't|haven't|had|hadn't|never|ever|already|only|eventually|finally|actually) (?:not |never |already |yet |ever )?reached (?!(?:for|out|zero|0|EOF|its end|the end|an end|end|capacity|its limit|a limit|the limit|steady|a fixed|its maximum|the maximum|its minimum|the minimum|a size|a length|a value|a certain|a threshold|the threshold|a point|the point|a state|a level|the level|a depth|the depth|a count|a total|the total|the top|the bottom|the root|the same|a leaf|the leaf|a node|the node|a null|nil|null|the target|its target|a target|a maximum|a minimum|the goal|its goal|the age|age|maturity|is|are|was|were|has|have|had|be|been|by|from|of|in|on|at|to|with|and|or|but|as|than|into|onto|via|through|over|under|after|before|when|if|unless|until|while|because|so|that|which|who|not|only|also|then|there|here|out|up|down|off|for|about|across|along|around|beyond|inside|outside|within|without|toward|towards|against|between|among|during|per|like|its|itself|two|three|four|five|six|seven|eight|nine|ten|twenty|thirty|fifty|hundred|thousand|million|several|many|more|fewer|less|enough|too|\\d+)\\b)(?:it|them|that|this|nothing|a|an|the|its|their|every|each|any|no|one|[a-z][a-z_]+)\\b"

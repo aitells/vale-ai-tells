@@ -15,7 +15,7 @@ ignorecase: true
 # the operation: the stage reads the pipeline's output, the row is left
 # without a parent, the index grows past its budget.
 #
-# The tokens gate each verb on the shape the audit saw, and every one
+# The tokens gate each verb on the construction the audit saw, and every one
 # measured at zero to two across the Go and Python standard libraries
 # ("that variable feeds into an if/switch," "Go leans on stricter OS
 # limits," "GOEXPERIMENT is baked in," "dwarfed by the overhead of the

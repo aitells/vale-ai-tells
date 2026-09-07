@@ -84,7 +84,7 @@ tokens:
 
   # "Deserving" family.
   # Treats abstractions and inanimate subjects as moral agents owed
-  # consideration. The gerund shape ("deserves noting", "deserves
+  # consideration. The gerund form ("deserves noting", "deserves
   # exploring") is the strongest AI tell — the older idiomatic
   # phrases ("deserves a closer look", "deserves mention") are
   # included for completeness.
@@ -175,7 +175,7 @@ tokens:
   # gavel wielded through "settles" ("availability settles the
   # question," "the reconfirmation settles it") lives in
   # FigurativeSettles with the rest of that verb's figures, and the
-  # invoice shapes ("settled the cost," "settles up," "squares the
+  # invoice tokens ("settled the cost," "settles up," "squares the
   # ledger," "balances the books") live in FigurativePays with the
   # other money figures.
   - decides? the (?:question|debate|matter|argument|issue|dispute)

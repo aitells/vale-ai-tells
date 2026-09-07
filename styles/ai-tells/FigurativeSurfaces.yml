@@ -7,7 +7,7 @@ ignorecase: true
 # "Surfaces" is an AI fingerprint for discovery as emergence: a defect
 # "surfaces" during review, a bump "surfaced" three findings, "nothing
 # surfaced this earlier." The plain statement says what reported the
-# problem and when. The verb shapes gate on an object or a defect-family
+# problem and when. The verb tokens gate on an object or a defect-family
 # subject, so the singular noun ("the API surface," "the surface of the
 # sphere") never matches, and a submarine surfacing takes the marine note
 # in the message. The one match across the Go and Python standard
@@ -20,12 +20,12 @@ ignorecase: true
 # now, refusing only the prepositions, copulas, and auxiliaries that would
 # admit the plural noun ("the API surfaces are," "surfaces exposed by")
 # and the physical compounds ("surface tension," "surface temperature");
-# the open shape measures zero across both standard libraries.
+# the open token measures zero across both standard libraries.
 #
 # A documentation-corpus census (2026-09) then found the uninflected verb
 # escaping behind a modal or an infinitive marker ("tooling to surface
 # changes," "will surface reports," "can surface bugs"), because every
-# token here read an inflected form. The bare shape gates on the word
+# token here read an inflected form. The bare token gates on the word
 # before the verb, since after "to" or "will" the word is the verb and
 # only the compounds need refusing. Thirteen hits across the seven
 # pre-LLM corpora, each the figure ("static analysis tooling to surface
