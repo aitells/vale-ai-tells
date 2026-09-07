@@ -71,13 +71,42 @@ tokens:
   - does? most of the work
   - doing most of the work
 
-  # "Standing" family
+  # "Standing" family.
+  # Across the seven pre-LLM corpora (Go blog, Go proposals, Go stdlib,
+  # PEPs, Pro Git, Python stdlib, Rust RFCs) "stand on its own" and
+  # "stand on their own" match four times, each the self-sufficient
+  # sense: the Go stdlib's "the deprecation message should be able to
+  # stand on its own" and a PEP's "The changes in this PEP stand on
+  # their own merits." The verb phrase "stand alone" matches another
+  # four (a PEP's "the final PEP text stands alone with all required
+  # information," a Rust RFC's "the tuple notation stands alone"). The
+  # one adjective use, the Python stdlib's "a stand alone top-level
+  # window," is what the lookbehind on the bare-verb token excludes.
+  # "Stand by itself," "hold up on its own," "speak for themselves," and
+  # "carry" or "pull its own weight" match nowhere.
   - stands? on its own
   - standing on its own
+  - stands alone
+  - standing alone
+  - stood alone
+  - "(?<!\\b(?:a|an|the|any|each|every|one|this|that) )stand alone\\b"
+  - stands? by (?:itself|themselves)
+  - standing by (?:itself|themselves)
+  - stood by (?:itself|themselves)
+  - stands? on their own
+  - standing on their own
+  - stood on (?:its|their) own
   - holds? its own
   - holding its own
+  - holds? up on (?:its|their) own
+  - holding up on (?:its|their) own
+  - held up on (?:its|their) own
   - speaks? for itself
   - speaking for itself
+  - speaks? for themselves
+  - speaking for themselves
+  - carr(?:ies|y|ied|ying) (?:its|their) own weight
+  - pull(?:s|ed|ing)? (?:its|their) own weight
   - justifies? its existence
   - justify its existence
   - justifying its existence
