@@ -21,7 +21,7 @@ ignorecase: true
 # the process-lifecycle register of runtime prose, about twenty matches
 # across the Go and Python standard libraries ("if the parent dies," "until
 # the thread dies," "waits on this goroutine to die"), and prose about
-# process lifetimes disables the rule. "Survives" costs nine ("the
+# process lifetimes disables the rule. "Survives" matches nine ("the
 # forking thread survives," "sweepgen survive across freeing"), and
 # "outlives" nineteen, all Go's escape analysis ("outlives the statement"),
 # a compiler term of art that fires here by the same call and disables
