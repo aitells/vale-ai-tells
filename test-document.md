@@ -2256,6 +2256,10 @@ Upstream owns their wording.
 
 The one owning rule keeps the phrase.
 
+The installer owns the per-host registry.
+
+The service owns the shared configuration manifest.
+
 ## FigurativeClears
 
 The draft cleared every gate on the first try.
