@@ -8,3 +8,10 @@
 # toolchain bump's diff is the only place a reviewer sees them change.
 # Suppressed, a Renovate pin bump renders as `Bin NNNNN bytes`.
 mise.lock diff
+
+# marker-scan.sh exempts the resolve-rebase-conflicts SKILL.md by name,
+# because that document teaches the marker shape by showing it. The
+# codex twin shows the same block and the exemption does not reach it,
+# so every rebase verification reports three markers that are the
+# document's subject rather than an unfinished resolution.
+.claude/skills/codex-resolve-rebase-conflicts/SKILL.md conflict-markers=documented
