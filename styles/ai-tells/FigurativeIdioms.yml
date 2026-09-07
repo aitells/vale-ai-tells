@@ -201,5 +201,14 @@ tokens:
   - '\bstands? up (?:a|an|the|its|this|that|new|another|fresh|every|each)\b'
   - '\bstood up (?:a|an|the|its|this|that|new|another|fresh|every|each)\b'
 
+  # --- Burial: a value or a decision hidden by depth ("buried in the
+  # config," "buried deep in the log," "buries the error"). A
+  # documentation-corpus census (2026-09) listed it among the verbs no
+  # rule read; five hits across the seven pre-LLM corpora ("buried in
+  # the middle of the file," "buried deep"), each the figure. Prose
+  # about graves or geology disables the rule.
+  - '\bburi(?:es|ed) (?:in|inside|under|beneath|deep|within)\b'
+  - '\b(?:buries|buried|bury|burying) (?:the|a|an|its|their|this|that|it|them)\b'
+
   # The rest of the substitution frame ("disguised as," "masquerading as,"
   # "dressed as," "in the guise of") lives in FigurativeDisguises.

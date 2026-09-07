@@ -76,3 +76,15 @@ tokens:
   # verb would flood"). The checking-noun subject is the gate, so a river
   # or a network flood stays quiet.
   - "\\b(?:rule|token|shape|pattern|check|gate|alert)s? (?:that |which |would |will |could |never |then |always |otherwise )?flood(?:s|ed|ing)?\\b"
+
+  # --- Governing and escalating: a setting in office ("the flag governs
+  # whether the cache writes," "the manifest governs how the tag
+  # resolves") and a failure climbing the chain of command ("a warning
+  # escalates to an error"). A documentation-corpus census (2026-09)
+  # listed both among the verbs no rule read. Four hits for governing
+  # and five for escalating across the seven pre-LLM corpora, the PEPs
+  # and Rust RFCs writing "rules that govern how" and "escalated to" of
+  # their own committees and one Go comment escalating to os.Kill, each
+  # the figure; prose about actual governments disables the rule.
+  - "\\bgovern(?:s|ed|ing)? (?:the|a|an|its|their|this|that|each|every|it|them|how|whether|what|which)\\b"
+  - "\\bescalat(?:e|es|ed|ing) to\\b"

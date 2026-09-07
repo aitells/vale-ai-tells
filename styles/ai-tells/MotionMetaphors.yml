@@ -88,3 +88,11 @@ tokens:
   - "\\bcrack(?:s|ed|ing)? open\\b"
   - "\\bsheds? (?:the|a|an|its|this|that|every|each|most|all|any|some|those|these|light|weight)\\b"
   - "\\bshed light\\b"
+
+  # --- Seating and trailing: a value placed like a passenger or lagging
+  # like a runner ("the loader seats the record in the cache," "the
+  # mirror trails the newest release"). A documentation-corpus census
+  # (2026-09) listed both among the verbs no rule read; each measures
+  # zero across the seven pre-LLM corpora.
+  - "\\bseat(?:s|ed|ing)? (?:the|a|an|its|their|this|that|each|every|it|them)\\b"
+  - "\\btrail(?:s|ed|ing)? (?:the|a|an|its|their|this|that) (?:[a-z]+ )?(?:value|version|release|tag|pin|newest|latest|head|tip|main)\\b"

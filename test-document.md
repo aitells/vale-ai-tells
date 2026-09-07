@@ -3207,3 +3207,45 @@ The overall shape of the message stays fixed.
 A code-shaped line slipped past the extractor.
 
 The shapes agent prose builds without a determiner are the plural.
+
+## FusionMetaphors
+
+The change folds the helper into the caller.
+
+The three rules collapse into one token.
+
+The new token absorbs the old one.
+
+The fix fuses the two passes.
+
+The flag couples the cache to the writer.
+
+## DepletionMetaphors
+
+The loop exhausts its retry budget after three passes.
+
+The retry starves the writer of slots.
+
+The job stalls on the lock.
+
+The query degrades on large inputs.
+
+## MotionMetaphors, EnforcementMetaphors, FigurativeQuiet, FigurativeRides, JourneyMetaphors, and FigurativeIdioms census additions
+
+The loader seats the record in the cache.
+
+The mirror trails the newest release by a day.
+
+The flag governs whether the cache writes.
+
+A warning escalates to an error on the second run.
+
+The flag silences the warning for that file.
+
+The lookup rides the chain to the last block.
+
+The resolver walks three tiers before it gives up.
+
+The default is buried in the config.
+
+The wrapper buries the error under a generic message.

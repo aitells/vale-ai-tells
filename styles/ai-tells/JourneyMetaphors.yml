@@ -66,7 +66,7 @@ tokens:
   # --- Walking the workflow: a reader or a tool taken along a path
   # ("walks the workflow," "walk the pipeline"). "Walks the tree" stays
   # out as the traversal term of art.
-  - "\\bwalk(?:s|ed|ing)? the (?:workflow|pipeline|stages|steps|process|procedure)\\b"
+  - "\\bwalk(?:s|ed|ing)? (?:the|each|every|all|its|their|up|down|two|three|four|five|\\d+) (?:[a-z]+ )?(?:workflow|pipeline|stages?|steps?|process|procedure|tiers?|levels?|ladder|rungs?|precedence)\\b"
 
   # --- Distance as progress ("goes a long way toward clean diffs,"
   # "has come a long way," "a long way to go").

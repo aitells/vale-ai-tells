@@ -38,3 +38,12 @@ tokens:
 
   # --- The unspoken-truth idiom ("says the quiet part out loud").
   - "\\bthe quiet part out loud\\b"
+
+  # --- Silencing as a verb: a check muted rather than turned off ("the
+  # flag silences the warning," "silenced every alert"). A
+  # documentation-corpus census (2026-09) listed it among the verbs no
+  # rule read. Nine hits across the seven pre-LLM corpora, mostly the
+  # Rust RFCs and the Python sources writing "silence the lint" and
+  # "silence this exception," the bare infinitive being the form the
+  # corpora use; each is the figure, flagged by design.
+  - "\\bsilenc(?:e|es|ed|ing) (?:the|a|an|its|their|this|that|it|them|every|each)\\b"
