@@ -15,6 +15,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **FigurativeSurfaces** (`ai-tells`): The bare verb behind a modal, an infinitive marker, or a negation now fires ("tooling to surface changes," "will surface reports," "can surface bugs," "doesn't surface the failure"). A documentation-corpus census found the uninflected form escaping, since every token read an inflected one. Thirteen hits across the seven pre-LLM corpora, each the figure.
 - **FigurativeNouns** (`ai-tells`): "Surface" as what a reader or a caller sees joins the noun list ("the prose surface," "its canonical surface," "a reader-facing surface," "the whole surface"), the census's second-ranked figurative noun with no rule reading it. The modifier slot refuses the exported-names term ("the API surface," "the attack surface," "its public surface") and the lookahead the physical and linguistic compounds ("surface area," "surface syntax," "the surface language," "the surface of the moon"); it fires seven times in the Rust RFCs and PEPs, five making the same figure and two on the bare "on the surface."
 
+### Fixed
+
+- **EmphaticCopula** (`ai-tells`): Bold markup no longer fires the rule. Every asterisk token was a bare regular expression, and a doubled-asterisk span contains the same four-character shape a single-asterisk one does, so a sentence carrying bold and no italics at all raised an alert whose message asked for italics to be removed. Each asterisk token now requires an unpaired asterisk on either side, which leaves single-asterisk emphasis as the only match and drops the bold-italic triple along with bold. The underscore tokens are unchanged, because a doubled-underscore run never contains the space-prefixed shape they require. A bold-markup case in `test-false-positives.md` covers the regression.
+
 <!-- vale on -->
 
 ## [1.33.0] - 2026-09-06

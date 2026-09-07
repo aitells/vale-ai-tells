@@ -5,10 +5,11 @@ path = "CHANGELOG.md"
 template = "remote"
 remote = "github.com"
 repository = "vale-ai-tells"
-owner = "aitells"
+owner = "tbhb"
 authors = [
   { username = "aitellsbot", signature = "AI Tells Bot" },
   { username = "tbhb", signature = "Tony Burns" },
+  { username = "theredspoon", signature = "Nim G" },
 ]
 
 [commit_types]
