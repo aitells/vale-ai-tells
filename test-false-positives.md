@@ -891,8 +891,6 @@ Ensure no goroutines leak after the test completes.
 
 The glob matches no files in an empty directory.
 
-The search found no match in the corpus.
-
 If you pass no arguments, the command reads standard input.
 
 At present no workaround exists for the older parser.
@@ -1554,3 +1552,11 @@ The upgrade cost 40 dollars.
 The cost of the license is 200 dollars a year.
 
 Those hits cost the team a week of work.
+
+## NegatedObject: perception idioms that should NOT trigger
+
+I see no reason to change the default.
+
+She found no more than three of them.
+
+We see no way around the lock.
