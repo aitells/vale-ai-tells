@@ -1566,3 +1566,25 @@ I see no reason to change the default.
 She found no more than three of them.
 
 We see no way around the lock.
+
+## ConsequenceClause: ordinary "so" clauses that should NOT trigger
+
+The server is already configured with the deny hooks, so you can rebase freely.
+
+They are both upstream, so it does not matter which merges first.
+
+A copy of this dict is used for each docstring, so that each run starts clean.
+
+GitLab is a database-backed web application, so its installation is more involved.
+
+In this case the value type is int, so the zero value is 0.
+
+Last year we only asked for the top three, so the results are not directly comparable.
+
+The file is empty, so no writes yet.
+
+Both use the same allocator, so any changes are local to the caller.
+
+Pointer types are named after one example type, so the names of the wrappers follow it.
+
+The tree is small, so this pass is cheap.
