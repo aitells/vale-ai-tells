@@ -20,7 +20,7 @@ StylesPath = styles
 MinAlertLevel = suggestion
 
 Packages = ai-tells, \
-  https://github.com/tbhb/vale-ai-tells/releases/download/v1.33.0/ai-tells-commits.zip
+  https://github.com/tbhb/vale-ai-tells/releases/download/v1.34.0/ai-tells-commits.zip
 
 [*.md]
 BasedOnStyles = ai-tells
