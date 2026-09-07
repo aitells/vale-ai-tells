@@ -3293,3 +3293,5 @@ The cost is five hits in the Rust RFCs.
 Bare cheap stays out at fifty-two pre-LLM corpus hits.
 
 The cost is real and flagged on the maintainer's call.
+
+The nominal reach costs six, all one RFC definition.
