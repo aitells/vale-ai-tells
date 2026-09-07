@@ -730,6 +730,24 @@ The refactor is paying for itself already.
 
 The new index is paying dividends across every read.
 
+## AnthropomorphicJustification (standing)
+
+The module stands alone once the shim is removed.
+
+The two helpers stand alone after the split.
+
+The helper can stand by itself without the wrapper.
+
+The two services stand on their own after the split.
+
+The cache holds up on its own under load.
+
+The benchmarks speak for themselves.
+
+The report carries its own weight without the appendix.
+
+Both benchmarks pull their own weight in the comparison.
+
 ## FigurativeQuiet
 
 The check stays quiet on valid input.

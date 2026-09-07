@@ -375,6 +375,12 @@ A self-healing cluster restarts failed nodes.
 
 The system is self-correcting by design.
 
+## AnthropomorphicJustification (standing): compound adjectives that should NOT trigger
+
+The widget becomes a stand alone top-level window.
+
+The package installs as a stand-alone tool.
+
 ## FigurativeCarries: literal carrying that should NOT trigger
 
 The courier carries a backpack full of parts.
