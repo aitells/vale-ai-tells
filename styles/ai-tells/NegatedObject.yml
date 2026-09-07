@@ -17,9 +17,12 @@ ignorecase: true
 # pre-LLM human technical prose (Go stdlib doc comments plus Python stdlib
 # source). Verbs where the corpora show the construction is ordinary docs
 # English stay out: "has/have no" (807 hits), "contains no" (79), "takes no
-# arguments" (50), "returns no value" (18), "finds/found no" (10), "matches
-# no" (7), "sees no" (4, mostly the first-person "I see no reason"), and
-# "inherits no" (2, the OO docs register: "inherits no __init__"). "Carries no" stays in FigurativeCarries,
+# arguments" (50), "returns no value" (18), "matches no" (7), and
+# "inherits no" (2, the OO docs register: "inherits no __init__").
+# "Finds/found no" (10) and "sees no" (4) sat on that list until a
+# documentation-corpus census (2026-09) showed both everywhere in agent
+# prose; they now have a token of their own at the end of this file,
+# flagged on the maintainer's call. "Carries no" stays in FigurativeCarries,
 # whose negated-cargo token covers it with the same lookahead gates, and
 # "earns no" in FigurativeEarns. The verbs kept below total ~165 corpus
 # hits, dominated by "makes no sense" (12) and low-rate docs formulas
@@ -137,3 +140,13 @@ tokens:
   # idiom phrases that only share the surface ("nothing more than,"
   # "nothing but," "leaves nothing to chance").
   - "\\b(?:writes?|wrote|writing|reads?|reading|deletes?|deleted|deleting|removes?|removed|removing|touch|touches|touched|touching|embeds?|embedded|embedding|fires?|fired|firing|costs?|costing|leaves?|left|leaving|adds?|added|adding|changes?|changed|changing|creates?|created|creating|yields?|yielded|yielding|produces?|produced|producing|contributes?|contributed|contributing|sends?|sent|sending|logs?|logged|logging|prints?|printed|printing|emits?|emitted|emitting|stores?|stored|storing|loads?|loaded|loading|allocates?|allocated|allocating|consumes?|consumed|consuming|imports?|imported|importing|installs?|installed|installing|caches?|cached|caching|copy|copies|copied|copying|mutates?|mutated|mutating|persists?|persisted|persisting|downloads?|downloaded|downloading|uploads?|uploaded|uploading|fetch|fetches|fetched|fetching|spawns?|spawned|spawning|breaks?|broke|broken|breaking|blocks?|blocked|blocking|skips?|skipped|skipping|drops?|dropped|dropping|holds?|held|holding|keeps?|kept|keeping|owns?|owned|owning|gives?|gave|given|giving|offers?|offered|offering|provides?|provided|providing|reports?|reported|reporting|reveals?|revealed|revealing|surfaces?|surfaced|surfacing|proves?|proved|proving|guarantees?|guaranteed|resolves?|resolved|resolving|match|matches|matched|matching|writes?|wants?|wanted|wanting|needs?|needed|needing|requires?|required|requiring|expects?|expected|expecting|allocates?|collects?|collected|collecting|tracks?|tracked|tracking|records?|recorded|recording|transmits?|transmitted|transmitting|shares?|shared|sharing|exposes?|exposed|exposing|leaks?|leaked|leaking|mutates?|overwrites?|overwrote|overwriting|deploys?|deployed|deploying|ships?|shipped|shipping|renders?|rendered|rendering|displays?|displayed|displaying|shows?|showed|showing|checks?|checked|checking|validates?|validated|validating|verifies|verified|verifying|verify|tests?|tested|testing|catches|caught|catching|catch|flags?|flagged|flagging|counts?|counted|counting|measures?|measured|measuring|inspects?|inspected|inspecting|explains?|explained|explaining|describes?|described|describing|documents?|documented|documenting|teaches|taught|teaching|learns?|learned|learning|decides?|decided|deciding|proves?|settles?|settled|settling|enforces?|enforced|enforcing|applies|applied|applying|apply) nothing\\b(?! (?:but|more|less|else|about|to|like|short|new|special|wrong|if|unless|until|when|for|from|in|on|that|which)\\b)"
+
+  # --- The perception verbs a documentation-corpus census (2026-09)
+  # found escaping ("finds no match," "found no examples," "sees no
+  # difference"). Both were measured out at first, but on the seven
+  # pre-LLM corpora the finding verb matches ten times, the Go survey
+  # posts writing "found no differences" and the runtime "finds no
+  # elements to flush," and the seeing verb six times, each the
+  # construction itself, so they join the list on the maintainer's call.
+  # The same lookahead drops the degree and idiom phrases.
+  - "\\b(?:finds?|found|finding|sees?|saw|seeing) no (?!(?:one|matter|more|less|fewer|longer|sooner|later|earlier|better|worse|faster|slower|higher|lower|further|deeper|closer|harder|easier|doubt|way|point|reason|need|end)\\b)[a-z]"

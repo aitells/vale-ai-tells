@@ -3295,3 +3295,11 @@ Bare cheap stays out at fifty-two pre-LLM corpus hits.
 The cost is real and flagged on the maintainer's call.
 
 The nominal reach costs six, all one RFC definition.
+
+## NegatedObject: the perception verbs
+
+The reviewer found no alert on that line.
+
+The scan finds no match for the old key.
+
+The comparison sees no difference between the two builds.
