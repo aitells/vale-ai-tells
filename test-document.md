@@ -3249,3 +3249,21 @@ The resolver walks three tiers before it gives up.
 The default is buried in the config.
 
 The wrapper buries the error under a generic message.
+
+## FigurativeNouns census additions
+
+Each skill is one grain of the analysis.
+
+Run the review at a coarser grain.
+
+Read the diff through a security lens.
+
+The headline number hides the variance.
+
+One bad pin starts a cascade of retries.
+
+That branch is a dead end.
+
+The census has a blind spot for adjectives.
+
+The injection seam is between the parser and the writer.

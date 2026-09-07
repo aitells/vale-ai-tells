@@ -1526,3 +1526,13 @@ The starvation of low-priority threads is a known scheduler problem.
 ## MotionMetaphors, EnforcementMetaphors, and FigurativeIdioms: literal senses that should NOT trigger
 
 The dog trailed the scent across the field.
+
+## FigurativeNouns: literal grains, lenses, and seams that should NOT trigger
+
+A grain of sand jammed the mechanism.
+
+The lens cap protects the front element.
+
+The seam allowance is one centimeter.
+
+Fine-grained locks replaced the global one.
