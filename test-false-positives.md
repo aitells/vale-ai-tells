@@ -1536,3 +1536,13 @@ The lens cap protects the front element.
 The seam allowance is one centimeter.
 
 Fine-grained locks replaced the global one.
+
+## AnthropomorphicAdjectives: people, medicine, and physical senses that should NOT trigger
+
+The surgeon called the growth a benign tumor.
+
+A healthy person recovers in a week.
+
+She left a generous tip.
+
+The noisy room made the call hard to hear.
