@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+<!-- vale off -->
+
+### Added
+
+- **ConsequenceClause** (`ai-tells`): New rule. The mechanism-and-inference sentence: a clause states what something does, then ", so" introduces a second clause with a fresh full-noun subject and its own present-tense verb that draws the conclusion for the reader ("a replay checks out every commit it moves, so the sandbox deny applies to a staged change too," "the styles ship as release assets, so the version pins itself," "each test file names its subject, so a rename fails the test"). `ConsequenceParticiple` reads the same move with a participle in place of the conjunction. Human technical prose uses ", so" constantly and follows it with a pronoun or a purpose clause (", so it," ", so you," ", so that"), which agent prose almost never writes; the gate is what follows the conjunction: a determiner, a noun phrase of up to three words, and a third-person present verb that is not a copula or a modal, so "so the order doesn't matter," "so its installation is more involved," and "so you can rebase" stay out, as does a plural noun read as the verb ("so the results are not comparable") and the first half of a hyphenated compound ("so an apples-to-apples comparison"). Fifty-eight hits across the seven pre-LLM corpora ("so the matcher uses the fallback language," "so the invariant holds trivially," "so the traceback proceeds normally," "so the compiler accepts less code than it should"), each the construction, at 0.3 per ten thousand words or less, against about six per ten thousand in agent-written documentation. The bare conjunction, the pronoun subject, ", so that," the copula clause, and the elliptical "so no writes yet" measured out as ordinary English at hundreds to thousands per corpus.
+
+<!-- vale on -->
+
 ## [1.34.0] - 2026-09-07
 
 <!-- vale off -->

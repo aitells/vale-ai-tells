@@ -3321,3 +3321,15 @@ The reviewer found no alert on that line.
 The scan finds no match for the old key.
 
 The comparison sees no difference between the two builds.
+
+## ConsequenceClause
+
+A replay checks out every commit it moves, so the sandbox deny applies to a staged change too.
+
+The styles ship as release assets, so the version pins itself.
+
+Each test file names its subject explicitly, so a rename fails the test.
+
+The payload anchors itself with an env var, so a consumer needs nothing else.
+
+The inner event table has no strict mode, so a misspelled key passes silently.
