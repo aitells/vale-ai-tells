@@ -61,9 +61,17 @@ exceptions:
 tokens:
   # --- Possession: a determiner-led object owned by a mechanism ("vendir
   # owns that directory," "git owns the commit," "one rule owns the
-  # phrase"). An optional modifier word sits between the determiner and the
-  # object.
-  - "\\bown(?:s|ing) (?:a|an|the|this|that|its|their|each|every) (?:[a-z]+ )?[a-z]+"
+  # phrase"). The character class covers hyphenated compounds of any length
+  # ("the per-head Dependency Registry"), so a hyphen never truncates the
+  # match. Up to three modifier words sit between the determiner and the
+  # head noun, which reaches a 4-word noun phrase ("the monitoring-host
+  # PermitOpen implementation," 3 modifiers plus the head). This is a word
+  # count, not real noun-phrase-boundary detection: a 5th modifier word
+  # still truncates the match before the head noun (e.g. "owns the primary
+  # user authentication session cache" matches only through "session"),
+  # reproducing the same defect class this fix otherwise closes, just at a
+  # higher, still-finite threshold.
+  - "\\bown(?:s|ing) (?:a|an|the|this|that|its|their|each|every) (?:[a-z][\\w-]* ){0,3}[a-z][\\w-]*"
 
   # --- The object fronted: a relative clause with the owner after its
   # table ("the table it owns," "the columns each stage owns," "the

@@ -259,6 +259,7 @@ description = "Run the fixture guard: tells fire, past-tense subjects smoke-test
 run = [
   "mise run test-fires",
   "mise run test-commit-past-tense",
+  "mise run test-figurative-owns-span",
   "mise run test-clean",
 ]
 
@@ -318,6 +319,39 @@ check clean 'fix: Resolve race condition in scheduler'
 check clean 'feat(auth): Drop legacy session check'
 rm -rf "$dir"
 [[ "$fail" -eq 0 ]] && echo "CommitPastTense smoke test passed."
+exit "$fail"
+'''
+
+# Smoke-test FigurativeOwns' object-capture span. test-document.md's fire
+# count can't catch a regression here: a truncated match still fires, just
+# with the wrong span, so test-fires' floor stays green either way. This
+# checks the actual matched text reaches the head noun instead of stopping
+# at a hyphen or after one modifier word.
+[tasks.test-figurative-owns-span]
+description = "Smoke-test FigurativeOwns' object-capture span reaches the head noun"
+run = '''
+#!/usr/bin/env bash
+# Deliberately not -e: every case is checked before the result is judged.
+set -uo pipefail
+dir=$(mktemp -d)
+cfg="$dir/smoke.ini"
+subj="$dir/subject.md"
+printf 'StylesPath = %s/styles\nMinAlertLevel = error\n[*]\nBasedOnStyles = ai-tells\n' "$(pwd)" > "$cfg"
+fail=0
+check() {
+  printf '%s\n' "$1" > "$subj"
+  match=$(vale --config="$cfg" --output=JSON "$subj" \
+    | jq -r '[.[][] | select(.Check=="ai-tells.FigurativeOwns")][0].Match // "<no match>"')
+  if [[ "$match" == "$2" ]]; then echo "ok: $1"
+  else echo "FAIL: $1"; echo "  expected: $2"; echo "  actual:   $match"; fail=1
+  fi
+}
+check 'The installer owns the per-host registry.' \
+  'owns the per-host registry'
+check 'The service owns the shared configuration manifest.' \
+  'owns the shared configuration manifest'
+rm -rf "$dir"
+[[ "$fail" -eq 0 ]] && echo "FigurativeOwns span smoke test passed."
 exit "$fail"
 '''
 
