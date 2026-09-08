@@ -44,10 +44,9 @@ tokens:
   - "\\*\\*Bottom line:?\\*\\*"
   - "\\*\\*The point:?\\*\\*"
 
-  # "This is the insight/key/point" framing
+  # "This is the insight/key" framing. "This is the point" is PointVerdict's.
   - "\\bThis is the insight\\b"
   - "\\bThis is the key\\b"
-  - "\\bThis is the point\\b"
   - "\\bThis is the takeaway\\b"
   - "\\bThis is the crucial\\b"
   - "\\bThis is the critical\\b"

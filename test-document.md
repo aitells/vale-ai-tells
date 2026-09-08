@@ -3333,3 +3333,29 @@ Each test file names its subject explicitly, so a rename fails the test.
 The payload anchors itself with an env var, so a consumer needs nothing else.
 
 The inner event table has no strict mode, so a misspelled key passes silently.
+
+## PointVerdict
+
+Speed is the point.
+
+That is the point.
+
+That's the whole point.
+
+This is exactly the point.
+
+The caching is the entire point.
+
+Determinism was the point.
+
+The retry is the whole point of the wrapper.
+
+The whole point of the cache is to avoid the read.
+
+The whole point is to keep the writer out of the index.
+
+And that's the point.
+
+This is the point.
+
+Isolation is precisely the point here.
