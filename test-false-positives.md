@@ -1588,3 +1588,21 @@ Both use the same allocator, so any changes are local to the caller.
 Pointer types are named after one example type, so the names of the wrappers follow it.
 
 The tree is small, so this pass is cheap.
+
+## PointVerdict: literal positions and plain purposes that should NOT trigger
+
+The cursor is the point at which the scan resumes.
+
+This is the point where the two paths diverge.
+
+The origin is the point of the cursor.
+
+That was the point of the cache.
+
+What is the point of the second read?
+
+Each vertex is the point of a triangle.
+
+The marker is the point following the borrow.
+
+Floating point is the point type here.
