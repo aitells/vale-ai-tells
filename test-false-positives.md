@@ -1217,6 +1217,16 @@ The battery dies after a week on the shelf.
 
 The tree survives the winter under a tarp.
 
+## FigurativeMints: literal senses that should NOT trigger
+
+We tested on Linux Mint 18.3 and Ubuntu.
+
+The book arrived in mint condition.
+
+The walls are painted mint green.
+
+The recipe calls for fresh mint leaves.
+
 ## MotionMetaphors: literal motion that should NOT trigger
 
 The bird feeds its chicks at dawn.

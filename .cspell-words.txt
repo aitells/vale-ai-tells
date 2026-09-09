@@ -64,6 +64,7 @@ cocogitto
 codebook
 codespell
 Coffman
+colou
 colour
 commitlint
 concatstring
