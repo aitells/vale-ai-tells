@@ -1784,6 +1784,30 @@ The graduation is a well-earned promotion to core.
 
 She earns a salary at the firm.
 
+## FigurativeMints
+
+The step mints a new identifier.
+
+The workflow mints an app token and runs the bump.
+
+Renovate authenticates by minting a short-lived installation token.
+
+The release job runs under a token minted from the GitHub App.
+
+Passing the minted installation token raises the rate limit.
+
+Token minting creates a short-lived bot credential.
+
+The step mints them on demand.
+
+The loader mints identifiers for every row.
+
+The build mints every localization key up front.
+
+A newly minted release goes out on Friday.
+
+The Royal Mint strikes the coins in Wales.
+
 ## FigurativeFires
 
 The rule fires on every heading.
@@ -2757,8 +2781,6 @@ The big table dwarfs the rest.
 The stage crowds out the rest.
 
 The planner leans on the index.
-
-The step mints a new identifier.
 
 The default is baked in.
 
